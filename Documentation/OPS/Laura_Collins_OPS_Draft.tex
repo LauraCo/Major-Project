@@ -1,0 +1,219 @@
+\documentclass[a4paper,11pt]{report}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University of Sussex thesis template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Modification History
+%
+% Based on usthesis.cls by Jonathon Read
+% http://www.cogs.susx.ac.uk/users/jlr24/latex.html
+% Modified by Anthony Smith, Feb 2007
+% Incorporated into single thesis.tex file, Anthony Smith, 30 June 2008
+% Minor alterations to page numbering, AJS, 25 July 2008
+% New alternative hyperref options for print version, AJS, 11 Sep 2008
+% "DRAFT" on header, AJS, 12 Sep 2008
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LINE SPACING
+\newcommand{\linespacing}{1.5}
+\renewcommand{\baselinestretch}{\linespacing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY STYLE
+\bibliographystyle{plain_annote}
+% \bibliographystyle{plain} for [1], [2] etc.
+%\bibliographystyle{annotate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OTHER FORMATTING/LAYOUT DECLARATIONS
+% Graphics
+\usepackage{graphicx,color}
+\usepackage{epstopdf}
+\usepackage[british]{babel}
+% The left-hand-side should be 40mm.  The top and bottom margins should be
+% 25mm deep.  The right hand margin should be 20mm.
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=4cm,right=2cm,headsep=10pt]{geometry}
+\flushbottom
+% Pages should be numbered consecutively thorugh the main text.  Page numbers
+% should be located centrally at the top of the page.
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+	\fancyhf{}
+	% Add "DRAFT: <today's date>" to header (comment out the following to remove)
+	\lhead{\textit{DRAFT: \today}}
+	%
+	\chead{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\pagestyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ANY OTHER DECLARATIONS HERE:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYPERREF
+\usepackage[colorlinks,pagebackref,pdfusetitle,urlcolor=black,citecolor=black,linkcolor=black,bookmarksnumbered,plainpages=false]{hyperref}
+% For print version, use this instead:
+%\usepackage[pdfusetitle,bookmarksnumbered,plainpages=false]{hyperref}
+%\usepackage{backref}
+%\renewcommand{\backrefpagesname}{Cited on}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN DOCUMENT
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREAMBLE: roman page numbering i, ii, iii, ...
+\pagenumbering{roman}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE: The title page should give the following information:
+%%	(i) the full title of the thesis and the sub-title if any;
+%%	(ii) the full name of the author;
+%%	(iii) the qualification aimed for;
+%%	(iv) the name of the University of Sussex;
+%%	(v) the month and year of submission.
+\thispagestyle{empty}
+\begin{flushright}
+
+\end{flushright}	
+\vskip40mm
+\begin{center}
+% TITLE
+\huge\textbf{Outline Project Specification}
+\vskip2mm
+% SUBTITLE (optional)
+\LARGE\textit{Entropy-based metrics for joint-alignment of images}
+\vskip5mm
+% AUTHOR
+\Large\textbf{Laura Collins}
+\normalsize
+\end{center}
+\vfill
+\begin{flushleft}
+\large
+% QUALIFICATION
+University of Aberystwyth	\\
+% DATE OF SUBMISSION
+January 2016
+\end{flushleft}		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUMMARY PAGE
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGEMENTS
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLE OF CONTENTS, LISTS OF TABLES & FIGURES
+\newpage
+\pdfbookmark[0]{Contents}{contents_bookmark}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN THESIS TEXT: arabic page numbering 1, 2, 3, ...
+\newpage
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%-----------------------------------------------------
+% Chapter: Introduction
+%-----------------------------------------------------
+
+% NB Good idea to put each chapter in a separate file.
+% If you put the following in a file called "thesis_introduction.tex"
+% then you can include it with the following:
+
+% \input{thesis_introduction}
+
+\chapter{Project Description}
+\label{chap:desc}
+
+There are two different ways of approaching Medical Diagnosis using Computer Vision techniques. The first, Abnormality detection is prone to misdiagnosis as commonly no abnormalities are present, even in cancer-positive scenarios. The second approach is cancer risk assessment by categorising breast tissue into 1 of 4 `types' as specified by BI-RADS (Breast Imaging-Reporting and Data System) - with `a' being extremely fatty tissue (lowest risk) and `d' being dense tissue (highest risk).
+
+The project will encompass a sleek GUI for users to input a set of mammography scans, select their alignment metric (from a list of Information Entropy, Fuzzy Entropy) and then the software will output the average image of the input set. 
+
+The idea would be the software creates an average image per tissue composition category. This can then either be used to classify new instances of mammography scans or can be used to create a roadmap to aid Doctors in offline diagnosis.
+
+\chapter{Proposed Tasks}
+\label{chap:tasks}
+
+\section{Research into previous work}
+Work has been done using the Congealing method on 3D MRI scans on brightness alignment. 
+
+\section{Integrating existing Congealing algorithm}
+
+The Congealing algorithm has been implemented in both C++ and Objective-C. As my programming language of choice is Java, I will need to take one of the implementations and wrap it to be able to integrate it with the rest of my code. 
+
+I had an early decision to make as to whether I would program the entire project in C++ to accommodate the Congealing code, whether I would write my own implementation of Congealing in Java (this would ultimately be a great extra project, but I worry it would take away from my final goal) or finally whether I would wrap the existing open-source code by MIT and integrate it.
+
+\section{Graphical User Interface}
+
+\chapter{Project Deliverables}
+\label{chap:deliverables}
+
+%-----------------------------------------------------
+% Chapter: Conclusion
+%-----------------------------------------------------
+\nocite{*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START APPENDICES
+\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%-----------------------------------------------------
+% Appendix: Code
+%-----------------------------------------------------
+\chapter{Some appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END DOCUMENT
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
