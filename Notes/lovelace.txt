@@ -1,0 +1,7 @@
+Machine Learning and Computer Vision techniques to help improve diagnosis of disease via Medical Imaging analysis is a rapidly-growing field. The University of Swansea recently announced advancements in ‘teaching’ computers to recognise disease in images using a set of positive examples of cancer.
+
+There are two different ways of approaching Medical Diagnosis using Computer Vision techniques. The first, Abnormality detection is prone to misdiagnosis as commonly no abnormalities are present, even in cancer-positive scenarios. The second approach is cancer risk assessment by categorising breast tissue into 1 of 4 densities as specified by BI-RADS (Breast Imaging-Reporting and Data System) - with ‘a’ being extremely fatty tissue (lowest risk) and ‘d’ being dense tissue (highest risk).
+
+Entropy-based metrics for joint image alignment focuses on alignment of mammography scans from the same BI-RAD composition category (sets of a, b, c & d) to create an ‘average’ image. Different metrics could be used to create different results and further research could be undertaken as to which would be the most beneficial metric for classifying breast tissue composition images.
+
+The outcome could be used to educate Doctors in the differences between the 4 categories and could further go on to help categorise new scans.
