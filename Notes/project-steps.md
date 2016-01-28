@@ -7,7 +7,8 @@ Project Steps & Initial Reqs.
 * Run standard congealing
 * Edit metric - Entropy, Fuzzy Entropy
 * Output average image or colour values
-* Be able to save output 
+* Be able to save output
+* Be able to compare outputs of two different metrics?
 
 
 Stretch:
