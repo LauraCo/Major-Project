@@ -11,3 +11,7 @@
 *.toc
 *.brf
 *.idx
+*.ilg
+*.ind
+*.fls
+*fdb_latexmk
