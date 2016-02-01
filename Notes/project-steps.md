@@ -8,9 +8,8 @@ Project Steps & Initial Reqs.
 * Edit metric - Entropy, Fuzzy Entropy
 * Output average image or colour values
 * Be able to save output
-* Be able to compare outputs of two different metrics?
-
 
 Stretch:
+* Be able to compare outputs of two (or more) different metrics
 * Input 'new' image - can it be classified?
 * Create roadmap
