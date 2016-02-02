@@ -24,7 +24,7 @@
 \name{Laura Collins}
 \userid{lac32}
 \projecttitle{Entropy-based metrics for joint image alignment}
-\projecttitlememoir{Your project title (shorter form, if necessary)} %same as the project title or abridged version for page header
+\projecttitlememoir{Entropy-based metrics for joint image alignment} %same as the project title or abridged version for page header
 \reporttitle{Outline Project Specification}
 \version{0.1}
 \docstatus{Draft}
@@ -54,7 +54,7 @@ Aligning mammography scans would help build an average of the image set. With th
 
 Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model.
 
-I decided to use an adapted-XP approach for my software methodology.
+An adapted-XP (Extreme Programming) approach has been selected for the software methodology on this Project. Some early investigation will go into how to best overcome the lack of Pair-Programming practice. Daily stand-ups will take in the formal of daily meet-ups with peers to discuss individual progress.
 
 %==============================================================================
 \section{Proposed tasks}
@@ -62,9 +62,9 @@ I decided to use an adapted-XP approach for my software methodology.
 
 \subsection{Research into alternative metrics}
 \label{ssec:alt-met}
-The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus I would have to research into different kinds of Entropy-based metrics. This led me on to the paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output.
+The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus research into different alignment metrics will be needed. This led me on to the paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output.
 
-After reading about different metrics used in Congealing, I discovered Cox et al's Least Squares implementation \cite{least-squares-congealing}, however I decided to stay aligned with the Major Project title, and implemented only entropy-based metrics.
+Cox et al's Least Squares implementation \cite{least-squares-congealing} is an interesting Congealing implementation using an entirely different type of alignment metric, however the project would most benefit from a narrow entropy-only based approach, staying in-line with the original Major Project title.
 
 \subsection{Development}
 
@@ -80,14 +80,14 @@ Weekly supervisor meetings will be conducted throughout the project. A blog will
 Through the duration of the Project, the following deliverables are to be expected.
 
 \subsection{Short Report per Alignment implementation}
-At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report.
+At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report. This will be an ongoing process,  to conclude once development has ceased.
 
 \subsection{Technical Deliverable}
 
 \subsection{Final Report}
 
 \subsection{Possible Publication}
-
+If the average image outputs are found to be of use to clinicians there is the possibility of writing a scientific paper on the original algorithm, research, alterations to the algorithm(s) and final conclusions. This would be work completed at the end of the Project cycle.
 
 \nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
 
