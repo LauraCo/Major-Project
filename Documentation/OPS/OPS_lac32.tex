@@ -48,28 +48,41 @@
 
 The Project builds upon the Congealing code developed by Erik Learned-Miller from the University of Massachusetts \cite{joint-alignment}. In the paper Learned-Miller utilises the Congealing algorithm to align both MNIST handwriting data and MRI Scans by reducing the variability between each pixel within a stack of images. For example, the algorithm will analyse the properties of the upper-leftmost pixel in image 1, then in image 2 and through each image in the set. This variation between pixels is known as Entropy, and thus the objective of Congealing is to minimise the Entropy across a set of images.
 
-The aim of this project will be to implement the Congealing algorithm using not only Entropy, as in Learned-Miller's application, but using other metrics such as Fuzzy Entropy, and Least Squares as implemented in \cite{least-squares-congealing}. As for the data to feed into the application, my image set of choice will be Mammography scans, however due to their large file size initial experimentation will be run using the MNIST handwriting data set.
+The aim of this project will be to implement the Congealing algorithm using not only standard Entropy, as in Learned-Miller's application, but using other metrics, as discussed in Section \ref{ssec:alt-met}. As for the data to feed into the application, my image set of choice will be Mammography scans, however due to their large file size initial experimentation will be run using the MNIST handwriting data set.
 
 Aligning mammography scans would help build an average of the image set. With this is in mind it is possible to build an average for the 4 breast tissue composition categories outlined by BI-RADS (Breast Imaging-Reporting and Data System) - with 1 being fatty tissue (lowest risk) and 4 being dense tissue (highest risk) \cite{bi-rads}. Approaching this alignment of images using different metrics would output different a range of output results, and further investigation could be undertaken to ascertain the best alignment metric.
 
 Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model.
+
+I decided to use an adapted-XP approach for my software methodology.
 
 %==============================================================================
 \section{Proposed tasks}
 %==============================================================================
 
 \subsection{Research into alternative metrics}
-The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus I would have to research into different kinds of Entropy-based metrics. This led me on to the paper by \textbf{citation needed} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output.
+\label{ssec:alt-met}
+The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus I would have to research into different kinds of Entropy-based metrics. This led me on to the paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output.
 
-\subsection{Graphical User Interface}
+After reading about different metrics used in Congealing, I discovered Cox et al's Least Squares implementation \cite{least-squares-congealing}, however I decided to stay aligned with the Major Project title, and implemented only entropy-based metrics.
+
+\subsection{Development}
 
 \subsection{Dataset}
+Choosing to align Mammography scans causes some issues, the main one being the file size of the images. Due to their large nature
+
+\subsection{Project Meetings \& Blog}
+Weekly supervisor meetings will be conducted throughout the project. A blog will also be kept throughout the duration of the project, covering a wide range of topics such as weekly updates, hurdles, progress made and other news worth noting. Ghost will be used as the blogging platform of choice, located at: \url{lauramcollins.co.uk/blog}.
 
 %==============================================================================
 \section{Project deliverables}
 %==============================================================================
+Through the duration of the Project, the following deliverables are to be expected.
 
-\subsection{Software}
+\subsection{Short Report per Alignment implementation}
+At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report.
+
+\subsection{Technical Deliverable}
 
 \subsection{Final Report}
 
