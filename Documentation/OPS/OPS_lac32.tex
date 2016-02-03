@@ -10,7 +10,8 @@
 \usepackage{fancyhdr} %header and footer package
 \usepackage{mmpv2}
 \usepackage{url}
-\usepackage{savetrees}
+\setlength{\parskip}{0.25em}
+
 
 % the following packages are used for citations - You only need to include one.
 %
@@ -53,9 +54,9 @@ The aim of this project will be to implement the Congealing algorithm using not 
 
 Aligning mammography scans would help build an average of the image set. With this is in mind it is possible to build an average for the 4 breast tissue composition categories outlined by BI-RADS (Breast Imaging-Reporting and Data System) - with 1 being fatty tissue (lowest risk) and 4 being dense tissue (highest risk) \cite{bi-rads}. Approaching this alignment of images using different metrics would output different a range of output results, and further investigation could be undertaken to ascertain the best alignment metric.
 
-Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model.
+Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model to help categorise new, unseen mammography scans by tissue density.
 
-An adapted-XP (Extreme Programming) approach has been selected for the software methodology on this Project. Some early investigation will go into how to best overcome the lack of Pair-Programming practice. Daily stand-ups will take in the formal of daily meet-ups with peers to discuss individual progress.
+An adapted-XP (Extreme Programming) approach has been selected for the software methodology on this Project. Some early investigation will go into how to best overcome the lack of Pair-Programming practice. Daily stand-ups will take in the formal of daily meet-ups with peers to discuss individual progress. \par
 
 %==============================================================================
 \section{Proposed tasks}
@@ -68,7 +69,7 @@ The original Congealing algorithm implemented by Learned-Miller uses standard En
 Cox et al's Least Squares implementation \cite{least-squares-congealing} is an interesting Congealing implementation using an entirely different type of alignment metric, however the project would most benefit from a narrow entropy-only based approach, staying in-line with the original Major Project title.
 
 \subsection{Installing MATLAB}
-A MATLAB license will need to be obtained and then MATLAB installed and properly configured on my MacBook Pro. Learned-Miller's Congealing code will need to be imported.
+A MATLAB license will need to be obtained and then MATLAB installed and properly configured on my MacBook Pro. Learned-Miller's Congealing code will need to be imported. Research will have to be undertaken as to how to how to run tests in MATLAB.
 
 \subsection{Development}
 The development is likely to be split into 2 major sections:
@@ -91,12 +92,20 @@ Through the duration of the Project, the following deliverables are to be expect
 \subsection{Short Report per Alignment implementation}
 At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report. This will be an ongoing process,  to conclude once development has ceased.
 
+\subsection{Mid-Project Demonstration Notes}
+A set of notes will be created to accompany the mid-project demonstration. This will be a summary of what was presented, and will be discussed with the project supervisor prior to the demonstration. This will be included in the appendices of the Final Report as a marker of technical improvement since the mid-project demonstration.
+
 \subsection{Technical Deliverable}
+The final Technical Deliverable package will include all necessary files to run the software. This package will be submitted for assessment and also will be stored upon a version control system.
 
 \subsection{Story Cards and CRC Cards}
-As this project will be following an adapted-XP methodology, the defining stories and design will fall within the Story Cards and CRC Cards respectively. 
+As this project will be following an adapted-XP methodology, the defining stories and design will fall within the Story Cards and CRC Cards respectively. These are likely to be included in the Final Report appendices.
 
 \subsection{Final Report}
+This will be the final evaluative report, acknowledging any third-party libraries, frameworks and tools used along with other associated appendices. This will be completed and submitted at the end of the Project.
+
+\subsection{Final Demonstration}
+No formal documentation will be needed for this stage of the Major Project, however due to it's importance to the final grade, and the work needed to prepare for it, it is worth noting here.
 
 \subsection{Possible Publication}
 If the average image outputs are found to be of use to clinicians there is the possibility of writing a scientific paper on the original algorithm, research, alterations to the algorithm(s) and final conclusions. This would be work completed at the end of the Project cycle.
