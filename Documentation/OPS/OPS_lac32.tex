@@ -10,7 +10,12 @@
 \usepackage{fancyhdr} %header and footer package
 \usepackage{mmpv2}
 \usepackage{url}
-\setlength{\parskip}{0.25em}
+
+\usepackage{titlesec}
+
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
 
 
 % the following packages are used for citations - You only need to include one.
@@ -28,7 +33,7 @@
 \projecttitle{Entropy-based metrics for joint image alignment}
 \projecttitlememoir{Entropy-based metrics for joint image alignment} %same as the project title or abridged version for page header
 \reporttitle{Outline Project Specification}
-\version{0.1}
+\version{0.2}
 \docstatus{Draft}
 \modulecode{CS39440}
 \degreeschemecode{GH7P}
@@ -48,11 +53,9 @@
 \section{Project description}
 %==============================================================================
 
-The Project builds upon the Congealing code developed by Erik Learned-Miller from the University of Massachusetts \cite{joint-alignment}. In the paper Learned-Miller utilises the Congealing algorithm to align both MNIST handwriting data and MRI Scans by reducing the variability between each pixel within a stack of images. For example, the algorithm will analyse the properties of the upper-leftmost pixel in image 1, then in image 2 and through each image in the set. This variation between pixels is known as Entropy, and thus the objective of Congealing is to minimise the Entropy across a set of images.
+The Project builds upon the Congealing code developed by Erik Learned-Miller from the University of Massachusetts \cite{joint-alignment}. In the paper Learned-Miller utilises the Congealing algorithm to align both MNIST handwriting data and MRI Scans by reducing the variability between each pixel within a stack of images. For example, the algorithm will analyse the properties of the upper-leftmost pixel in image 1, then in image 2 and through each image in the set. This variation between pixels is known as Entropy, and thus the objective of Congealing is to minimise the Entropy across a set of images. \par
 
-The aim of this project will be to implement the Congealing algorithm using not only standard Entropy, as in Learned-Miller's application, but using other metrics, as discussed in Section \ref{ssec:alt-met}. As for the data to feed into the application, my image set of choice will be Mammography scans, however due to their large file size initial experimentation will be run using the MNIST handwriting data set.
-
-Aligning mammography scans would help build an average of the image set. With this is in mind it is possible to build an average for the 4 breast tissue composition categories outlined by BI-RADS (Breast Imaging-Reporting and Data System) - with 1 being fatty tissue (lowest risk) and 4 being dense tissue (highest risk) \cite{bi-rads}. Approaching this alignment of images using different metrics would output different a range of output results, and further investigation could be undertaken to ascertain the best alignment metric.
+The aim of this project will be to implement the Congealing algorithm using not only standard Entropy, as in Learned-Miller's application, but using other metrics, as discussed in Section \ref{ssec:alt-met}. Mammography scans are the image of choice for this project as aligning these scans would help build an average of the image set. With this is in mind it is possible to build an average for the 4 breast tissue composition categories outlined by BI-RADS (Breast Imaging-Reporting and Data System) - with 1 being fatty tissue (lowest risk) and 4 being dense tissue (highest risk) \cite{bi-rads}. Approaching this alignment of images using different metrics would output different a range of output results, and further investigation could be undertaken to ascertain the best alignment metric. \par
 
 Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model to help categorise new, unseen mammography scans by tissue density.
 
@@ -64,9 +67,7 @@ An adapted-XP (Extreme Programming) approach has been selected for the software 
 
 \subsection{Research into alternative metrics}
 \label{ssec:alt-met}
-The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus research into different alignment metrics will be needed. This led me on to the paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output.
-
-Cox et al's Least Squares implementation \cite{least-squares-congealing} is an interesting Congealing implementation using an entirely different type of alignment metric, however the project would most benefit from a narrow entropy-only based approach, staying in-line with the original Major Project title.
+The original Congealing algorithm implemented by Learned-Miller uses standard Entropy and thus research into different alignment metrics will be needed. This led me on to the paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations. Each one is implemented with slight variation, and thus each gives a different output. \par
 
 \subsection{Installing MATLAB}
 A MATLAB license will need to be obtained and then MATLAB installed and properly configured on my MacBook Pro. Learned-Miller's Congealing code will need to be imported. Research will have to be undertaken as to how to how to run tests in MATLAB.
@@ -79,7 +80,7 @@ The development is likely to be split into 2 major sections:
   Each Algorithm will be implemented in the original Congealing code, swapping out the standard Entropy algorithm for each Fuzzy Entropy version.
 
 \subsection{Dataset}
-Choosing to align Mammography scans causes some issues, the main one being the file size of the images. For example, the Digital Database for Screening Mammography (DDSM) has approximately 4400 pixels per line, with each pixel approximately 1900bits \cite{ddsm-paper}. Due to their large nature, a fewer number of training images will be used in development, however if the time permits and a classifier is to be created, it would have to be assessed as to how to accommodate a large number of these scans. The dataset of choice will be the `Mini-MIAS database of mammograms' as their image size has been specifically reduced to 1024x1024 pixels \cite{suckling1994mammographic}.
+Choosing to align Mammography scans causes some issues, the main one being the file size of the images. For example, the Digital Database for Screening Mammography (DDSM) has approximately 4400 pixels per line, with each pixel approximately 1900bits \cite{ddsm-paper}. The dataset of choice will be the `Mini-MIAS database of mammograms' as their image size has been specifically reduced to 1024x1024 pixels \cite{suckling1994mammographic}.
 
 \subsection{Project Meetings \& Blog}
 Weekly supervisor meetings will be conducted throughout the project. A blog will also be kept throughout the duration of the project, covering a wide range of topics such as weekly updates, hurdles, progress made and other news worth noting. Ghost will be used as the blogging platform of choice, located at: \url{lauramcollins.co.uk/blog}.
@@ -95,8 +96,11 @@ At the end, or at a suitable time during development should it arise, a short re
 \subsection{Mid-Project Demonstration Notes}
 A set of notes will be created to accompany the mid-project demonstration. This will be a summary of what was presented, and will be discussed with the project supervisor prior to the demonstration. This will be included in the appendices of the Final Report as a marker of technical improvement since the mid-project demonstration.
 
-\subsection{Technical Deliverable}
+\subsection{Technical Deliverable \& Test Scripts}
 The final Technical Deliverable package will include all necessary files to run the software. This package will be submitted for assessment and also will be stored upon a version control system.
+
+\subsection{Test Scripts}
+Exact tools for testing the technical deliverable will be assessed as the project progresses. It is likely that these will include MATLAB`s xUnit automated testing framework and JUnit (if Java is utilised), along with some required manual testing. These will be submitted as part of the technical deliverable.
 
 \subsection{Story Cards and CRC Cards}
 As this project will be following an adapted-XP methodology, the defining stories and design will fall within the Story Cards and CRC Cards respectively. These are likely to be included in the Final Report appendices.
