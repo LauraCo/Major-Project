@@ -10,6 +10,7 @@
 \usepackage{fancyhdr} %header and footer package
 \usepackage{mmpv2}
 \usepackage{url}
+\usepackage{savetrees}
 
 % the following packages are used for citations - You only need to include one.
 %
@@ -66,7 +67,15 @@ The original Congealing algorithm implemented by Learned-Miller uses standard En
 
 Cox et al's Least Squares implementation \cite{least-squares-congealing} is an interesting Congealing implementation using an entirely different type of alignment metric, however the project would most benefit from a narrow entropy-only based approach, staying in-line with the original Major Project title.
 
+\subsection{Installing MATLAB}
+A MATLAB license will need to be obtained and then MATLAB installed and properly configured on my MacBook Pro. Learned-Miller's Congealing code will need to be imported.
+
 \subsection{Development}
+The development is likely to be split into 2 major sections:
+  \subsubsection{Graphical User Interface}
+  From here the User will be able to input their sets of images, select the alignment metric and the output will be displayed. This is vital for the easy comparison between images for clinicians.
+  \subsubsection{Algorithm Implementation}
+  Each Algorithm will be implemented in the original Congealing code, swapping out the standard Entropy algorithm for each Fuzzy Entropy version.
 
 \subsection{Dataset}
 Choosing to align Mammography scans causes some issues, the main one being the file size of the images. For example, the Digital Database for Screening Mammography (DDSM) has approximately 4400 pixels per line, with each pixel approximately 1900bits \cite{ddsm-paper}. Due to their large nature, a fewer number of training images will be used in development, however if the time permits and a classifier is to be created, it would have to be assessed as to how to accommodate a large number of these scans. The dataset of choice will be the `Mini-MIAS database of mammograms' as their image size has been specifically reduced to 1024x1024 pixels \cite{suckling1994mammographic}.
@@ -83,6 +92,9 @@ Through the duration of the Project, the following deliverables are to be expect
 At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report. This will be an ongoing process,  to conclude once development has ceased.
 
 \subsection{Technical Deliverable}
+
+\subsection{Story Cards and CRC Cards}
+As this project will be following an adapted-XP methodology, the defining stories and design will fall within the Story Cards and CRC Cards respectively. 
 
 \subsection{Final Report}
 
