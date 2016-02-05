@@ -1,0 +1,118 @@
+\documentclass[11pt,fleqn,twoside]{article}
+\usepackage{makeidx}
+\makeindex
+\usepackage{palatino} %or {times} etc
+\usepackage{plain} %bibliography style
+\usepackage{amsmath} %math fonts - just in case
+\usepackage{amsfonts} %math fonts
+\usepackage{amssymb} %math fonts
+\usepackage{lastpage} %for footer page numbers
+\usepackage{fancyhdr} %header and footer package
+\usepackage{mmpv2}
+\usepackage{url}
+
+\usepackage{titlesec}
+
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+
+
+% the following packages are used for citations - You only need to include one.
+%
+% Use the cite package if you are using the numeric style (e.g. IEEEannot).
+% Use the natbib package if you are using the author-date style (e.g. authordate2annot).
+% Only use one of these and comment out the other one.
+\usepackage{cite}
+%\usepackage{natbib}
+
+\begin{document}
+
+\name{Laura Collins}
+\userid{lac32}
+\projecttitle{Entropy-based metrics for joint image alignment}
+\projecttitlememoir{Entropy-based metrics for joint image alignment} %same as the project title or abridged version for page header
+\reporttitle{Outline Project Specification}
+\version{1.0}
+\docstatus{Released}
+\modulecode{CS39440}
+\degreeschemecode{GH7P}
+\degreeschemename{Artificial Intelligence And Robotics}
+\supervisor{Neil MacParthalain} % e.g. Neil Taylor
+\supervisorid{ncm}
+\wordcount{}
+
+%optional - comment out next line to use current date for the document
+%\documentdate{10th February 2014}
+\mmp
+
+\setcounter{tocdepth}{3} %set required number of level in table of contents
+
+
+%==============================================================================
+\section{Project description}
+%==============================================================================
+
+The Project is concerned with the alignment of multiple images using an image-alignment technique called Congealing \cite{joint-alignment}. In the paper Learned-Miller utilises the Congealing algorithm to align both MNIST handwriting data and MRI Scans by reducing the pixel-wise uncertainty across a collection of images. For example, the algorithm will examine the grey-levels of the upper-leftmost pixel in image 1, then in image 2 and through each of the images to be aligned. This uncertainty across pixel grey-level values is measured using Entropy, and thus the objective of Congealing is to minimise the Entropy value for a given set of images. \par
+
+The aim of this project will be to implement an image-alignment technique using not only standard Entropy, as in \cite{joint-alignment}, but using other metrics, as discussed in Section \ref{itm:task}. We will attempt to use mammographic images drawn from the Mini-MIAS dataset \cite{suckling1994mammographic} for the basis of the alignment. By aligning these mammograms, it is hoped we can derive an average image which can provide information about the tissue structure of that classification, as outlined by BI-RADS (Breast Imaging-Reporting and Data System) - with 1 being fatty tissue (lowest risk) and 4 being dense tissue (highest risk) \cite{bi-rads}. Utilising different alignment metrics on the same images would result in a range of average images, and if time permits, this may be used to ascertain the most useful for the alignment of mammography images. \par
+
+Finally, the resulting software tool could be used by Radiologists in assessing the tissue variation between the 4 categories and could also be used to build a classifier model to help categorise new, unseen mammograms in terms of tissue density.
+
+An adapted-XP (Extreme Programming) approach has been selected for the software methodology on this Project. Some early investigation will go into how to best overcome the lack of Pair-Programming practice. Daily stand-ups will take in the formal of daily meet-ups with peers to discuss individual progress. \par
+
+%==============================================================================
+\section{Proposed tasks}
+%==============================================================================
+
+\begin{itemize}
+  \label{itm:task}
+  \item\textbf{Research into alternative metrics} The original Congealing algorithm implemented developed in \cite{joint-alignment} uses standard Entropy and thus research into different alignment metrics will be needed. The paper by Al-Sharhan et al \cite{fuzzy-entropy} about different Fuzzy Entropy implementations will be a paper of significance. Each one is implemented with slight variation, and thus each gives a different output.
+  \item\textbf{Installing MATLAB} A MATLAB license will need to be obtained and then MATLAB installed and properly configured on my MacBook Pro. Learned-Miller's Congealing code will need to be imported. Research will have to be undertaken as to how to how to run tests in MATLAB.
+  \item\textbf{Development} The development is likely to be split into 2 major sections:
+  \begin{itemize}
+    \item\textbf{Graphical User Interface} From here the User will be able to input their sets of images, select the alignment metric and the output will be displayed. This is vital for the easy comparison between images for clinicians.
+    \item\textbf{Algorithm Implementation} Each Algorithm will be implemented in the original Congealing code, swapping out the standard Entropy algorithm for each Fuzzy Entropy version.
+  \end{itemize}
+  \item\textbf{Dataset} Choosing to align mammograms causes some issues, the main one being the file size of the images. For example, the Digital Database for Screening Mammography (DDSM) has approximately 4400 pixels per line, with each pixel approximately 1900bits \cite{ddsm-paper}. The dataset used in this project will be the `Mini-MIAS database of mammograms' as their image size has been specifically reduced to 1024x1024 pixels \cite{suckling1994mammographic}.
+  \item\textbf{Project Meetings \& Blog} Weekly supervisor meetings will be conducted throughout the project. A blog will also be kept throughout the duration of the project, covering a wide range of topics such as weekly updates, hurdles, progress made and other news worth noting. Ghost will be used as the blogging platform of choice, located at: \url{lauramcollins.co.uk/blog}.
+\end{itemize}
+
+
+%==============================================================================
+\section{Project deliverables}
+%==============================================================================
+Through the duration of the Project, the following deliverables are to be expected.
+
+\begin{itemize}
+\item \textbf{Short Report per Alignment implementation} At the end, or at a suitable time during development should it arise, a short report will be created to outline the implementation of each Entropy-based metric. This report will cover resources used, progress made, any hurdles overcome and any extra notes that may be of use in the Final Report. This will be an ongoing process,  to conclude once development has ceased.
+\item \textbf{Mid-Project Demonstration Notes} A set of notes will be created to accompany the mid-project demonstration. This will be a summary of what was presented, and will be discussed with the project supervisor prior to the demonstration. This will be included in the appendices of the Final Report as a marker of technical improvement since the mid-project demonstration.
+
+\item \textbf{Technical Deliverable} The final Technical Deliverable package will include all necessary files to run the software. This package will be submitted for assessment and also will be stored upon a version control system.
+
+\item \textbf{Test Scripts} Exact tools for testing the technical deliverable will be assessed as the project progresses. It is likely that these will include MATLAB`s xUnit automated testing framework and JUnit (if Java is utilised), along with some required manual testing. These will be submitted as part of the technical deliverable.
+
+\item \textbf{Story Cards and CRC Cards} As this project will be following an adapted-XP methodology, the defining stories and design will fall within the Story Cards and CRC Cards respectively. These are likely to be included in the Final Report appendices.
+
+\item \textbf{Final Report} This will be the final evaluative report, acknowledging any third-party libraries, frameworks and tools used along with other associated appendices. This will be completed and submitted at the end of the Project.
+
+\item \textbf{Final Demonstration} No formal documentation will be needed for this stage of the Major Project, however due to it's importance to the final grade, and the work needed to prepare for it, it is worth noting here.
+
+\item \textbf{Possible Publication} If the average image outputs are found to be of use to clinicians there is the possibility of writing a scientific paper on the original algorithm, research, alterations to the algorithm(s) and final conclusions. This would be work completed at the end of the Project cycle.
+
+\end{itemize}
+
+\nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
+
+% the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography.
+\newpage
+\addcontentsline{toc}{section}{Initial Annotated Bibliography}
+
+%
+% example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.
+%\bibliographystyle{authordate2annot}
+\bibliographystyle{IEEEannot}
+\renewcommand{\refname}{Annotated Bibliography}  % if you put text into the final {} on this line, you will get an extra title, e.g. References. This isn't necessary for the outline project specification.
+\bibliography{mmp} % References file
+
+\end{document}
