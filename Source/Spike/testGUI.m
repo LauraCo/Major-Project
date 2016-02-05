@@ -22,7 +22,7 @@ function varargout = testGUI(varargin)
 
 % Edit the above text to modify the response to help testGUI
 
-% Last Modified by GUIDE v2.5 05-Feb-2016 11:14:08
+% Last Modified by GUIDE v2.5 05-Feb-2016 11:18:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -84,4 +84,18 @@ if isequal(filename,0)
    disp('User selected Cancel')
 else
    disp(['User selected ', fullfile(pathname, filename)])
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[filename, pathname] = uiputfile('*.m',...
+                       'Save image');
+if isequal(filename,0) || isequal(pathname,0)
+   disp('User selected Cancel')
+else
+   disp(['User selected ',fullfile(pathname,filename)])
 end
