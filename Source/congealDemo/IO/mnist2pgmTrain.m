@@ -1,5 +1,5 @@
-im_fname='/home/vis3/data/emiller/MNIST/t10k-images-idx3-ubyte';
-label_fname='/home/vis3/data/emiller/MNIST/t10k-labels-idx1-ubyte';
+im_fname='/Users/lauracollins/Git/Major-Project/Source/congealDemo/MNIST/t10k-images-idx3-ubyte';
+label_fname='/Users/lauracollins/Git/Major-Project/Source/congealDemo/MNIST/t10k-labels-idx1-ubyte';
 %im_fname='/home/vis3/data/emiller/MNIST/train-images-idx3-ubyte';
 %label_fname='/home/vis3/data/emiller/MNIST/train-labels-idx1-ubyte';
 
