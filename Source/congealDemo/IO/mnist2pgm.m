@@ -1,7 +1,7 @@
 %im_fname='/home/vis3/data/emiller/MNIST/t10k-images-idx3-ubyte';
 %label_fname='/home/vis3/data/emiller/MNIST/t10k-labels-idx1-ubyte';
-im_fname='/home/vis3/data/emiller/MNIST/train-images-idx3-ubyte';
-label_fname='/home/vis3/data/emiller/MNIST/train-labels-idx1-ubyte';
+im_fname='/Users/lauracollins/Git/Major-Project/Source/congealDemo/train-images-idx3-ubyte ';
+label_fname='/Users/lauracollins/Git/Major-Project/Source/congealDemo/train-labels-idx1-ubyte ';
 
 sers=zeros(28,28,6500,10);
 
@@ -33,9 +33,9 @@ for i=1:60000
 end
 
 
-addpath /home/vis3/data/emiller/NIST/matlab/IO;
+addpath /Users/lauracollins/Git/Major-Project/Source/congealDemo/IO;
 for i=1:10
-  outfname=sprintf('/home/vis3/data/emiller/MNIST/pgm/train_%d.pgm',i-1);
+  outfname=sprintf('/Users/lauracollins/Git/Major-Project/Source/congealDemo/pgm ',i-1);
   s=sers(:,:,1:curInd(i)-1,i);
   saveSeries(outfname,s);
 end
