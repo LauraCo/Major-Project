@@ -13,7 +13,7 @@ sr=min(sr,1);
 
 %sr=sr(1:end-6,:,:);
 
-[adjSer,meanIms,transVecs]=binaryCongeal(sr,40,7);
+[adjSer,meanIms,transVecs]=binaryCongeal(sr,20,7);
 
 showSer(meanIms,1);
 showSer(adjSer,2);
