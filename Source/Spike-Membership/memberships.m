@@ -16,7 +16,14 @@ subplot(1,3,2), subimage(IGrey), title('Greyscale Image')
 subplot(1,3,3), subimage(BW), title('Black & White Image')
 
 figure;
-subplot(1,2,2), subimage(IGrey), title('Greyscale Image')
-subplot(1,2,1), imhist(IGrey) %http://uk.mathworks.com/help/images/ref/imhist.html
+subplot(1,2,1), subimage(IGrey), title('Greyscale Image')
+subplot(1,2,2), imhist(IGrey) %http://uk.mathworks.com/help/images/ref/imhist.html
+
+%figure; 
+%subplot(1,2,1), subimage(BW), title('Black & White Image')
+%subplot(1,2,2), imhist(BW)
+
+intensityValue = IGrey(100, 230); %Intensity value of a particular pixel
+disp(intensityValue); 
 
 
