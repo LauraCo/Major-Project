@@ -16,3 +16,8 @@ Membership
 3. Grey
 4. *Grey-Black*
 5. Black
+
+> Fuzzy Logic Toolbox
+
+* Create an array of the 3 or 5 different groups
+* If pixel intensity falls into cateory, add to array
