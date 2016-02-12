@@ -30,6 +30,7 @@ disp(intensityValue);
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 % Adapted from Octave website - http://octave.sourceforge.net/fuzzy-logic-toolkit/function/trapmf.html
+
 x = 0:255;
 params = [-1 0 50 95];
 y1 = trapmf(x, params);
@@ -50,7 +51,7 @@ grid;
 
 %http://www.bel.utcluj.ro/dce/didactic/sln/lab_eng/2MultimiFuzzy_eng/html/FuzzySets.html
 
-u1 = evalmf(intensityValue,params1,'trapmf'); 
+u1 = evalmf(intensityValue,params,'trapmf'); 
 sprintf( 'x1=%1.2f has the membership degree u1=%1.2f',intensityValue,u1);
 disp(u1);
 plot(intensityValue,u1,'r*');
