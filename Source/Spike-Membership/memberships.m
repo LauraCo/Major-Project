@@ -33,16 +33,14 @@ disp(intensityValue);
 x = 0:255;
 params = [-1 0 50 95];
 y1 = trapmf(x, params);
-params = [60 90 150 180];
-y2 = trapmf(x, params);
-params = [145 185 260 275];
-y3 = trapmf(x, params);
+params1 = [60 90 150 180];
+y2 = trapmf(x, params1);
+params2 = [145 185 260 275];
+y3 = trapmf(x, params2);
 figure;
-plot(x, y1)
+plot(x, y1,x, y2,x, y3)
 hold on; %hold this drawn line on the graph
-plot(x, y2)
-hold on; %hold this drawn line on the graph
-plot(x, y3)
+
 
 xlim([0 255]);
 ylim([-0.1 1.2]);
@@ -51,10 +49,12 @@ ylabel('Degree of Membership', 'FontWeight', 'bold');
 grid;
 
 %http://www.bel.utcluj.ro/dce/didactic/sln/lab_eng/2MultimiFuzzy_eng/html/FuzzySets.html
-x1 = intensityValue;
-u1 = evalmf(x1,params,'trapmf'); 
-sprintf( 'x1=%1.2f has the membership degree u1=%1.2f',x1,u1);
-plot(x1,u1,'r*');
-plot([x1,x1],[0,u1],'linestyle','-','color','r');
-plot([0,x1],[u1,u1],'linestyle','-','color','r');
+
+u1 = evalmf(intensityValue,params1,'trapmf'); 
+sprintf( 'x1=%1.2f has the membership degree u1=%1.2f',intensityValue,u1);
+disp(u1);
+plot(intensityValue,u1,'r*');
+plot([intensityValue,intensityValue],[0,u1],'linestyle','-','color','r');
+plot([0,intensityValue],[u1,u1],'linestyle','-','color','r');
 hold off;
+
