@@ -25,7 +25,7 @@ subplot(1,2,2), imhist(IGrey) %http://uk.mathworks.com/help/images/ref/imhist.ht
 %subplot(1,2,1), subimage(BW), title('Black & White Image')
 %subplot(1,2,2), imhist(BW)
 
-intensityValue = IGrey(100, 230); %Intensity value of a particular pixel
+intensityValue = IGrey(80, 230); %Intensity value of a particular pixel
 disp(intensityValue); 
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
@@ -39,13 +39,22 @@ params = [145 185 260 275];
 y3 = trapmf(x, params);
 figure;
 plot(x, y1)
-hold on;
+hold on; %hold this drawn line on the graph
 plot(x, y2)
-hold on;
+hold on; %hold this drawn line on the graph
 plot(x, y3)
+
 xlim([0 255]);
 ylim([-0.1 1.2]);
 xlabel('Greyscale Value', 'FontWeight', 'bold');
 ylabel('Degree of Membership', 'FontWeight', 'bold');
 grid;
- 
+
+%http://www.bel.utcluj.ro/dce/didactic/sln/lab_eng/2MultimiFuzzy_eng/html/FuzzySets.html
+x1 = intensityValue;
+u1 = evalmf(x1,params,'trapmf'); 
+sprintf( 'x1=%1.2f has the membership degree u1=%1.2f',x1,u1);
+plot(x1,u1,'r*');
+plot([x1,x1],[0,u1],'linestyle','-','color','r');
+plot([0,x1],[u1,u1],'linestyle','-','color','r');
+hold off;
