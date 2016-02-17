@@ -1,4 +1,4 @@
-% This function takes a series of images and returns 
+    % This function takes a series of images and returns 
 % three things, an adjSer which are the congealed images,
 % the meanIms, which are arrays of histograms of values,
 % and xfrms, an array of transforms mapping the 
@@ -9,9 +9,10 @@ function [adjSer,meanIms,transVecs]=binaryCongeal(ser,numIters,par_count)
 
 addpath IO
 addpath UTILITY
+addpath DE_LUCA_FUZZY
 
 [x,y,imgCount]=size(ser);
-meanIms(:,:,1)=mean(ser,3);
+meanIms(:,:,1)=mean(ser,3); %LAC32 - this denotes taking the mean across 3 axis - so x,y and each image in the series
 curMean=meanIms(:,:,1);
 
 transVecs=zeros(imgCount,par_count);
@@ -29,7 +30,7 @@ for iters=1:numIters       % Until convergence?
   transVecs=transVecs-repmat(mean(transVecs,1),[imgCount 1]);
   adjSer=computeXfrmImgs(ser,transVecs);
   curMean=mean(adjSer,3);
-  ent=fastEntLookup(curMean);
+  ent=deLucaFuzzy(curMean);
   fprintf(1,'Current entropy: %f\n',ent);
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
