@@ -3,10 +3,13 @@ function maximumU = membership( image, x, y )
 
 inputImage = imread(image);
 
-%Standard NTSC conversion formula to convert to greyscale
-iGrey = 0.2989*inputImage(:,:,1)+0.5870*inputImage(:,:,2)+0.1140*inputImage(:,:,3);
+%If RGB convert to greyscale (this is only really for test images) 
+if size(inputImage,3) == 3
+    iGrey = rgb2gray(inputImage);
+    pixelIntensity = double(iGrey(x,y));
 
-pixelIntensity = double(iGrey(x,y)); 
+else pixelIntensity = double(inputImage(x,y));
+end
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 x = 0:250; % Min & Max x values
