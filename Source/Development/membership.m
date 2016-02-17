@@ -1,15 +1,12 @@
-function maximumU = membership( image, x, y )
+function maximumU = membership(image)
 %Calculate the membershipDegree of a pixel
 
-inputImage = imread(image);
 
-%If RGB convert to greyscale (this is only really for test images) 
-if size(inputImage,3) == 3
-    iGrey = rgb2gray(inputImage);
-    pixelIntensity = double(iGrey(x,y));
 
-else pixelIntensity = double(inputImage(x,y));
-end
+% ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
+[rows,columns] = size(image);
+imgMu = zeros(rows,columns);
+
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 x = 0:250; % Min & Max x values
@@ -50,6 +47,16 @@ ylabel('Degree of Membership', 'FontWeight', 'bold');
 
 hold on;
 
+% GOING TO WANT TO PUT A LOOP IN HERE TO GO THROUGH THE ENTIRE IMAGE
+
+
+%If RGB convert to greyscale (this is only really for test images) 
+if size(image,3) == 3
+    image = rgb2gray(image);
+    pixelIntensity = double(image(x,y));
+
+else pixelIntensity = double(image(x,y));
+end
 
 evalLow = evalmf(pixelIntensity, param1, 'trapmf');
 evalMed = evalmf(pixelIntensity, param2, 'trapmf');
@@ -57,6 +64,8 @@ evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
 
 collectiveU = [evalLow, evalMed, evalHigh];
 maximumU = max(collectiveU);
+
+% ADD TO ARRAY
 
 plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
 hold on;

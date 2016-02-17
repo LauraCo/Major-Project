@@ -30,9 +30,11 @@ for iters=1:numIters       % Until convergence?
   transVecs=transVecs-repmat(mean(transVecs,1),[imgCount 1]);
   adjSer=computeXfrmImgs(ser,transVecs);
   curMean=mean(adjSer,3);
-  ent=deLucaFuzzy(curMean);
+  ent=fastEntLookup(curMean);
   fprintf(1,'Current entropy: %f\n',ent);
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
+  
+ 
 end
 
