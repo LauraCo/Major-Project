@@ -6,7 +6,7 @@ function maximumU = membership(image)
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
 [rows,columns] = size(image);
 %imgMu = zeros(rows,columns);
-imgMu = {rows,columns};
+%imgMu = {rows,columns};
 
 image = imread(image);
 
@@ -92,14 +92,15 @@ end
         %axes(ax1)
         %text(.025,0.6,allEvals,'FontSize',14)
 
-           
-  %imgMu = arrayfun(@(x) max(collectiveU), image, 'UniformOutput', false);
         
         
 figure;
 imshow(image);
 
-disp(maximumU);
+%disp(imgMu);
+
+%dlmwrite('image.txt',image);
+%dlmwrite('memberships.txt',maximumU);
 
 end
 
