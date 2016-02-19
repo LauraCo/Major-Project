@@ -2,6 +2,7 @@ addpath IO
 addpath UTILITY
 addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
+addpath MEMBERSHIP
 
 ser=loadSeries('train_30_shuf.pbm',1,20);
 ser=ser/256;

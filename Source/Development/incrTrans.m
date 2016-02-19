@@ -18,7 +18,7 @@ function transVec=incrTrans(mn,cnt,img,transVec)
 
 pars=length(transVec);
 
-ent=fastEntLookup(mn);
+ent=deLucaFuzzy(mn);
 
 % The goal of this routine is to see whether transforming an image
 % increases its likelihood. But remember that the likelihood also
@@ -38,7 +38,7 @@ for i=1:pars
   transVec(i)=transVec(i)+1;
   newImg=computeXfrmImg(img,transVec);
   newMean=allbutone+newImg/cnt;
-  newEnt=fastEntLookup(newMean);
+  newEnt=deLucaFuzzy(newMean);
   
   if newEnt<ent
     ent=newEnt;
@@ -46,7 +46,7 @@ for i=1:pars
     transVec(i)=transVec(i)-2;
     newImg=computeXfrmImg(img,transVec);
     newMean=allbutone+newImg/cnt;
-    newEnt=fastEntLookup(newMean);
+    newEnt=deLucaFuzzy(newMean);
     
     if newEnt<ent
       ent=newEnt;
