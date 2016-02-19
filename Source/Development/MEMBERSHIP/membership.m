@@ -5,7 +5,11 @@ function maximumU = membership(image)
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
 [rows,columns] = size(image);
-imgMu = zeros(rows,columns);
+%imgMu = zeros(rows,columns);
+imgMu = {rows,columns};
+
+image = imread(image);
+
 
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
@@ -47,39 +51,53 @@ ylabel('Degree of Membership', 'FontWeight', 'bold');
 
 hold on;
 
-% GOING TO WANT TO PUT A LOOP IN HERE TO GO THROUGH THE ENTIRE IMAGE
-
-
 %If RGB convert to greyscale (this is only really for test images) 
 if size(image,3) == 3
     image = rgb2gray(image);
-    pixelIntensity = double(image(x,y));
-
-else pixelIntensity = double(image(x,y));
 end
 
-evalLow = evalmf(pixelIntensity, param1, 'trapmf');
-evalMed = evalmf(pixelIntensity, param2, 'trapmf');
-evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
+for i=1:rows
+    for j=1:columns
+        
+        pixelIntensity = double(image);
+        
+       % disp(pixelIntensity);
 
-collectiveU = [evalLow, evalMed, evalHigh];
-maximumU = max(collectiveU);
 
-% ADD TO ARRAY
+        evalLow = evalmf(pixelIntensity, param1, 'trapmf');
+        evalMed = evalmf(pixelIntensity, param2, 'trapmf');
+        evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
 
-plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
-hold on;
+        collectiveU = [evalLow, evalMed, evalHigh];
+        maximumU = max(collectiveU);
+        
+        %imgMu{i,j} = maximumU;
+        
+    end
+end
 
-plot([pixelIntensity,pixelIntensity],[0,maximumU],'linestyle','-','color','r');
-plot([0,pixelIntensity],[maximumU,maximumU],'linestyle','-','color','r');
-hold off;
+        % ADD TO ARRAY
 
-string = sprintf('\\bf Membership \n Degrees \\rm \n \n \\mu_{Low} = %.4f \n \\mu_{Med} = %.4f \n \\mu_{High} = %.4f', evalLow, evalMed, evalHigh);
+        %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
+        %hold on;
 
-allEvals = {string};
- 
-axes(ax1)
-text(.025,0.6,allEvals,'FontSize',14)
+        %plot([pixelIntensity,pixelIntensity],[0,maximumU],'linestyle','-','color','r');
+        %plot([0,pixelIntensity],[maximumU,maximumU],'linestyle','-','color','r');
+        %hold off;
+
+        %string = sprintf('\\bf Membership \n Degrees \\rm \n \n \\mu_{Low} = %.4f \n \\mu_{Med} = %.4f \n \\mu_{High} = %.4f', evalLow, evalMed, evalHigh);
+
+        %allEvals = {string};
+
+        %axes(ax1)
+        %text(.025,0.6,allEvals,'FontSize',14)
+
+           
+  %imgMu = arrayfun(@(x) max(collectiveU), image, 'UniformOutput', false);
+        
+        
+figure;
+imshow(image);
 
 disp(maximumU);
 
