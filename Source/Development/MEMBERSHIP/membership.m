@@ -4,16 +4,18 @@ function maximumU = membership(image)
 
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
+image = imread(image);
+
 [rows,columns] = size(image);
 %imgMu = zeros(rows,columns);
-%imgMu = {rows,columns};
+imgMu{rows,columns} = [];
 
-image = imread(image);
+
 
 
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
-x = 0:250; % Min & Max x values
+x = 0:255; % Min & Max x values
 
 param1 = [-1 0 50 95]; %the 4 corners of the trapezium
 low = trapmf(x,param1);
@@ -56,13 +58,23 @@ if size(image,3) == 3
     image = rgb2gray(image);
 end
 
-for i=1:rows
-    for j=1:columns
-        
-        pixelIntensity = double(image);
-        
-       % disp(pixelIntensity);
+%evalLow = evalmf(x, param1, 'trapmf');
+%evalMed = evalmf(x, param2, 'trapmf');
+%evalHigh = evalmf(x, param3, 'trapmf');
 
+%evaluation = [evalLow, evalMed, evalHigh];
+
+% http://www.mathworks.com/matlabcentral/answers/4402-traversing-an-image-matrix-columnwise
+% Somehow on this forum for column traversal, the long-winded way of
+% looping an image works better than short-handed calling the rows and
+% columns
+for i = 1:size(image,1)
+    for j = 1:size(image,2)         
+        
+        pixelIntensity = double(image(i,j));
+        %disp(pixelIntensity);
+        
+        % NEXT WORK - OPTIMISE THIS 
 
         evalLow = evalmf(pixelIntensity, param1, 'trapmf');
         evalMed = evalmf(pixelIntensity, param2, 'trapmf');
@@ -71,9 +83,11 @@ for i=1:rows
         collectiveU = [evalLow, evalMed, evalHigh];
         maximumU = max(collectiveU);
         
-        %imgMu{i,j} = maximumU;
+       % disp(maximumU);    
         
-    end
+        imgMu{i,j} = maximumU;
+ 
+    end   
 end
 
         % ADD TO ARRAY
@@ -92,15 +106,20 @@ end
         %axes(ax1)
         %text(.025,0.6,allEvals,'FontSize',14)
 
+%disp(image);
         
-        
+%zero = find(~maximumU);
+       
 figure;
+
+%dlmwrite('zeros.txt',zero);
+
 imshow(image);
 
 %disp(imgMu);
 
 %dlmwrite('image.txt',image);
-%dlmwrite('memberships.txt',maximumU);
+%dlmwrite('memberships.txt',imgMu);
 
 end
 
