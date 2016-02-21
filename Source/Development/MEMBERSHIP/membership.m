@@ -58,9 +58,9 @@ if size(image,3) == 3
     image = rgb2gray(image);
 end
 
-%evalLow = evalmf(x, param1, 'trapmf');
-%evalMed = evalmf(x, param2, 'trapmf');
-%evalHigh = evalmf(x, param3, 'trapmf');
+evalLow = evalmf(x, param1, 'trapmf');
+evalMed = evalmf(x, param2, 'trapmf');
+evalHigh = evalmf(x, param3, 'trapmf');
 
 %evaluation = [evalLow, evalMed, evalHigh];
 
@@ -71,19 +71,19 @@ end
 for i = 1:size(image,1)
     for j = 1:size(image,2)         
         
-        pixelIntensity = double(image(i,j));
+        pixelIntensity = double(image(i,j)) + 1;
         %disp(pixelIntensity);
         
         % NEXT WORK - OPTIMISE THIS 
 
-        evalLow = evalmf(pixelIntensity, param1, 'trapmf');
-        evalMed = evalmf(pixelIntensity, param2, 'trapmf');
-        evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
+        %evalLow = evalmf(pixelIntensity, param1, 'trapmf');
+        %evalMed = evalmf(pixelIntensity, param2, 'trapmf');
+        %evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
 
-        collectiveU = [evalLow, evalMed, evalHigh];
-        maximumU = max(collectiveU);
+        %collectiveU = [evalLow, evalMed, evalHigh];
+        maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
         
-       % disp(maximumU);    
+        disp(maximumU);    
         
         imgMu{i,j} = maximumU;
  
