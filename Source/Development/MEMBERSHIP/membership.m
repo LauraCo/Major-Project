@@ -1,29 +1,23 @@
 function maximumU = membership(image)
 %Calculate the membershipDegree of a pixel
 
-
-
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
+
 image = imread(image);
 
 [rows,columns] = size(image);
-%imgMu = zeros(rows,columns);
 imgMu{rows,columns} = [];
-
-
-
-
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 x = 0:255; % Min & Max x values
 
-param1 = [-1 0 50 95]; %the 4 corners of the trapezium
+param1 = [-1 0 50 85]; %the 4 corners of the trapezium
 low = trapmf(x,param1);
 
-param2 = [60 90 150 180];
+param2 = [60 85 170 195];
 med = trapmf(x,param2);
 
-param3 = [145 185 260 275];
+param3 = [170 205 260 275];
 high = trapmf(x,param3);
 
 figure;
@@ -85,12 +79,13 @@ for i = 1:size(image,1)
         
         disp(maximumU);    
         
+        % ADD TO ARRAY
         imgMu{i,j} = maximumU;
  
     end   
 end
 
-        % ADD TO ARRAY
+        
 
         %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
         %hold on;
