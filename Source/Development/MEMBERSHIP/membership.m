@@ -66,15 +66,7 @@ for i = 1:size(image,1)
     for j = 1:size(image,2)         
         
         pixelIntensity = double(image(i,j)) + 1;
-        %disp(pixelIntensity);
         
-        % NEXT WORK - OPTIMISE THIS 
-
-        %evalLow = evalmf(pixelIntensity, param1, 'trapmf');
-        %evalMed = evalmf(pixelIntensity, param2, 'trapmf');
-        %evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
-
-        %collectiveU = [evalLow, evalMed, evalHigh];
         maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
         
         disp(maximumU);    
@@ -84,9 +76,7 @@ for i = 1:size(image,1)
  
     end   
 end
-
-        
-
+      
         %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
         %hold on;
 
@@ -102,12 +92,8 @@ end
         %text(.025,0.6,allEvals,'FontSize',14)
 
 %disp(image);
-        
-%zero = find(~maximumU);
-       
-figure;
 
-%dlmwrite('zeros.txt',zero);
+figure;
 
 imshow(image);
 

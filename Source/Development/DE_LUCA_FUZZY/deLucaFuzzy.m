@@ -6,10 +6,6 @@ addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP
 
 imgMu = membership(meanImg);
 
-
-%disp(imgMu);
-
-
 persistent entTable;
 if size(entTable)==0
   fprintf(1,'Computing entropy lookup table...');
