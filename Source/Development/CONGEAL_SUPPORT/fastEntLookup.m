@@ -4,6 +4,7 @@
 
 function ent=fastEntLookup(meanImg)
 
+
 persistent entTable;
 if size(entTable)==0
   fprintf(1,'Computing entropy lookup table...');
