@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of incrTrans</title>
+  <meta name="keywords" content="incrTrans">
+  <meta name="description" content="incrTrans">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">Development</a> &gt; incrTrans.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Development&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>incrTrans
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>incrTrans</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function transVec=incrTrans(mn,cnt,img,transVec) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> incrTrans
+
+ function transVec=incrTrans(mn,cnt,img,transVec)
+
+ This function finds an incremental change to the transformation
+ transVec which improves the likelihood of the image img under the
+ distribution specified by mn.
+
+ IMPORTANT: It is assumed that the image mn CONTAINS a copy of 
+ the TRANSFORMED VERSION of img already. That is, it contains a
+ copy of the img acted upon by transVec.
+ This is why oldImg is subtracted out to create allbutone
+ below.
+
+ All incoming images (mn and img) should be normalized from 0-1.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs]=binaryCongeal(ser,numIters,par_count)">binaryCongeal</a>	This function takes a series of images and returns</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% incrTrans</span>
+0002 <span class="comment">%</span>
+0003 <span class="comment">% function transVec=incrTrans(mn,cnt,img,transVec)</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">% This function finds an incremental change to the transformation</span>
+0006 <span class="comment">% transVec which improves the likelihood of the image img under the</span>
+0007 <span class="comment">% distribution specified by mn.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% IMPORTANT: It is assumed that the image mn CONTAINS a copy of</span>
+0010 <span class="comment">% the TRANSFORMED VERSION of img already. That is, it contains a</span>
+0011 <span class="comment">% copy of the img acted upon by transVec.</span>
+0012 <span class="comment">% This is why oldImg is subtracted out to create allbutone</span>
+0013 <span class="comment">% below.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% All incoming images (mn and img) should be normalized from 0-1.</span>
+0016 
+0017 <a name="_sub0" href="#_subfunctions" class="code">function transVec=incrTrans(mn,cnt,img,transVec)</a>
+0018 
+0019 pars=length(transVec);
+0020 
+0021 ent=deLucaFuzzy(mn);
+0022 
+0023 <span class="comment">% The goal of this routine is to see whether transforming an image</span>
+0024 <span class="comment">% increases its likelihood. But remember that the likelihood also</span>
+0025 <span class="comment">% depends upon the image. There are two parts to the image</span>
+0026 <span class="comment">% distribution. The first is a part that does not change,</span>
+0027 <span class="comment">% the &quot;allbutone&quot; part. This is the distribution of all of the</span>
+0028 <span class="comment">% images except the image which may undergo transformation. The</span>
+0029 <span class="comment">% other part is the image which may undergo transformation. The</span>
+0030 <span class="comment">% weight of the first part should be (cnt-1)/cnt and the weight of</span>
+0031 <span class="comment">% the second part should be 1/cnt. By computing and saving</span>
+0032 <span class="comment">% allbutone ahead of time, we can save on computation.</span>
+0033 
+0034 oldImg=computeXfrmImg(img,transVec);
+0035 allbutone=mn-oldImg/cnt;
+0036 
+0037 <span class="keyword">for</span> i=1:pars
+0038   transVec(i)=transVec(i)+1;
+0039   newImg=computeXfrmImg(img,transVec);
+0040   newMean=allbutone+newImg/cnt;
+0041   newEnt=deLucaFuzzy(newMean);
+0042   
+0043   <span class="keyword">if</span> newEnt&lt;ent
+0044     ent=newEnt;
+0045   <span class="keyword">else</span>
+0046     transVec(i)=transVec(i)-2;
+0047     newImg=computeXfrmImg(img,transVec);
+0048     newMean=allbutone+newImg/cnt;
+0049     newEnt=deLucaFuzzy(newMean);
+0050     
+0051     <span class="keyword">if</span> newEnt&lt;ent
+0052       ent=newEnt;
+0053     <span class="keyword">else</span>
+0054       transVec(i)=transVec(i)+1;
+0055     <span class="keyword">end</span>
+0056   <span class="keyword">end</span>
+0057 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 11:35:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

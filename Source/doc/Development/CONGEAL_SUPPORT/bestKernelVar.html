@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of bestKernelVar</title>
+  <meta name="keywords" content="bestKernelVar">
+  <meta name="description" content="This function, given a set of affine transforms, tries to find the">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">CONGEAL_SUPPORT</a> &gt; bestKernelVar.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Development/CONGEAL_SUPPORT&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>bestKernelVar
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This function, given a set of affine transforms, tries to find the</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function kernelVar=bestKernelVar(xfrms) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> This function, given a set of affine transforms, tries to find the
+ bandwidth parameter which maximizes the likelihood under the
+ invariant kernel of Miller and Chefd'hotel (see CVPR paper).
+
+ A small amount of noise is added because the xfrms are likely to
+ contain transforms that are exactly the same, due to the
+ discretization of the parameter space. This noise keeps the
+ bandwidth parameter from shrinking to zero.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="xfrmLeaveOneOut.html" class="code" title="function loglike=xfrmLeaveOneOut(xfrms,kernelVar,invdets,sqdists)">xfrmLeaveOneOut</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% This function, given a set of affine transforms, tries to find the</span>
+0002 <span class="comment">% bandwidth parameter which maximizes the likelihood under the</span>
+0003 <span class="comment">% invariant kernel of Miller and Chefd'hotel (see CVPR paper).</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">% A small amount of noise is added because the xfrms are likely to</span>
+0006 <span class="comment">% contain transforms that are exactly the same, due to the</span>
+0007 <span class="comment">% discretization of the parameter space. This noise keeps the</span>
+0008 <span class="comment">% bandwidth parameter from shrinking to zero.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <a name="_sub0" href="#_subfunctions" class="code">function kernelVar=bestKernelVar(xfrms)</a>
+0012 
+0013 n=size(xfrms,3);
+0014 xfrms=xfrms+rand(size(xfrms))*.1-.05;
+0015 
+0016 kernelVar=1;
+0017 
+0018 x2=xfrms(1:2,1:2,:);
+0019 <span class="keyword">for</span> i=1:n
+0020   x2inv(:,:,i)=x2(:,:,i)^-1;
+0021   <span class="keyword">for</span> j=1:n
+0022     T=x2inv(:,:,i)*x2(:,:,j);
+0023     invdets(i,j)=1/det(T);
+0024     sqdists(i,j)=norm(logm(T),<span class="string">'fro'</span>)^2;
+0025   <span class="keyword">end</span>
+0026 <span class="keyword">end</span>
+0027 
+0028 ll=<a href="xfrmLeaveOneOut.html" class="code" title="function loglike=xfrmLeaveOneOut(xfrms,kernelVar,invdets,sqdists)">xfrmLeaveOneOut</a>(xfrms,kernelVar,invdets,sqdists);
+0029 
+0030 <span class="keyword">for</span> iter=1:100
+0031   ll_bigger=<a href="xfrmLeaveOneOut.html" class="code" title="function loglike=xfrmLeaveOneOut(xfrms,kernelVar,invdets,sqdists)">xfrmLeaveOneOut</a>(xfrms,kernelVar*1.2,invdets,sqdists);
+0032   ll_smaller=<a href="xfrmLeaveOneOut.html" class="code" title="function loglike=xfrmLeaveOneOut(xfrms,kernelVar,invdets,sqdists)">xfrmLeaveOneOut</a>(xfrms,kernelVar*0.8,invdets,sqdists);
+0033   <span class="keyword">if</span> ll_bigger&gt;ll
+0034     kernelVar=kernelVar*1.2;
+0035     ll=ll_bigger;
+0036   <span class="keyword">else</span> 
+0037     <span class="keyword">if</span> ll_smaller&gt;ll
+0038       kernelVar=kernelVar*0.8;
+0039       ll=ll_smaller;
+0040     <span class="keyword">else</span> 
+0041       <span class="keyword">break</span>;
+0042     <span class="keyword">end</span>
+0043   <span class="keyword">end</span>
+0044 <span class="keyword">end</span>
+0045 
+0046 kernelVar</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 11:35:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

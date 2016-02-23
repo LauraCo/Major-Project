@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vasicekExact</title>
+  <meta name="keywords" content="vasicekExact">
+  <meta name="description" content="***********************************************************************">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">CONGEAL_SUPPORT</a> &gt; vasicekExact.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Development/CONGEAL_SUPPORT&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vasicekExact
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>***********************************************************************</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function h=vasicekExact(v,m) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ***********************************************************************
+ Copyright (c) Erik G. Learned-Miller, 2004.
+ ***********************************************************************
+ vasicekExact(v,m)       Estimate entropy of distribution from a sample.
+ 
+ h=vasicek(v,m)
+
+ Inputs:
+   v is a vector of scalars.
+   m is the &quot;spacings&quot; count which must be an integer between 1 and the
+     length of the vector v. This can be thought of as a
+     &quot;smoothing&quot; parameter. Larger values give lower variance but
+     higher bias. A good default should be floor(sqrt(len(v))).
+
+ Output:
+   h is an estimate of the entropy of the distribution from which
+     the sample v was taken.
+
+ The function returns a somewhat downward biased estimate of
+ the entropy IN NATS. It is fast, but is also reasonably
+ accurate. Its accuracy could be increased by adding a bias
+ adjustment term. It uses the natural log rather than the possibly
+ more intuitive log2 because natural log is faster.
+ 
+ For more information on this estimator, see the following
+ publications:
+
+   Beirlant, J., Dudewicz, E. J., Gyorfi, L., and van der Meulen,
+     E. C. &quot;Nonparametric entropy estimation: An overview&quot;,
+     International Journal of the Mathematical Statistics
+     Sciences, 6, 17-39, 2001.
+ 
+   Vasicek, Oldrich. &quot;A test for normality based on sample entropy.&quot;
+     Journal of the Royal Statistical Society, Series
+     B. 38(1):54-59, 1976.
+ 
+   Learned-Miller, Erik G. and Fisher, John W. &quot;ICA using spacings
+     estimates of entropy.&quot; Journal of Machine Learning Research, 4,
+     1271-1295, 2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% ***********************************************************************</span>
+0002 <span class="comment">% Copyright (c) Erik G. Learned-Miller, 2004.</span>
+0003 <span class="comment">% ***********************************************************************</span>
+0004 <span class="comment">% vasicekExact(v,m)       Estimate entropy of distribution from a sample.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% h=vasicek(v,m)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">% Inputs:</span>
+0009 <span class="comment">%   v is a vector of scalars.</span>
+0010 <span class="comment">%   m is the &quot;spacings&quot; count which must be an integer between 1 and the</span>
+0011 <span class="comment">%     length of the vector v. This can be thought of as a</span>
+0012 <span class="comment">%     &quot;smoothing&quot; parameter. Larger values give lower variance but</span>
+0013 <span class="comment">%     higher bias. A good default should be floor(sqrt(len(v))).</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% Output:</span>
+0016 <span class="comment">%   h is an estimate of the entropy of the distribution from which</span>
+0017 <span class="comment">%     the sample v was taken.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">% The function returns a somewhat downward biased estimate of</span>
+0020 <span class="comment">% the entropy IN NATS. It is fast, but is also reasonably</span>
+0021 <span class="comment">% accurate. Its accuracy could be increased by adding a bias</span>
+0022 <span class="comment">% adjustment term. It uses the natural log rather than the possibly</span>
+0023 <span class="comment">% more intuitive log2 because natural log is faster.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">% For more information on this estimator, see the following</span>
+0026 <span class="comment">% publications:</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   Beirlant, J., Dudewicz, E. J., Gyorfi, L., and van der Meulen,</span>
+0029 <span class="comment">%     E. C. &quot;Nonparametric entropy estimation: An overview&quot;,</span>
+0030 <span class="comment">%     International Journal of the Mathematical Statistics</span>
+0031 <span class="comment">%     Sciences, 6, 17-39, 2001.</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   Vasicek, Oldrich. &quot;A test for normality based on sample entropy.&quot;</span>
+0034 <span class="comment">%     Journal of the Royal Statistical Society, Series</span>
+0035 <span class="comment">%     B. 38(1):54-59, 1976.</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   Learned-Miller, Erik G. and Fisher, John W. &quot;ICA using spacings</span>
+0038 <span class="comment">%     estimates of entropy.&quot; Journal of Machine Learning Research, 4,</span>
+0039 <span class="comment">%     1271-1295, 2003.</span>
+0040 <span class="comment">%</span>
+0041 <a name="_sub0" href="#_subfunctions" class="code">function h=vasicekExact(v,m)</a>
+0042 
+0043 len=length(v);
+0044 orderStats=sort(v);
+0045 
+0046 <span class="comment">% Note that the intervals overlap for this estimator.</span>
+0047 intvals=orderStats(m+1:len)-orderStats(1:len-m);
+0048 hvec=log(intvals);
+0049 h=sum(hvec);
+0050 
+0051 <span class="comment">%h=h/(len-m)+log((len+1)/m);     % Simpler version. See Learned-Miller et al.</span>
+0052 
+0053 h=h/(len-m)+log(len+1)-psi(m);   <span class="comment">% With partial bias correction? See Beirlant et al.</span>
+0054 
+0055</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 11:35:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
