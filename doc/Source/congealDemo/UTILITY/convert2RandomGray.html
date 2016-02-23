@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of convert2RandomGray</title>
+  <meta name="keywords" content="convert2RandomGray">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../../index.html">Home</a> &gt;  <a href="#">Source</a> &gt; <a href="../index.html">congealDemo</a> &gt; <a href="index.html">UTILITY</a> &gt; convert2RandomGray.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../../index.html"><img alt="<" border="0" src="../../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Source/congealDemo/UTILITY&nbsp;<img alt=">" border="0" src="../../../right.png"></a></td></tr></table>-->
+
+<h1>convert2RandomGray
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre>0001 addpath IO
+0002 binaryIms=loadSeries(<span class="string">'/home/vis3/data/emiller/NIST/pgm/train_30_shuf.pbm'</span>,0,1000);
+0003 
+0004 <span class="keyword">for</span> i=1:1001
+0005   imi=binaryIms(:,:,i);
+0006   imi(imi==0.5)=floor(rand*255.9999999);
+0007   imi(imi==255.5)=floor(rand*255.9999999);
+0008   
+0009   binaryIms(:,:,i)=imi;
+0010   
+0011 <span class="keyword">end</span>
+0012 
+0013 
+0014   
+0015 saveSeries(<span class="string">'/home/vis3/data/emiller/NIST/pgm/grayTrain0.pgm'</span>,binaryIms);
+0016 
+0017</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 11:31:29 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of get_sincos_basis</title>
+  <meta name="keywords" content="get_sincos_basis">
+  <meta name="description" content="GET_SINCOS_BASIS             Make a set of basis images for">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../../index.html">Home</a> &gt;  <a href="#">Source</a> &gt; <a href="../index.html">congealDemo</a> &gt; <a href="index.html">CONGEAL_SUPPORT</a> &gt; get_sincos_basis.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../../index.html"><img alt="<" border="0" src="../../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Source/congealDemo/CONGEAL_SUPPORT&nbsp;<img alt=">" border="0" src="../../../right.png"></a></td></tr></table>-->
+
+<h1>get_sincos_basis
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>GET_SINCOS_BASIS             Make a set of basis images for</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>function b=get_sincos_basis(res,freqs) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> GET_SINCOS_BASIS             Make a set of basis images for
+                              smooth images
+
+ b=get_sincos_basis(res,freqs)
+
+ This function generates a set of sine and cosine functions in
+ two-dimensions. 
+
+ res    - The resolution of the basis images.
+ perrow - This value says how many frequencies to include in the
+          set of basis functions. More frequencies result in more
+          images according to the following pattern:
+     
+          Number of frequencies             Number of basis images
+                 1                                     1
+                 2                                     9
+                 3                                    25
+                 N                                  (2N-1)^2</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% GET_SINCOS_BASIS             Make a set of basis images for</span>
+0002 <span class="comment">%                              smooth images</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% b=get_sincos_basis(res,freqs)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% This function generates a set of sine and cosine functions in</span>
+0007 <span class="comment">% two-dimensions.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% res    - The resolution of the basis images.</span>
+0010 <span class="comment">% perrow - This value says how many frequencies to include in the</span>
+0011 <span class="comment">%          set of basis functions. More frequencies result in more</span>
+0012 <span class="comment">%          images according to the following pattern:</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%          Number of frequencies             Number of basis images</span>
+0015 <span class="comment">%                 1                                     1</span>
+0016 <span class="comment">%                 2                                     9</span>
+0017 <span class="comment">%                 3                                    25</span>
+0018 <span class="comment">%                 N                                  (2N-1)^2</span>
+0019 
+0020 <a name="_sub0" href="#_subfunctions" class="code">function b=get_sincos_basis(res,freqs)</a>
+0021 
+0022 k=1;
+0023 b(:,:,1)=ones(res,res);
+0024 k=k+1;
+0025 
+0026 <span class="keyword">for</span> i=2:freqs
+0027   rowfreq=i-1;
+0028   <span class="keyword">for</span> y=1:res
+0029     <span class="keyword">for</span> x=1:res
+0030       b(y,x,k)=cos(2*pi*y/res*rowfreq);
+0031     <span class="keyword">end</span>
+0032   <span class="keyword">end</span>
+0033   k=k+1;
+0034   <span class="keyword">for</span> y=1:res
+0035     <span class="keyword">for</span> x=1:res
+0036       b(y,x,k)=sin(2*pi*y/res*rowfreq);
+0037     <span class="keyword">end</span>
+0038   <span class="keyword">end</span>
+0039   k=k+1;
+0040   <span class="keyword">for</span> y=1:res
+0041     <span class="keyword">for</span> x=1:res
+0042       b(y,x,k)=cos(2*pi*x/res*rowfreq);
+0043     <span class="keyword">end</span>
+0044   <span class="keyword">end</span>
+0045   k=k+1;
+0046   <span class="keyword">for</span> y=1:res
+0047     <span class="keyword">for</span> x=1:res
+0048       b(y,x,k)=sin(2*pi*x/res*rowfreq);
+0049     <span class="keyword">end</span>
+0050   <span class="keyword">end</span>
+0051   k=k+1;
+0052 <span class="keyword">end</span>
+0053 
+0054   
+0055 <span class="keyword">for</span> i=2:freqs
+0056   rowfreq=i-1;
+0057   <span class="keyword">for</span> j=2:freqs
+0058     colfreq=j-1;
+0059     <span class="keyword">for</span> y=1:res
+0060       <span class="keyword">for</span> x=1:res
+0061     b(y,x,k)=cos(2*pi*y/res*rowfreq)*cos(2*pi*x/res*colfreq);
+0062       <span class="keyword">end</span>
+0063     <span class="keyword">end</span>
+0064     k=k+1;
+0065     <span class="keyword">for</span> y=1:res
+0066       <span class="keyword">for</span> x=1:res
+0067     <span class="keyword">if</span> colfreq==0
+0068         b(y,x,k)=cos(2*pi*y/res*rowfreq);
+0069     <span class="keyword">else</span>
+0070          b(y,x,k)=cos(2*pi*y/res*rowfreq)*sin(2*pi*x/res*colfreq);
+0071     <span class="keyword">end</span>
+0072     
+0073       <span class="keyword">end</span>
+0074     <span class="keyword">end</span>
+0075     k=k+1;
+0076     <span class="keyword">for</span> y=1:res
+0077       <span class="keyword">for</span> x=1:res
+0078     <span class="keyword">if</span> rowfreq==0
+0079         b(y,x,k)=                        cos(2*pi*x/res*colfreq);
+0080     <span class="keyword">else</span>
+0081         b(y,x,k)=sin(2*pi*y/res*rowfreq)*cos(2*pi*x/res*colfreq);
+0082     <span class="keyword">end</span>
+0083     
+0084       <span class="keyword">end</span>
+0085     <span class="keyword">end</span>
+0086     k=k+1;
+0087     <span class="keyword">for</span> y=1:res
+0088       <span class="keyword">for</span> x=1:res
+0089     <span class="keyword">if</span> rowfreq==0 &amp; colfreq==0
+0090       b(y,x,k)=1;
+0091     <span class="keyword">else</span> 
+0092       <span class="keyword">if</span> rowfreq==0 
+0093          b(y,x,k)=                       sin(2*pi*x/res*colfreq);
+0094       <span class="keyword">else</span> 
+0095         <span class="keyword">if</span> colfreq==0
+0096           b(y,x,k)=sin(2*pi*y/res*rowfreq);
+0097         <span class="keyword">else</span>
+0098                b(y,x,k)=sin(2*pi*y/res*rowfreq)*sin(2*pi*x/res*colfreq);
+0099         <span class="keyword">end</span>
+0100       <span class="keyword">end</span>
+0101     <span class="keyword">end</span>    
+0102       <span class="keyword">end</span>
+0103     <span class="keyword">end</span>
+0104     k=k+1;
+0105     
+0106   <span class="keyword">end</span>
+0107 <span class="keyword">end</span>
+0108 
+0109</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 11:31:29 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
