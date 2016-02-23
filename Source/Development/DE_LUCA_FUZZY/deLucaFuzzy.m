@@ -1,6 +1,5 @@
 function entropy = deLucaFuzzy(meanImg)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% Function implementing De Luca & Termini's Fuzzy Entropy algorithm
 
 addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
 

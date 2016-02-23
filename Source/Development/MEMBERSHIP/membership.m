@@ -1,9 +1,11 @@
-function maximumU = membership(image)
+function maximumU = membership(image_matrix)
 %Calculate the membershipDegree of a pixel
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
 
-image = imread(image);
+imwrite(image_matrix,'mean_image.pgm');
+
+image = imread('mean_image.pgm');
 
 [rows,columns] = size(image);
 imgMu{rows,columns} = [];
