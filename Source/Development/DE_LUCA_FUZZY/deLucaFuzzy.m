@@ -5,7 +5,7 @@ addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP
 
 imgMu = membership(meanImg);
 
-dlmwrite('imgMu.txt',imgMu);
+%dlmwrite('imgMu.txt',imgMu);
 
 %imageEnt = [];
 
@@ -37,7 +37,7 @@ if size(entTable)==0
   fprintf(1,'done.\n');
 end
 
-dlmwrite('entTable.txt',entTable);
+%dlmwrite('entTable.txt',entTable);
 
 
 %WORKS UP TO HERE
