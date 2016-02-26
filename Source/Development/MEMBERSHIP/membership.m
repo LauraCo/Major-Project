@@ -1,4 +1,4 @@
-function maximumU = membership(image_matrix)
+function imgMu = membership(image_matrix)
 %Calculate the membershipDegree of a pixel
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
@@ -22,17 +22,17 @@ med = trapmf(x,param2);
 param3 = [170 205 260 275];
 high = trapmf(x,param3);
 
-figure;
+%figure;
 ax1 = axes('Position',[0 0 1 1],'Visible','off');
 ax2 = axes('Position',[.3 .1 .6 .8]);
 
-plot(ax2,x,low,'r');
+%plot(ax2,x,low,'r');
 text(20,1.1,'Low','FontWeight','bold','FontSize',12);
 hold on;
-plot(ax2,x,med,'b');
+%plot(ax2,x,med,'b');
 text(100,1.1,'Medium','FontWeight','bold','FontSize',12);
 hold on;
-plot(ax2,x,high,'m');
+%plot(ax2,x,high,'m');
 text(200,1.1,'High','FontWeight','bold','FontSize',12);
 hold on; 
 
@@ -44,8 +44,8 @@ ylim([0 1.2]);
 % http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot
 set(gcf,'NumberTitle','off') %don't show the figure number
 set(gcf,'Name','Grey Level Membership') %select the name you want
-xlabel('Grey Level Value', 'FontWeight', 'bold');
-ylabel('Degree of Membership', 'FontWeight', 'bold');
+%xlabel('Grey Level Value', 'FontWeight', 'bold');
+%ylabel('Degree of Membership', 'FontWeight', 'bold');
 
 hold on;
 
@@ -95,9 +95,9 @@ end
 
 %disp(image);
 
-figure;
+%figure;
 
-imshow(image);
+%imshow(image);
 
 %disp(imgMu);
 
