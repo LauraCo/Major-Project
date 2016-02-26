@@ -43,7 +43,8 @@ ylim([0 1.2]);
 %Label Axis
 % http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot
 set(gcf,'NumberTitle','off') %don't show the figure number
-set(gcf,'Name','Grey Level Membership') %select the name you want
+%set(gcf,'Name','Grey Level Membership') %select the name you want
+%COMMENTED OUT UNTIL CAN FIX FIGURE ISSUE
 %xlabel('Grey Level Value', 'FontWeight', 'bold');
 %ylabel('Degree of Membership', 'FontWeight', 'bold');
 

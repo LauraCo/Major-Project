@@ -19,4 +19,5 @@ sr=min(sr,1);
 
 figure;
 showSer(meanIms,1);
+figure;
 showSer(adjSer,2);
