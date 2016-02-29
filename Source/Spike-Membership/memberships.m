@@ -83,6 +83,7 @@ plot([x1,x1],[0,max_u],'linestyle','-','color','r');
 plot([0,x1],[max_u,max_u],'linestyle','-','color','r');
 hold off;
 
+disp(max_u);
 %dfl = defuzz(x,another_union,'lom');
 %disp(dfl);
 
