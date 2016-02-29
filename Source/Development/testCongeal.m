@@ -15,7 +15,7 @@ sr=min(sr,1);
 
 %sr=sr(1:end-6,:,:);
 
-[adjSer,meanIms,transVecs]=binaryCongeal(sr,1,7);
+[adjSer,meanIms,transVecs]=binaryCongeal(sr,20,7);
 
 figure;
 showSer(meanIms,1);
