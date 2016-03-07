@@ -72,7 +72,7 @@ for i = 1:size(image,1)
         
         maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
         
-        disp(maximumU);    
+        %disp(maximumU);    
         
         % ADD TO ARRAY
         imgMu{i,j} = maximumU;
