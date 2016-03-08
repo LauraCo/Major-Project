@@ -47,6 +47,7 @@ pixPerImRow=rowSize*y;
 memImCount=min(endInd,diskImCount)-stInd+1;
 
 ser=zeros(x,y,memImCount);
+%ser=cell(x,y,memImCount); %Conversion to cell from double is not possible.
 
 curMemIm=1;
 curDiskIm=1;
