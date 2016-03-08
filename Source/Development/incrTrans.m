@@ -14,11 +14,15 @@
 %
 % All incoming images (mn and img) should be normalized from 0-1.
 
-function transVec=incrTrans(mn,cnt,img,transVec)
+function transVec=incrTrans(mn,cnt,img,transVec,metric)
 
 pars=length(transVec);
 
-ent=deLucaFuzzy(mn);
+if strcmp(metric,'deLuca')
+    ent=deLucaFuzzy(mn);
+else  strcmp(metric,'shannon')
+    ent=fastEntLookup(mn);
+end
 
 % The goal of this routine is to see whether transforming an image
 % increases its likelihood. But remember that the likelihood also
@@ -38,7 +42,13 @@ for i=1:pars
   transVec(i)=transVec(i)+1;
   newImg=computeXfrmImg(img,transVec);
   newMean=allbutone+newImg/cnt;
-  newEnt=deLucaFuzzy(newMean);
+  
+  if strcmp(metric,'deLuca')
+    newEnt=deLucaFuzzy(newMean);
+  else  strcmp(metric,'shannon')
+    newEnt=fastEntLookup(newMean);
+  end
+  
   
   if newEnt<ent
     ent=newEnt;
@@ -46,7 +56,12 @@ for i=1:pars
     transVec(i)=transVec(i)-2;
     newImg=computeXfrmImg(img,transVec);
     newMean=allbutone+newImg/cnt;
+    
+  if strcmp(metric,'deLuca')
     newEnt=deLucaFuzzy(newMean);
+  else  strcmp(metric,'shannon')
+    newEnt=fastEntLookup(newMean);
+  end
     
     if newEnt<ent
       ent=newEnt;

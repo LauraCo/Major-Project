@@ -5,7 +5,7 @@
 %
 % Note that the images are not necessary binary, but they
 % are congealed under the "binary image model".
-function [adjSer,meanIms,transVecs]=binaryCongeal(ser,numIters,par_count)
+function [adjSer,meanIms,transVecs]=binaryCongeal(ser,numIters,par_count,metric)
 
 addpath IO
 addpath UTILITY
@@ -24,13 +24,20 @@ for iters=1:numIters       % Until convergence?
     %i
     % Change the transformation vector so that the current image
     % is more likely under the current mean.
-    transVecs(i,:)=incrTrans(curMean,imgCount,ser(:,:,i),oldTransVecs(i,:));
+    transVecs(i,:)=incrTrans(curMean,imgCount,ser(:,:,i),oldTransVecs(i,:),metric);
   end
 
   transVecs=transVecs-repmat(mean(transVecs,1),[imgCount 1]);
   adjSer=computeXfrmImgs(ser,transVecs);
   curMean=mean(adjSer,3);
-  ent=deLucaFuzzy(curMean);
+  
+  if strcmp(metric,'deLuca')
+      ent=deLucaFuzzy(curMean);
+  else  strcmp(metric,'shannon')
+      ent=fastEntLookup(curMean);
+  end
+  
+  
   fprintf(1,'Current entropy: %f\n',ent);
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
