@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distFieldDeriv</title>
+  <meta name="keywords" content="distFieldDeriv">
+  <meta name="description" content="function deltaEnt=distFieldDeriv(df,dfNew,N)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">CONGEAL_SUPPORT</a> &gt; distFieldDeriv.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Development/CONGEAL_SUPPORT&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distFieldDeriv
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function deltaEnt=distFieldDeriv(df,dfNew,N)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function deltaEnt=distFieldDeriv(df,dfNew,N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> function deltaEnt=distFieldDeriv(df,dfNew,N)
+ 
+ Return a number proportional to H(df)-H(df+dfNew)
+ 
+ df is a distribution field.
+ dfNew is a distribution field that is a candidate for
+       combination with df.
+ N is an integer that says how many distribution fields have been
+       average to make df.
+
+ The idea of this routine is to return a number that is positive if
+ combining the dfNew with df would reduce the overall entropy of 
+ the distribution field, and negative if it would increase the entropy.
+
+ For example, adding the distribution of a low 
+ variance 0-mean Gaussian to a high variance
+ 0-mean Gaussian would result in a distribution that
+ had lower entropy than the high variance Gaussian.
+ If df and dfNew contained just these single distributions, then
+ the value returned would be positive, indicating that dfNew had a
+ reducing effect on the entropy.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% function deltaEnt=distFieldDeriv(df,dfNew,N)</span>
+0002 <span class="comment">%</span>
+0003 <span class="comment">% Return a number proportional to H(df)-H(df+dfNew)</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">% df is a distribution field.</span>
+0006 <span class="comment">% dfNew is a distribution field that is a candidate for</span>
+0007 <span class="comment">%       combination with df.</span>
+0008 <span class="comment">% N is an integer that says how many distribution fields have been</span>
+0009 <span class="comment">%       average to make df.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">% The idea of this routine is to return a number that is positive if</span>
+0012 <span class="comment">% combining the dfNew with df would reduce the overall entropy of</span>
+0013 <span class="comment">% the distribution field, and negative if it would increase the entropy.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% For example, adding the distribution of a low</span>
+0016 <span class="comment">% variance 0-mean Gaussian to a high variance</span>
+0017 <span class="comment">% 0-mean Gaussian would result in a distribution that</span>
+0018 <span class="comment">% had lower entropy than the high variance Gaussian.</span>
+0019 <span class="comment">% If df and dfNew contained just these single distributions, then</span>
+0020 <span class="comment">% the value returned would be positive, indicating that dfNew had a</span>
+0021 <span class="comment">% reducing effect on the entropy.</span>
+0022 
+0023 <a name="_sub0" href="#_subfunctions" class="code">function deltaEnt=distFieldDeriv(df,dfNew,N)</a>
+0024 
+0025 SMALL_VAL=0.000001;
+0026 BIG_VAL=0.999999;
+0027 
+0028 MAX_INDEX=100;
+0029 
+0030 <span class="keyword">persistent</span> xlogxTable;
+0031 <span class="keyword">persistent</span> oldp;
+0032 <span class="keyword">persistent</span> newp;
+0033 <span class="keyword">persistent</span> p;
+0034 
+0035 <span class="keyword">persistent</span> maskv;
+0036 <span class="comment">% The table indices will range from 1:MAX_INDEX.</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">% The first value in the table will represent f(0).</span>
+0039 <span class="comment">% The last value will represent f(1).</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% Hence, for a given value d, its index is given by</span>
+0042 <span class="comment">% ind=floor(d*(MAX_INDEX-.000001))+1</span>
+0043 <span class="comment">%</span>
+0044 
+0045 <span class="keyword">if</span> size(xlogxTable)==0 
+0046   fprintf(1,<span class="string">'Computing xlogx lookup table...'</span>);
+0047   p=linspace(SMALL_VAL,BIG_VAL,MAX_INDEX);
+0048   [oldp,newp]=meshgrid(p,p);
+0049 
+0050   <span class="comment">% NOTE: The following line computes H(old)-H(new), not the opposite!</span>
+0051 
+0052   <span class="comment">% ALSO: oldp varies from left to right</span>
+0053   <span class="comment">%       newp varies from top to bottom</span>
+0054   tempTable= newp.*log(newp)-oldp.*log(oldp);
+0055   xlogxTable=tempTable(:);
+0056   fprintf(1,<span class="string">'done.\n'</span>);
+0057   masklayer=fspecial(<span class="string">'gaussian'</span>,[size(df,1) size(df,2)],size(df,1)/2]);
+0058   mask=repmat(masklayer,[1 1 size(df,3)]);
+0059   maskv=mask(:);
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% oldp is just df</span>
+0063 <span class="comment">% newp is df*(N-1)/N+dfNew/N</span>
+0064 
+0065 oldpvals=floor(df(:)*(MAX_INDEX-.000001));
+0066 newpvals=floor((df(:)*(N-1)+dfNew(:))/N*(MAX_INDEX-.000001));
+0067 
+0068 
+0069 
+0070 <span class="comment">% Unfortunately, the two-dimensional index must be turned into a</span>
+0071 <span class="comment">% one-dimensional index. So we must form a new index:</span>
+0072 <span class="comment">% jnt_index=index1*MAX_INDEX+index;</span>
+0073 
+0074 <span class="comment">% Here, we must preserve the fact that</span>
+0075 <span class="comment">%     : oldp varies from left to right</span>
+0076 <span class="comment">%     : newp varies from top to bottom</span>
+0077 dtmp=xlogxTable(oldpvals*MAX_INDEX+newpvals+1);
+0078 deltaEnt=sum(dtmp.*maskv);
+0079 
+0080 <span class="comment">%deltaEnt=sum(xlogxTable(oldpvals*MAX_INDEX+newpvals+1));</span>
+0081</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 16:55:35 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

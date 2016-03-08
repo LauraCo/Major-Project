@@ -1,0 +1,19 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  mnist2pgm -> saveSeries;
+  mnist2pgmTest -> saveSeries;
+  mnist2pgmTrain -> saveSeries;
+  select_MR_slices -> load_MR_raw;
+
+  loadSeries [URL="loadSeries.html"];
+  loadSeriesClean [URL="loadSeriesClean.html"];
+  loadSeriesMac [URL="loadSeriesMac.html"];
+  load_MR_raw [URL="load_MR_raw.html"];
+  mnist2pgm [URL="mnist2pgm.html"];
+  mnist2pgmTest [URL="mnist2pgmTest.html"];
+  mnist2pgmTrain [URL="mnist2pgmTrain.html"];
+  readpgm [URL="readpgm.html"];
+  saveSeries [URL="saveSeries.html"];
+  select_MR_slices [URL="select_MR_slices.html"];
+  ser2Im [URL="ser2Im.html"];
+}

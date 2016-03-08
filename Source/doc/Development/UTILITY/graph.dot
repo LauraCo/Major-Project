@@ -1,0 +1,30 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  cascade -> add_border_24;
+  cascade -> add_box_24;
+  cascade -> convert24fixed;
+  max2d -> min2d;
+
+  add_border_24 [URL="add_border_24.html"];
+  add_box_24 [URL="add_box_24.html"];
+  bc [URL="bc.html"];
+  cascade [URL="cascade.html"];
+  convert24 [URL="convert24.html"];
+  convert24FixedRange [URL="convert24FixedRange.html"];
+  convert24fixed [URL="convert24fixed.html"];
+  convert2RandomGray [URL="convert2RandomGray.html"];
+  max2d [URL="max2d.html"];
+  maxsort2d [URL="maxsort2d.html"];
+  min2d [URL="min2d.html"];
+  minsort2d [URL="minsort2d.html"];
+  rbf [URL="rbf.html"];
+  showCellsTight [URL="showCellsTight.html"];
+  showPosNeg [URL="showPosNeg.html"];
+  showSer [URL="showSer.html"];
+  showSerColor [URL="showSerColor.html"];
+  showSerColorTight [URL="showSerColorTight.html"];
+  showSerFixed [URL="showSerFixed.html"];
+  showSerFixedTight [URL="showSerFixedTight.html"];
+  showSerFixedTightRowCol [URL="showSerFixedTightRowCol.html"];
+  showSerTight [URL="showSerTight.html"];
+}

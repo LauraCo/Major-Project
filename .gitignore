@@ -27,3 +27,5 @@ Source/congealDemo/MNIST/t10k-labels-idx1-ubyte
 Source/congealDemo/MNIST/train-images-idx3-ubyte
 
 m2html/
+
+Source/Development/toy_example.png

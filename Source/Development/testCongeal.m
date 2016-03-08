@@ -4,7 +4,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
-ser=loadSeries('train_30_shuf.pbm',1,20);
+ser=loadSeries('toy_example.pgm',1,20);
 ser=ser/256;
 
 for i=1:size(ser,3)
@@ -15,7 +15,9 @@ sr=min(sr,1);
 
 %sr=sr(1:end-6,:,:);
 
-[adjSer,meanIms,transVecs]=binaryCongeal(sr,40,7);
+[adjSer,meanIms,transVecs]=binaryCongeal(sr,10,7);
 
+figure;
 showSer(meanIms,1);
+figure;
 showSer(adjSer,2);

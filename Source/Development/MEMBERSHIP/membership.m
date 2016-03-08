@@ -1,9 +1,11 @@
-function maximumU = membership(image)
+function imgMu = membership(image_matrix)
 %Calculate the membershipDegree of a pixel
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
 
-image = imread(image);
+imwrite(image_matrix,'mean_image.pgm');
+
+image = imread('mean_image.pgm');
 
 [rows,columns] = size(image);
 imgMu{rows,columns} = [];
@@ -20,17 +22,17 @@ med = trapmf(x,param2);
 param3 = [170 205 260 275];
 high = trapmf(x,param3);
 
-figure;
+%figure;
 ax1 = axes('Position',[0 0 1 1],'Visible','off');
 ax2 = axes('Position',[.3 .1 .6 .8]);
 
-plot(ax2,x,low,'r');
+%plot(ax2,x,low,'r');
 text(20,1.1,'Low','FontWeight','bold','FontSize',12);
 hold on;
-plot(ax2,x,med,'b');
+%plot(ax2,x,med,'b');
 text(100,1.1,'Medium','FontWeight','bold','FontSize',12);
 hold on;
-plot(ax2,x,high,'m');
+%plot(ax2,x,high,'m');
 text(200,1.1,'High','FontWeight','bold','FontSize',12);
 hold on; 
 
@@ -41,9 +43,10 @@ ylim([0 1.2]);
 %Label Axis
 % http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot
 set(gcf,'NumberTitle','off') %don't show the figure number
-set(gcf,'Name','Grey Level Membership') %select the name you want
-xlabel('Grey Level Value', 'FontWeight', 'bold');
-ylabel('Degree of Membership', 'FontWeight', 'bold');
+%set(gcf,'Name','Grey Level Membership') %select the name you want
+%COMMENTED OUT UNTIL CAN FIX FIGURE ISSUE
+%xlabel('Grey Level Value', 'FontWeight', 'bold');
+%ylabel('Degree of Membership', 'FontWeight', 'bold');
 
 hold on;
 
@@ -66,27 +69,17 @@ for i = 1:size(image,1)
     for j = 1:size(image,2)         
         
         pixelIntensity = double(image(i,j)) + 1;
-        %disp(pixelIntensity);
         
-        % NEXT WORK - OPTIMISE THIS 
-
-        %evalLow = evalmf(pixelIntensity, param1, 'trapmf');
-        %evalMed = evalmf(pixelIntensity, param2, 'trapmf');
-        %evalHigh = evalmf(pixelIntensity, param3, 'trapmf');
-
-        %collectiveU = [evalLow, evalMed, evalHigh];
         maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
         
-        disp(maximumU);    
+        %disp(maximumU);    
         
         % ADD TO ARRAY
         imgMu{i,j} = maximumU;
  
     end   
 end
-
-        
-
+      
         %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
         %hold on;
 
@@ -102,14 +95,10 @@ end
         %text(.025,0.6,allEvals,'FontSize',14)
 
 %disp(image);
-        
-%zero = find(~maximumU);
-       
-figure;
 
-%dlmwrite('zeros.txt',zero);
+%figure;
 
-imshow(image);
+%imshow(image);
 
 %disp(imgMu);
 
