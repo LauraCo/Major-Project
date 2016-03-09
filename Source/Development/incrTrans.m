@@ -20,8 +20,9 @@ pars=length(transVec);
 
 if strcmp(metric,'deLuca')
     ent=deLucaFuzzy(mn);
-else  strcmp(metric,'shannon')
+elseif  strcmp(metric,'shannon')
     ent=fastEntLookup(mn);
+else fprintf(2, 'Error in chosing alignment metric');
 end
 
 % The goal of this routine is to see whether transforming an image
@@ -45,8 +46,9 @@ for i=1:pars
   
   if strcmp(metric,'deLuca')
     newEnt=deLucaFuzzy(newMean);
-  else  strcmp(metric,'shannon')
+  elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
+  else fprintf(2, 'Error in chosing alignment metric');
   end
   
   
@@ -59,8 +61,9 @@ for i=1:pars
     
   if strcmp(metric,'deLuca')
     newEnt=deLucaFuzzy(newMean);
-  else  strcmp(metric,'shannon')
+  elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
+  else fprintf(2, 'Error in chosing alignment metric');
   end
     
     if newEnt<ent

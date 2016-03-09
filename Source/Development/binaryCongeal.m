@@ -33,8 +33,9 @@ for iters=1:numIters       % Until convergence?
   
   if strcmp(metric,'deLuca')
       ent=deLucaFuzzy(curMean);
-  else  strcmp(metric,'shannon')
+  elseif  strcmp(metric,'shannon')
       ent=fastEntLookup(curMean);
+  else fprintf(2, 'Error in chosing alignment metric');
   end
   
   
