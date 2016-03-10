@@ -1,0 +1,91 @@
+\documentclass[11pt,fleqn,twoside]{article}
+\usepackage{makeidx}
+\makeindex
+\usepackage{palatino} %or {times} etc
+\usepackage{plain} %bibliography style
+\usepackage{amsmath} %math fonts - just in case
+\usepackage{amsfonts} %math fonts
+\usepackage{amssymb} %math fonts
+\usepackage{lastpage} %for footer page numbers
+\usepackage{fancyhdr} %header and footer package
+\usepackage{mmpv2}
+\usepackage{url}
+
+% the following packages are used for citations - You only need to include one.
+%
+% Use the cite package if you are using the numeric style (e.g. IEEEannot).
+% Use the natbib package if you are using the author-date style (e.g. authordate2annot).
+% Only use one of these and comment out the other one.
+\usepackage{cite}
+%\usepackage{natbib}
+
+\begin{document}
+
+\name{Laura Collins}
+\userid{lac32}
+\projecttitle{Can entropy-based image alignment metrics offer improved image aggregation of tissue density for mammographic risk assessment?}
+\projecttitlememoir{Entropy based metrics for joint image alignment} %same as the project title or abridged version for page header
+\reporttitle{De-Luca \& Termini Fuzzy Entropy Implementation}
+\version{0.1}
+\docstatus{Draft}
+\modulecode{CS39440}
+\degreeschemecode{GH7P}
+\degreeschemename{Artificial Intelligence \& Robotics}
+\supervisor{Dr. Neil MacParthalain} % e.g. Neil Taylor
+\supervisorid{ncm}
+\wordcount{}
+
+%optional - comment out next line to use current date for the document
+%\documentdate{10th February 2014}
+\mmp
+
+\setcounter{tocdepth}{3} %set required number of level in table of contents
+
+
+%==============================================================================
+\section{Fuzzy entropy description}
+%==============================================================================
+\label{sec:desc}
+
+De-Luca \& Termini fuzzy entropy algorithm \cite{DeLuca_Termini_1972} is considered to be the first to build upon Shannon entropy. Their implementation takes into account a set of data, along with their various membership degrees.
+
+
+\begin{equation}
+  \label{eq:de-luca}
+  H_A = -K \displaystyle\sum_{i=1}^{n}{\{\mu_i\log(\mu_i) + (1 - \mu_i)\log(1 - \mu_i)\}}
+\end{equation}
+
+Al-sharhan et al's paper compiling several Fuzzy Entropy algorithms \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} contains a methodical,in-depth derivation of their algorithm, and has been instrumental in building my knowledge on the algorithm in question.
+
+We will assume $-K$, the positive constant, is defined as $\frac{1}{n}$ as outlined in \cite{DeLuca_Termini_1972}.
+
+%==============================================================================
+\section{MATLAB implementation}
+%==============================================================================
+
+After some research into current implementations of Fuzzy Entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership class, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
+
+This array of pixel memberships is fed into a `De Luca' function where it is iteratively passed into latter part of equation \ref{eq:de-luca} (after $\displaystyle\sum$). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Section \ref{sec:desc}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
+
+This is all relatively straight forward to implement in MATLAB, as it is designed to run mathematical equations.
+
+
+%==============================================================================
+\section{Technical challenges}
+%==============================================================================
+
+
+\nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
+
+% the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography.
+\newpage
+\addcontentsline{toc}{section}{Initial Annotated Bibliography}
+
+%
+% example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.
+%\bibliographystyle{authordate2annot}
+\bibliographystyle{IEEEannot}
+\renewcommand{\refname}{Annotated Bibliography}  % if you put text into the final {} on this line, you will get an extra title, e.g. References. This isn't necessary for the outline project specification.
+\bibliography{mmp} % References file
+
+\end{document}
