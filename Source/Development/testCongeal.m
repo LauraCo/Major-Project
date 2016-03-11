@@ -6,7 +6,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
-ser=loadSeries('train_0.pgm',1,20);
+ser=loadSeries('big_scan.pgm',1,20);
 ser=ser/256;
 
 for i=1:size(ser,3)
