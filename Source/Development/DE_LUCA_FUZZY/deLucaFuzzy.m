@@ -20,7 +20,7 @@ end
 %ent= (sum(sum(imageEnt(floor(meanImg*9999.999999+1))))); %LAC32 - -K x the sum of the ent, which has been normalised
 
 ent = 1/numel(imgMu)*sum(cellfun(@sum, imageEnt));
-entropy=sum(ent)/numel(meanImg);   % Return mean pixel entropy. %LAC32 - NUMEL is usually faster than PROD
-
+%entropy=sum(ent)/numel(meanImg);   % Return mean pixel entropy. %LAC32 - NUMEL is usually faster than PROD
+entropy=sum(ent);
 end
 

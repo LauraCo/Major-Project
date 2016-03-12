@@ -5,7 +5,7 @@ function imgMu = membership(image_matrix)
 
 imwrite(image_matrix,'mean_image.pgm');
 
-image = imread('mean_image.pgm');
+image = imread('mean_image.pgm');   
 
 [rows,columns] = size(image);
 imgMu{rows,columns} = [];

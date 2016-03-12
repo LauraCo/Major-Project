@@ -12,7 +12,7 @@ addpath UTILITY
 addpath DE_LUCA_FUZZY
 
 [x,y,imgCount]=size(ser);
-meanIms(:,:,1)=mean(ser,3); %LAC32 - this denotes taking the mean across 3 axis - so x,y and each image in the series
+meanIms(:,:,1)=mean(ser,3); 
 curMean=meanIms(:,:,1);
 
 transVecs=zeros(imgCount,par_count);
