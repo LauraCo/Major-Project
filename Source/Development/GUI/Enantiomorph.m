@@ -85,7 +85,7 @@ if isequal(filename,0)
 else
    disp(['User selected ', fullfile(pathname, filename)])
    img = imread(filename);
-   axes(handles.axes1);
+   axes(handles.axes2);
    imshow(img);
 end
 
