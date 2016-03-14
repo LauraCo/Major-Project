@@ -11,6 +11,10 @@
 \usepackage{mmpv2}
 \usepackage{url}
 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
 % the following packages are used for citations - You only need to include one.
 %
 % Use the cite package if you are using the numeric style (e.g. IEEEannot).
@@ -73,6 +77,32 @@ This is all relatively straight forward to implement in MATLAB, as it is designe
 %==============================================================================
 \section{Technical challenges}
 %==============================================================================
+
+The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own functions for the membership saves a lot of time and lines of code, however it's been important to check what they call from within. One membership function was redrawing the trapeziums every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60seconds.
+
+Another technical challenge faced whilst implementing the De Luca \& Termini algorithm, isn't directly tied to the implementation of their specific equation, but more of my lack of experience in MATLAB, slowing down the programming rate. It has indeed been a steep learning curve, getting to grips with standard error messages, the debugger tool and knowing which `Toolboxes' are needed to run specific MATLAB functions.
+
+%==============================================================================
+\newpage
+\section{Results}
+%==============================================================================
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{img/iteration-mean.png}
+        \caption{Mean image over each iteration}
+        \label{fig:mean-imgs}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{img/adj-ser.png}
+        \caption{Adjusted original input images}
+        \label{fig:adj-ser}
+    \end{subfigure}
+    \caption{Output of 5 congealing iterations}\label{fig:mammo-results}
+\end{figure}
 
 
 \nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
