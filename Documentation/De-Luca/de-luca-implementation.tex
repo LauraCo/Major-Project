@@ -82,12 +82,21 @@ The main technical challenge for this implementation is ensuring maximum optimis
 
 Another technical challenge faced whilst implementing the De Luca \& Termini algorithm, isn't directly tied to the implementation of their specific equation, but more of my lack of experience in MATLAB, slowing down the programming rate. It has indeed been a steep learning curve, getting to grips with standard error messages, the debugger tool and knowing which `Toolboxes' are needed to run specific MATLAB functions.
 
+Finally, as can be ascertained from Figure \ref{fig:mammo-results}, when writing the 4 seperate scans into 1 larger file, somewhere the images get rotated. This will be a reoccurring issue through the 3 Fuzzy entropy implementations, however as this is the first I will note it here. I think this is caused thanks to the swapping of the height and width values, however upon initial inspection of the file writing function, it is not clear as to which line is causing this issue. This issue has been marked low priority in the short term, due to all the scans being rotated in this fashion, and as such all have the same orientation. This means the congealing algorithm can work with no issues upon these images, the rotation is more merely an aesthetic issue.
+
 %==============================================================================
 \newpage
 \section{Results}
 %==============================================================================
 
-\begin{figure}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.4\textwidth]{img/big_scan_1.jpg}
+  \caption{4 input images of BI-RADS I classification}
+  \label{fig:input}
+\end{figure}
+
+\begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{img/iteration-mean.png}
@@ -104,6 +113,34 @@ Another technical challenge faced whilst implementing the De Luca \& Termini alg
     \caption{Output of 5 congealing iterations}\label{fig:mammo-results}
 \end{figure}
 
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.4\textwidth]{img/final_mean.jpg}
+  \caption{Final mean image after 5 iterations (bottom-right most in Figure \ref{fig:mammo-results})}
+  \label{fig:final-mean}
+\end{figure}
+
+\subsection{Entropy results}
+
+  \begin{tabular}{ | l | r | }
+    \hline
+    \textbf{Iteration} & \textbf{Entropy} \\
+    \hline
+    1 & 0.050519 \\ \hline
+    2 & 0.043925 \\ \hline
+    3 & 0.035679 \\ \hline
+    4 & 0.029035 \\ \hline
+    5 & 0.026194 \\ \hline
+  \end{tabular}
+
+\subsection{Time to Run}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/Run-time.png}
+  \caption{Snapshot of run-time statistics}
+  \label{fig:run-time}
+\end{figure}
 
 \nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
 
