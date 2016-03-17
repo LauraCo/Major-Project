@@ -19,7 +19,9 @@ sr=min(sr,1);
 
 [adjSer,meanIms,transVecs]=binaryCongeal(sr,iterations,7,metric);
 
+
 figure;
 showSer(meanIms,1);
+%imwrite(meanIms(:,:,5),'final_mean.pgm','pgm');
 figure;
 showSer(adjSer,2);
