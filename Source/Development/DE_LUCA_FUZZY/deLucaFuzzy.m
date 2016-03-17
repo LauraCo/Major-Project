@@ -5,22 +5,15 @@ addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP
 
 imgMu = membership(meanImg);
 
-imageEnt = cell(14,14);
+%imageEnt = cell(size(imgMu,1),size(imgMu,2));
 
-for i=1:numel(imgMu)
- if isequal(imgMu{i},1)
-      pixelEnt = 0;
- else
+    pixelEnt = -(imgMu(1:numel(imgMu)).*log10(imgMu(1:numel(imgMu)))+(1-imgMu(1:numel(imgMu))).*log10(1-imgMu(1:numel(imgMu))));
+    
+    pixelEnt(isnan(pixelEnt))= 0;
 
-    pixelEnt = -(imgMu{i}.*log10(imgMu{i})+(1-imgMu{i}).*log10(1-imgMu{i}));
- end
-  imageEnt{i} = pixelEnt;
-end
-
-%ent= (sum(sum(imageEnt(floor(meanImg*9999.999999+1))))); %LAC32 - -K x the sum of the ent, which has been normalised
+    imageEnt = num2cell(pixelEnt);
 
 ent = 1/numel(imgMu)*sum(cellfun(@sum, imageEnt));
-%entropy=sum(ent)/numel(meanImg);   % Return mean pixel entropy. %LAC32 - NUMEL is usually faster than PROD
 entropy=sum(ent);
 end
 

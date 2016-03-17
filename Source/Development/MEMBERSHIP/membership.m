@@ -58,27 +58,24 @@ end
 evalLow = evalmf(x, param1, 'trapmf');
 evalMed = evalmf(x, param2, 'trapmf');
 evalHigh = evalmf(x, param3, 'trapmf');
-
 %evaluation = [evalLow, evalMed, evalHigh];
 
 % http://www.mathworks.com/matlabcentral/answers/4402-traversing-an-image-matrix-columnwise
 % Somehow on this forum for column traversal, the long-winded way of
 % looping an image works better than short-handed calling the rows and
 % columns
-for i = 1:size(image,1)
-    for j = 1:size(image,2)         
+%for i = 1:size(image,1)
+%    for j = 1:size(image,2)
+
+%i = 1:size(image,1);
+%j = 1:size(image,2);
         
-        pixelIntensity = double(image(i,j)) + 1;
+        pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
         
-        maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
-        
-        %disp(maximumU);    
-        
-        % ADD TO ARRAY
-        imgMu{i,j} = maximumU;
- 
-    end   
-end
+        temp = bsxfun(@max, evalLow(pixelIntensity), evalMed(pixelIntensity));
+        imgMu = bsxfun(@max, temp, evalHigh(pixelIntensity));
+                
+       
       
         %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree
         %hold on;
