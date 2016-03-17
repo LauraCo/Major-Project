@@ -19,6 +19,7 @@ transVecs=zeros(imgCount,par_count);
 oldTransVecs=transVecs;
 
 for iters=1:numIters       % Until convergence?
+    tic
   fprintf(1,'Iteration %d\n',iters);
   for i=1:imgCount
     %i
@@ -43,6 +44,6 @@ for iters=1:numIters       % Until convergence?
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
   
- 
+ toc
 end
 
