@@ -6,7 +6,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
-ser=loadSeries('train_0.pgm',1,20);
+ser=loadSeries('big_scan.pgm',1,20);
 ser=ser/256;
 
 for i=1:size(ser,3)
@@ -19,7 +19,9 @@ sr=min(sr,1);
 
 [adjSer,meanIms,transVecs]=binaryCongeal(sr,iterations,7,metric);
 
+
 figure;
 showSer(meanIms,1);
+%imwrite(meanIms(:,:,5),'final_mean.pgm','pgm');
 figure;
 showSer(adjSer,2);

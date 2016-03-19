@@ -12,13 +12,14 @@ addpath UTILITY
 addpath DE_LUCA_FUZZY
 
 [x,y,imgCount]=size(ser);
-meanIms(:,:,1)=mean(ser,3); %LAC32 - this denotes taking the mean across 3 axis - so x,y and each image in the series
+meanIms(:,:,1)=mean(ser,3); 
 curMean=meanIms(:,:,1);
 
 transVecs=zeros(imgCount,par_count);
 oldTransVecs=transVecs;
 
 for iters=1:numIters       % Until convergence?
+    tic
   fprintf(1,'Iteration %d\n',iters);
   for i=1:imgCount
     %i
@@ -43,6 +44,6 @@ for iters=1:numIters       % Until convergence?
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
   
- 
+ toc
 end
 
