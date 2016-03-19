@@ -23,11 +23,13 @@ sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
 for i = 1:noOfScans
     scan = fopen(strcat(pathname,scanDirectory(i).name));
+    %if strfind(ln2,'#')
+    %    continue
+    %end
     im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
     sers(:,:,i) = im;
 end
 
-
-outfname=sprintf('%s/big_scan.pgm', pathname);
+outfname=sprintf('%s/output/big_scan.pgm', pathname);
 s=sers(:,:,:);
 saveSeries(outfname,s);
