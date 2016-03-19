@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 09-Mar-2016 17:20:55
+% Last Modified by GUIDE v2.5 19-Mar-2016 15:52:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -88,6 +88,9 @@ else
     pgm2bigPgm(pathname);
     
     imshow(strcat(pathname,'/big_scan.pgm'));
+    
+    set(handles.pushbutton8, 'enable','on')
+    set(handles.view, 'enable','on')
    %filename = cellstr(filename);  % Care for the correct type 
    %for k = 1:length(filename)
    %     disp(fullfile(pathname, filename{k}))
@@ -169,3 +172,38 @@ if strcmp(menu_Selection,'Shannon')
 elseif strcmp(menu_Selection,'De-Luca & Termini')
     testCongeal('de-luca', slider_value);
 end
+
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+[filename, pathname] = uigetfile('*.pgm','Select pre-compiled pgm file');
+if isequal(pathname,0)
+   disp('User selected Cancel')
+else
+    imshow(filename);
+    set(handles.pushbutton8, 'enable','on')
+    set(handles.view, 'enable','on')
+end
+
+
+% --- Executes on button press in pushbutton8.
+function pushbutton8_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+cla
+
+% --- Executes on button press in view.
+function view_Callback(hObject, eventdata, handles)
+% hObject    handle to view (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+fh = figure();
+
+%Print axes 2 in here
+
