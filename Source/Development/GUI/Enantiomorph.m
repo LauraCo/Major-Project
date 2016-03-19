@@ -79,14 +79,19 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[filename, pathname] = uigetfile('*.pgm;*.pbm;', 'Select an image file');
-if isequal(filename,0)
+%[filename, pathname] = uigetfile('*.pgm;*.pbm;', 'Select an image file', 'MultiSelect', 'on');
+pathname = uigetdir();
+if isequal(pathname,0)
    disp('User selected Cancel')
 else
-   disp(['User selected ', fullfile(pathname, filename)])
-   img = imread(filename);
-   axes(handles.axes2);
-   imshow(img);
+    addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
+    pgm2bigPgm(pathname);
+    
+    imshow(strcat(pathname,'/big_scan.pgm'));
+   %filename = cellstr(filename);  % Care for the correct type 
+   %for k = 1:length(filename)
+   %     disp(fullfile(pathname, filename{k}))
+   %end
 end
 
 
