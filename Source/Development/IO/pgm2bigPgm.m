@@ -1,4 +1,4 @@
-function bigPgm = pgm2bigPgm(pathname)
+function s = pgm2bigPgm(pathname)
 
 %    filename = strcat('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/',scanDirectory(i).name);
 %    I = imread(filename);
@@ -7,7 +7,7 @@ function bigPgm = pgm2bigPgm(pathname)
 scanDirectory = dir(fullfile(pathname, '*.pgm'));
 noOfScans = length(scanDirectory);
 
-filename = strcat(pathname,scanDirectory(1).name);
+filename = strcat(pathname,'/',scanDirectory(1).name);
 file=fopen(filename,'r');
 
 if file == -1
@@ -22,10 +22,14 @@ squareImageSize = str2double(ln2);
 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
 for i = 1:noOfScans
+<<<<<<< HEAD
     scan = fopen(strcat(pathname,scanDirectory(i).name));
     %if strfind(ln2,'#')
     %    continue
     %end
+=======
+    scan = fopen(strcat(pathname,'/',scanDirectory(i).name));
+>>>>>>> development
     im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
     sers(:,:,i) = im;
 end
