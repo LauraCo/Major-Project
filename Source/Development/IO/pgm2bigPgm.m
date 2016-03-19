@@ -22,14 +22,9 @@ squareImageSize = str2double(ln2);
 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
 for i = 1:noOfScans
-<<<<<<< HEAD
-    scan = fopen(strcat(pathname,scanDirectory(i).name));
-    %if strfind(ln2,'#')
-    %    continue
-    %end
-=======
+
     scan = fopen(strcat(pathname,'/',scanDirectory(i).name));
->>>>>>> development
+
     im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
     sers(:,:,i) = im;
 end
