@@ -29,6 +29,6 @@ for i = 1:noOfScans
     sers(:,:,i) = im;
 end
 
-outfname=sprintf('%s/output/big_scan.pgm', pathname);
+outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
 saveSeries(outfname,s);
