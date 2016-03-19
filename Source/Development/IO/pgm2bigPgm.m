@@ -1,12 +1,18 @@
+function bigPgm = pgm2bigPgm(pathname)
+
 %    filename = strcat('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/',scanDirectory(i).name);
 %    I = imread(filename);
 %    figure, imshow(I);
 
-scanDirectory = dir('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/*.pgm');
+scanDirectory = dir(fullfile(pathname, '*.pgm'));
 noOfScans = length(scanDirectory);
 
-filename = strcat('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/',scanDirectory(1).name);
+filename = strcat(pathname,scanDirectory(1).name);
 file=fopen(filename,'r');
+
+if file == -1
+  error('Author:Function:OpenFile', 'Cannot open folder: %s', filename);
+end
 
 ln1=fgetl(file);
 ln2=strsplit(fgetl(file));
@@ -16,12 +22,12 @@ squareImageSize = str2double(ln2);
 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
 for i = 1:noOfScans
-    scan = fopen(strcat('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/',scanDirectory(i).name));
+    scan = fopen(strcat(pathname,scanDirectory(i).name));
     im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
     sers(:,:,i) = im;
 end
 
 
-outfname=sprintf('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/big_scan.pgm');
+outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
 saveSeries(outfname,s);
