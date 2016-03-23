@@ -2,72 +2,64 @@
 %% http://bibdesk.sourceforge.net/
 
 
-%% Created for Neil Taylor at 2014-04-07 22:34:31 +0100 
+%% Created for Neil Taylor at 2014-04-07 22:34:31 +0100
 
 
-%% Saved with string encoding Unicode (UTF-8) 
+%% Saved with string encoding Unicode (UTF-8)
 
 
 @string{aij = {Artificial Intelligence}}
 
 
-@book{NumericalRecipes,
-	Annote = {This is my annotation. I can add in comments that are in \textbf{bold} and \em{italics} and then other content.},
-	Author = {Press, W.H. and others},
-	Pages = {349--361},
-	Publisher = {Cambridge University Press Cambridge},
-	Title = {{Numerical recipes in C}},
-	Year = {1992}}
+@inproceedings{fuzzy-entropy,
+    author = {Al-Sharhan, S. and Karray, F. and Gueaieb, W. and Basir, O.},
+    booktitle = {Fuzzy Systems, 2001. The 10th IEEE International Conference on},
+    citeulike-article-id = {13916270},
+    citeulike-linkout-0 = {http://dx.doi.org/10.1109/fuzz.2001.1008855},
+    citeulike-linkout-1 = {http://ieeexplore.ieee.org/xpls/abs\_all.jsp?arnumber=1008855},
+    doi = {10.1109/fuzz.2001.1008855},
+    institution = {Dept. of Syst. Design Eng., Waterloo Univ., Ont., Canada},
+    isbn = {0-7803-7293-X},
+    keywords = {entropy, metrics},
+    pages = {1135--1139},
+    posted-at = {2016-01-25 12:07:56},
+    priority = {2},
+    publisher = {IEEE},
+    title = {Fuzzy entropy: a brief survey},
+    url = {http://dx.doi.org/10.1109/fuzz.2001.1008855},
+    volume = {3},
+    year = {2001},
+    annote = {Paper outlining the different implementations of Fuzzy Entropy, of which 3 will be selected and focused on during this Project.},
+}
 
-@inproceedings{MarksPaper,
-	Annote = {This paper...},
-	Author = {Mark Neal and Jan Feyereisl and Rosario Rascun\`{a} and Xiaolei Wang},
-	Booktitle = {Proceedings of the 5th International Conference on Artificial Immune Systems},
-	Pages = {349--361},
-	Publisher = {Springer},
-	Title = {{Don't touch me, I'm fine: Robot autonomy using an artificial innate immune system}},
-	Year = {2006}}
+@article{joint-alignment,
+    abstract = {{This paper presents a family of techniques that we call congealing for modeling image classes from data. The idea is to start with a set of images and make them appear as similar as possible by removing variability along the known axes of variation. This technique can be used to eliminate "nuisance\&\#8221; variables such as affine deformations from handwritten digits or unwanted bias fields from magnetic resonance images. In addition to separating and modeling the latent images\&\#8212;i.e., the images without the nuisance variables\&\#8212;we can model the nuisance variables themselves, leading to factorized generative image models. When nuisance variable distributions are shared between classes, one can share the knowledge learned in one task with another task, leading to efficient learning. We demonstrate this process by building a handwritten digit classifier from just a single example of each class. In addition to applications in handwritten character recognition, we describe in detail the application of bias removal from magnetic resonance images. Unlike previous methods, we use a separate, nonparametric model for the intensity values at each pixel. This allows us to leverage the data from the MR images of different patients to remove bias from each other. Only very weak assumptions are made about the distributions of intensity values in the images. In addition to the digit and MR applications, we discuss a number of other uses of congealing and describe experiments about the robustness and consistency of the method.}},
+    address = {Washington, DC, USA},
+    author = {Learned-Miller, Erik G.},
+    booktitle = {Pattern Analysis and Machine Intelligence, IEEE Transactions on},
+    citeulike-article-id = {5632077},
+    citeulike-linkout-0 = {http://portal.acm.org/citation.cfm?id=1106769},
+    citeulike-linkout-1 = {http://dx.doi.org/10.1109/tpami.2006.34},
+    citeulike-linkout-2 = {http://ieeexplore.ieee.org/xpls/abs\_all.jsp?arnumber=1561183},
+    doi = {10.1109/tpami.2006.34},
+    institution = {Dept. of Comput. Sci., Massachusetts Univ., Amherst, MA, USA},
+    issn = {0162-8828},
+    journal = {Pattern Analysis and Machine Intelligence, IEEE Transactions on},
+    keywords = {alignment, joint},
+    month = feb,
+    number = {2},
+    pages = {236--250},
+    posted-at = {2016-01-25 12:12:40},
+    priority = {2},
+    publisher = {IEEE},
+    title = {{Data driven image models through continuous joint alignment}},
+    url = {http://dx.doi.org/10.1109/tpami.2006.34},
+    volume = {28},
+    year = {2006},
+    annote = {Learned-Miller's original Congealing method is the basis for this Project - however I am looking to further extend the alignment capabilities using fuzzy entropy metrics, rather than standard Shannon entropy as currently implemented. This paper was extremely useful for understanding of the basic concepts behind it, and will be a good reference guide throughout the project.},
+}
 
-@article{HannahsPaper,
-	Annote = {This is my annotation. I should add in a description here.},
-	Author = {Dee, H. M. and Hogg, D. C.},
-	Journal = aij,
-	Pages = {329-342},
-	Title = {Navigational strategies in behaviour modelling},
-	Volume = {173(2)},
-	Year = 2009}
-
-@misc{FailBlog,
-	Annote = {This is my annotation. I should add in a description here.},
-	Author = {Various},
-	Howpublished = {\url{http://www.failblog.org/}},
-	Month = Aug,
-	Note = {Accessed August 2011},
-	Title = {Fail Blog},
-	Year = {2011}}
-
-@misc{kittenpic_ref,
-	Annote = {This is my annotation. I should add in a description here.},
-	Author = {Sylvia Duckworth},
-	Howpublished = {\url{http://www.geograph.org.uk/photo/640959}},
-	Note = {Copyright Sylvia Duckworth and licensed for reuse under a Creative Commons Attribution-Share Alike 2.0 Generic Licence. Accessed August 2011},
-	Title = {{A picture of a kitten at Hellifield Peel}},
-	Year = 2007}
-
-@url{apache_poi,
-	Annote = {This is my annotation. I should add in a description here.},
-	Author = {{Apache Software Foundation}},
-	Date-Modified = {2014-04-07 21:34:28 +0000},
-	Howpublished = {\url{http://poi.apache.org}},
-	Lastchecked = {14 March 2014},
-	Title = {{Apache POI - the Java API for Microsoft Documents}},
-	Year = 2014}
-
-@url{apache_license,
-	Annote = {This is my annotation. I should add in a description here.},
-	Author = {{Apache Software Foundation}},
-	Date-Modified = {2014-04-07 21:32:45 +0000},
-	Howpublished = {\url{http://www.apache.org/licenses/LICENSE-2.0}},
-	Lastchecked = {14 March 2014},
-	Title = {{Apache License, Version 2.0}},
-	Year = 2004}
+@inbook{Cox_Sridharan_Lucey_Cohn_2008,
+title={Least squares congealing for unsupervised alignment of images}, DOI={10.1109/CVPR.2008.4587573}, abstractNote={In this paper, we present an approach we refer to as ldquoleast squares congealingrdquo which provides a solution to the problem of aligning an ensemble of images in an unsupervised manner. Our approach circumvents many of the limitations existing in the canonical ldquocongealingrdquo algorithm. Specifically, we present an algorithm that:- (i) is able to simultaneously, rather than sequentially, estimate warp parameter updates, (ii) exhibits fast convergence and (iii) requires no pre-defined step size. We present alignment results which show an improvement in performance for the removal of unwanted spatial variation when compared with the related work of Learned-Miller on two datasets, the MNIST hand written digit database and the MultiPIE face database.}, booktitle={IEEE Conference on Computer Vision and Pattern Recognition, 2008. CVPR 2008}, author={Cox, M. and Sridharan, S. and Lucey, S. and Cohn, J.}, year={2008}, month={Jun}, pages={1–8},
+annote={A disregarded adaption of the Congealing algorithm - however was useful in highlighting performance issues in the original algorithm. Something which was near continuously faced when implementing heavier fuzzy entropy alignment metrics.},
+}
