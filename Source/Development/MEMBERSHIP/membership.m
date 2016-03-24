@@ -1,4 +1,4 @@
-function imgMu = membership(image_matrix)
+function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)
 %Calculate the membershipDegree of a pixel
 
 % ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
@@ -58,6 +58,8 @@ end
 evalLow = evalmf(x, param1, 'trapmf');
 evalMed = evalmf(x, param2, 'trapmf');
 evalHigh = evalmf(x, param3, 'trapmf');
+
+
 %evaluation = [evalLow, evalMed, evalHigh];
 
 % http://www.mathworks.com/matlabcentral/answers/4402-traversing-an-image-matrix-columnwise
@@ -72,8 +74,12 @@ evalHigh = evalmf(x, param3, 'trapmf');
         
         pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
         
-        temp = bsxfun(@max, evalLow(pixelIntensity), evalMed(pixelIntensity));
-        imgMu = bsxfun(@max, temp, evalHigh(pixelIntensity));
+        lowMu = evalLow(pixelIntensity);
+        medMu = evalMed(pixelIntensity);
+        highMu = evalHigh(pixelIntensity);
+        
+        temp = bsxfun(@max, lowMu, medMu);
+        imgMu = bsxfun(@max, temp,highMu);
                 
        
       

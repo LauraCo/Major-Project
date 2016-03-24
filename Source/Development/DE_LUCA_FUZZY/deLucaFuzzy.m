@@ -3,7 +3,7 @@ function entropy = deLucaFuzzy(meanImg)
 
 addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
 
-imgMu = membership(meanImg);
+[imgMu, lowMu, medMu, highMu] = membership(meanImg);
 
 %imageEnt = cell(size(imgMu,1),size(imgMu,2));
 
