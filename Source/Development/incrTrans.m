@@ -14,11 +14,16 @@
 %
 % All incoming images (mn and img) should be normalized from 0-1.
 
-function transVec=incrTrans(mn,cnt,img,transVec)
+function transVec=incrTrans(mn,cnt,img,transVec,metric)
 
 pars=length(transVec);
 
-ent=fastEntLookup(mn);
+if strcmp(metric,'deLuca')
+    ent=deLucaFuzzy(mn);
+elseif  strcmp(metric,'shannon')
+    ent=fastEntLookup(mn);
+else fprintf(2, 'Error in chosing alignment metric');
+end
 
 % The goal of this routine is to see whether transforming an image
 % increases its likelihood. But remember that the likelihood also
@@ -38,7 +43,14 @@ for i=1:pars
   transVec(i)=transVec(i)+1;
   newImg=computeXfrmImg(img,transVec);
   newMean=allbutone+newImg/cnt;
-  newEnt=fastEntLookup(newMean);
+  
+  if strcmp(metric,'deLuca')
+    newEnt=deLucaFuzzy(newMean);
+  elseif  strcmp(metric,'shannon')
+    newEnt=fastEntLookup(newMean);
+  else fprintf(2, 'Error in chosing alignment metric');
+  end
+  
   
   if newEnt<ent
     ent=newEnt;
@@ -46,7 +58,13 @@ for i=1:pars
     transVec(i)=transVec(i)-2;
     newImg=computeXfrmImg(img,transVec);
     newMean=allbutone+newImg/cnt;
+    
+  if strcmp(metric,'deLuca')
+    newEnt=deLucaFuzzy(newMean);
+  elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
+  else fprintf(2, 'Error in chosing alignment metric');
+  end
     
     if newEnt<ent
       ent=newEnt;

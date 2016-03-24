@@ -40,7 +40,7 @@ end
 b=bigIm';
 ubigIm=floor(b(:));
 
-fid=fopen(fname,'w');
+fid=fopen(fname,'w+');
 
 fprintf(fid,'P5\n');
 fprintf(fid,'# %d %d %d\n',imWidth,imHeight,ims);

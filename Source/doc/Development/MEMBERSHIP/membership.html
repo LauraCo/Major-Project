@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of membership</title>
+  <meta name="keywords" content="membership">
+  <meta name="description" content="Calculate the membershipDegree of a pixel">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">MEMBERSHIP</a> &gt; membership.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for Development/MEMBERSHIP&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>membership
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Calculate the membershipDegree of a pixel</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function maximumU = membership(image_matrix) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">Calculate the membershipDegree of a pixel</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="membershipTest.html" class="code" title="function tests = membershipTest">membershipTest</a>	Test the Membership function</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function maximumU = membership(image_matrix)</a>
+0002 <span class="comment">%Calculate the membershipDegree of a pixel</span>
+0003 
+0004 <span class="comment">% ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG</span>
+0005 
+0006 imwrite(image_matrix,<span class="string">'mean_image.pgm'</span>);
+0007 
+0008 image = imread(<span class="string">'mean_image.pgm'</span>);
+0009 
+0010 [rows,columns] = size(image);
+0011 imgMu{rows,columns} = [];
+0012 
+0013 <span class="comment">%Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html</span>
+0014 x = 0:255; <span class="comment">% Min &amp; Max x values</span>
+0015 
+0016 param1 = [-1 0 50 85]; <span class="comment">%the 4 corners of the trapezium</span>
+0017 low = trapmf(x,param1);
+0018 
+0019 param2 = [60 85 170 195];
+0020 med = trapmf(x,param2);
+0021 
+0022 param3 = [170 205 260 275];
+0023 high = trapmf(x,param3);
+0024 
+0025 figure;
+0026 ax1 = axes(<span class="string">'Position'</span>,[0 0 1 1],<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0027 ax2 = axes(<span class="string">'Position'</span>,[.3 .1 .6 .8]);
+0028 
+0029 plot(ax2,x,low,<span class="string">'r'</span>);
+0030 text(20,1.1,<span class="string">'Low'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,12);
+0031 hold on;
+0032 plot(ax2,x,med,<span class="string">'b'</span>);
+0033 text(100,1.1,<span class="string">'Medium'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,12);
+0034 hold on;
+0035 plot(ax2,x,high,<span class="string">'m'</span>);
+0036 text(200,1.1,<span class="string">'High'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,12);
+0037 hold on; 
+0038 
+0039 <span class="comment">%Set boundaries of graph</span>
+0040 xlim([0 250]);
+0041 ylim([0 1.2]); 
+0042 
+0043 <span class="comment">%Label Axis</span>
+0044 <span class="comment">% http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot</span>
+0045 set(gcf,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>) <span class="comment">%don't show the figure number</span>
+0046 set(gcf,<span class="string">'Name'</span>,<span class="string">'Grey Level Membership'</span>) <span class="comment">%select the name you want</span>
+0047 xlabel(<span class="string">'Grey Level Value'</span>, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>);
+0048 ylabel(<span class="string">'Degree of Membership'</span>, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>);
+0049 
+0050 hold on;
+0051 
+0052 <span class="comment">%If RGB convert to greyscale (this is only really for test images)</span>
+0053 <span class="keyword">if</span> size(image,3) == 3
+0054     image = rgb2gray(image);
+0055 <span class="keyword">end</span>
+0056 
+0057 evalLow = evalmf(x, param1, <span class="string">'trapmf'</span>);
+0058 evalMed = evalmf(x, param2, <span class="string">'trapmf'</span>);
+0059 evalHigh = evalmf(x, param3, <span class="string">'trapmf'</span>);
+0060 
+0061 <span class="comment">%evaluation = [evalLow, evalMed, evalHigh];</span>
+0062 
+0063 <span class="comment">% http://www.mathworks.com/matlabcentral/answers/4402-traversing-an-image-matrix-columnwise</span>
+0064 <span class="comment">% Somehow on this forum for column traversal, the long-winded way of</span>
+0065 <span class="comment">% looping an image works better than short-handed calling the rows and</span>
+0066 <span class="comment">% columns</span>
+0067 <span class="keyword">for</span> i = 1:size(image,1)
+0068     <span class="keyword">for</span> j = 1:size(image,2)         
+0069         
+0070         pixelIntensity = double(image(i,j)) + 1;
+0071         
+0072         maximumU = max([evalLow(pixelIntensity), evalMed(pixelIntensity), evalHigh(pixelIntensity)]);
+0073         
+0074         disp(maximumU);    
+0075         
+0076         <span class="comment">% ADD TO ARRAY</span>
+0077         imgMu{i,j} = maximumU;
+0078  
+0079     <span class="keyword">end</span>   
+0080 <span class="keyword">end</span>
+0081       
+0082         <span class="comment">%plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree</span>
+0083         <span class="comment">%hold on;</span>
+0084 
+0085         <span class="comment">%plot([pixelIntensity,pixelIntensity],[0,maximumU],'linestyle','-','color','r');</span>
+0086         <span class="comment">%plot([0,pixelIntensity],[maximumU,maximumU],'linestyle','-','color','r');</span>
+0087         <span class="comment">%hold off;</span>
+0088 
+0089         <span class="comment">%string = sprintf('\\bf Membership \n Degrees \\rm \n \n \\mu_{Low} = %.4f \n \\mu_{Med} = %.4f \n \\mu_{High} = %.4f', evalLow, evalMed, evalHigh);</span>
+0090 
+0091         <span class="comment">%allEvals = {string};</span>
+0092 
+0093         <span class="comment">%axes(ax1)</span>
+0094         <span class="comment">%text(.025,0.6,allEvals,'FontSize',14)</span>
+0095 
+0096 <span class="comment">%disp(image);</span>
+0097 
+0098 figure;
+0099 
+0100 imshow(image);
+0101 
+0102 <span class="comment">%disp(imgMu);</span>
+0103 
+0104 <span class="comment">%dlmwrite('image.txt',image);</span>
+0105 <span class="comment">%dlmwrite('memberships.txt',imgMu);</span>
+0106 
+0107 <span class="keyword">end</span>
+0108</pre></div>
+<hr><address>Generated on Tue 23-Feb-2016 16:55:35 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
