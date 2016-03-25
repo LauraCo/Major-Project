@@ -7,8 +7,9 @@ tests = functiontests(localfunctions);
 
 end
 
+% Test 1 - test that membership degree array is not empty 
 function testMembershipDegree(testCase)  
-    testImage = imread('../test.jpeg');
+    testImage = imread('mdb136.pgm');
     memDegree = membership(testImage); 
     verifyNotEmpty(testCase, memDegree);
 end
