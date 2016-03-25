@@ -53,7 +53,7 @@ for i=1:pars
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
   elseif  strcmp(metric,'hybrid')
-      ent=hybrid(newMean);
+      newEnt=hybrid(newMean);
   else fprintf(2, 'Error in chosing alignment metric');
   end
   
@@ -70,7 +70,7 @@ for i=1:pars
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
   elseif  strcmp(metric,'hybrid')
-      ent=hybrid(newMean);
+      newEnt=hybrid(newMean);
   else fprintf(2, 'Error in chosing alignment metric');
   end
     
