@@ -109,4 +109,3 @@ evalHigh = evalmf(x, param3, 'trapmf');
 %dlmwrite('memberships.txt',imgMu);
 
 end
-
