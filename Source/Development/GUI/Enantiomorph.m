@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 19-Mar-2016 15:52:12
+% Last Modified by GUIDE v2.5 24-Mar-2016 16:20:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,9 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Enantiomorph
 handles.output = hObject;
-
+num = 0;
+handles.iterations = num;
+handles.alignment = '';
 % Update handles structure
 guidata(hObject, handles);
 
@@ -73,9 +75,9 @@ function varargout = Enantiomorph_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in generate.
+function generate_Callback(hObject, eventdata, handles)
+% hObject    handle to generate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -89,7 +91,7 @@ else
     
     imshow(strcat(pathname,'/big_scan.pgm'));
     
-    set(handles.pushbutton8, 'enable','on')
+    set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
    %filename = cellstr(filename);  % Care for the correct type 
    %for k = 1:length(filename)
@@ -98,19 +100,35 @@ else
 end
 
 
-% --- Executes on selection change in popupmenu1.
-function popupmenu1_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+% --- Executes on selection change in alignment.
+function alignment_Callback(hObject, eventdata, handles)
+% hObject    handle to alignment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu1
+% Hints: contents = cellstr(get(hObject,'String')) returns alignment contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from alignment
+
+contents = get(hObject,'Value')
+handles = guidata(hObject);  % Update!
+switch contents 
+    case 1
+        metric = 'Shannon';
+    case 2
+        metric = 'deLuca';
+    otherwise
+end
+
+set(handles.alignment, 'UserData', metric);
+guidata(hObject, handles);
+
+
+
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+function alignment_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to alignment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -120,63 +138,35 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 set(hObject,'String',{'Shannon';'De-Luca & Termini';'Fuzzy Shannon'; 'Hybrid'});
-menu_selection = get(hObject, 'String');
 
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+
+% --- Executes on button press in save_output.
+function save_output_Callback(hObject, eventdata, handles)
+% hObject    handle to save_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton4 (see GCBO)
+% --- Executes on button press in clear_output.
+function clear_output_Callback(hObject, eventdata, handles)
+% hObject    handle to clear_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
-% --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
+% --- Executes on button press in run.
+function run_Callback(hObject, eventdata, handles)
+% hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
-slider_value = get(hObject,'Value');
+testCongeal(handles.alignment, handles.iterations);
 
 
-% --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-
-
-% --- Executes on button press in pushbutton5.
-function pushbutton5_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-if strcmp(menu_Selection,'Shannon')
-    testCongeal('shannon', slider_value);
-elseif strcmp(menu_Selection,'De-Luca & Termini')
-    testCongeal('de-luca', slider_value);
-end
-
-
-% --- Executes on button press in pushbutton6.
-function pushbutton6_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton6 (see GCBO)
+% --- Executes on button press in load_existing.
+function load_existing_Callback(hObject, eventdata, handles)
+% hObject    handle to load_existing (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -185,14 +175,14 @@ if isequal(pathname,0)
    disp('User selected Cancel')
 else
     imshow(filename);
-    set(handles.pushbutton8, 'enable','on')
+    set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
 end
 
 
-% --- Executes on button press in pushbutton8.
-function pushbutton8_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton8 (see GCBO)
+% --- Executes on button press in clear.
+function clear_Callback(hObject, eventdata, handles)
+% hObject    handle to clear (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 cla
@@ -207,3 +197,37 @@ fh = figure();
 
 %Print axes 2 in here
 
+
+%http://uk.mathworks.com/help/matlab/creating_guis/add-code-for-components-in-callbacks.html#f10-1001464
+function iterations_Callback(hObject, eventdata, handles)
+% hObject    handle to iterations (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of iterations as text
+%        str2double(get(hObject,'String')) returns contents of iterations as a double
+num = str2double(get(hObject.iterations,'String'));
+
+if isnan(num)
+    errordlg('You must enter a numeric value','Invalid Input','modal')
+  uicontrol(hObject)
+  return
+else
+  display(num);
+  handles.iterations=num;
+  guidata(hObject, handles);
+end
+    
+
+
+% --- Executes during object creation, after setting all properties.
+function iterations_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to iterations (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
