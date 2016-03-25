@@ -16,8 +16,13 @@ end
 
 ln1=fgetl(file);
 ln2=strsplit(fgetl(file));
-squareImageSize = str2double(ln2);
 
+
+if find(strcmp('#', ln2))
+    ln2(1) = []; % http://blogs.mathworks.com/videos/2010/03/30/deleting-an-element-from-a-cell-array/
+end
+
+squareImageSize = str2double(ln2);
 
 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
