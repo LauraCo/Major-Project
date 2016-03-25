@@ -18,10 +18,14 @@ function transVec=incrTrans(mn,cnt,img,transVec,metric)
 
 pars=length(transVec);
 
+addpath /Users/lauracollins/Git/Major-Project/Source/Development/HYBRID_ENTROPY 
+
 if strcmp(metric,'deLuca')
     ent=deLucaFuzzy(mn);
 elseif  strcmp(metric,'shannon')
     ent=fastEntLookup(mn);
+elseif  strcmp(metric,'hybrid')
+    ent=hybrid(mn);
 else fprintf(2, 'Error in chosing alignment metric');
 end
 
@@ -48,6 +52,8 @@ for i=1:pars
     newEnt=deLucaFuzzy(newMean);
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
+  elseif  strcmp(metric,'hybrid')
+      newEnt=hybrid(newMean);
   else fprintf(2, 'Error in chosing alignment metric');
   end
   
@@ -63,6 +69,8 @@ for i=1:pars
     newEnt=deLucaFuzzy(newMean);
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
+  elseif  strcmp(metric,'hybrid')
+      newEnt=hybrid(newMean);
   else fprintf(2, 'Error in chosing alignment metric');
   end
     
