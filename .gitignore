@@ -30,3 +30,5 @@ Source/congealDemo/MNIST/train-images-idx3-ubyte
 m2html/
 
 Source/Development/toy_example.png
+
+*.jpeg
