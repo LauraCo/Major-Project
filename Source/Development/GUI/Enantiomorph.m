@@ -56,6 +56,8 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 handles.iterations = 0;
 handles.alignment = '';
+handles.imageName = '';
+handles.imagePath = '';
 % Update handles structure
 guidata(hObject, handles);
 
@@ -88,14 +90,20 @@ else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
     
-    imshow(strcat(pathname,'/big_scan.pgm'));
+    inputImg = strcat(pathname,'/big_scan.pgm');
+    
+    handles.imagePath = pathname;
+    
+    imshow(inputImg);
+    handles.alignment = inputImg;
+    guidata(hObject, handles);
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
-   %filename = cellstr(filename);  % Care for the correct type 
-   %for k = 1:length(filename)
-   %     disp(fullfile(pathname, filename{k}))
-   %end
+   
+    
+    info = imfinfo(strcat(pathname,'/big_scan.pgm'));
+    set(handles.imageMeta, 'String', struct2cell(imageinfo(info)));
 end
 
 
@@ -138,7 +146,7 @@ function alignment_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-set(hObject,'String',{'Shannon';'De-Luca & Termini';'Fuzzy Shannon'; 'Hybrid'});
+set(hObject,'String',{'Shannon';'De-Luca & Termini';'Hybrid'});
 
 
 
@@ -161,7 +169,9 @@ function run_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
-testCongeal(handles.alignment, handles.iterations);
+testCongeal(handles.alignment, handles.iterations, handles.imageName);
+
+imshow(strcat(handles.imagePath,'final_mean.pgm'));
 
 
 
@@ -176,8 +186,18 @@ if isequal(pathname,0)
    disp('User selected Cancel')
 else
     imshow(filename);
+    handles.imageName = filename;
+    handles.imagePath = pathname;
+    guidata(hObject, handles);
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
+    
+    info = imfinfo(filename);
+    set(handles.filename, 'String', info.Filename);
+    set(handles.modified, 'String', info.FileModDate);
+    set(handles.type, 'String', info.Format);
+    set(handles.height, 'String', info.Height);
+    set(handles.width, 'String', info.Width);
 end
 
 
