@@ -1,4 +1,4 @@
-function testCongeal(metric,iterations, filename)
+function testCongeal(metric,iterations, filename, path)
 
 addpath IO
 addpath UTILITY
@@ -22,6 +22,6 @@ sr=min(sr,1);
 
 figure;
 showSer(meanIms,1);
-imwrite(meanIms(:,:,iterations),'final_mean.pgm','pgm');
+imwrite(meanIms(:,:,5),strcat(path,'/final_mean.pgm'),'pgm');
 figure;
 showSer(adjSer,2);
