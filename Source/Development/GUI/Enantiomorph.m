@@ -54,8 +54,7 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Enantiomorph
 handles.output = hObject;
-num = 0;
-handles.iterations = num;
+handles.iterations = 0;
 handles.alignment = '';
 % Update handles structure
 guidata(hObject, handles);
@@ -109,17 +108,19 @@ function alignment_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns alignment contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from alignment
 
-contents = get(hObject,'Value')
+contents = get(hObject,'Value');
 handles = guidata(hObject);  % Update!
 switch contents 
     case 1
-        metric = 'Shannon';
+        metric = 'shannon';
     case 2
         metric = 'deLuca';
+    case 3
+        metric = 'hybrid';
     otherwise
 end
 
-set(handles.alignment, 'UserData', metric);
+handles.alignment = metric;
 guidata(hObject, handles);
 
 
@@ -206,7 +207,7 @@ function iterations_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of iterations as text
 %        str2double(get(hObject,'String')) returns contents of iterations as a double
-num = str2double(get(hObject.iterations,'String'));
+num = str2double(get(hObject,'String'));
 
 if isnan(num)
     errordlg('You must enter a numeric value','Invalid Input','modal')
