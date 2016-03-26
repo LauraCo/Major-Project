@@ -1,4 +1,4 @@
-function testCongeal(metric,iterations)
+function testCongeal(metric,iterations, filename)
 
 addpath IO
 addpath UTILITY
@@ -6,7 +6,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
-ser=loadSeries('big_scan.pgm',1,20);
+ser=loadSeries(filename,1,20);
 ser=ser/256;
 
 for i=1:size(ser,3)
