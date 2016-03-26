@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 24-Mar-2016 16:20:23
+% Last Modified by GUIDE v2.5 26-Mar-2016 15:07:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,8 +58,12 @@ handles.iterations = 0;
 handles.alignment = '';
 handles.imageName = '';
 handles.imagePath = '';
+handles.meanIms = [];
+handles.adjSer = [];
 % Update handles structure
 guidata(hObject, handles);
+
+addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
 
 % UIWAIT makes Enantiomorph wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -94,9 +98,11 @@ else
     
     handles.imagePath = pathname;
     
-    imshow(inputImg);
-    handles.alignment = inputImg;
+    
+    handles.imageName = inputImg;
     guidata(hObject, handles);
+    
+    imshow(handles.imageName);
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
@@ -150,12 +156,14 @@ set(hObject,'String',{'Shannon';'De-Luca & Termini';'Hybrid'});
 
 
 
-% --- Executes on button press in save_output.
-function save_output_Callback(hObject, eventdata, handles)
-% hObject    handle to save_output (see GCBO)
+% --- Executes on button press in adjSer.
+function adjSer_Callback(hObject, eventdata, handles)
+% hObject    handle to adjSer (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+figure;
+showSer(handles.adjSer,1);
 
 % --- Executes on button press in clear_output.
 function clear_output_Callback(hObject, eventdata, handles)
@@ -168,8 +176,12 @@ function run_Callback(hObject, eventdata, handles)
 % hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
-testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+
+[meanIms, adjSer] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+
+handles.meanIms = meanIms;
+handles.adjSer = adjSer;
+guidata(hObject, handles);
 
 imshow(strcat(handles.imagePath,'final_mean.pgm'), 'parent', handles.output_img);
 
@@ -185,10 +197,13 @@ function load_existing_Callback(hObject, eventdata, handles)
 if isequal(pathname,0)
    disp('User selected Cancel')
 else
-    imshow(filename);
-    handles.imageName = filename;
+    
+    handles.imageName = filename;   
     handles.imagePath = pathname;
     guidata(hObject, handles);
+    
+    imshow(handles.imageName);
+    
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
     
@@ -206,7 +221,17 @@ function clear_Callback(hObject, eventdata, handles)
 % hObject    handle to clear (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+clear handles.imageName;
+guidata(hObject, handles);
+
+axes(handles.input_img) 
 cla
+
+set(handles.filename, 'String', '');
+    set(handles.modified, 'String', '');
+    set(handles.type, 'String', '');
+    set(handles.height, 'String', '');
+    set(handles.width, 'String', '');
 
 % --- Executes on button press in view.
 function view_Callback(hObject, eventdata, handles)
@@ -214,9 +239,8 @@ function view_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-fh = figure();
-
-%Print axes 2 in here
+figure; 
+imshow(handles.imageName);
 
 
 %http://uk.mathworks.com/help/matlab/creating_guis/add-code-for-components-in-callbacks.html#f10-1001464
@@ -252,3 +276,12 @@ function iterations_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in meanIms.
+function meanIms_Callback(hObject, eventdata, handles)
+% hObject    handle to meanIms (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+figure;
+showSer(handles.meanIms,1);
