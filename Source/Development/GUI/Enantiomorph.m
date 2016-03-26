@@ -160,7 +160,7 @@ function run_Callback(hObject, eventdata, handles)
 % hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
 testCongeal(handles.alignment, handles.iterations);
 
 
