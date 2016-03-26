@@ -169,9 +169,9 @@ function run_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
-testCongeal(handles.alignment, handles.iterations, handles.imageName);
+testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
-imshow(strcat(handles.imagePath,'final_mean.pgm'));
+imshow(strcat(handles.imagePath,'final_mean.pgm'), 'parent', handles.output_img);
 
 
 
