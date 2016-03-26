@@ -36,6 +36,8 @@ for iters=1:numIters       % Until convergence?
       ent=deLucaFuzzy(curMean);
   elseif  strcmp(metric,'shannon')
       ent=fastEntLookup(curMean);
+  elseif  strcmp(metric,'hybrid')
+      ent=hybrid(curMean);
   else fprintf(2, 'Error in chosing alignment metric');
   end
   
