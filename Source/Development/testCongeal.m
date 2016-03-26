@@ -1,4 +1,4 @@
-function testCongeal(metric,iterations, filename, path)
+function [meanIms, adjSer] = testCongeal(metric,iterations, filename, path)
 
 addpath IO
 addpath UTILITY
@@ -20,8 +20,8 @@ sr=min(sr,1);
 [adjSer,meanIms,transVecs]=binaryCongeal(sr,iterations,7,metric);
 
 
-figure;
-showSer(meanIms,1);
+%figure;
+%showSer(meanIms,1);
 imwrite(meanIms(:,:,iterations),strcat(path,'/final_mean.pgm'),'pgm');
-figure;
-showSer(adjSer,2);
+%figure;
+%showSer(adjSer,2);
