@@ -22,6 +22,6 @@ sr=min(sr,1);
 
 figure;
 showSer(meanIms,1);
-imwrite(meanIms(:,:,5),strcat(path,'/final_mean.pgm'),'pgm');
+imwrite(meanIms(:,:,iterations),strcat(path,'/final_mean.pgm'),'pgm');
 figure;
 showSer(adjSer,2);
