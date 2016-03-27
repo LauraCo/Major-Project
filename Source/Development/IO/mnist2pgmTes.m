@@ -3,6 +3,7 @@ label_fname='/home/vis3/data/emiller/MNIST/t10k-labels-idx1-ubyte';
 %im_fname='/home/vis3/data/emiller/MNIST/train-images-idx3-ubyte';
 %label_fname='/home/vis3/data/emiller/MNIST/train-labels-idx1-ubyte';
 
+
 sers=zeros(28,28,1000,10);
 
 lfid=fopen(label_fname,'r','ieee-be');
