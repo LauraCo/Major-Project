@@ -11,14 +11,14 @@ end
 % Test 1 - test is pgm format
 
 function testImageType(testCase)
-file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/TESTING/scans/big_scan.pgm','r');
+file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm','r');
 ln1=fgetl(file);
 assertEqual(testCase,ln1, 'P5');
 end
 
 % Test 2 - test insertion of comment for load function to read
 function testCommentInsertion(testCase)
-file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/TESTING/scans/big_scan.pgm','r');
+file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm','r');
 ln1 = fgetl(file);
 ln2=fgetl(file);
 
