@@ -6,7 +6,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
-ser=loadSeries(filename,1,20);
+ser=loadSeries(strcat(path,filename),1,20);
 ser=ser/256;
 
 for i=1:size(ser,3)
