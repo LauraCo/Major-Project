@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 28-Mar-2016 16:39:49
+% Last Modified by GUIDE v2.5 26-Mar-2016 15:07:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -293,10 +293,11 @@ figure;
 showSer(handles.meanIms,1);
 
 
+
 % --- Executes on button press in pushbutton11.
 function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-removeMarker;
+removeMarker; 
