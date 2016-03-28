@@ -16,8 +16,13 @@ end
 
 ln1=fgetl(file);
 ln2=strsplit(fgetl(file));
-squareImageSize = str2double(ln2);
 
+
+if find(strcmp('#', ln2))
+    ln2(1) = []; % http://blogs.mathworks.com/videos/2010/03/30/deleting-an-element-from-a-cell-array/
+end
+
+squareImageSize = str2double(ln2);
 
 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
 
@@ -31,4 +36,4 @@ end
 
 outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
-saveSeries(outfname,s);
+saveSeries(outfname,permute(s,[2,1,3])); %http://uk.mathworks.com/help/matlab/ref/permute.html - swap rows and columns around for fwrite

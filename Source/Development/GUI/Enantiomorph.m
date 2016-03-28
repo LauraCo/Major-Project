@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 09-Mar-2016 17:20:55
+% Last Modified by GUIDE v2.5 28-Mar-2016 16:39:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,9 +54,16 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Enantiomorph
 handles.output = hObject;
-
+handles.iterations = 0;
+handles.alignment = '';
+handles.imageName = '';
+handles.imagePath = '';
+handles.meanIms = [];
+handles.adjSer = [];
 % Update handles structure
 guidata(hObject, handles);
+
+addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
 
 % UIWAIT makes Enantiomorph wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -73,9 +80,9 @@ function varargout = Enantiomorph_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in generate.
+function generate_Callback(hObject, eventdata, handles)
+% hObject    handle to generate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -87,27 +94,56 @@ else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
     
-    imshow(strcat(pathname,'/big_scan.pgm'));
-   %filename = cellstr(filename);  % Care for the correct type 
-   %for k = 1:length(filename)
-   %     disp(fullfile(pathname, filename{k}))
-   %end
+    inputImg = strcat(pathname,'/big_scan.pgm');
+    
+    handles.imagePath = pathname;
+    
+    
+    handles.imageName = inputImg;
+    guidata(hObject, handles);
+    
+    imshow(handles.imageName);
+    
+    set(handles.clear, 'enable','on')
+    set(handles.view, 'enable','on')
+   
+    
+    info = imfinfo(strcat(pathname,'/big_scan.pgm'));
+    set(handles.imageMeta, 'String', struct2cell(imageinfo(info)));
 end
 
 
-% --- Executes on selection change in popupmenu1.
-function popupmenu1_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+% --- Executes on selection change in alignment.
+function alignment_Callback(hObject, eventdata, handles)
+% hObject    handle to alignment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu1
+% Hints: contents = cellstr(get(hObject,'String')) returns alignment contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from alignment
+
+contents = get(hObject,'Value');
+handles = guidata(hObject);  % Update!
+switch contents 
+    case 1
+        metric = 'shannon';
+    case 2
+        metric = 'deLuca';
+    case 3
+        metric = 'hybrid';
+    otherwise
+end
+
+handles.alignment = metric;
+guidata(hObject, handles);
+
+
+
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+function alignment_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to alignment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -116,56 +152,151 @@ function popupmenu1_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-set(hObject,'String',{'Shannon';'De-Luca & Termini';'Fuzzy Shannon'; 'Hybrid'});
-menu_selection = get(hObject, 'String');
+set(hObject,'String',{'Shannon';'De-Luca & Termini';'Hybrid'});
 
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+
+% --- Executes on button press in adjSer.
+function adjSer_Callback(hObject, eventdata, handles)
+% hObject    handle to adjSer (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+figure;
+showSer(handles.adjSer,1);
 
-% --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton4 (see GCBO)
+% --- Executes on button press in clear_output.
+function clear_output_Callback(hObject, eventdata, handles)
+% hObject    handle to clear_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
-% --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
+% --- Executes on button press in run.
+function run_Callback(hObject, eventdata, handles)
+% hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+[meanIms, adjSer] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
-slider_value = get(hObject,'Value');
+handles.meanIms = meanIms;
+handles.adjSer = adjSer;
+guidata(hObject, handles);
+
+imshow(strcat(handles.imagePath,'final_mean.pgm'), 'parent', handles.output_img);
+
+
+
+% --- Executes on button press in load_existing.
+function load_existing_Callback(hObject, eventdata, handles)
+% hObject    handle to load_existing (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+[filename, pathname] = uigetfile('*.pgm','Select pre-compiled pgm file');
+if isequal(pathname,0)
+   disp('User selected Cancel')
+else
+    
+    handles.imageName = filename;   
+    handles.imagePath = pathname;
+    guidata(hObject, handles);
+    
+    imshow(handles.imageName);
+    
+    set(handles.clear, 'enable','on')
+    set(handles.view, 'enable','on')
+    
+    info = imfinfo(filename);
+    set(handles.filename, 'String', info.Filename);
+    set(handles.modified, 'String', info.FileModDate);
+    set(handles.type, 'String', info.Format);
+    set(handles.height, 'String', info.Height);
+    set(handles.width, 'String', info.Width);
+end
+
+
+% --- Executes on button press in clear.
+function clear_Callback(hObject, eventdata, handles)
+% hObject    handle to clear (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear handles.imageName;
+guidata(hObject, handles);
+
+axes(handles.input_img) 
+cla
+
+set(handles.filename, 'String', '');
+    set(handles.modified, 'String', '');
+    set(handles.type, 'String', '');
+    set(handles.height, 'String', '');
+    set(handles.width, 'String', '');
+
+% --- Executes on button press in view.
+function view_Callback(hObject, eventdata, handles)
+% hObject    handle to view (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+figure; 
+imshow(handles.imageName);
+
+
+%http://uk.mathworks.com/help/matlab/creating_guis/add-code-for-components-in-callbacks.html#f10-1001464
+function iterations_Callback(hObject, eventdata, handles)
+% hObject    handle to iterations (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of iterations as text
+%        str2double(get(hObject,'String')) returns contents of iterations as a double
+num = str2double(get(hObject,'String'));
+
+if isnan(num)
+    errordlg('You must enter a numeric value','Invalid Input','modal')
+  uicontrol(hObject)
+  return
+elseif num > 100 
+  errordlg('You must enter a number less than 100','Invalid Input','modal')
+  uicontrol(hObject)
+elseif num <= 0
+    errordlg('You must enter a number greater than 0','Invalid Input','modal')
+    uicontrol(hObject)
+else
+  display(num);
+  handles.iterations=num;
+  guidata(hObject, handles);
+end
+    
 
 
 % --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
+function iterations_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to iterations (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
 end
 
 
-% --- Executes on button press in pushbutton5.
-function pushbutton5_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton5 (see GCBO)
+% --- Executes on button press in meanIms.
+function meanIms_Callback(hObject, eventdata, handles)
+% hObject    handle to meanIms (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+figure;
+showSer(handles.meanIms,1);
+
+
+% --- Executes on button press in pushbutton11.
+function pushbutton11_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-if strcmp(menu_Selection,'Shannon')
-    testCongeal('shannon', slider_value);
-elseif strcmp(menu_Selection,'De-Luca & Termini')
-    testCongeal('de-luca', slider_value);
-end
+removeMarker;

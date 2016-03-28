@@ -1,7 +1,10 @@
+% Formally: mnist2pgmTest - but would run when Unit tests are run
+
 im_fname='/home/vis3/data/emiller/MNIST/t10k-images-idx3-ubyte';
 label_fname='/home/vis3/data/emiller/MNIST/t10k-labels-idx1-ubyte';
 %im_fname='/home/vis3/data/emiller/MNIST/train-images-idx3-ubyte';
 %label_fname='/home/vis3/data/emiller/MNIST/train-labels-idx1-ubyte';
+
 
 sers=zeros(28,28,1000,10);
 
