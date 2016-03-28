@@ -140,7 +140,7 @@ output = fopen(strcat(path,file), 'w');
 fprintf(output,'P5\n');
 fprintf(output,'%d %d\n',imWidth,imHeight);
 fprintf(output,'255\n');
-fwrite(output,handles.finalImg,'uchar');
+fwrite(output,handles.finalImg.','uchar'); %Need to transpose the array, as fwrite writes by columns
 fclose(output);
 
 %imwrite(handles.finalImg, strcat(path,file), 'pgm');
