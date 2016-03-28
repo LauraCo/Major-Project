@@ -36,4 +36,4 @@ end
 
 outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
-saveSeries(outfname,s);
+saveSeries(outfname,permute(s,[2,1,3])); %http://uk.mathworks.com/help/matlab/ref/permute.html - swap rows and columns around for fwrite
