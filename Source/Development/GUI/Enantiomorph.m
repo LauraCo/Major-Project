@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 28-Mar-2016 16:39:49
+% Last Modified by GUIDE v2.5 26-Mar-2016 15:07:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,14 +102,18 @@ else
     handles.imageName = inputImg;
     guidata(hObject, handles);
     
-    imshow(handles.imageName);
+    imshow(strcat(handles.imagePath,handles.imageName));
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
    
     
-    info = imfinfo(strcat(pathname,'/big_scan.pgm'));
-    set(handles.imageMeta, 'String', struct2cell(imageinfo(info)));
+    info = imfinfo(handles.imageName);
+    set(handles.filename, 'String', info.Filename);
+    set(handles.modified, 'String', info.FileModDate);
+    set(handles.type, 'String', info.Format);
+    set(handles.height, 'String', info.Height);
+    set(handles.width, 'String', info.Width);
 end
 
 
@@ -183,7 +187,7 @@ handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 guidata(hObject, handles);
 
-imshow(strcat(handles.imagePath,'final_mean.pgm'), 'parent', handles.output_img);
+imshow(strcat(handles.imagePath,'/final_mean.pgm'), 'parent', handles.output_img);
 
 
 
@@ -202,7 +206,7 @@ else
     handles.imagePath = pathname;
     guidata(hObject, handles);
     
-    imshow(handles.imageName);
+    imshow(strcat(handles.imagePath,handles.imageName));
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
@@ -293,10 +297,11 @@ figure;
 showSer(handles.meanIms,1);
 
 
+
 % --- Executes on button press in pushbutton11.
 function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-removeMarker;
+removeMarker; 
