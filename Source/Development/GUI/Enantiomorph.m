@@ -102,14 +102,18 @@ else
     handles.imageName = inputImg;
     guidata(hObject, handles);
     
-    imshow(handles.imageName);
+    imshow(strcat(handles.imagePath,handles.imageName));
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
    
     
-    info = imfinfo(strcat(pathname,'/big_scan.pgm'));
-    set(handles.imageMeta, 'String', struct2cell(imageinfo(info)));
+    info = imfinfo(handles.imageName);
+    set(handles.filename, 'String', info.Filename);
+    set(handles.modified, 'String', info.FileModDate);
+    set(handles.type, 'String', info.Format);
+    set(handles.height, 'String', info.Height);
+    set(handles.width, 'String', info.Width);
 end
 
 
@@ -183,7 +187,7 @@ handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 guidata(hObject, handles);
 
-imshow(strcat(handles.imagePath,'final_mean.pgm'), 'parent', handles.output_img);
+imshow(strcat(handles.imagePath,'/final_mean.pgm'), 'parent', handles.output_img);
 
 
 
@@ -202,7 +206,7 @@ else
     handles.imagePath = pathname;
     guidata(hObject, handles);
     
-    imshow(handles.imageName);
+    imshow(strcat(handles.imagePath,handles.imageName));
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
