@@ -257,6 +257,12 @@ if isnan(num)
     errordlg('You must enter a numeric value','Invalid Input','modal')
   uicontrol(hObject)
   return
+elseif num > 100 
+  errordlg('You must enter a number less than 100','Invalid Input','modal')
+  uicontrol(hObject)
+elseif num <= 0
+    errordlg('You must enter a number greater than 0','Invalid Input','modal')
+    uicontrol(hObject)
 else
   display(num);
   handles.iterations=num;
