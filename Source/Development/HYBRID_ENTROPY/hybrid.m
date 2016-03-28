@@ -48,6 +48,10 @@ hybridLow = -(lowCount / numel(lowMu).*log10(1 - eLow0) - (lowCount / numel(lowM
 hybridMed = -(medCount / numel(medMu).*log10(1 - eMed0) - (medCount / numel(medMu).*log10(eMed1)));
 hybridHigh = -(highCount / numel(highMu).*log10(1 - eHigh0) - (highCount / numel(highMu).*log10(eHigh1)));
 
+if isnan(hybridHigh)
+    hybridHigh = 0;
+end
+
 totalHybrid = hybridLow + hybridMed + hybridHigh;
 entropy = totalHybrid / 3; %For 3 trapeziums
 
