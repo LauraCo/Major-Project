@@ -168,6 +168,7 @@ function adjSer_Callback(hObject, eventdata, handles)
 
 figure;
 showSer(handles.adjSer,1);
+hold on;
 
 % --- Executes on button press in clear_output.
 function clear_output_Callback(hObject, eventdata, handles)
@@ -181,13 +182,13 @@ function run_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[meanIms, adjSer] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+[meanIms, adjSer, finalMean] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
 handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 guidata(hObject, handles);
 
-imshow(strcat(handles.imagePath,'/final_mean.pgm'), 'parent', handles.output_img);
+imshow(finalMean, 'parent', handles.output_img);
 
 
 
@@ -295,6 +296,7 @@ function meanIms_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 figure;
 showSer(handles.meanIms,1);
+hold on
 
 
 
