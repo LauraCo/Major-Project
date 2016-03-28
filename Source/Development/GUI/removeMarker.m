@@ -132,4 +132,4 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 %http://uk.mathworks.com/help/matlab/ref/uiputfile.html
 
 [file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),'Save file name');
-imwrite(handles.finalImg, strcat(path,file));
+imwrite(handles.finalImg, strcat(path,file), 'pgm');
