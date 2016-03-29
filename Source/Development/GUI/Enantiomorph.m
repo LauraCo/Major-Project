@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 26-Mar-2016 15:07:01
+% Last Modified by GUIDE v2.5 29-Mar-2016 15:14:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,11 +55,12 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Enantiomorph
 handles.output = hObject;
 handles.iterations = 0;
-handles.alignment = '';
+handles.alignment = 'shannon';
 handles.imageName = '';
 handles.imagePath = '';
 handles.meanIms = [];
 handles.adjSer = [];
+handles.finalImg = [];
 % Update handles structure
 guidata(hObject, handles);
 
@@ -86,10 +87,16 @@ function generate_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%[filename, pathname] = uigetfile('*.pgm;*.pbm;', 'Select an image file', 'MultiSelect', 'on');
 pathname = uigetdir();
+rmpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development'));
+addpath(pathname);
 if isequal(pathname,0)
    disp('User selected Cancel')
+elseif exist('/big_scan.pgm', 'file') == 2
+   
+    message = sprintf('Big scan has already been generated in this folder. \nPlease use "Load existing" button instead.'); 
+    uiwait(msgbox(message));
+    return;
 else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
@@ -102,7 +109,7 @@ else
     handles.imageName = inputImg;
     guidata(hObject, handles);
     
-    imshow(strcat(handles.imagePath,handles.imageName));
+    imshow(handles.imageName);
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
@@ -166,8 +173,7 @@ function adjSer_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-figure;
-showSer(handles.adjSer,1);
+
 
 % --- Executes on button press in clear_output.
 function clear_output_Callback(hObject, eventdata, handles)
@@ -175,20 +181,35 @@ function clear_output_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+clear handles.imageName;
+clear handles.imagePath;
+clear handles.iterations;
+clear handles.alignment;
+clear handles.meanIms;
+clear handles.adjSer;
+clear handles.finalImg;
+guidata(hObject, handles);
+
+axes(handles.input_img)
+axes(handles.output_img)
+cla
+
 % --- Executes on button press in run.
 function run_Callback(hObject, eventdata, handles)
 % hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[meanIms, adjSer] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+[meanIms, adjSer, finalMean] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
 handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 guidata(hObject, handles);
 
-imshow(strcat(handles.imagePath,'/final_mean.pgm'), 'parent', handles.output_img);
+handles.finalImg = finalMean;
+guidata(hObject, handles);
 
+imshow(handles.finalImg, 'parent', handles.output_img);
 
 
 % --- Executes on button press in load_existing.
@@ -243,7 +264,7 @@ function view_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-figure; 
+figure('Name','Input image'); 
 imshow(handles.imageName);
 
 
@@ -288,16 +309,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in meanIms.
-function meanIms_Callback(hObject, eventdata, handles)
-% hObject    handle to meanIms (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-figure;
-showSer(handles.meanIms,1);
-
-
-
 % --- Executes on button press in pushbutton11.
 function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
@@ -305,3 +316,34 @@ function pushbutton11_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 removeMarker; 
+
+
+% --- Executes on button press in save_output.
+function save_output_Callback(hObject, eventdata, handles)
+% hObject    handle to save_output (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),'Save file name');
+
+imwrite(handles.finalImg,strcat(path,file),'pgm'); % Doesn't save in the right format to be fed back in - but doesn't need to be.
+
+
+% --- Executes on button press in mean_ims_button.
+function mean_ims_button_Callback(hObject, eventdata, handles)
+% hObject    handle to mean_ims_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+figure('Name','Mean images per each iteration');
+showSer(handles.meanIms,1);
+hold on
+
+
+% --- Executes on button press in adj_ser_button.
+function adj_ser_button_Callback(hObject, eventdata, handles)
+% hObject    handle to adj_ser_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+figure('Name','Adjusted input images after last iteration');
+showSer(handles.adjSer,1);
+hold on
