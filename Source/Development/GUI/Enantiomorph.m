@@ -91,6 +91,9 @@ function generate_Callback(hObject, eventdata, handles)
 pathname = uigetdir();
 if isequal(pathname,0)
    disp('User selected Cancel')
+elseif exist('big_scan.pgm', 'file') == 2
+    message = sprintf('Big scan has already been generated in this folder. \nPlease use load button.'); 
+    uiwait(msgbox(message));
 else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
@@ -319,14 +322,4 @@ function save_output_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 [file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),'Save file name');
 
-%[imHeight,imWidth, dim] = size(handles.finalImg);
-
-%output = fopen(strcat(path,file), 'w');
-
-%fprintf(output,'P5\n');
-%fprintf(output,'%d %d\n',imWidth,imHeight);
-%fprintf(output,'255\n');
-%fwrite(output,handles.finalImg.','uchar'); %Need to transpose the array, as fwrite writes by columns
-%fclose(output);
-
-imwrite(handles.finalImg,strcat(path,file),'pgm');
+imwrite(handles.finalImg,strcat(path,file),'pgm'); % Doesn't save in the right format to be fed back in - but doesn't need to be.
