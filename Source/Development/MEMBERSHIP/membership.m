@@ -71,16 +71,16 @@ evalHigh = evalmf(x, param3, 'trapmf');
 
 %i = 1:size(image,1);
 %j = 1:size(image,2);
-        
-        pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
-        
-        lowMu = evalLow(pixelIntensity);
-        medMu = evalMed(pixelIntensity);
-        highMu = evalHigh(pixelIntensity);
-        
-        temp = bsxfun(@max, lowMu, medMu);
-        imgMu = bsxfun(@max, temp,highMu);
-                
+
+pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
+
+lowMu = evalLow(pixelIntensity);
+medMu = evalMed(pixelIntensity);
+highMu = evalHigh(pixelIntensity);
+
+temp = bsxfun(@max, lowMu, medMu);
+imgMu = bsxfun(@max, temp,highMu);
+
        
       
         %plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree

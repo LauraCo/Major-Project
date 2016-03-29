@@ -6,11 +6,15 @@ addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP
 
 [imgMu, lowMu, medMu, highMu] = membership(meanImg);
 
+
 lowCount = 0;
 medCount = 0;
 highCount = 0;
 
 for i=1:numel(imgMu)
+    disp(lowMu(i));
+    disp(medMu(i));
+    disp(highMu(i));
     if lowMu(i) > medMu(i) && lowMu(i) > highMu(i)
         lowCount = lowCount + 1;
     elseif medMu(i) > lowMu(i) && medMu(i) > highMu(i)
@@ -44,9 +48,9 @@ eHigh0 = sum(1/numel(highMu)*sum(eHigh0));
 eHigh1 = highMu.*exp(1 - highMu);
 eHigh1 = sum(1/numel(highMu)*sum(eHigh1));
 
-hybridLow = -(lowCount / numel(lowMu).*log10(1 - eLow0) - (lowCount / numel(lowMu).*log10(eLow1)));
-hybridMed = -(medCount / numel(medMu).*log10(1 - eMed0) - (medCount / numel(medMu).*log10(eMed1)));
-hybridHigh = -(highCount / numel(highMu).*log10(1 - eHigh0) - (highCount / numel(highMu).*log10(eHigh1)));
+hybridLow = -(lowCount / (lowCount+medCount).*log10(1 - eLow0) - (medCount / (lowCount+medCount).*log10(eLow1)));
+hybridMed = -(medCount / (lowCount+medCount+highCount).*log10(1 - eMed0) - ((lowCount+highCount) / (lowCount+medCount+highCount).*log10(eMed1)));
+hybridHigh = -(highCount / (medCount+highCount).*log10(1 - eHigh0) - (medCount / (medCount+highCount).*log10(eHigh1)));
 
 if isnan(hybridHigh)
     hybridHigh = 0;
