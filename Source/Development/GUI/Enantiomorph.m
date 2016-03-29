@@ -55,7 +55,7 @@ function Enantiomorph_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Enantiomorph
 handles.output = hObject;
 handles.iterations = 0;
-handles.alignment = '';
+handles.alignment = 'shannon';
 handles.imageName = '';
 handles.imagePath = '';
 handles.meanIms = [];
