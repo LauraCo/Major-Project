@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 26-Mar-2016 15:07:01
+% Last Modified by GUIDE v2.5 29-Mar-2016 12:08:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,6 +60,7 @@ handles.imageName = '';
 handles.imagePath = '';
 handles.meanIms = [];
 handles.adjSer = [];
+handles.finalImg = [];
 % Update handles structure
 guidata(hObject, handles);
 
@@ -188,8 +189,10 @@ handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 guidata(hObject, handles);
 
-imshow(finalMean, 'parent', handles.output_img);
+handles.finalImg = finalMean;
+guidata(hObject, handles);
 
+imshow(handles.finalImg, 'parent', handles.output_img);
 
 
 % --- Executes on button press in load_existing.
@@ -307,3 +310,23 @@ function pushbutton11_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 removeMarker; 
+
+
+% --- Executes on button press in save_output.
+function save_output_Callback(hObject, eventdata, handles)
+% hObject    handle to save_output (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),'Save file name');
+
+%[imHeight,imWidth, dim] = size(handles.finalImg);
+
+%output = fopen(strcat(path,file), 'w');
+
+%fprintf(output,'P5\n');
+%fprintf(output,'%d %d\n',imWidth,imHeight);
+%fprintf(output,'255\n');
+%fwrite(output,handles.finalImg.','uchar'); %Need to transpose the array, as fwrite writes by columns
+%fclose(output);
+
+imwrite(handles.finalImg,strcat(path,file),'pgm');
