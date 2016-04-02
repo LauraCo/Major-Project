@@ -12,9 +12,6 @@ medCount = 0;
 highCount = 0;
 
 for i=1:numel(imgMu)
-    disp(lowMu(i));
-    disp(medMu(i));
-    disp(highMu(i));
     if lowMu(i) > medMu(i) && lowMu(i) > highMu(i)
         lowCount = lowCount + 1;
     elseif medMu(i) > lowMu(i) && medMu(i) > highMu(i)
@@ -26,38 +23,51 @@ end
 
 %Trapezium A - Low grey-level values
 
-eLow0 = (1 - lowMu).*exp(lowMu);
-eLow0 = sum(1/numel(lowMu)*sum(eLow0));
+eLowMed0 = ((1 - medMu) - lowMu).*exp(lowMu); % Likelihood of receiving medium 
+eLowMed0 = sum(1/numel(lowMu)*sum(eLowMed0));
 
-eLow1 = lowMu.*exp(1 - lowMu);
-eLow1 = sum(1/numel(lowMu)*sum(eLow1));
+eLowMed1 = lowMu.*exp((1 - medMu) - lowMu);
+eLowMed1 = sum(1/numel(lowMu)*sum(eLowMed1));
 
 %Trapezium B - Medium grey-level values
 
-eMed0 = (1 - medMu).*exp(medMu);
-eMed0 = sum(1/numel(medMu)*sum(eMed0));
+eMedHigh0 = ((1 - highMu) - medMu).*exp(medMu);
+eMedHigh0 = sum(1/numel(medMu)*sum(eMedHigh0));
 
-eMed1 = medMu.*exp(1 - medMu);
-eMed1 = sum(1/numel(medMu)*sum(eMed1));
+eMedHigh1 = medMu.*exp((1 - highMu) - medMu);
+eMedHigh1 = sum(1/numel(medMu)*sum(eMedHigh1));
 
-%Trapezium C - High grey-level values
+%eLowMed0 = lowMu.*exp((1 - medMu) - lowMu);
+%eLowMed0 = sum(1/numel(lowMu)*sum(eLowMed0));
 
-eHigh0 = (1 - highMu).*exp(highMu);
-eHigh0 = sum(1/numel(highMu)*sum(eHigh0));
+%eLowMed1 = ((1 - medMu) - lowMu).*exp(lowMu); % Likelihood of receiving medium 
+%eLowMed1 = sum(1/numel(lowMu)*sum(eLowMed1));
 
-eHigh1 = highMu.*exp(1 - highMu);
-eHigh1 = sum(1/numel(highMu)*sum(eHigh1));
 
-hybridLow = -(lowCount / (lowCount+medCount).*log10(1 - eLow0) - (medCount / (lowCount+medCount).*log10(eLow1)));
-hybridMed = -(medCount / (lowCount+medCount+highCount).*log10(1 - eMed0) - ((lowCount+highCount) / (lowCount+medCount+highCount).*log10(eMed1)));
-hybridHigh = -(highCount / (medCount+highCount).*log10(1 - eHigh0) - (medCount / (medCount+highCount).*log10(eHigh1)));
+%Trapezium B - Medium grey-level values
 
-if isnan(hybridHigh)
-    hybridHigh = 0;
-end
+%eMedHigh0 = medMu.*exp((1 - highMu) - medMu);
+%eMedHigh0 = sum(1/numel(medMu)*sum(eMedHigh0));
 
-totalHybrid = hybridLow + hybridMed + hybridHigh;
-entropy = totalHybrid / 3; %For 3 trapeziums
+%eMedHigh1 = ((1 - highMu) - medMu).*exp(medMu);
+%eMedHigh1 = sum(1/numel(medMu)*sum(eMedHigh1));
+
+
+
+
+
+%hybridLow = -lowCount / (lowCount+medCount).*log10(1 - eLowMed0) - (medCount / (lowCount+medCount).*log10(eLowMed1));
+%hybridMed = -medCount / (lowCount+medCount+highCount).*log10(1 - eMedHigh0) - ((lowCount+highCount) / (lowCount+medCount+highCount).*log10(eMedHigh1)); % 0.243414
+
+hybridLow = -lowCount / (lowCount+medCount).*log10(1 - eLowMed0) - (medCount / (lowCount+medCount).*log10(eLowMed1));
+hybridMed = -medCount / (medCount+highCount).*log10(1 - eMedHigh0) - (highCount / (lowCount+medCount+highCount).*log10(eMedHigh1)); % 0.242960
+
+%if isnan(hybridHigh)
+%    hybridHigh = 0;
+%end
+
+totalHybrid = hybridLow + hybridMed;
+entropy = totalHybrid / 2; %For 2 comparisons
 
 end
 
