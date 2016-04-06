@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 29-Mar-2016 15:14:39
+% Last Modified by GUIDE v2.5 06-Apr-2016 11:38:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -323,10 +323,15 @@ function save_output_Callback(hObject, eventdata, handles)
 % hObject    handle to save_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),'Save file name');
 
+
+[file,path] = uiputfile(strcat(handles.imagePath,'final_image_',num2str(handles.iterations),'_',handles.alignment),'Save file name');
+
+if isequal(path,0)
+   disp('User selected Cancel') 
+else 
 imwrite(handles.finalImg,strcat(path,file),'pgm'); % Doesn't save in the right format to be fed back in - but doesn't need to be.
-
+end
 
 % --- Executes on button press in mean_ims_button.
 function mean_ims_button_Callback(hObject, eventdata, handles)
@@ -347,3 +352,35 @@ function adj_ser_button_Callback(hObject, eventdata, handles)
 figure('Name','Adjusted input images after last iteration');
 showSer(handles.adjSer,1);
 hold on
+
+
+% --- Executes on button press in larger_output.
+function larger_output_Callback(hObject, eventdata, handles)
+% hObject    handle to larger_output (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+figure('Name','Final Mean Image'); 
+imshow(handles.finalImg);
+
+
+% --- Executes on button press in pushbutton17.
+function pushbutton17_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton17 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+clear handles.imageName;
+clear handles.imagePath
+guidata(hObject, handles);
+
+axes(handles.input_img) 
+cla
+axes(handles.output_img) 
+cla
+
+set(handles.filename, 'String', '');
+set(handles.modified, 'String', '');
+set(handles.type, 'String', '');
+set(handles.height, 'String', '');
+set(handles.width, 'String', '');
