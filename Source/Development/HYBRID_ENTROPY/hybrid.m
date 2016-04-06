@@ -23,36 +23,44 @@ end
 
 %Trapezium A - Low grey-level values
 
-%eLowMed0 = (1 - medMu).*exp(lowMu); % Likelihood of receiving medium 
-eLowMed0 = (1 - lowMu).*exp(lowMu);
-eLowMed0 = sum(1/(lowCount + medCount)*sum(eLowMed0));
+eLow0 = (1 - lowMu).*exp(lowMu);
+eLow0 = (1/(lowCount)) * sum(sum(eLow0));
 
-
-%eLowMed1 = (1 - lowMu).*exp(medMu); % Likelihood of receiving medium 
-eLowMed1 = (1 - medMu).*exp(medMu);
-eLowMed1 = sum(1/(lowCount + medCount)*sum(eLowMed1));
+eLow1 = lowMu.*exp(1-lowMu);
+eLow1 = (1/(lowCount)) * sum(sum(eLow1));
 
 %Trapezium B - Medium grey-level values
 
-%eMedHigh0 = (1 - highMu).*exp(medMu);
-eMedHigh0 = (1 - medMu).*exp(medMu);
-eMedHigh0 = 1/(medCount + highCount).*sum(sum(eMedHigh0));
 
-%eMedHigh1 = (1 - medMu).*exp(highMu);
-eMedHigh1 = (1 - highMu).*exp(highMu);
-eMedHigh1 = sum(1/(medCount + highCount)*sum(eMedHigh1));
+eMed0 = (1 - medMu).*exp(medMu);
+eMed0 = (1/medCount) * sum(sum(eMed0));
+
+eMed1 = medMu.*exp(1-medMu);
+eMed1 = (1/medCount) * sum(sum(eMed1));
+
+%Trapezium C - High grey-level values
+
+eHigh0 = (1 - highMu).*exp(highMu);
+eHigh0 = (1/highCount) * sum(sum(eHigh0));
+
+eHigh1 = highMu.*exp(1-highMu);
+eHigh1 = (1/highCount) * sum(sum(eHigh1));
 
 
 
 
-hybridLow = -(lowCount / (lowCount+medCount)).*log10(1 - eLowMed0);
-hybridLow = hybridLow - (medCount / (lowCount+medCount).*log10(eLowMed1));
 
-hybridMed = -(medCount / (medCount+highCount)).*log10(1 - eMedHigh0);
-hybridMed = hybridMed - (highCount / (medCount+highCount).*log10(eMedHigh1));
+hybridLow = -(lowCount / (lowCount+medCount))*log10(1 - eLow0);
+hybridLow = hybridLow - (lowCount / (lowCount+medCount)*log10(eLow1));
 
-totalHybrid = hybridLow + hybridMed;
-entropy = totalHybrid / 2; %For 2 comparisons
+hybridMed = -(medCount / (lowCount + medCount + highCount))*log10(1 - eMed0);
+hybridMed = hybridMed - (medCount / numel(medMu)*log10(eMed1)); % Do I compare this to low trapezium, high trapezium or both??
+
+hybridHigh = -(highCount / (medCount + highCount))*log10(1 - eHigh0);
+hybridHigh = hybridHigh - (highCount / (medCount+highCount)*log10(eHigh1));
+
+totalHybrid = hybridLow + hybridMed + hybridHigh;
+entropy = totalHybrid / 3; 
 
 end
 
