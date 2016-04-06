@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 06-Apr-2016 11:38:38
+% Last Modified by GUIDE v2.5 06-Apr-2016 19:11:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,13 +61,14 @@ handles.imagePath = '';
 handles.meanIms = [];
 handles.adjSer = [];
 handles.finalImg = [];
+handles.ent = [];
 % Update handles structure
 guidata(hObject, handles);
 
 addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
 
 % UIWAIT makes Enantiomorph wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.Main_GUI);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -200,11 +201,14 @@ function run_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[meanIms, adjSer, finalMean] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+[meanIms, adjSer, finalMean, ent] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
 handles.meanIms = meanIms;
 handles.adjSer = adjSer;
+handles.ent = ent;
 guidata(hObject, handles);
+
+%set(handles.ent_text, 'String', handles.ent);
 
 handles.finalImg = finalMean;
 guidata(hObject, handles);
@@ -384,3 +388,28 @@ set(handles.modified, 'String', '');
 set(handles.type, 'String', '');
 set(handles.height, 'String', '');
 set(handles.width, 'String', '');
+
+
+% --- Executes on button press in entropy_btn.
+function entropy_btn_Callback(hObject, eventdata, handles)
+% hObject    handle to entropy_btn (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+figure;
+
+ax = gca;
+ax.XLim = [0 handles.iterations];
+ax.YLim = [0 1];
+
+x = (1:handles.iterations);
+
+plot(x,handles.ent);
+
+%http://uk.mathworks.com/matlabcentral/answers/97277-how-can-i-apply-data-labels-to-each-point-in-a-scatter-plot-in-matlab-7-0-4-r14sp2
+input = handles.ent'; 
+label = num2str(input); 
+data_label = cellstr(label);
+
+text(x,handles.ent,data_label);
