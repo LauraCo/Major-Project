@@ -1,0 +1,77 @@
+\subsection{Hybrid Entropy}
+%==============================================================================
+\subsubsection{Fuzzy entropy description}
+%==============================================================================
+
+Pal and Pal introduced Hybrid Entropy \cite{Pal_Pal_1992} in 1992 to help combat the issues faced by Non-Probablisitc entropy - mainly that it does not model probabilistic uncertainty. The name `Hybrid' stems from the fact it models both Probabilistic and Possibilistic (fuzziness) uncertainty.
+
+\todo[inline]{This could probably be covered in Lit review.}
+
+%==============================================================================
+\subsubsection{MATLAB implementation}
+%==============================================================================
+
+Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapeziums covering 2 fuzzy sets.
+
+Two arrays are then fed into the Hybrid Entropy function - listing all the pixel membership values from the low trapezium, and the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
+
+%==============================================================================
+\subsubsection{Technical challenges}
+\label{sssec:hyrid-technical}
+%==============================================================================
+
+Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then must belong to the other.
+
+Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapeziums - low, medium and high grey-level values.
+
+\textbf{Initial ideas - check email between me and neil}
+
+
+Logic would dictate that if the comparison of two fuzzy sets works, then to compare the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
+
+For example:
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/hybrid-img/3_traps.png}
+  \caption{3 fuzzy set trapeziums}
+  \label{fig:3-traps}
+\end{figure}
+
+In theory, calculating $E_0$ and $E_1$ for each trapezium, calculating the hybrid entropy for each, and then combining them, should work:
+
+\begin{equation}
+E_0 = \frac{1}{No.\_of\_pixels\_in\_low\_trapezium}\displaystyle\sum_{i=1}^{n}{(1-Low\mu_i)exp(Low\mu_i)}
+\end{equation}
+\begin{equation}
+E_1 = \frac{1}{No.\_of\_pixels\_in\_low\_trapezium}\displaystyle\sum_{i=1}^{n}{Low\mu_iexp(1-Low\mu_i)}
+\end{equation}
+
+Where $Low\mu$ is the membership of the pixels in the low fuzzy set.
+%http://tex.stackexchange.com/questions/112238/how-to-wrap-a-long-equation-in-latex
+\begin{equation}
+H_{hy} = -p_0\log_{10}(1 - E_0) - p_1\log_{10}(E_1)
+\end{equation}
+
+Where
+
+$p_0 = \frac{No.\_of\_pixels\_in\_low\_trapezium}{No.\_of\_pixels\_in\_low\_trapezium + med\_trapezium}$
+
+and
+
+$p_1 = \frac{No.\_of\_pixels\_in\_med\_trapezium}{No.\_of\_pixels\_in\_low\_trapezium + med\_trapezium}$
+
+
+This was done for all 3 trapeziums, then combined and divided by 3 (for the mean entropy). As the result for each trapezium should be between 0 and 1 (as each is an entropy value), then combining them should be no issue. However this was not the case.
+
+First of all, the hybrid equation output was deemed to be `NaN' - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting the output equal to 0, in effect ignoring any output from the highest fuzzy set.
+
+After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative - something not possible in terms of entropy.
+
+\missingfigure{Minus entropy}
+
+It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining timeframe of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal.
+
+%==============================================================================
+\subsubsection{Results}
+%==============================================================================
