@@ -1,14 +1,4 @@
-function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)
-%Calculate the membershipDegree of a pixel
-
-% ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
-
-imwrite(image_matrix,'mean_image.pgm');
-
-image = imread('mean_image.pgm');   
-
-[rows,columns] = size(image);
-imgMu{rows,columns} = [];
+%Script to generate trapeziums
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 x = 0:255; % Min & Max x values
@@ -23,17 +13,17 @@ param3 = [170 205 260 275];
 high = trapmf(x,param3);
 
 %figure;
-ax1 = axes('Position',[0 0 1 1],'Visible','off');
-ax2 = axes('Position',[.3 .1 .6 .8]);
+%ax1 = axes('Position',[0 0 1 1],'Visible','off');
+ax2 = axes();
 
-%plot(ax2,x,low,'r');
-text(20,1.1,'Low','FontWeight','bold','FontSize',12);
+plot(ax2,x,low,'r');
+text(20,1.1,'Low','FontWeight','bold','FontSize',16);
 hold on;
-%plot(ax2,x,med,'b');
-text(100,1.1,'Medium','FontWeight','bold','FontSize',12);
+plot(ax2,x,med,'b');
+text(120,1.1,'Medium','FontWeight','bold','FontSize',16);
 hold on;
-%plot(ax2,x,high,'m');
-text(200,1.1,'High','FontWeight','bold','FontSize',12);
+plot(ax2,x,high,'m');
+text(220,1.1,'High','FontWeight','bold','FontSize',16);
 hold on; 
 
 %Set boundaries of graph
@@ -43,21 +33,13 @@ ylim([0 1.2]);
 %Label Axis
 % http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot
 set(gcf,'NumberTitle','off') %don't show the figure number
-%set(gcf,'Name','Grey Level Membership') %select the name you want
+set(gcf,'Name','Grey Level Membership') %select the name you want
 %COMMENTED OUT UNTIL CAN FIX FIGURE ISSUE
-%xlabel('Grey Level Value', 'FontWeight', 'bold');
-%ylabel('Degree of Membership', 'FontWeight', 'bold');
+xlabel('Grey Level Value', 'FontWeight', 'bold','FontSize',16);
+ylabel('Degree of Membership', 'FontWeight', 'bold','FontSize',16);
 
 hold on;
 
-%If RGB convert to greyscale (this is only really for test images) 
-if size(image,3) == 3
-    image = rgb2gray(image);
-end
-
-evalLow = evalmf(x, param1, 'trapmf');
-evalMed = evalmf(x, param2, 'trapmf');
-evalHigh = evalmf(x, param3, 'trapmf');
 
 
 %evaluation = [evalLow, evalMed, evalHigh];
@@ -72,14 +54,6 @@ evalHigh = evalmf(x, param3, 'trapmf');
 %i = 1:size(image,1);
 %j = 1:size(image,2);
 
-pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
-
-lowMu = evalLow(pixelIntensity);
-medMu = evalMed(pixelIntensity);
-highMu = evalHigh(pixelIntensity);
-
-temp = bsxfun(@max, lowMu, medMu);
-imgMu = bsxfun(@max, temp,highMu);
 
        
       
@@ -99,7 +73,6 @@ imgMu = bsxfun(@max, temp,highMu);
 
 %disp(image);
 
-%figure;
 
 %imshow(image);
 
@@ -108,4 +81,3 @@ imgMu = bsxfun(@max, temp,highMu);
 %dlmwrite('image.txt',image);
 %dlmwrite('memberships.txt',imgMu);
 
-end
