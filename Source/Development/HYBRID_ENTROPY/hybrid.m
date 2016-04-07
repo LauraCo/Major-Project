@@ -43,8 +43,16 @@ eMed1 = (1/medCount) * sum(sum(eMed1));
 eHigh0 = (1 - highMu).*exp(highMu);
 eHigh0 = (1/highCount) * sum(sum(eHigh0));
 
+if isnan(eHigh0)
+    eHigh0 = 0;
+end
+
 eHigh1 = highMu.*exp(1-highMu);
 eHigh1 = (1/highCount) * sum(sum(eHigh1));
+
+if isnan(eHigh1)
+    eHigh1 = 0;
+end
 
 
 
