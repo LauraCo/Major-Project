@@ -47,17 +47,17 @@ eHigh1 = highMu.*exp(1-highMu);
 eHigh1 = (1/highCount) * sum(sum(eHigh1));
 
 
+%If eHigh0/1 = NAN, set to 0...
 
 
+hybridLow = -(lowCount / (lowCount+medCount+highCount))*log10(1 - eLow0);
+hybridLow = hybridLow - (medCount / (lowCount+medCount+highCount)*log10(eLow1));
 
-hybridLow = -(lowCount / (lowCount+medCount))*log10(1 - eLow0);
-hybridLow = hybridLow - (lowCount / (lowCount+medCount)*log10(eLow1));
+hybridMed = -(medCount / (lowCount+medCount+highCount))*log10(1 - eMed0);
+hybridMed = hybridMed - (highCount / (lowCount+medCount+highCount)*log10(eMed1)); % Do I compare this to low trapezium, high trapezium or both??
 
-hybridMed = -(medCount / (lowCount + medCount + highCount))*log10(1 - eMed0);
-hybridMed = hybridMed - (medCount / numel(medMu)*log10(eMed1)); % Do I compare this to low trapezium, high trapezium or both??
-
-hybridHigh = -(highCount / (medCount + highCount))*log10(1 - eHigh0);
-hybridHigh = hybridHigh - (highCount / (medCount+highCount)*log10(eHigh1));
+hybridHigh = -(highCount / (lowCount+medCount+highCount))*log10(1 - eHigh0);
+hybridHigh = hybridHigh - (medCount / (lowCount+medCount+highCount)*log10(eHigh1));
 
 totalHybrid = hybridLow + hybridMed + hybridHigh;
 entropy = totalHybrid / 3; 
