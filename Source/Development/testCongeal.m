@@ -1,4 +1,4 @@
-function [meanIms, adjSer, finalMean] = testCongeal(metric,iterations, filename, path)
+function [meanIms, adjSer, finalMean, ent, time] = testCongeal(metric,iterations, filename, path)
 
 addpath IO
 addpath UTILITY
@@ -6,6 +6,7 @@ addpath CONGEAL_SUPPORT
 addpath DE_LUCA_FUZZY
 addpath MEMBERSHIP
 
+tic
 ser=loadSeries(strcat(path,filename),1,20);
 ser=ser/256;
 
@@ -17,12 +18,12 @@ sr=min(sr,1);
 
 %sr=sr(1:end-6,:,:);
 
-[adjSer,meanIms,transVecs]=binaryCongeal(sr,iterations,7,metric);
+[adjSer,meanIms,transVecs,ent]=binaryCongeal(sr,iterations,7,metric);
 
-
-figure;
-showSer(meanIms,1);
+time = toc
+%figure;
+%showSer(meanIms,1);
 %imwrite(meanIms(:,:,iterations),strcat(path,'/final_mean.pgm'),'pgm');
 finalMean = meanIms(:,:,iterations);
-figure;
-showSer(adjSer,2);
+%figure;
+%showSer(adjSer,2);

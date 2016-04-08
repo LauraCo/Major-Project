@@ -5,7 +5,7 @@
 %
 % Note that the images are not necessary binary, but they
 % are congealed under the "binary image model".
-function [adjSer,meanIms,transVecs]=binaryCongeal(ser,numIters,par_count,metric)
+function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)
 
 addpath IO
 addpath UTILITY
@@ -18,8 +18,10 @@ curMean=meanIms(:,:,1);
 transVecs=zeros(imgCount,par_count);
 oldTransVecs=transVecs;
 
+entropy_count = size(numIters);
+
 for iters=1:numIters       % Until convergence?
-    tic
+    %tic
   fprintf(1,'Iteration %d\n',iters);
   for i=1:imgCount
     %i
@@ -46,6 +48,8 @@ for iters=1:numIters       % Until convergence?
   meanIms(:,:,iters+1)=curMean;
   oldTransVecs=transVecs;
   
- toc
+  entropy_count(iters) = ent;
+  
+ %toc
 end
 
