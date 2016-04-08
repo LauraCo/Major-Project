@@ -22,7 +22,7 @@ function varargout = Enantiomorph(varargin)
 
 % Edit the above text to modify the response to help Enantiomorph
 
-% Last Modified by GUIDE v2.5 06-Apr-2016 19:11:07
+% Last Modified by GUIDE v2.5 08-Apr-2016 15:49:17
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -62,6 +62,7 @@ handles.meanIms = [];
 handles.adjSer = [];
 handles.finalImg = [];
 handles.ent = [];
+handles.time = 0;
 % Update handles structure
 guidata(hObject, handles);
 
@@ -102,18 +103,20 @@ else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
     
-    inputImg = strcat(pathname,'/big_scan.pgm');
+   % inputImg = strcat(pathname,'/big_scan.pgm');
     
     handles.imagePath = pathname;
-    
-    
-    handles.imageName = inputImg;
+      
+    handles.imageName = '/big_scan.pgm';
     guidata(hObject, handles);
+    
+    axes(handles.input_img);
     
     imshow(handles.imageName);
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
+    set(handles.run, 'enable','on')
    
     
     info = imfinfo(handles.imageName);
@@ -122,17 +125,21 @@ else
     set(handles.type, 'String', info.Format);
     set(handles.height, 'String', info.Height);
     set(handles.width, 'String', info.Width);
+   
+    
+   addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development'));
 end
 
 
-% --- Executes on selection change in alignment.
-function alignment_Callback(hObject, eventdata, handles)
-% hObject    handle to alignment (see GCBO)
+
+% --- Executes on selection change in alignment_menu.
+function alignment_menu_Callback(hObject, eventdata, handles)
+% hObject    handle to alignment_menu (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns alignment contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from alignment
+% Hints: contents = cellstr(get(hObject,'String')) returns alignment_menu contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from alignment_menu
 
 contents = get(hObject,'Value');
 handles = guidata(hObject);  % Update!
@@ -154,8 +161,8 @@ guidata(hObject, handles);
 
 
 % --- Executes during object creation, after setting all properties.
-function alignment_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to alignment (see GCBO)
+function alignment_menu_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to alignment_menu (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -184,8 +191,8 @@ function clear_output_Callback(hObject, eventdata, handles)
 
 clear handles.imageName;
 clear handles.imagePath;
-clear handles.iterations;
-clear handles.alignment;
+clear handles.iterations_box;
+clear handles.alignment_menu;
 clear handles.meanIms;
 clear handles.adjSer;
 clear handles.finalImg;
@@ -201,19 +208,51 @@ function run_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[meanIms, adjSer, finalMean, ent] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+if strcmp(handles.imageName,'')
+    message = sprintf('Image has not been loaded.'); 
+    uiwait(msgbox(message)); 
+    return;
+end
+
+if handles.iterations == 0
+    message = sprintf('Please enter an iteration amount.'); 
+    uiwait(msgbox(message)); 
+    return;
+end
+
+%http://uk.mathworks.com/matlabcentral/answers/11411-how-to-indicate-that-gui-is-busy-running
+%http://uk.mathworks.com/matlabcentral/newsreader/view_thread/58453
+set(gcf, 'pointer', 'watch')
+drawnow;
+
+[meanIms, adjSer, finalMean, ent, time] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
+
+set(gcf, 'pointer', 'arrow')
 
 handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 handles.ent = ent;
+handles.time = time;
 guidata(hObject, handles);
-
-%set(handles.ent_text, 'String', handles.ent);
 
 handles.finalImg = finalMean;
 guidata(hObject, handles);
 
 imshow(handles.finalImg, 'parent', handles.output_img);
+
+set(handles.ttr_box, 'String', handles.time);
+set(handles.final_entropy, 'String', handles.ent(handles.iterations));
+set(handles.final_txt, 'visible', 'on');
+
+set(handles.entropy_btn, 'enable','on');
+set(handles.larger_output, 'enable','on');
+set(handles.mean_ims_button, 'enable','on');
+set(handles.adj_ser_button, 'enable','on');
+set(handles.save_output, 'enable','on');
+set(handles.start_new_btn, 'enable','on');
+
+
+
 
 
 % --- Executes on button press in load_existing.
@@ -231,10 +270,13 @@ else
     handles.imagePath = pathname;
     guidata(hObject, handles);
     
+    axes(handles.input_img);
+    
     imshow(strcat(handles.imagePath,handles.imageName));
     
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
+    set(handles.run, 'enable','on')
     
     info = imfinfo(filename);
     set(handles.filename, 'String', info.Filename);
@@ -242,6 +284,17 @@ else
     set(handles.type, 'String', info.Format);
     set(handles.height, 'String', info.Height);
     set(handles.width, 'String', info.Width);
+    
+    file = fopen(filename);
+    ln1=fgetl(file);
+    ln2=strsplit(fgetl(file));
+    
+    if numel(ln2) ~= 4
+        message = sprintf('The header doesn`t seem to the in the right format. \nAre you sure this is the right image?'); 
+        uiwait(msgbox(message));
+        return;
+    end
+    
 end
 
 
@@ -273,13 +326,13 @@ imshow(handles.imageName);
 
 
 %http://uk.mathworks.com/help/matlab/creating_guis/add-code-for-components-in-callbacks.html#f10-1001464
-function iterations_Callback(hObject, eventdata, handles)
-% hObject    handle to iterations (see GCBO)
+function iterations_box_Callback(hObject, eventdata, handles)
+% hObject    handle to iterations_box (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of iterations as text
-%        str2double(get(hObject,'String')) returns contents of iterations as a double
+% Hints: get(hObject,'String') returns contents of iterations_box as text
+%        str2double(get(hObject,'String')) returns contents of iterations_box as a double
 num = str2double(get(hObject,'String'));
 
 if isnan(num)
@@ -301,8 +354,8 @@ end
 
 
 % --- Executes during object creation, after setting all properties.
-function iterations_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to iterations (see GCBO)
+function iterations_box_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to iterations_box (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -368,14 +421,20 @@ figure('Name','Final Mean Image');
 imshow(handles.finalImg);
 
 
-% --- Executes on button press in pushbutton17.
-function pushbutton17_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton17 (see GCBO)
+% --- Executes on button press in start_new_btn.
+function start_new_btn_Callback(hObject, eventdata, handles)
+% hObject    handle to start_new_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 clear handles.imageName;
-clear handles.imagePath
+clear handles.imagePath;
+clear handles.time;
+clear handles.ent;
+clear handles.iterations_box;
+clear handles.meanIms;
+clear handles.adjSer;
+clear handles.finalImg;
 guidata(hObject, handles);
 
 axes(handles.input_img) 
@@ -388,6 +447,11 @@ set(handles.modified, 'String', '');
 set(handles.type, 'String', '');
 set(handles.height, 'String', '');
 set(handles.width, 'String', '');
+set(handles.ttr_box, 'String', '');
+set(handles.final_entropy, 'String', '');
+
+set(handles.alignment_menu, 'Value', 1);
+set(handles.iterations_box, 'String', '');
 
 
 % --- Executes on button press in entropy_btn.
@@ -397,7 +461,8 @@ function entropy_btn_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-figure;
+figure('Position', [100, 100, 1049, 895]);
+set(gcf,'numbertitle','off','name','Decline in Entropy') 
 
 ax = gca;
 ax.XLim = [0 handles.iterations];
@@ -413,3 +478,6 @@ label = num2str(input);
 data_label = cellstr(label);
 
 text(x,handles.ent,data_label);
+
+xlabel('Iterations', 'FontSize', 16)
+ylabel('Entropy', 'FontSize', 16)

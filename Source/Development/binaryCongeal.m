@@ -21,7 +21,7 @@ oldTransVecs=transVecs;
 entropy_count = size(numIters);
 
 for iters=1:numIters       % Until convergence?
-    tic
+    %tic
   fprintf(1,'Iteration %d\n',iters);
   for i=1:imgCount
     %i
@@ -50,6 +50,6 @@ for iters=1:numIters       % Until convergence?
   
   entropy_count(iters) = ent;
   
- toc
+ %toc
 end
 
