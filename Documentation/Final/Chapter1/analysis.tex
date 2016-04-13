@@ -1,0 +1,18 @@
+\section{Analysis}
+
+\subsection{Task composition}
+
+\subsubsection{Pixel Membership}
+
+From the analysis of the planned Fuzzy Entropy algorithms, one major task to be undertaken would be to calculate the membership of each pixel. Membership stems from Fuzzy set theory \textbf{Check this?} which acknowledges that an element can be part of more than one group to a certain degree, not just one or the other. One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5foot 11inches not be classified as tall? In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height.
+
+There are two common methods to modeling degrees of membership. The first is to manually define the categorty boundaries, so in the case of trapezium functions, the two bases and the two shoulders as in Figure x \textbf{include a diagram here showing?}. The other solution would be to iterate over the values you have and to computationally build the an even distribution throughout your membership functions. Whilst this is the preferred method for being dynamic in it's calculations, it is also more computationally expensive as pre-processing of the image would have to be completed before the Congealing algorithm could be run.
+
+Taking this into account, for grey-level pixel values, ranging from 0 (black) to 255 (white), three trapezium functions would be sufficient, therefore modeling `Low', `Medium' and `High' grey-level values. The bases and shoulders would be statically defined by the User, however would be open for editing between running the Congealing code for experimentation purposes. For Non-Probabilistic entropy the highest membership for each pixel from each of the three trapeziums would be taken as the membership degree.
+
+\subsection{Research questions}
+\begin{itemize}
+\item Does the use of Fuzzy Entropy alignment metrics improve the alignment of mammograms?
+\item Do clinicians / radiographers / mammographers find the output at all useful?
+\item What advantages / disadvantages does each fuzzy entropy alignment metric entail?
+\end{itemize}
