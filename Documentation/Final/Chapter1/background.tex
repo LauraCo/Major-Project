@@ -1,23 +1,95 @@
+\chapter{Background \& Objectives}
+
 \section{Background}
-In preparation for my Major Project extensive research was undertaken into the Fuzzy Entropy alignment metrics that would be chosen and implemented in the Congealing algorithm to align mammography scans. S. Al-sharhan's paper `Fuzzy Entropy: a Brief Survey' \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was instrumental in a brief comparison between Fuzzy Entropy metrics - allowing a simple way to compare and contrast mathematical differences and implementations.
+%In preparation for my Major Project extensive research was undertaken into the Fuzzy Entropy alignment metrics that would be chosen and implemented in the Congealing algorithm to align mammography scans. S. Al-sharhan's paper `Fuzzy Entropy: a Brief Survey' \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was instrumental in a brief comparison between Fuzzy Entropy metrics - allowing a simple way to compare and contrast mathematical differences and implementations.
 
-Researchers have implemented many variations of the Congealing algorithm, with success in varying areas - however very little to no work has been done implementing the algorithm to assess mammography scans. Cox's `Least Squares Congealing' \cite{Cox_Sridharan_Lucey_Cohn_2008} was quickly disregarded given the project preference to select entropy-based alignment techniques, however did alert to the issue of performance for the project.
+%Researchers have implemented many variations of the Congealing algorithm, with success in varying areas - however very little to no work has been done implementing the algorithm to assess mammography scans. Cox's `Least Squares Congealing' \cite{Cox_Sridharan_Lucey_Cohn_2008} was quickly disregarded given the project preference to select entropy-based alignment techniques, however did alert to the issue of performance for the project.
 
-The motivation behind choosing mammograms as the input data of choice was an interest into how computer systems and machine learning can help in the medical sector - especially in the early diagnosis and/or preventative means of breast cancer. In Europe, breast cancer is the leading cause of death through cancer for women, with 1 in 6 women dying from a cancer having it in the glandular breast tissue \cite{European Commission_2009}. The UK is contained within the higher mortality band which runs across the EU, sitting alongside countries such as the Netherlands, North-West France and Western Germany \ref{fig:mortality-band}. However the reason behind why these countries have a higher breast cancer mortality rate than their neighbours to the north and south is unknown.
+%The motivation behind choosing mammograms as the input data of choice was an interest into how computer systems and machine learning can help in the medical sector - especially in the early diagnosis and/or preventative means of breast cancer.
 
-\begin{figure}[!ht]
+In Europe, breast cancer is the leading cause of death through cancer for women, with 1 in 6 women dying from a cancer having it in the glandular breast tissue \cite{European_Commission_2009}. The UK is contained within the higher mortality band which runs across the EU, sitting alongside countries such as the Netherlands, North-West France and Western Germany (see Figure \ref{fig:mortality-band}). However the reason behind why these countries have a higher breast cancer mortality rate than their neighbours to the north and south is unknown.
+
+\begin{figure}[!h]
   \center
   \includegraphics[scale=0.5]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter1/background-img/mortality_EU_Comms.png}
   \caption{Image Source: EU Commission: Atlas on Mortality \cite{European_Commission_2009}}
   \label{fig:mortality-band}
 \end{figure}
 
+\subsection{Tissue density classification}
+
+The internal breast structure consists of different kinds of tissue and glands \cite{Anatomy_breast}:
+
+\begin{itemize}
+  \item Fatty and connective tissue: protects the lobules and ducts, gives shape to the breasts
+  \item Lobules - milk-production glands
+  \item Ducts - carry milk from Lobules to Nipple
+\end{itemize}
+
+\begin{figure}[!h]
+  \center
+  \includegraphics[scale=0.4]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter1/background-img/breast_anatomy.png}
+  \caption{Image Source: Gray's Anatomy \cite{Gray_1907}}
+  \label{fig:breast-anatomy}
+\end{figure}
+
+Fatty and connective tissue density can vary widely between women. After extensive research into the links between a higher proportion of fibrous and glandular tissue versus fatty tissue and a higher risk of breast cancer, it is pretty widely accepted there is a strong link \cite{Boyd_Byng_Jong_Fishell_Little_Miller_Lockwood_Tritchler_Yaffe_1995} \todo[inline]{Reword this + add citations}. Therefore, simple classification of denser tissue is vital for both radiographers and patients alike.
+
+\subsubsection{Wolfe classification}
+
+Wolfe described the first qualitative means in which to classify breast tissue density in 1976 \cite{Wolfe_1976}.
+
+\begin{itemize}
+    \item \textbf{N1:} consisting mainly of fat (lowest risk)
+    \item \textbf{P1:} fat plus linear densities occupying no more than 25\% of the breast (low risk)
+    \item \textbf{P2:} linear densities occupying \textgreater 25\% of breast (high risk)
+    \item \textbf{DY:} dense (highest risk)
+\end{itemize}
+
+\subsubsection{Boyd classification}
+
+Boyd and colleagues proposed a quantitative means to categorising breast tissue density, based on a percentage of `dense' tissue assigned by a radiographer \cite{Boyd_Byng_Jong_Fishell_Little_Miller_Lockwood_Tritchler_Yaffe_1995}.
+
+\begin{itemize}
+  \item \textbf{A: } 0\%
+  \item \textbf{B: } \textgreater 0\% - 10\%
+  \item \textbf{C: } \textgreater 10\% - 25\%
+  \item \textbf{D: } \textgreater 25\% - 50\%
+  \item \textbf{E: } \textgreater 50\% - 75\%
+  \item \textbf{F: } \textgreater 75\%
+\end{itemize}
+
+\subsubsection{BI-RADS classification}
+
+A widely accepted quantitative tool for the classification and risk analysis of mammography and ultrasounds is BI-RADS (Breast Imaging-Reporting and Data System) system, defined by the American College of Radiology \cite{sickles2013acr}.
+
+\begin{itemize}
+  \item \textbf{a: } almost entirely fatty
+  \item \textbf{b: } scattered areas of fibroglandular density
+  \item \textbf{c: } heterogeneously dense, which may obscure small masses
+  \item \textbf{d: } extremely dense, which lowers the sensitivity of mammography
+\end{itemize}
+
+This is the classification of choice for this project due to it's wide-spread acceptance and usage in the industry.
+
+\subsubsection{Tab\'ar classification}
+
+This technique is somewhat different from the previous 3 by utilising anatomic-mammographic correlations, as developed by Tab\'ar \cite{al}.
+
+\begin{itemize}
+  \item \textbf{I: } balanced proportion of all components of breast tissue with a slight predominance of fibrous tissue
+  \item \textbf{II: } predominance of fat tissue (fat breast)
+  \item \textbf{III: } predominance of fat tissue with retroareolar residual fibrous tissue
+  \item \textbf{IV: } predominantly nodular densities
+  \item \textbf{V: } predominantly fibrous tissue (dense breast)
+\end{itemize}
+
 \subsection{Mammograms}
 
-Quite simply, a Mammogram is an X-Ray of the breast tissue from up to 4 different angles \cite{Radswiki} \cite{Mammography_views_Doc_2016}:
+Quite simply, a Mammogram is an X-Ray of the breast tissue from a number of different angles. Below are a selection of the most common \cite{Radswiki} \cite{Mammography_views_Doc_2016}:
 \begin{itemize}
   \item Cranial-Caudal (CC) - taken from above (Figure \ref{fig:CC})
-  \item Medio-Lateral Oblique (MLO) - from the side, at an angle (usually 45$/deg$) (Figure \ref{fig:MLO})
+  \item Medio-Lateral Oblique (MLO) - from the side, at an angle (usually 45$\deg$) (Figure \ref{fig:MLO})
   \item Medio-Lateral (ML) - from the centre outwards (Figure \ref{fig:ML})
   \item Latero-Medial (LM) - from the side, into the centre (Figure \ref{fig:LM})
 \end{itemize}
@@ -55,17 +127,31 @@ CC and MLO are generally the standard practice angles, with ML and LM adding mor
 
 Organisations such as Breast Test Wales invite women between the ages of 50 and 70 to attend a scan every 3 years \cite{Informed_Choice_about_Cancer_Screening_2013}. However women with higher-density breasts, which is ascertained during a mammogram, could be called back for more regular screening, to ensure to catch any abnormalities sooner.
 
-\begin{figure}[!ht]
-  \center
-  \includegraphics[scale=0.5]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter1/background-img/mammo-leaflet.png}
-  \caption{Each time 100 women have breast screening. Image Source: NHS Cancer Screening Programmes \cite{Informed_Choice_about_Cancer_Screening_2013}}
-  \label{fig:mammo-leaflet}
-\end{figure}
+\subsubsection{Alternatives to Mammograms}
 
-Other breast cancer scanning methods include Ultrasound and a Needle Biopsy. Women under 35 are often offered an ultrasound scan over a mammogram, due to their breasts being of a higher density naturally. Ultrasounds can also show the if the breast lump is a cyst, or if it is solid internally \cite{Cancer_Research_UK_2015}.
+Although the input data of choice for this project will be Mammographic scans, it is important to remember that for some women, and some circumstances, it may be more appropriate to use a different method of diagnosis.
 
-\subsection{Tissue density classification}
+\textbf{Ultrasound}
+
+Women under 35 are often offered an ultrasound scan over a mammogram, due to their breasts being of a higher density naturally which makes obtaining a clear mammogram more difficult. Ultrasounds can also show the if the breast lump is a cyst, or if it is solid internally \cite{Cancer_Research_UK_2015}.
+
+\noindent \textbf{Biopsy}
+
+A Biopsy is usually a secondary step after diagnosis of a breast lump via mammogram or ultrasound. It can take a number of forms including:
+
+\begin{itemize}
+  \item Needle biopsy
+  \item Vacuum biopsy
+  \item Needle aspiration
+  \item Punch biopsy
+  \item Wire guided biopsy
+\end{itemize}
 
 
+\subsection{Existing Computer Systems}
 
-\subsection{Use of Computer Vision techniques in Medical diagnosis}
+A lot of the current computer systems focus on mammography computer aided diagnosis due to the ease in which a Radiographer can misdiagnose cancer from a mammogram. Mammograms are difficult to read, or technological issues may occur and as a result, Radiographers can fail to detect between 10-15\% of breast cancer cases \cite{Champaign_Cederbom_2000}.
+
+However this is not the focus of this Project. This Project aims to focus upon healthy tissue, and the first steps towards computers classifying breast tissue into the correct density category. So what steps have been taken currently, in Industry and in research, towards this end goal?
+
+\todo[inline]{Paper by Mohamed Abu ElSoud; Ahmed M. Anter - Automatic mammogram segmentation and computer aided diagnoses for breast tissue density according to BIRADS dictionary}

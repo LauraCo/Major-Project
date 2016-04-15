@@ -31,6 +31,13 @@
 % Use the following to selectively exclude chapters
 %\includeonly{cover,abstract,acknowledge,declare,chapter1,chapter2}
 
+% http://tex.stackexchange.com/questions/173102/table-of-equations-like-list-of-figures
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+\setlength{\cftmyequationsnumwidth}{2.5em}% Width of equation number in List of Equations
+
 \begin{document}
 
 % all of the include directives below refer to tex files
@@ -64,6 +71,8 @@
 \newpage
 \listoftables
 \newpage
+%\listofmyequations - not working yet, throws page numbers off
+%\newpage
 
 % Set up page numbering
 \pagenumbering{arabic}
@@ -71,7 +80,8 @@
 \setchapterheaderfooter
 
 % include the chapters
-\include{Chapter1/chapter1}
+\include{Introduction/project-desc}
+\include{Introduction/project-structure}
 \include{Chapter1/background}
 \include{Chapter1/lit-review}
 \include{Chapter2/chapter2}
