@@ -2,9 +2,7 @@
 
 %You need to describe briefly the life cycle model or research method that you used. You do not need to write about all of the different process models that you are aware of. Focus on the process model or research method that you have used. It is possible that you needed to adapt an existing method to suit your project; clearly identify what you used and how you adapted it for your needs.
 
-\todo[inline]{Talk about lit review here}
-
-For this project, a literature review was undertaken to assess the work completed by researchers in the fields of Fuzzy Entropy and image alignment methods to help better understand what has been investigated, and to gain a personal background understanding.
+For this project, a literature review was undertaken to assess the work completed by researchers in the fields of Entropy, Fuzzy Entropy and image alignment methods to help better understand what has been investigated, and to gain a personal background understanding.
 
 \subsection{Entropy}
 
@@ -98,7 +96,7 @@ By definition:
 
 \subsection{Fuzzy Entropy}
 
-Fuzzy entropy stems from combining standard Entropy with the practices of Fuzzy Set Theory. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
+Fuzzy entropy stems from combining standard Entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
 
 One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5foot 11inches not be classified as tall? Given crisp sets, then they would be classified as `Average'. In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
 
@@ -111,13 +109,154 @@ One common example of this is listing someone as `Short', `Average' or `Tall' in
 
 To combine Fuzzy Set Theory with Entropy, then the amount of fuzzy information gained from the fuzzy set(s) is known as Fuzzy Entropy.
 
+\subsubsection{Non-Probabilistic Entropy - 1972}
+
+De Luca and Termini are considered to be the first to have taken Shannon Entropy and extended it to include fuzziness \cite{DeLuca_Termini_1972}. They also defined properties which a fuzzy entropy must follow, in order to be classed as true.
+
+Their non-probabilistic fuzzy entropy equation is as given:
+
+\begin{equation}\label{eq:de-luca-eq}
+  H_A = -K \displaystyle\sum_{i=1}^{n}{\{\mu_i\log(\mu_i) + (1 - \mu_i)\log(1 - \mu_i)\}}
+\end{equation}
+\myequations{Non-Probabilistic Entropy}
+
+Where $\mu$ is the maximum membership across all the fuzzy sets.
+
+The entropy given by equation \eqref{eq:de-luca-eq} satisfies all 4 of De Luca and Termini's defined properties:
+
+  \begin{subequations} \label{eq:de-luca-cond}
+    \begin{align}
+      &\text{\textbf{P-1 }} H_A = 0 \text{ iff } A \text{ is a crisp set (}\mu_i = 0 \text{ o r} 1 \forall x_i \in A\text{)} \\
+      &\text{\textbf{P-2 }} H_A \text{ is maximum iff }\mu_i = 0.5 \forall x_i \in A \\
+      &\text{\textbf{P-3 }} H \geq H^\ast\text{ where }H^\ast\text{ is the entropy of }A\text{, a sharpened version of } A \\
+      &\text{\textbf{P-4 }} H = \overline{H}\text{ where }\overline{H}\text{ is the entropy of the complement set }\overline{A}
+    \end{align}
+  \end{subequations}
+
+
+Given the simplistic nature of this implementation, this was one of the chosen Fuzzy Entropy algorithms to be implemented in the project.
+
+%\subsubsection{Fuzzy entropy and conditioning - 1986}
+
+\subsubsection{Fuzzy Shannon Entropy - 1989}
+
+Sander \cite{Sander_1989} presented a characterisation of a Fuzzy Entropy some time after De Luca and Termini`s work was published. His implementation of Shannon Fuzzy Entropy is laid out in equation \eqref{eq:fuzzy-shannon} below:
+
+\begin{equation}\label{eq:fuzzy-shannon}
+  H(f) = -c \displaystyle\sum_{i=1}^{n}{f(x_i)lnf(x_i), c > 0}
+\end{equation}
+
+Where the power of a fuzzy set is defined as:
+
+\begin{equation}
+  P(f) = \displaystyle\sum_{i=1}^{n}{f (x_i)}
+\end{equation}
+
+Sander further went on to propose some properties, which must be imposed on a Fuzzy Entropy $d$ to ensure that $d(f) = H(f)$:
+
+\begin{subequations}
+  \begin{align}
+    &\text{\textbf{1. Sharpness: }} d(f) = 0 \Leftrightarrow f(X) \subset {0,1}, f \in [0,1]^X \\
+    &\text{\textbf{2. Valuation: }} d(f \wedge g) + d(f \vee g) = d(f) + d(g), f,g \in [0,1]^X \\
+    \begin{split}
+    &\text{\textbf{3. Generalised additivity: }} \text{There exists two mappings s,t: } [0,\infty) \rightarrow  [0,\infty) \\
+      &\text{ such that } d(f x g) = d(f)t(P(g)) + s(P(f))d(g) \text{ for all } f \in [0,1]^X, g \in [0,1]^Y, \\
+      &\text{ where } X \text{ and } Y \text{ are finite sets.}
+    \end{split}
+  \end{align}
+\end{subequations}
+
+The initial plan was to implement this algorithm in the project - however after further investigation which revealed that Fuzzy Shannon Entropy does not model Probabilistic uncertainty - it was decided that this algorithm was to be excluded.
+
+\subsubsection{Object-background segmentation using new definitions of entropy - 1989}
+
+Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all 4 of De Luca and Termini`s 4 conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
+
+\begin{equation} \label{eq:pal-pal-orig}
+  H = -k  \displaystyle\sum_{i=1}^{n}{\{\mu_iexp(1 - \mu_i) + (1 - \mu_i)exp(\mu_i)}
+\end{equation}
+
+\subsubsection{Higher Order Fuzzy Entropy \& Hybrid Entropy - 1992}
+
+In Pal \& Pal's paper \say{Higher order fuzzy entropy and hybrid entropy of a set} \cite{Pal_Pal_1992}, they not only prove some of De Luca \& Termini`s work to be flawed, but also defined two new Fuzzy Entropy algorithms, and a new set of definitions.
+
+\textbf{Higher Order Fuzzy Entropy}
+
+As defined by Pal \& Pal:
+
+\begin{itemize}
+  \item $P = $ Fuzzy property set
+  \item $\mu =$ the degree to which $x_i$ possesses the property $P$
+  \item $n =$ number of elements, with $r =$ a combination of elements from group $n$
+  \item $S^r_i =$ denotes the $i$th element of such a combination
+  \item $\mu(S^r_i) =$ the degree to which the combination $S'$ as a whole possesses $P$
+  \item There are $\begin{bmatrix} \bigl(\begin{smallmatrix}
+  n \\ r
+  \end{smallmatrix} \bigr) \end{bmatrix}$ such combinations
+\end{itemize}
+
+The entropy of order $r$ of the fuzzy set $A$ is defined as:
+
+\begin{equation} \label{eq:higher-order}
+  H' = \bigg(\frac{I}{\bigl(\begin{smallmatrix}
+  n \\ r
+\end{smallmatrix} \bigr)}\bigg) \displaystyle\sum_{i=1}^{\bigl(\begin{smallmatrix}
+  n \\ r
+  \end{smallmatrix} \bigr)} \{ \mu(S^r_i)exp(1 - \mu(S^r_i)) \} + \{ 1 - \mu(S^r_i) \}log\{\mu(S^r_i)\}
+\end{equation}
+
+If $r = 1$, then \eqref{eq:higher-order} reduces to Equations \eqref{eq:pal-pal-orig} and \eqref{eq:de-luca-eq}
+
+This project does not implement Higher Order Fuzzy Entropy due to the computational-overhead needed to run - especially on images with as much detail as a mammogram.
+
+\textbf{Hybrid Entropy}
+
+Another Fuzzy Entropy implementation outlined in Pal \& Pal`s paper was Hybrid Entropy. This algorithm is particularly useful as it combines Probabilistic and Possibilistic (fuzziness) uncertainty and if fuzziness is removed or not present, it returns to that of a classical set.
+
+Let us define Hybrid Entropy.
+
+\begin{itemize}
+\item Let $p_0$ and $p_1$ be the probabilities of receiving 0 and 1 symbols over a noisy digital communication line respectively.
+\item Let $\mu$ denote the membership functions of the fuzzy set \say{Symbol close to 1}
+\item Both $E_1$ is a monotonically increasing function of $\mu$ - $E_0$ can be perceived as the likelihood (possibility) of receiving a \say{1} symbol
+\begin{itemize}
+    \item as $\mu$ increases from 0 to 1, then $E_1$ also increases
+    \item e.g. with an incoming \say{0} symbol, if $\mu$ increases, than the difficulty of correct interpretation also \textit{increases} - a wrong interpretation of a \say{0} becomes likely
+    \item e.g. for an incoming \say{1} symbol, if $\mu$ increases, then the difficulty of correct interpretation \textit{decreases} - improving likelihood of correct classification
+  \end{itemize}
+\item At the same time, $E_0$ can be perceived as the likelihood (possibility) of receiving the \say{0} symbol for the same reasoning
+\end{itemize}
+
+$E_0$ and $E_1$ can be defined as:
+
+\begin{subequations} \label{eq:E0-E1}
+  \begin{align}
+    &E_0 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{(1-\mu_i)exp(\mu_i)} \\
+    &E_1 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{\mu_iexp(1-\mu_i)}
+  \end{align}
+\end{subequations}
+
+Therefore, the hybrid entropy of fuzzy set $A$ can be defined as:
+
+\begin{equation}
+  H_{hy} = -p_0\log(1 - E_0) - p_1\log(E_1)
+\end{equation}
+
+This algorithm was chosen for implementation in this project due to it's hybrid nature (implementing both Probabilistic and Possibilistic uncertainty) and for it's simplification nature - in the absence of fuzziness, then $E_0$ and $E_1$ reduce to $p_0$ and $p_1$ respectively, therefore classical Shannon entropy. This is especially useful in image processing, and other such areas which deal with a lot of noise.
+
+\subsubsection{Fuzzy Entropy: a Brief Survey - 2001}
+
+Due to the older nature of some of the papers listed above, some were difficult to locate online. So when implementing the chosen algorithms (Non-Probalistic Entropy and Hybrid Entropy), Al-sharhan et al's paper \say{Fuzzy Entropy: a Brief Survey} \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was a useful tool.
+
+It's concise nature, and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
+
 \subsection{Joint Image Alignment}
 
 Image Alignment focuses on the alignment of several images, into one average image.
 
 \subsubsection{Learned-Miller`s Congealing}
 
-Learned-Miller's Congealing \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data, with minimal noise, no occlusions and illumination variation \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl} \cite{Peng_Ganesh_Wright_Xu_Ma_2012}. Many more robust image alignment techniques have been developed off of the basis of this work, with more computational-expense.
+Learned-Miller's Congealing \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data with minimal noise, no occlusions and illumination variation \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl} \cite{Peng_Ganesh_Wright_Xu_Ma_2012}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
 
 This algorithm works by iteratively reducing the pixel-wise entropy over the input images, using a set of standard image transformations such as:
 
@@ -139,6 +278,20 @@ The entropy is calculated by assessing each individual set of pixel-locations in
 
 As this project will be working with mammograms, something with little variation nor inconsistency, Congealing is the perfect, light-weight image alignment algorithm to which to build upon, especially as the demonstration code available for research has an entropy implementation already developed.
 
-\subsubsection{Image Alignment using Fuzzy Entropy}
+\subsubsection{Least squares congealing for unsupervised alignment of images}
 
-Some work has already been undertaken to investigate image alignment using Fuzzy Entropy metrics, however typically they are computationally costly, and therefore slow to run. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for more everyday use in image alignment. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
+Further work was done upon the Congealing algorithm proposed by Learned-Miller by Cox et al. in 2008 \cite{Cox_Sridharan_Lucey_Cohn_2008}. They set out to address any performance issues and to remove the need for a pre-defined step size. It proposes to mitigate these issues by implementing an alternative method for aligning the images - utilising the Lucas \& Kanade algorithm for aligning a single image to another using a gradient descent approach \cite{Lucas_Kanade_1981}.
+
+This alignment algorithm was disregarded for this project due to the preference to focus upon entropy-based alignment algorithms and the computational costs that the authors themselves regard to be a drawback of their algorithm.
+
+\subsubsection{Unsupervised Joint Alignment of Complex Images}
+
+Huang and a team (notably including Learned-Miller) further extended the Congealing algorithm to be usable upon complex images - such as faces and cars at different orientations \cite{Huang_Jain_Learned-Miller_2007}.
+
+This was quickly identified as overly complex for this project. The original Congealing algorithm was more appropriate for grey-scale mammograms, with a consistent canonical pose.
+
+\subsection{Image Alignment using Fuzzy Entropy}
+
+Research has been undertaken in the past to investigate image alignment using Fuzzy Entropy metrics, however typically they were found to be computationally costly, and therefore slow to run on a conventional PC or laptop. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for more everyday use in image alignment. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
+
+Some of this work which has implemented a more computationally-costly Congealing algorithm is that presented by Mac Parthal\'ain and Strange in their 2013 paper \say{Fuzzy-entropy based image congealing} \cite{Mac_Parthalain_Strange_2013}.  Their implementation included dynamically-calculated fuzzy sets and a fuzzy similiarity relation matrix - allowing a comparison of all the objects to each other.
