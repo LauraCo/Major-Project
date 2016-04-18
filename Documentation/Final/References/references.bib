@@ -189,3 +189,26 @@ exploiting the tolerance for imprecision—a methodology which serves to achieve
 @inbook{Lucas_Kanade_1981, title={An iterative image registration technique with an application to stereo vision}, url={http://dl.acm.org/citation.cfm?id=1623264.1623280}, publisher={Morgan Kaufmann Publishers Inc.}, author={Lucas, Bruce D. and Kanade, Takeo}, year={1981}, month={Aug}, pages={674–679}, annote = "Lucas and Kanade approach to aligning images using gradient-descent - this is what Cox et al based their Least Squares Congealing algorithm off of."}
 
 @inbook{Huang_Jain_Learned-Miller_2007, title={Unsupervised Joint Alignment of Complex Images}, ISBN={978-1-4244-1630-1}, url={http://ieeexplore.ieee.org/articleDetails.jsp?arnumber=4408858}, DOI={10.1109/ICCV.2007.4408858}, publisher={IEEE}, author={Huang, G. B. and Jain, V. and Learned-Miller, E.}, year={2007}, month={Oct}, pages={1–8}, annote = "Further work done upon Congealing by a team including Learned-Miller. This was disregarded for the project due to the complexity added for inputting complex images - something mammograms are not."}
+
+@misc{fwrite, url={http://uk.mathworks.com/help/matlab/ref/fwrite.html}, title = "fwite - Write data to binary file", author = "MathWorks", annote = "fwrite function which write binary data to file. As it writes the data column-wise, this was causing a transposition issue initially."}
+
+@misc{permute, title = "permute - Rearrange dimensions of N-D array", author = "MATLAB", url={http://uk.mathworks.com/help/matlab/ref/permute.html}, annote = "For the transposition of ND arrays (arrays greater than 2-dimensions.)"}
+
+@misc{Collins_2016, title={Hurdle \#4 - Removing labels from Mammograms}, url={http://lauramcollins.co.uk/blog/removing-labels-from-mammograms/}, abstractNote={Some Mammograms contain the medical clips / marker / insert proper terminology here - and these cause issues when attempting to Congeal different scans, as these clips are recognised, and they try to align with each other also. This may detract from...}, journal={Enantiomorph}, author={Collins, Laura}, year={2016}, month={Mar}, annote = "My personal blog post containing information about the methods in which I tried to remove Medical Markers from the data set of mammograms."}
+
+@misc{detect_square, author="Chandra Kurniawan", title="Detect square in image", url={http://uk.mathworks.com/matlabcentral/answers/24943-detect-square-in-image}, annote = "Mathworks forum thread on how to detect squares in an image using a morphological operation. This was investigated for possible use in medical marker removal."}
+
+@misc{regionprops, title = "regionprops - Measure properties of image regions", author = "MATLAB", url={http://uk.mathworks.com/help/images/ref/regionprops.html}, annote = "A possible solution for removing medical markers from mammograms."}
+
+@misc{shape_recognition, title = "Shape Recognition - File Exchange - MATLAB Central", author = "Ahmed Samieh
+ ", year = "2016", url={http://uk.mathworks.com/matlabcentral/fileexchange/15491-shape-recognition}, abstractNote={differentiate Square, Rectangular, Circle from others}, annote = "Demonstration on shape recognition which was investigated for the removal of medical markers from the mammograms."}
+
+ @misc{remove_white, title = "Want to remove white patches of a image - MATLAB Answers - MATLAB Central", url={http://uk.mathworks.com/matlabcentral/answers/141008-want-to-remove-white-patches-of-a-image}, annote = "Thread on removing white objects/glare from an image - useful for removing medical markers from mammograms."}
+
+ @misc{binary_mask, title = "Masking out Image area using Binary Mask - MATLAB Answers - MATLAB Central", url={http://uk.mathworks.com/matlabcentral/answers/38547-masking-out-image-area-using-binary-mask}, annote = "Chosen method for removing Medical Markers - draw an outline, create a mask and overlay the mask over the drawn area."}
+
+ @misc{imfreehand, title = "imfreehand - Create draggable freehand region", author = "MATLAB", url={http://uk.mathworks.com/help/images/ref/imfreehand.html}, annote = "Tool the user utilises to draw freehand the area they wish to remove from the scan."}
+
+ @misc{PGM_Format, title = "PGM Format Specification", author = "Jef Poskanzer", url={http://netpbm.sourceforge.net/doc/pgm.html}, annote = "Webpage outlining the header file of pgm images."}
+
+ @misc{vectorization, title = "Vectorization", author = "MATLAB", url={http://uk.mathworks.com/help/matlab/matlab_prog/vectorization.html?refresh=true}, annote = "Vectorisation was extremely useful in this project for reducing the run time of the Non-probabilistic entropy and membership functions. This was a new concept to myself."}

@@ -1,19 +1,36 @@
 \subsection{Hybrid Entropy}
-%==============================================================================
-\subsubsection{Fuzzy entropy description}
-%==============================================================================
 
-Pal and Pal introduced Hybrid Entropy \cite{Pal_Pal_1992} in 1992 to help combat the issues faced by Non-Probablisitc entropy - mainly that it does not model probabilistic uncertainty. The name `Hybrid' stems from the fact it models both Probabilistic and Possibilistic (fuzziness) uncertainty.
+As mentioned in Section \ref{sssec:hybrid-section}, the Hybrid Entropy equation is as follows:
 
-\todo[inline]{This could probably be covered in Lit review.}
+\begin{equation}
+  H_{hy} = -p_0\log(1 - E_0) - p_1\log(E_1)
+\end{equation}
+
+Where $E_0$ and $E_1$ can be defined as:
+
+\begin{subequations} \label{eq:E0-E1}
+  \begin{align}
+    &E_0 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{(1-\mu_i)exp(\mu_i)} \\
+    &E_1 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{\mu_iexp(1-\mu_i)}
+  \end{align}
+\end{subequations}
+
+And $p_0$ and $p_1$ are the probabilities of receiving 0 and 1 symbols respectively.
 
 %==============================================================================
 \subsubsection{MATLAB implementation}
 %==============================================================================
 
-Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapeziums covering 2 fuzzy sets.
+Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapeziums covering 2 fuzzy sets, as seen in Figure
 
-Two arrays are then fed into the Hybrid Entropy function - listing all the pixel membership values from the low trapezium, and the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/hybrid-img/2_traps.png}
+  \caption{Two membership trapeziums for Hybrid Entropy - Low and High grey-level values.}
+  \label{fig:2-traps}
+\end{figure}
+
+Two arrays are then fed into the Hybrid Entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
 
 %==============================================================================
 \subsubsection{Technical challenges}
@@ -66,12 +83,17 @@ This was done for all 3 trapeziums, then combined and divided by 3 (for the mean
 
 First of all, the hybrid equation output was deemed to be `NaN' - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting the output equal to 0, in effect ignoring any output from the highest fuzzy set.
 
-After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative - something not possible in terms of entropy.
+After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative, something which is not possible in terms of entropy - see Figure \ref{fig:minus-entropy}.
 
-\missingfigure{Minus entropy}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.5]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/hybrid-img/minus-entropy.png}
+  \caption{Graph showing the entropy output after 5 iterations}
+  \label{fig:minus-entropy}
+\end{figure}
 
-It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining timeframe of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal.
+It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining timeframe of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal. This would mean, one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.
 
 %==============================================================================
-\subsubsection{Results}
+\subsubsection{Run-time}
 %==============================================================================

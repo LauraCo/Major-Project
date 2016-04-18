@@ -95,6 +95,7 @@ By definition:
 
 
 \subsection{Fuzzy Entropy}
+\label{ssec:fuzzy-entropy}
 
 Fuzzy entropy stems from combining standard Entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
 
@@ -134,8 +135,6 @@ The entropy given by equation \eqref{eq:de-luca-eq} satisfies all 4 of De Luca a
   \end{subequations}
 
 
-Given the simplistic nature of this implementation, this was one of the chosen Fuzzy Entropy algorithms to be implemented in the project.
-
 %\subsubsection{Fuzzy entropy and conditioning - 1986}
 
 \subsubsection{Fuzzy Shannon Entropy - 1989}
@@ -166,8 +165,6 @@ Sander further went on to propose some properties, which must be imposed on a Fu
   \end{align}
 \end{subequations}
 
-The initial plan was to implement this algorithm in the project - however after further investigation which revealed that Fuzzy Shannon Entropy does not model Probabilistic uncertainty - it was decided that this algorithm was to be excluded.
-
 \subsubsection{Object-background segmentation using new definitions of entropy - 1989}
 
 Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all 4 of De Luca and Termini`s 4 conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
@@ -177,6 +174,7 @@ Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_19
 \end{equation}
 
 \subsubsection{Higher Order Fuzzy Entropy \& Hybrid Entropy - 1992}
+\label{sssec:hybrid-section}
 
 In Pal \& Pal's paper \say{Higher order fuzzy entropy and hybrid entropy of a set} \cite{Pal_Pal_1992}, they not only prove some of De Luca \& Termini`s work to be flawed, but also defined two new Fuzzy Entropy algorithms, and a new set of definitions.
 
@@ -242,8 +240,6 @@ Therefore, the hybrid entropy of fuzzy set $A$ can be defined as:
   H_{hy} = -p_0\log(1 - E_0) - p_1\log(E_1)
 \end{equation}
 
-This algorithm was chosen for implementation in this project due to it's hybrid nature (implementing both Probabilistic and Possibilistic uncertainty) and for it's simplification nature - in the absence of fuzziness, then $E_0$ and $E_1$ reduce to $p_0$ and $p_1$ respectively, therefore classical Shannon entropy. This is especially useful in image processing, and other such areas which deal with a lot of noise.
-
 \subsubsection{Fuzzy Entropy: a Brief Survey - 2001}
 
 Due to the older nature of some of the papers listed above, some were difficult to locate online. So when implementing the chosen algorithms (Non-Probalistic Entropy and Hybrid Entropy), Al-sharhan et al's paper \say{Fuzzy Entropy: a Brief Survey} \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was a useful tool.
@@ -276,19 +272,17 @@ The entropy is calculated by assessing each individual set of pixel-locations in
   \label{fig:pixel-stack}
 \end{figure}
 
-As this project will be working with mammograms, something with little variation nor inconsistency, Congealing is the perfect, light-weight image alignment algorithm to which to build upon, especially as the demonstration code available for research has an entropy implementation already developed.
+
 
 \subsubsection{Least squares congealing for unsupervised alignment of images}
 
 Further work was done upon the Congealing algorithm proposed by Learned-Miller by Cox et al. in 2008 \cite{Cox_Sridharan_Lucey_Cohn_2008}. They set out to address any performance issues and to remove the need for a pre-defined step size. It proposes to mitigate these issues by implementing an alternative method for aligning the images - utilising the Lucas \& Kanade algorithm for aligning a single image to another using a gradient descent approach \cite{Lucas_Kanade_1981}.
 
-This alignment algorithm was disregarded for this project due to the preference to focus upon entropy-based alignment algorithms and the computational costs that the authors themselves regard to be a drawback of their algorithm.
-
 \subsubsection{Unsupervised Joint Alignment of Complex Images}
 
 Huang and a team (notably including Learned-Miller) further extended the Congealing algorithm to be usable upon complex images - such as faces and cars at different orientations \cite{Huang_Jain_Learned-Miller_2007}.
 
-This was quickly identified as overly complex for this project. The original Congealing algorithm was more appropriate for grey-scale mammograms, with a consistent canonical pose.
+This method removes the need to hand-label the input data and improves the performance of face recognition systems, by ensuring faces are properly aligned prior to recognition.
 
 \subsection{Image Alignment using Fuzzy Entropy}
 
