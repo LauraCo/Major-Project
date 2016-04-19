@@ -7,7 +7,7 @@ One issue which was faced when creating the large .pgm file containing all the i
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/rotation.png}
+  \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/rotation.png}
   \caption{4 rotated input images concatenated into one larger image.}
   \label{fig:rotated-input}
 \end{figure}
@@ -56,7 +56,7 @@ After transposing all arrays which are to be saved out to file, whether directly
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/big_scan.jpg}
+  \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/big_scan.jpg}
   \caption{Final output image.}
   \label{fig:final-output-4}
 \end{figure}
@@ -69,7 +69,7 @@ As the images are aligned using a comparison of the pixel-value, the Medical Mar
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/mdb196.png}
+  \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/mdb196.png}
   \caption{Image containing Medical Markers}
   \label{fig:med-markers}
 \end{figure}
@@ -93,19 +93,19 @@ Two options were available for the avoidance of Medical Markers:
 \begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/morph.png}
+        \includegraphics[width=\textwidth]{Chapter2/technical-img/morph.png}
         \caption{Squares detected in a mammogram using morphological operations.}
         \label{fig:morph}
     \end{subfigure} \hfill
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
       %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[t]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/regionprops.png}
+        \includegraphics[width=\textwidth]{Chapter2/technical-img/regionprops.png}
         \caption{Regionprops detecting areas and superimposing the area information on a mammogram.}
         \label{fig:regionprops}
     \end{subfigure} \hfill
     \begin{subfigure}[t]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/shape_recog.png}
+      \includegraphics[width=\textwidth]{Chapter2/technical-img/shape_recog.png}
       \caption{Shape recognition picking out the rough boundary of breast tissue.}
       \label{fig:shape-recog}
     \end{subfigure}
@@ -113,17 +113,17 @@ Two options were available for the avoidance of Medical Markers:
     %(or a blank line to force the subfigure onto a new line)
 
     \begin{subfigure}[t]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/remove-white-220.png}
+      \includegraphics[width=\textwidth]{Chapter2/technical-img/remove-white-220.png}
       \caption{Removing areas of grey-level value above 220.}
       \label{fig:remove-white}
     \end{subfigure} \hfill
     \begin{subfigure}[t]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/remove-white.png}
+      \includegraphics[width=\textwidth]{Chapter2/technical-img/remove-white.png}
       \caption{Lower grey-level removal threshold to 200.}
       \label{fig:remove-white-200}
     \end{subfigure} \hfill
     \begin{subfigure}[t]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/other-scan.png}
+      \includegraphics[width=\textwidth]{Chapter2/technical-img/other-scan.png}
       \caption{Applying removal over 220-value to another scan.}
       \label{fig:remove-other-scan}
     \end{subfigure}
@@ -165,7 +165,7 @@ After reading through the demo given as an answer by \say{Image Analyst} on the 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/draw-to-remove.png}
+  \includegraphics[scale=0.4]{Chapter2/technical-img/draw-to-remove.png}
   \caption{Image depicting the steps taken to remove Medical Markers from a scan.}
   \label{fig:remove-marker}
 \end{figure}
@@ -240,18 +240,63 @@ The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzz
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/timeToRunBinaryCongeal.png}
-  \caption{Time per iteration before, during and after vectorisation}
-  \label{fig:time-per-iteration}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width = 12cm,
+          ybar,
+          bar width=4pt,
+          ylabel={Time (secs)},
+          xlabel={Iterations},
+          xtick={1,...,5},
+          nodes near coords,
+          every node near coord/.append style={font=\scriptsize,
+                xshift=-6pt,  yshift=+5pt,anchor=west},
+          nodes near coords align={vertical},
+          legend pos=outer north east,
+          legend style={cells={align=left}},
+          ]
+        \addplot table[x=Iteration, y=Pre optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Pre optimisation \\ (for loops) \\};
+        \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Partial optimisation \\ (just membership.m) \\};
+        \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Full optimisation \\ (both membership.m \& \\ deLucaFuzzy.m) \\};
+        %\addplot table[x=rounds, y=QRC] {\loadedtable};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Time per iteration before, during and after vectorisation}
+    \label{fig:time-per-iteration}
 \end{figure}
 
 Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, in the same environment, to run the \texttt{binaryCongeal.m} \footnote{The function which calls the specified entropy algorithm.} function on each iteration. A marked improvement can be seen just by vectorising the \texttt{membership.m} function, and further improvements once the \texttt{deLucaFuzzy.m} function for Non-Probabilistic entropy was vectorised.
 
+%http://pgfplots.sourceforge.net/gallery.html
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{/Users/lauracollins/Git/Major-Project/Documentation/Final/Chapter2/technical-img/totalTime.png}
-  \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
-  \label{fig:total-time}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width= 10cm,
+        symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        x tick label style={font=\small,text width=2.5cm,align=center},
+        ybar,
+        enlargelimits=0.15,
+        legend style={at={(0.5,-0.2)},
+          anchor=north,legend columns=-1},
+        ylabel={Time (secs)},
+        xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        nodes near coords,
+    	  nodes near coords align={vertical},
+        %x tick label style={rotate=45,anchor=east},
+        ]
+        \addplot[ybar,fill] coordinates {
+    (Pre optimisation (For loops),265.771186)
+    (Partial optimisation (Just membership),155.432352)
+    (Full optimisation (Membership \& De Luca),105.188263) };
+      \end{axis}
+    \end{tikzpicture}
+    \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
+    \label{fig:total-time}
+  \end{center}
 \end{figure}
 
 Figure \ref{fig:total-time} outlines the total time taken to run 5 iterations of Non-Probabilistic Entropy before vectorisation, once vectorisation was complete on the \texttt{membership.m} function, and finally after full vectorisation.
