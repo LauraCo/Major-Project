@@ -1,4 +1,4 @@
-function tests = TESThybrid
+function tests = TESTnonProb
 % Test the Membership function
 % http://uk.mathworks.com/help/matlab/matlab_prog/write-function-based-unit-tests-.html
 
@@ -9,14 +9,14 @@ end
 
 % Test 1 - make sure entropy is less than 1
 
-function testHybridEntropyLessThanOne(testCase)
+function testNonProbEntropyLessThanOne(testCase)
     testImg = imread('mdb136.pgm');
-    assertLessThan(testCase, hybrid(testImg), 1);
+    assertLessThan(testCase, deLucaFuzzy(testImg), 1);
 end
 
 % Test 2 - ensure entropy is larger than 0 
 
-function testHybridEntropyLargerThanZero(testCase)
+function testNonProbEntropyLargerThanZero(testCase)
     testImg = imread('mdb136.pgm');
-    assertGreaterThan(testCase, hybrid(testImg), 0);
+    assertGreaterThan(testCase, deLucaFuzzy(testImg), 0);
 end

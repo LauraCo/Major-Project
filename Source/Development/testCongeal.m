@@ -1,4 +1,5 @@
 function [meanIms, adjSer, finalMean, ent, time] = testCongeal(metric,iterations, filename, path)
+%function  testCongeal(metric,iterations, filename, path)
 
 addpath IO
 addpath UTILITY
@@ -23,7 +24,11 @@ sr=min(sr,1);
 time = toc
 %figure;
 %showSer(meanIms,1);
-%imwrite(meanIms(:,:,iterations),strcat(path,'/final_mean.pgm'),'pgm');
-finalMean = meanIms(:,:,iterations);
+%imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
+%finalMean = meanIms(:,:,iterations);
+
+%fid=fopen(strcat(path,'/entropy.txt'),'w+');
+%fprintf(fid,'%f \n',ent);
+%fclose(fid);
 %figure;
 %showSer(adjSer,2);
