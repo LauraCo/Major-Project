@@ -83,13 +83,42 @@ This was done for all 3 trapeziums, then combined and divided by 3 (for the mean
 
 First of all, the hybrid equation output was deemed to be `NaN' - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting the output equal to 0, in effect ignoring any output from the highest fuzzy set.
 
-After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative, something which is not possible in terms of entropy - see Figure \ref{fig:minus-entropy}.
+After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative, something which is not possible in terms of entropy, as it must be between 0 and 1 - see Figure \ref{fig:minus-entropy}.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[scale=0.5]{Chapter2/hybrid-img/minus-entropy.png}
-  \caption{Graph showing the entropy output after 5 iterations}
-  \label{fig:minus-entropy}
+\begin{figure}[H]
+  \begin{center}
+  %  \pgfplotsset{every axis/.append style={thick},width=0.4*\textwidth, ymax=1}
+  %    \begin{tikzpicture}
+  %        width = 10cm,
+  %        axis lines = middle,
+  %        xlabel = {Iterations},
+  %        ylabel = {Entropy},
+  %        ymin = -0.3,
+  %        ymax = 0.3,
+  %        ytick={-0.5,-0.4,...,0.6},
+  %        y tick label style={
+  %                /pgf/number format/.cd,
+  %                fixed,
+  %                fixed zerofill,
+  %                precision=1,
+  %            /tikz/.cd
+  %        },
+  %        xtick={1,2,...,5},
+  %        x label style={at={(axis description cs:0.5,0.3)},anchor=north},
+  %        y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+  %        nodes near coords,
+  %    	  nodes near coords align={vertical},
+  %        every node near coord/.append style={font=\scriptsize,
+  %                xshift = +3pt, yshift=+4pt,anchor=west, /pgf/number format/precision=6},
+  %        ]
+  %      \addplot coordinates
+  %        { (1, 0.124512) (2, 0.048099) (3, 0.238875) (4, 0.232505) (5, -0.140011) };
+  %        \draw[ultra thin] (axis cs:0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0,\pgfkeysvalueof{/pgfplots/ymax});
+  %      \end{axis}
+  %    \end{tikzpicture}
+    \end{center}
+    \caption{Graph showing the entropy output after 5 iterations}
+    \label{fig:minus-entropy}
 \end{figure}
 
 It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining timeframe of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal. This would mean, one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.

@@ -55,7 +55,17 @@
 \usepackage{pgfplotstable} % http://tex.stackexchange.com/questions/146716/importing-csv-file-into-latex-as-a-table
 %\pgfplotstableset{fixed zerofill, precision = 1}
 
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\definecolor{arrowblue}{RGB}{98,145,224}
+%\usetikzlibrary{external}
+% Enable the library !!!>>> MUST be in the preamble <<<!!!!
+%\tikzexternalize % http://tex.stackexchange.com/questions/76440/not-recompile-unchanged-pgfplots-graph
+%\tikzexternalize[prefix=fig/]
+
 \usepackage{gensymb} %https://www.overleaf.com/help/115-how-can-i-write-a-degrees-degree-symbol-in-latex
+
+\usepackage{longtable}
 
 % Various parameters
 \setlength{\textheight}{229mm}

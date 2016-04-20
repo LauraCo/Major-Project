@@ -13,6 +13,7 @@
 % http://tex.stackexchange.com/questions/202072/scale-y-and-x-axis-in-pgfplots
 \begin{figure}[H]
   \begin{center}
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=15cm,
@@ -34,6 +35,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/shannon-img/shannon-20.csv};
     \end{axis}
     \end{tikzpicture}
+    \fi
     \caption{Comparison of the reduction in entropy over iterations.}
   \end{center}
 \end{figure}
@@ -64,6 +66,7 @@
 
 \begin{figure}[H]
   \begin{center}
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -82,6 +85,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/shannon-img/shannon-20.csv};
     \end{axis}
     \end{tikzpicture}
+    \fi
     \caption{Shannon: Comparison of the reduction in entropy over iterations, as in Table \ref{table:shannon-entropy}.}
   \end{center}
 \end{figure}
@@ -120,6 +124,7 @@
 
 \begin{figure}[H]
   \begin{center}
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -137,6 +142,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/nonProb-img/nonProb20.csv};
     \end{axis}
     \end{tikzpicture}
+    \fi
     \caption{Non-Probabilistic: Comparison of the reduction in entropy over iterations, as in Table \ref{table:non-prob-entropy}.}
   \end{center}
 \end{figure}
@@ -175,6 +181,7 @@
 
 \begin{figure}[H]
   \begin{center}
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -193,6 +200,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/hybrid-img/hybrid20.csv};
     \end{axis}
     \end{tikzpicture}
+    \fi
     \caption{Hybrid: Comparison of the reduction in entropy over iterations, as in Table \ref{table:non-prob-entropy}.}
   \end{center}
 \end{figure}

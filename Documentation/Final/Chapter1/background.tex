@@ -7,12 +7,12 @@
 
 %The motivation behind choosing mammograms as the input data of choice was an interest into how computer systems and machine learning can help in the medical sector - especially in the early diagnosis and/or preventative means of breast cancer.
 
-In Europe, breast cancer is the leading cause of death through cancer for women, with 1 in 6 women dying from a cancer having it in the glandular breast tissue \cite{European_Commission_2009}. The UK is contained within the higher mortality band which runs across the EU, sitting alongside countries such as the Netherlands, North-West France and Western Germany (see Figure \ref{fig:mortality-band}). However the reason behind why these countries have a higher breast cancer mortality rate than their neighbours to the north and south is unknown.
+In Europe, breast cancer is the leading cause of death through cancer for women, with 1 in 6 women dying from cancer having it in the glandular breast tissue \cite{European_Commission_2009}. The UK is contained within the higher mortality band which runs across the EU, sitting alongside countries such as the Netherlands, North-West France and Western Germany (see Figure \ref{fig:mortality-band}). However the reason behind why these countries have a higher breast cancer mortality rate than their neighbours to the north and south is unknown.
 
 \begin{figure}[!h]
   \center
   \includegraphics[scale=0.5]{Chapter1/background-img/mortality_EU_Comms.png}
-  \caption{Image Source: EU Commission: Atlas on Mortality \cite{European_Commission_2009}}
+  \caption{Breast tissue composition. Image Source: EU Commission: Atlas on Mortality \cite{European_Commission_2009}}
   \label{fig:mortality-band}
 \end{figure}
 
@@ -33,7 +33,9 @@ The internal breast structure consists of different kinds of tissue and glands \
   \label{fig:breast-anatomy}
 \end{figure}
 
-Fatty and connective tissue density can vary widely between women. After extensive research into the links between a higher proportion of fibrous and glandular tissue versus fatty tissue and a higher risk of breast cancer, it is pretty widely accepted there is a strong link \cite{Boyd_Byng_Jong_Fishell_Little_Miller_Lockwood_Tritchler_Yaffe_1995} \todo[inline]{Reword this + add citations}. Therefore, simple classification of denser tissue is vital for both radiographers and patients alike.
+Fatty and connective tissue density can vary widely between women. After extensive research into the links between a higher proportion of fibrous/glandular tissue versus fatty tissue and a higher risk of breast cancer, it is widely accepted there is a strong link between dense tissue and breast cancer \cite{Boyd_Byng_Jong_Fishell_Little_Miller_Lockwood_Tritchler_Yaffe_1995}. Therefore, simple classification of denser tissue is vital for both radiographers and patients alike.
+
+There exists several methods for classifying the density of breast tissue, as outlined in the following subsections.
 
 \subsubsection{Wolfe classification}
 
@@ -60,15 +62,42 @@ Boyd and colleagues proposed a quantitative means to categorising breast tissue 
 \end{itemize}
 
 \subsubsection{BI-RADS classification}
+\label{sssec:bi-rads}
 
 A widely accepted quantitative tool for the classification and risk analysis of mammography and ultrasounds is BI-RADS (Breast Imaging-Reporting and Data System) system, defined by the American College of Radiology \cite{sickles2013acr}.
 
 \begin{itemize}
-  \item \textbf{a: } almost entirely fatty
-  \item \textbf{b: } scattered areas of fibroglandular density
-  \item \textbf{c: } heterogeneously dense, which may obscure small masses
-  \item \textbf{d: } extremely dense, which lowers the sensitivity of mammography
+  \item \textbf{a: } almost entirely fatty (Figure \ref{fig:birads-a})
+  \item \textbf{b: } scattered areas of fibroglandular density (Figure \ref{fig:birads-b})
+  \item \textbf{c: } heterogeneously dense, which may obscure small masses (Figure \ref{fig:birads-c})
+  \item \textbf{d: } extremely dense, which lowers the sensitivity of mammography (Figure \ref{fig:birads-d})
 \end{itemize}
+
+\begin{figure}[!ht]
+  \center
+  \begin{subfigure}[ht!]{0.2\textwidth}
+        \includegraphics[width=\textwidth]{Chapter1/background-img/a.png}
+        \caption{}
+        \label{fig:birads-a}
+    \end{subfigure}
+    \begin{subfigure}[ht!]{0.2\textwidth}
+          \includegraphics[width=\textwidth]{Chapter1/background-img/b.png}
+          \caption{}
+          \label{fig:birads-b}
+    \end{subfigure}
+    \begin{subfigure}[ht!]{0.2\textwidth}
+          \includegraphics[width=\textwidth]{Chapter1/background-img/c.png}
+          \caption{}
+          \label{fig:birads-c}
+    \end{subfigure}
+    \begin{subfigure}[ht!]{0.2\textwidth}
+          \includegraphics[width=\textwidth]{Chapter1/background-img/d.png}
+          \caption{}
+          \label{fig:birads-d}
+    \end{subfigure}
+  \caption{Comparison of the 4 BI-RADS classification}
+  \label{fig:4-birads}
+\end{figure}
 
 This is the classification of choice for this project due to it's wide-spread acceptance and usage in the industry.
 
@@ -86,7 +115,7 @@ This technique is somewhat different from the previous 3 by utilising anatomic-m
 
 \subsection{Mammograms}
 
-Quite simply, a Mammogram is an X-Ray of the breast tissue from a number of different angles. Below are a selection of the most common \cite{Radswiki} \cite{Mammography_views_Doc_2016}:
+Quite simply, a Mammogram is an X-Ray of the breast tissue pressed between 2 plates from a number of different angles. Below are a selection of the most common \cite{Radswiki} \cite{Mammography_views_Doc_2016}:
 \begin{itemize}
   \item Cranial-Caudal (CC) - taken from above (Figure \ref{fig:CC})
   \item Medio-Lateral Oblique (MLO) - from the side, at an angle (usually 45$\deg$) (Figure \ref{fig:MLO})
@@ -95,28 +124,25 @@ Quite simply, a Mammogram is an X-Ray of the breast tissue from a number of diff
 \end{itemize}
 
 CC and MLO are generally the standard practice angles, with ML and LM adding more information for the radiographer to assess.
-
-\begin{figure}[!ht]
+  \iffalse
+\begin{figure}[H]
   \center
-  \begin{subfigure}[ht!]{0.4\textwidth}
-        \includegraphics[width=0.5\textwidth]{Chapter1/background-img/CC.jpg}
+  \begin{subfigure}[t]{0.2\textwidth}
+        \includegraphics[width= \textwidth]{Chapter1/background-img/CC.jpg}
         \caption{Cranial-Caudal: Case courtesy of Dr Garth Kruger, Radiopaedia.org, rID: 18580}
         \label{fig:CC}
     \end{subfigure}
-    \hspace{\fill}
-    \begin{subfigure}[ht!]{0.4\textwidth}
-          \includegraphics[width=0.5\textwidth]{Chapter1/background-img/MLO.jpg}
+    \begin{subfigure}[t]{0.2\textwidth}
+          \includegraphics[width=\textwidth]{Chapter1/background-img/MLO.jpg}
           \caption{Medio-Lateral Oblique: Case courtesy of A.Prof Frank Gaillard, Radiopaedia.org, rID: 12608}
           \label{fig:MLO}
     \end{subfigure}
-
-    \begin{subfigure}[ht!]{0.4\textwidth}
-          \includegraphics[width=0.5\textwidth]{Chapter1/background-img/ML.jpg}
+    \begin{subfigure}[t]{0.2\textwidth}
+          \includegraphics[width=1.2\textwidth]{Chapter1/background-img/ML.jpg}
           \caption{Medio-Lateral: Case courtesy of Mini-MIAS dataset \cite{Suckling_1994}}
           \label{fig:LM}
     \end{subfigure}
-    \hspace{\fill}
-    \begin{subfigure}[ht!]{0.4\textwidth}
+    \begin{subfigure}[t]{0.3\textwidth}
           \includegraphics[height=5cm]{Chapter1/background-img/LM.jpg}
           \caption{Latero-Medial: Case courtesy of Dr Paresh K Desai , Radiopaedia.org, rID: 5873}
           \label{fig:ML}
@@ -124,12 +150,13 @@ CC and MLO are generally the standard practice angles, with ML and LM adding mor
   \caption{Comparison of the 4 mammogram angles typically used}
   \label{fig:scan-angles}
 \end{figure}
+\fi
 
 Organisations such as Breast Test Wales invite women between the ages of 50 and 70 to attend a scan every 3 years \cite{Informed_Choice_about_Cancer_Screening_2013}. However women with higher-density breasts, which is ascertained during a mammogram, could be called back for more regular screening, to ensure to catch any abnormalities sooner.
 
 \subsubsection{Alternatives to Mammograms}
 
-Although the input data of choice for this project will be Mammographic scans, it is important to remember that for some women, and some circumstances, it may be more appropriate to use a different method of diagnosis.
+Although the input data of choice for this project will be Mammographic scans, it is important to remember that for some women, and under some circumstances, it may be more appropriate to use a different method of diagnosis.
 
 \textbf{Ultrasound}
 
@@ -155,3 +182,5 @@ A lot of the current computer systems focus on mammography computer aided diagno
 However this is not the focus of this Project. This Project aims to focus upon healthy tissue, and the first steps towards computers classifying breast tissue into the correct density category. So what steps have been taken currently, in Industry and in research, towards this end goal?
 
 \todo[inline]{Paper by Mohamed Abu ElSoud; Ahmed M. Anter - Automatic mammogram segmentation and computer aided diagnoses for breast tissue density according to BIRADS dictionary}
+
+\todo[inline]{Not sure if this section is needed? Cannot yet get ahold of above paper.}

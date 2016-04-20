@@ -1,0 +1,16 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}
+\node[inner sep=0pt] (input) at (0,0)
+    {\includegraphics[width=.25\textwidth]{big_scan.jpg}};
+\node[inner sep=0pt] (output) at (10,0)
+    {\includegraphics[width=.25\textwidth]{hybrid-5.png}};
+\draw[->,thick] (input.east) -- (output.west)
+    node[midway,fill=white] {Congealing algorithm};
+\draw[thick,->] (5,3) -- (5,0.5) node[pos=0,anchor=west, above, align=center,text width=7cm] {\textbf{Choose alignment metric:}\\Shannon Entropy\\Non-Probabilistic Entropy\\Hybrid Entropy};
+\end{tikzpicture}
+\end{document}

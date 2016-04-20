@@ -12,7 +12,7 @@ In terms of Information Theory, the Merriam-Webster Dictionary defines Entropy t
  \textit{Entropy (noun): the degree of disorder or uncertainty in a system}
 \end{quotation}
 
-Shannon entropy can be mathematically defined:
+Shannon entropy, derived by Claude Shannon \cite{shannon1948a} can be mathematically defined as :
 
 \begin{equation}
   H(X) = - \displaystyle\sum_{i=0}^{N}{p_i \log_2 p_i}
@@ -37,8 +37,8 @@ On the other side, if a system outputs solely the letter \say{M}, then the entro
 \begin{center}
 \pgfplotsset{every axis/.append style={thick},width=0.4*\textwidth, ymax=1}
 \begin{tikzpicture}
-  \begin{axis}[
-    axis lines = left,
+ \begin{axis}[
+     axis lines = left,
     xlabel = $p$,
     ylabel = {Entropy},
     ]
@@ -55,9 +55,11 @@ On the other side, if a system outputs solely the letter \say{M}, then the entro
 \label{fig:entropy}
 \end{figure}
 
+It follows that entropy can only ever be between 0 and 1, with an entropy of 0 have a 50\% probability, and an entropy of 1 being 100\% certain.
+
 \subsection{Uncertainty}
 
-A certain amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind of uncertainty, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important so as researchers we can understand it, and use it to our advantage in techniques such as Fuzzy Entropy.
+However real life is not 100\% certain - a certain amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind of uncertainty, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important so as researchers we can understand it, and use it to our advantage in techniques such as Fuzzy Entropy.
 
 \subsubsection{Probabilistic Uncertainty}
 
@@ -81,7 +83,7 @@ By definition:
   \textit{Possibility: a chance that something might exist, happen, or be true : the state or fact of being possible \cite{POSSIBILITY}}
 \end{quotation}
 
-Possibilistic uncertainty (closely related to \say{fuzziness}) indicates the lack of information we hold about the possible outcome values from a system - a sort of ambiguity. Possibilistic uncertainty models the possible outcomes from a system, as estimated by a decision maker because it is possibly impossible to determine beforehand \cite{Untiedt_2010}. For example,
+Possibilistic uncertainty (closely related to \say{fuzziness}) indicates the lack of information we hold about the possible outcome values from a system - a sort of ambiguity. Possibilistic uncertainty models the possible outcomes from a system, as estimated by a decision maker because it is possibly impossible to determine beforehand \cite{Untiedt_2010}.
 
 \subsubsection{Indiscernibility Uncertainty}
 
@@ -93,11 +95,13 @@ By definition:
   \textit{Indiscernible: impossible to see, hear, or know clearly \cite{INDISCERNIBLE}}
 \end{quotation}
 
+\todo[inline]{Find an explanation of Indiscernibility}
+
 
 \subsection{Fuzzy Entropy}
 \label{ssec:fuzzy-entropy}
 
-Fuzzy entropy stems from combining standard Entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
+Fuzzy entropy stems from combining standard Shannon entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
 
 One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5foot 11inches not be classified as tall? Given crisp sets, then they would be classified as `Average'. In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
 
@@ -108,7 +112,7 @@ One common example of this is listing someone as `Short', `Average' or `Tall' in
   \label{fig:fuzzy-sets}
 \end{figure}
 
-To combine Fuzzy Set Theory with Entropy, then the amount of fuzzy information gained from the fuzzy set(s) is known as Fuzzy Entropy.
+After combining Fuzzy Set Theory with Entropy, then the amount of fuzzy information gained from the fuzzy set(s) is known as Fuzzy Entropy.
 
 \subsubsection{Non-Probabilistic Entropy - 1972}
 
@@ -248,11 +252,11 @@ It's concise nature, and chronological listing ensured a strong understanding of
 
 \subsection{Joint Image Alignment}
 
-Image Alignment focuses on the alignment of several images, into one average image.
+Joint image alignment focuses on the alignment of several images, into one average image.
 
 \subsubsection{Learned-Miller`s Congealing}
 
-Learned-Miller's Congealing \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data with minimal noise, no occlusions and illumination variation \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl} \cite{Peng_Ganesh_Wright_Xu_Ma_2012}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
+Learned-Miller's Congealing \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data (which must have minimal noise, no occlusions and illumination variation) \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl} \cite{Peng_Ganesh_Wright_Xu_Ma_2012}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
 
 This algorithm works by iteratively reducing the pixel-wise entropy over the input images, using a set of standard image transformations such as:
 
@@ -272,8 +276,6 @@ The entropy is calculated by assessing each individual set of pixel-locations in
   \label{fig:pixel-stack}
 \end{figure}
 
-
-
 \subsubsection{Least squares congealing for unsupervised alignment of images}
 
 Further work was done upon the Congealing algorithm proposed by Learned-Miller by Cox et al. in 2008 \cite{Cox_Sridharan_Lucey_Cohn_2008}. They set out to address any performance issues and to remove the need for a pre-defined step size. It proposes to mitigate these issues by implementing an alternative method for aligning the images - utilising the Lucas \& Kanade algorithm for aligning a single image to another using a gradient descent approach \cite{Lucas_Kanade_1981}.
@@ -282,7 +284,7 @@ Further work was done upon the Congealing algorithm proposed by Learned-Miller b
 
 Huang and a team (notably including Learned-Miller) further extended the Congealing algorithm to be usable upon complex images - such as faces and cars at different orientations \cite{Huang_Jain_Learned-Miller_2007}.
 
-This method removes the need to hand-label the input data and improves the performance of face recognition systems, by ensuring faces are properly aligned prior to recognition.
+This method removes the need to hand-label the input data and improves the performance of face recognition systems, by ensuring the objects are properly oriented prior to recognition.
 
 \subsection{Image Alignment using Fuzzy Entropy}
 
