@@ -25,7 +25,7 @@ time = toc
 %figure;
 %showSer(meanIms,1);
 %imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
-%finalMean = meanIms(:,:,iterations);
+finalMean = meanIms(:,:,iterations);
 
 %fid=fopen(strcat(path,'/entropy.txt'),'w+');
 %fprintf(fid,'%f \n',ent);
