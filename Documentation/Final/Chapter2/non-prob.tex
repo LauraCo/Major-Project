@@ -1,4 +1,5 @@
 \subsection{Non-Probabilistic Entropy}
+\label{ssec:non-prob-sec}
 
 \subsubsection{Fuzzy entropy description}
 %==============================================================================
@@ -35,7 +36,7 @@ The main technical challenge for this implementation is ensuring maximum optimis
 
 Another technical challenge faced whilst implementing the De Luca \& Termini algorithm, isn't directly tied to the implementation of their specific equation, but more of my lack of experience in MATLAB, slowing down the programming rate. It has indeed been a steep learning curve, getting to grips with standard error messages, the debugger tool and knowing which `Toolboxes' are needed to run specific MATLAB functions.
 
-Finally, as can be ascertained from Figure \ref{fig:mammo-results}, when writing the 4 seperate scans into 1 larger file, somewhere the images get rotated. This will be a reoccurring issue through the 3 Fuzzy entropy implementations, however as this is the first I will note it here. I think this is caused thanks to the swapping of the height and width values, however upon initial inspection of the file writing function, it is not clear as to which line is causing this issue. This issue has been marked low priority in the short term, due to all the scans being rotated in this fashion, and as such all have the same orientation. This means the congealing algorithm can work with no issues upon these images, the rotation is more merely an aesthetic issue.
+Finally, as can be ascertained from Figure \ref{fig:mammo-results}, when writing the 4 seperate scans into 1 larger file, somewhere the images get rotated. This will be a reoccurring issue through the 3 Fuzzy entropy implementations, however as this is the first I will note it here. I think this is caused thanks to the swapping of the height and width values, however upon initial inspection of the file writing function, it is not clear as to which line is causing this issue. This issue has been marked low priority in the short term, due to all the scans being rotated in this fashion, and as such all have the same orientation. This means the \Gls{Congealing} algorithm can work with no issues upon these images, the rotation is more merely an aesthetic issue.
 
 %==============================================================================
 \subsubsection{Results}
@@ -62,7 +63,7 @@ Finally, as can be ascertained from Figure \ref{fig:mammo-results}, when writing
         \caption{Adjusted original input images}
         \label{fig:adj-ser}
     \end{subfigure}
-    \caption{Output of 5 congealing iterations}\label{fig:mammo-results}
+    \caption{Output of 5 \Gls{Congealing} iterations}\label{fig:mammo-results}
 \end{figure}
 
 \begin{figure}[!ht]
