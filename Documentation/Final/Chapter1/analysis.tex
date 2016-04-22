@@ -4,20 +4,55 @@
 
 After both the background research and literature review were completed, a list of main \say{Tasks} to be undertaken in order to complete this Project was easily composed. These are outlined in the following subsections.
 
-\subsubsection{Decide how best to implement Membership functions}
+\noindent \textbf{1: Decide how best to implement Membership functions}
 
 Fuzzy Entropy requires Membership functions, in which the data can be classified. This task would be to decide whether to dynamically calculate the Membership functions, or whether to statically define them within the back-end of the system.
 
-\subsubsection{Research and choose which Fuzzy Entropy algorithms would be best suited to this project}
+\noindent \textbf{2: Research and choose which Fuzzy Entropy algorithms would be best suited to this project}
 
-This project stresses the importance of running image alignment techniques on a standard laptop or PC.
+This project stresses the importance of running image alignment techniques on a standard laptop or PC. With this in mind, each Fuzzy Entropy algorithm would need to be analysed based on their simplicity of calculations, in order to run quickly.
+
+\noindent \textbf{3: Research and decide upon which image alignment technique would be best}
+
+Given this project is about aligning images using entropy techniques, this may indeed be an easy task to complete. However, other options should indeed be considered, especially if they are accurate and have low computing cost.
+
+\noindent \textbf{5: Decide which programming language to use}
+
+A lot of image processing can be run using programs such as Python, however the demo code given by Learned-Miller \cite{joint-alignment} has been compiled in MATLAB. Research would have to be undertaken to see if Learned-Miller`s approach has been implemented in any other languages if this is the image alignment approach decided upon.
+
+\noindent \textbf{6: Decide how best to represent the input and output data}
+
+This most likely would be in the form of a \acrshort{GUI} as the target User - Doctors - wouldn`t have access to tools like MATLAB, nor be well-versed in using the Command Line or Terminal.
+
+\noindent \textbf{7: Determine how well to best assess the output}
+
+This could possibly involve a professional medical opinion? Or it could be based of the amount the entropy declined over time? Or it could simply be a visual inspection of how well the scans aligned.
+
+\noindent \textbf{8: Research different ways in which to build the \acrshort{GUI}}
+
+Which programming language would this be done in? If MATLAB were to be chosen, it is capable of linking in which many other languages, such as Java, C and C++. However if the image alignment was done in another programming language, it may be possible to stick to just one language.
+
+\noindent \textbf{9: Determine which dataset to use}
+
+Given the data of choice - Mammograms - there exists an ethical issue of utilising people's medical scans. Research would have to be undertaken to determine whether there are freely-available, license-free Mammographic scans available for use in this project.
 
 \subsection{Research questions}
+\label{ssec:research-qs}
 
-The research questions are tightly interwoven with the Objectives of this Project, outlined in Section \ref{sec:objectives}
+The research questions are tightly interwoven with the Objectives of this project, outlined in Section \ref{sec:objectives}
 
-\begin{itemize}
-  \item Does the use of Fuzzy Entropy alignment metrics improve the alignment of mammograms?
-  \item Do clinicians / radiographers / mammographers find the output at all useful?
-  \item What advantages / disadvantages does each fuzzy entropy alignment metric entail?
-\end{itemize}
+\subsubsection{Does the use of Fuzzy Entropy alignment metrics improve the alignment of mammograms?}
+
+Through background research it would follow that there would be no issue in aligning images using fuzzy entropy techniques. However the implementation might be somewhat difficult or computationally-costly, which would undermine the objective of a quick tool.
+
+And if so, could one be more useful than another? As the uncertainty in fuzzy entropy will help model different types of tissue, the way in which they assess uncertainty will affect the output image.
+
+\subsubsection{Do clinicians / radiographers / mammographers find the output at all useful?}
+
+Does the output show a Doctor something useful? Does one of the Fuzzy Entropy alignment metrics show something different to one of the others? These are questions which would help to validate the success of this research question.
+
+This would be a step towards making a tool that one day could be utilised by Doctors worldwide to aid in their classification of a patient`s breast tissue, by giving a second opinion based on image analysis.
+
+\subsubsection{What advantages / disadvantages does each fuzzy entropy alignment metric entail?}
+
+One algorithm may be slower, but produce better results, so it is important to weigh up the speed versus the quality of the output.

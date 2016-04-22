@@ -9,7 +9,7 @@ As mentioned in Section \ref{sssec:hybrid-section}, the Hybrid Entropy equation 
 
 Where $E_0$ and $E_1$ can be defined as:
 
-\begin{subequations} \label{eq:E0-E1}
+\begin{subequations} %\label{eq:E0-E1}
   \begin{align}
     &E_0 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{(1-\mu_i)exp(\mu_i)} \\
     &E_1 = \frac{1}{n}\displaystyle\sum_{i=1}^{n}{\mu_iexp(1-\mu_i)}
@@ -88,35 +88,36 @@ After this mitigation, the third and fourth iteration had suitable entropy value
 
 \begin{figure}[H]
   \begin{center}
-  %  \pgfplotsset{every axis/.append style={thick},width=0.4*\textwidth, ymax=1}
-  %    \begin{tikzpicture}
-  %        width = 10cm,
-  %        axis lines = middle,
-  %        xlabel = {Iterations},
-  %        ylabel = {Entropy},
-  %        ymin = -0.3,
-  %        ymax = 0.3,
-  %        ytick={-0.5,-0.4,...,0.6},
-  %        y tick label style={
-  %                /pgf/number format/.cd,
-  %                fixed,
-  %                fixed zerofill,
-  %                precision=1,
-  %            /tikz/.cd
-  %        },
-  %        xtick={1,2,...,5},
-  %        x label style={at={(axis description cs:0.5,0.3)},anchor=north},
-  %        y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
-  %        nodes near coords,
-  %    	  nodes near coords align={vertical},
-  %        every node near coord/.append style={font=\scriptsize,
-  %                xshift = +3pt, yshift=+4pt,anchor=west, /pgf/number format/precision=6},
-  %        ]
-  %      \addplot coordinates
-  %        { (1, 0.124512) (2, 0.048099) (3, 0.238875) (4, 0.232505) (5, -0.140011) };
-  %        \draw[ultra thin] (axis cs:0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0,\pgfkeysvalueof{/pgfplots/ymax});
-  %      \end{axis}
-  %    \end{tikzpicture}
+    \pgfplotsset{every axis/.append style={thick},width=0.4*\textwidth, ymax=1}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width = 10cm,
+          axis lines = middle,
+          xlabel = {Iterations},
+          ylabel = {Entropy},
+          ymin = -0.3,
+          ymax = 0.3,
+          ytick={-0.5,-0.4,...,0.6},
+          y tick label style={
+                 /pgf/number format/.cd,
+                  fixed,
+                  fixed zerofill,
+                  precision=1,
+              /tikz/.cd
+          },
+          xtick={1,2,...,5},
+          x label style={at={(axis description cs:0.5,0.3)},anchor=north},
+          y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+          nodes near coords,
+      	  nodes near coords align={vertical},
+          every node near coord/.append style={font=\scriptsize,
+                  xshift = +3pt, yshift=+4pt,anchor=west, /pgf/number format/precision=6},
+          ]
+        \addplot coordinates
+          { (1, 0.124512) (2, 0.048099) (3, 0.238875) (4, 0.232505) (5, -0.140011) };
+          \draw[ultra thin] (axis cs:0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0,\pgfkeysvalueof{/pgfplots/ymax});
+        \end{axis}
+      \end{tikzpicture}
     \end{center}
     \caption{Graph showing the entropy output after 5 iterations}
     \label{fig:minus-entropy}

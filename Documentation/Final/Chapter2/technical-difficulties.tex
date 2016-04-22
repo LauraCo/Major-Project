@@ -240,30 +240,29 @@ The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzz
 
 \begin{figure}[H]
   \centering
-    %\begin{tikzpicture}
-    %  \begin{axis}[
-    %      width = 12cm,
-    %      ybar,
-    %      bar width=4pt,
-    %      ylabel={Time (secs)},
-    %      xlabel={Iterations},
-    %      xtick={1,...,5},
-    %      nodes near coords,
-    %      every node near coord/.append style={font=\scriptsize,
-    %            xshift=-6pt,  yshift=+5pt,anchor=west},
-    %      nodes near coords align={vertical},
-    %      legend pos=outer north east,
-    %      legend style={cells={align=left}},
-    %      ]
-    %    \addplot table[x=Iteration, y=Pre optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-    %    \addlegendentry{Pre optimisation \\ (for loops) \\};
-    %    \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-    %    \addlegendentry{Partial optimisation \\ (just membership.m) \\};
-    %    \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-    %    \addlegendentry{Full optimisation \\ (both membership.m \& \\ deLucaFuzzy.m) \\};
-        %\addplot table[x=rounds, y=QRC] {\loadedtable};
-    %  \end{axis}
-    %\end{tikzpicture}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width = 12cm,
+          ybar,
+          bar width=4pt,
+          ylabel={Time (secs)},
+          xlabel={Iterations},
+          xtick={1,...,5},
+          nodes near coords,
+          every node near coord/.append style={font=\scriptsize,
+                xshift=-6pt,  yshift=+5pt,anchor=west},
+          nodes near coords align={vertical},
+          legend pos=outer north east,
+          legend style={cells={align=left}},
+          ]
+        \addplot table[x=Iteration, y=Pre optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Pre optimisation \\ (for loops) \\};
+        \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Partial optimisation \\ (just membership.m) \\};
+        \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
+        \addlegendentry{Full optimisation \\ (both membership.m \& \\ deLucaFuzzy.m) \\};
+      \end{axis}
+    \end{tikzpicture}
     \caption{Time per iteration before, during and after vectorisation}
     \label{fig:time-per-iteration}
 \end{figure}
@@ -273,27 +272,27 @@ Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, i
 %http://pgfplots.sourceforge.net/gallery.html
 \begin{figure}[H]
   \begin{center}
-    %\begin{tikzpicture}
-    %  \begin{axis}[
-    %    width= 10cm,
-    %    symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
-    %    x tick label style={font=\small,text width=2.5cm,align=center},
-    %    ybar,
-    %    enlargelimits=0.15,
-    %    legend style={at={(0.5,-0.2)},
-    %      anchor=north,legend columns=-1},
-    %    ylabel={Time (secs)},
-    %    xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
-    %    nodes near coords,
-    %	  nodes near coords align={vertical},
-    %    %x tick label style={rotate=45,anchor=east},
-    %    ]
-    %    \addplot[ybar,fill] coordinates {
-    %(Pre optimisation (For loops),265.771186)
-    %(Partial optimisation (Just membership),155.432352)
-    %(Full optimisation (Membership \& De Luca),105.188263) };
-  %    \end{axis}
-  %  \end{tikzpicture}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width= 10cm,
+        symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        x tick label style={font=\small,text width=2.5cm,align=center},
+        ybar,
+        enlargelimits=0.15,
+        legend style={at={(0.5,-0.2)},
+          anchor=north,legend columns=-1},
+        ylabel={Time (secs)},
+        xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        nodes near coords,
+    	  nodes near coords align={vertical},
+        x tick label style={rotate=45,anchor=east},
+        ]
+        \addplot[ybar,fill] coordinates {
+    (Pre optimisation (For loops),265.771186)
+    (Partial optimisation (Just membership),155.432352)
+    (Full optimisation (Membership \& De Luca),105.188263) };
+      \end{axis}
+    \end{tikzpicture}
     \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
     \label{fig:total-time}
   \end{center}

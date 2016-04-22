@@ -108,7 +108,7 @@ One common example of this is listing someone as `Short', `Average' or `Tall' in
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter1/lit-review-img/fuzzy-sets.png}
-  \caption{A comparison between Fuzzy Sets and Crisp sets. Image Source: Fuzzy Sets and Fuzzy Logic: Theory and Applications \cite{GEORGE_J_BO_2008}}
+  \caption{A comparison between Fuzzy Sets and Crisp sets. \textit{Image Source: Fuzzy Sets and Fuzzy Logic: Theory and Applications \cite{GEORGE_J_BO_2008}}}
   \label{fig:fuzzy-sets}
 \end{figure}
 
@@ -174,7 +174,7 @@ Sander further went on to propose some properties, which must be imposed on a Fu
 Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all 4 of De Luca and Termini`s 4 conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
 
 \begin{equation} \label{eq:pal-pal-orig}
-  H = -k  \displaystyle\sum_{i=1}^{n}{\{\mu_iexp(1 - \mu_i) + (1 - \mu_i)exp(\mu_i)}
+  H = -k  \displaystyle\sum_{i=1}^{n}{\{\mu_iexp(1 - \mu_i) + (1 - \mu_i)exp(\mu_i)\}}
 \end{equation}
 
 \subsubsection{Higher Order Fuzzy Entropy \& Hybrid Entropy - 1992}
@@ -182,7 +182,7 @@ Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_19
 
 In Pal \& Pal's paper \say{Higher order fuzzy entropy and hybrid entropy of a set} \cite{Pal_Pal_1992}, they not only prove some of De Luca \& Termini`s work to be flawed, but also defined two new Fuzzy Entropy algorithms, and a new set of definitions.
 
-\textbf{Higher Order Fuzzy Entropy}
+\noindent \textbf{Higher Order Fuzzy Entropy}
 
 As defined by Pal \& Pal:
 
@@ -209,9 +209,7 @@ The entropy of order $r$ of the fuzzy set $A$ is defined as:
 
 If $r = 1$, then \eqref{eq:higher-order} reduces to Equations \eqref{eq:pal-pal-orig} and \eqref{eq:de-luca-eq}
 
-This project does not implement Higher Order Fuzzy Entropy due to the computational-overhead needed to run - especially on images with as much detail as a mammogram.
-
-\textbf{Hybrid Entropy}
+\noindent \textbf{Hybrid Entropy}
 
 Another Fuzzy Entropy implementation outlined in Pal \& Pal`s paper was Hybrid Entropy. This algorithm is particularly useful as it combines Probabilistic and Possibilistic (fuzziness) uncertainty and if fuzziness is removed or not present, it returns to that of a classical set.
 
@@ -252,7 +250,7 @@ It's concise nature, and chronological listing ensured a strong understanding of
 
 \subsection{Joint Image Alignment}
 
-Joint image alignment focuses on the alignment of several images, into one average image.
+Joint image alignment focuses on the alignment of several images, into one average image. This Subsection will look into a couple of the techniques available for this project.
 
 \subsubsection{Learned-Miller`s Congealing}
 
