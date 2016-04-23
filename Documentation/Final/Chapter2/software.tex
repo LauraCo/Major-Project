@@ -124,8 +124,65 @@ In traditional plan-driven methodologies, such as the Waterfall method, Design w
 
 \subsubsection{CRC Cards}
 
-In \acrshort{XP}, \acrfull{CRC} Cards are an important task in which the entire team can collaborate in the system design. Whilst there is no team in this project, they still play a vital role in structuring the system, and are easily discardable should plans change.
+In \acrshort{XP}, \acrfull{CRC} Cards are an useful task in which the entire team can collaborate in the system design. Whilst there is no team in this project, they still play a vital role in structuring the system, can be iteratively updated and are easily discardable should the need arise.
 
-Typically \acrshort{CRC} cards would represent Objects, with the class of the written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the \say{Classes} in this project are replaced by Functions and Scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and it's corresponding responsibilities and collaborations as normal - see Appendix \textbf{NEED TO REF HERE} for more detail.
+Typically \acrshort{CRC} cards would represent Objects, with the class of the written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the \say{Classes} in this project are replaced by Functions and Scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and it's corresponding responsibilities and collaborations as normal - see Figure \ref{fig:crc} and Appendix \ref{appendix:crc-cards} for more detail.
 
-\todo[inline]{Reference appendix}
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{Chapter2/software-img/crc.png}
+  \caption{Example CRC Card as used in this project}
+  \label{fig:crc}
+\end{figure}
+
+\subsubsection{GUI Design}
+
+The name \say{Enantiomorph} was chosen as the application name as a more concise, recognisable alternative to the project title.
+
+\begin{quotation}
+  \textit{either of a pair of crystals (as of quartz) that are structural mirror images \ref{enantiomorph}}
+\end{quotation}
+
+This section will look at the design evolution of the application GUI.
+
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_1.png}
+  \caption{Initial wireframe design for GUI}
+  \label{fig:wireframe1}
+\end{figure}
+
+The initial design, as represented in Figure \ref{fig:wireframe1}, was designed to incorporate the first set of project requirements.
+
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_2.png}
+  \caption{Second wireframe design for GUI}
+  \label{fig:wireframe2}
+\end{figure}
+
+Figure \ref{fig:wireframe2} represents the changes in requirements as the project progressed. It became clear that a load button which allowed the user to \textit{both} generate a large pgm file from a folder of mammograms, or upload a large pgm file that already exists would be difficult to implement. Therefore the button got split into two, with appropriate text above the buttons to help the user decide which to use.
+
+By the second \acrshort{GUI} iteration, it became apparent that implementing a way in which to stop the \Gls{Congealing} algorithm automatically would be too time-consuming for the time left in the project. Therefore the user would have to specify how many iterations they would like to run. This meant a textbox with numerical validation had to be incorporated into the \acrshort{GUI} and the extra iteration information fed into the back-end.
+
+During the second application iteration, the outputs of each iteration mean and the adjusted input images were implemented for the user to see.
+
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_3.png}
+  \caption{Third wireframe design for GUI}
+  \label{fig:wireframe3}
+\end{figure}
+
+The final wireframe created is outlined in Figure \ref{fig:wireframe3}. Additional information  about the \Gls{Congealing} process can be accessed via the button in the bottom left corner and meta data about the input image displayed in the top section. Users can also clear the entire \acrshort{GUI} to start a new alignment - this could be useful should they wish to compare the outputs from the 3 different entropy alignment techniques.
+
+\noindent \textbf{The final \acrshort{GUI}}
+
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{Chapter2/software-img/final_gui.png}
+  \caption{Final GUI}
+  \label{fig:final_gui}
+\end{figure}
+
+Figure \ref{fig:final_gui} is a screenshot of the final application the user would use. This provides a more detailed insight into the finer details of the \acrshort{GUI}, more so than the previous wireframes.
