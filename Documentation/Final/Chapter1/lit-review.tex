@@ -35,6 +35,7 @@ Let us consider a fair coin toss. The probability of heads is exactly $\frac{1}{
 On the other side, if a system outputs solely the letter \say{M}, then the entropy of receiving the letter \say{M} is exactly 0. This is because when either the positive or the negative outcome is 100\%, then both sides equal \say{0} when fed into the entropy equation.
 %http://mirror.ox.ac.uk/sites/ctan.org/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf
 \begin{figure}[H]
+  \iffalse
 \begin{center}
 \pgfplotsset{every axis/.append style={thick},width=0.4*\textwidth, ymax=1}
 \begin{tikzpicture}
@@ -54,6 +55,7 @@ On the other side, if a system outputs solely the letter \say{M}, then the entro
 \end{center}
 \caption{Entropy mapped against probability ($p$) of occurrence.}
 \label{fig:entropy}
+\fi
 \end{figure}
 
 It follows that entropy can only ever be between 0 and 1, with an entropy of 0 have a 50\% probability, and an entropy of 1 being 100\% certain.

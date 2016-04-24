@@ -49,6 +49,17 @@ Details of the implementation of the Fuzzy Entropy Algorithms can be found:
 
 \textbf{Hybrid Entropy: } Subsection \ref{ssec:hybrid-sec}
 
+\subsection{Data Flow}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Chapter2/software-img/data_flow_2.png}
+  \caption{Data flow through the application.}
+  \label{fig:data-flow}
+\end{figure}
+
+Figure \ref{fig:data-flow} shows the flow of data through the application, all the way up to \texttt{Enantiomorph} the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}
+
 \subsection{Testing}
 
 Prior to the project beginning, it was outlined that this project should follow a \acrshort{TDD} practice. In \acrshort{TDD}, the Developer first writes a test, which will fail due to the lack of corresponding functionality. They would then go on to implement the functionality desired by the test. Finally, any refactoring of the initial test and/or code would take place.

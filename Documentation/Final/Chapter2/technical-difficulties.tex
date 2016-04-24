@@ -285,6 +285,7 @@ Vectorisation is the process to replace loop-based code with MATLAB matrix and v
 The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzzy.m} contained for loops, so experimentation was run before, during and after vectorisation to evaluate the supposed performance increase.
 
 \begin{figure}[H]
+  \iffalse
   \centering
     \begin{tikzpicture}
       \begin{axis}[
@@ -311,12 +312,14 @@ The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzz
     \end{tikzpicture}
     \caption{Time per iteration before, during and after vectorisation}
     \label{fig:time-per-iteration}
+    \fi
 \end{figure}
 
 Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, in the same environment, to run the \texttt{binaryCongeal.m} \footnote{The function which calls the specified entropy algorithm.} function on each iteration. A marked improvement can be seen just by vectorising the \texttt{membership.m} function, and further improvements once the \texttt{deLucaFuzzy.m} function for Non-Probabilistic entropy was vectorised.
 
 %http://pgfplots.sourceforge.net/gallery.html
 \begin{figure}[H]
+  \iffalse
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
@@ -342,6 +345,7 @@ Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, i
     \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
     \label{fig:total-time}
   \end{center}
+  \fi
 \end{figure}
 
 Figure \ref{fig:total-time} outlines the total time taken to run 5 iterations of Non-Probabilistic Entropy before vectorisation, once vectorisation was complete on the \texttt{membership.m} function, and finally after full vectorisation.

@@ -15,7 +15,7 @@
 % http://tex.stackexchange.com/questions/202072/scale-y-and-x-axis-in-pgfplots
 \begin{figure}[H]
   \begin{center}
-    %\iffalse
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=15cm,
@@ -37,7 +37,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/shannon-img/shannon-20.csv};
     \end{axis}
     \end{tikzpicture}
-    %\fi
+    \fi
     \caption{Comparison of the reduction in entropy over iterations.}
   \end{center}
 \end{figure}
@@ -68,7 +68,7 @@
 
 \begin{figure}[H]
   \begin{center}
-    %\iffalse
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -87,7 +87,7 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/shannon-img/shannon-20.csv};
     \end{axis}
     \end{tikzpicture}
-    %\fi
+    \fi
     \caption{Shannon: Comparison of the reduction in entropy over iterations, as in Table \ref{table:shannon-entropy}.}
   \end{center}
 \end{figure}
@@ -143,7 +143,7 @@
 
 \begin{figure}[H]
   \begin{center}
-    %\iffalse
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -163,13 +163,13 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/nonProb-img/nonProb20.csv};
     \end{axis}
     \end{tikzpicture}
-    %\fi
+    \fi
     \caption{Non-Probabilistic: Comparison of the reduction in entropy over iterations, as in Table \ref{table:non-prob-entropy}.}
   \end{center}
 \end{figure}
 
 \begin{table}[H]
-  %\iffalse
+  \iffalse
   \begin{center}
 \pgfplotstabletypeset[col sep=comma,
     columns={Iteration,Entropy, Iteration, Entropy},columns/Entropy/.style={precision=6},
@@ -192,7 +192,7 @@
     \caption{Entropy table for Non-Probabilistic}
     \label{table:non-prob-entropy}
   \end{center}
-  %\fi
+  \fi
 \end{table}
 
 \newpage
@@ -221,7 +221,7 @@
 
 \begin{figure}[H]
   \begin{center}
-  %  \iffalse
+    \iffalse
     \begin{tikzpicture}
       \begin{axis}[
         width=12cm,
@@ -240,12 +240,13 @@
       \addplot table [x=Iteration, y=Entropy, col sep=comma] {Chapter3/hybrid-img/hybrid20.csv};
     \end{axis}
     \end{tikzpicture}
-  %  \fi
+    \fi
     \caption{Hybrid: Comparison of the reduction in entropy over iterations, as in Table \ref{table:non-prob-entropy}.}
   \end{center}
 \end{figure}
 
 \begin{table}[H]
+  \iffalse
   \begin{center}
 \pgfplotstabletypeset[col sep=comma,
     columns={Iteration,Entropy, Iteration, Entropy},columns/Entropy/.style={precision=6},
@@ -267,6 +268,7 @@
     \caption{Entropy table for Hybrid}
     \label{table:hybrid-entropy}
   \end{center}
+  \fi
 \end{table}
 
 \subsection{Run-time results}
