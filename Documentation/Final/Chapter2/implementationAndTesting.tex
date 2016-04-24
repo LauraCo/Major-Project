@@ -1,25 +1,34 @@
 \subsection{Membership Implementation}
 
-As covered in Section \ref{sssec:member}, the Membership trapeziums would be defined within the system, rather than dynamically being calculated. This made use of the Fuzzy Logic Toolbox by leveraging the following functions:
+As covered in Section \ref{sssec:member}, the Membership trapezia would be defined within the system, rather than dynamically being calculated. This made use of the Fuzzy Logic Toolbox by leveraging the following functions:
 
 \begin{itemize}
   \item \textbf{trapmf: } trapezium-shaped membership function
   \item \textbf{evalmf: } a generic membership evaluation function
 \end{itemize}
 
-Having pre-defined functions for creating and evaluating the membership trapeziums ensured that the function was a quick implementation. However it did reduce the number of Unit Tests I could have written to test the creation of such elements.
+Having pre-defined functions for creating and evaluating the membership trapezia ensured that the function was a quick implementation. However it did reduce the number of Unit Tests I could have written to test the creation of such elements.
 
-In this function, an image is read in, the membership of each pixel is evaluated against each of the two or three membership trapeziums, adding the outcome to a corresponding array (e.g. one array for the membership of all the pixels against the low-trapezium etc). The two/three arrays (depending on number of trapeziums) are then compared and the array which has the greater membership for each pixel, that membership value is added to another array which compiles all the highest values.
+In this function, an image is read in, the membership of each pixel is evaluated against each of the two or three membership trapezia, adding the outcome to a corresponding array (e.g. one array for the membership of all the pixels against the low-trapezium etc). The two/three arrays (depending on number of trapezia) are then compared and the array which has the greater membership for each pixel, that membership value is added to another array which compiles all the highest values.
 
 For example:
 
-\begin{lstlisting}[style=Matlab-editor,frame=single]
+\begin{minted}
+  [
+  breaklines,
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\small,
+  linenos
+  ]
+  {text}
     pixel[1,1]`s membership in trapezium low = 0.8
     pixel[1,1]`s membership in trapezium medium = 0.4
     pixel[1,1]`s membership in trapezium high = 0
 
     Therefore as 0.8 is the highest membership value, this is added to the image membership array
-\end{lstlisting}
+\end{minted}
 
 The three/four arrays (one for each trapezium and one for the highest values) are then passed out of the function, and utilised in each of the algorithm functions.
 
@@ -29,11 +38,12 @@ Initially the \acrfull{GUI} would be implemented using JavaFX, and any MATLAB ad
 
 The combination of both the drag-and-drop environment, and manually programming via the editor was undertaken during this project, to allow a greater amount of freedom and flexibility. Drag-and-drop was leveraged to style the \acrshort{GUI} and the editor was used to program the functionality in the back-end and link in the \Gls{Congealing} and Fuzzy Entropy algorithms.
 
+\vspace{1cm}
 \subsection{Algorithm Implementation}
 
 Details of the implementation of the Fuzzy Entropy Algorithms can be found:
 
-\textbf{Shannon Entropy: }
+\textbf{Shannon Entropy: } Subsection \ref{ssec:shannon-entropy}
 
 \textbf{Non-Probabilistic Entropy: } Subsection \ref{ssec:non-prob-sec}
 

@@ -5,6 +5,7 @@
 For this project, a literature review was undertaken to assess the work completed by researchers in the fields of Entropy, Fuzzy Entropy and image alignment methods to help better understand what has been investigated, and to gain a personal background understanding.
 
 \subsection{Entropy}
+\label{ssec:entropy}
 
 In terms of Information Theory, the Merriam-Webster Dictionary defines Entropy to be \cite{def_entropy}:
 
@@ -59,7 +60,7 @@ It follows that entropy can only ever be between 0 and 1, with an entropy of 0 h
 
 \subsection{Uncertainty}
 
-However real life is not 100\% certain - a certain amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind of uncertainty, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important so as researchers we can understand it, and use it to our advantage in techniques such as Fuzzy Entropy.
+However real life is not 100\% certain - a small amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important so as researchers we can understand it, and use it to our advantage in techniques such as fuzzy entropy.
 
 \subsubsection{Probabilistic Uncertainty}
 
@@ -112,9 +113,10 @@ One common example of this is listing someone as `Short', `Average' or `Tall' in
   \label{fig:fuzzy-sets}
 \end{figure}
 
-After combining Fuzzy Set Theory with Entropy, then the amount of fuzzy information gained from the fuzzy set(s) is known as Fuzzy Entropy.
+After combining Fuzzy Set Theory with Entropy, then the amount of fuzzy information gained from the fuzzy set(s) is known as fuzzy entropy.
 
 \subsubsection{Non-Probabilistic Entropy - 1972}
+\label{sssec:non-prob-review}
 
 De Luca and Termini are considered to be the first to have taken Shannon Entropy and extended it to include fuzziness \cite{DeLuca_Termini_1972}. They also defined properties which a fuzzy entropy must follow, in order to be classed as true.
 
@@ -143,7 +145,7 @@ The entropy given by equation \eqref{eq:de-luca-eq} satisfies all 4 of De Luca a
 
 \subsubsection{Fuzzy Shannon Entropy - 1989}
 
-Sander \cite{Sander_1989} presented a characterisation of a Fuzzy Entropy some time after De Luca and Termini`s work was published. His implementation of Shannon Fuzzy Entropy is laid out in equation \eqref{eq:fuzzy-shannon} below:
+Sander \cite{Sander_1989} presented a characterisation of a fuzzy entropy some time after De Luca and Termini`s work was published. His implementation of Shannon fuzzy entropy is laid out in equation \eqref{eq:fuzzy-shannon} below:
 
 \begin{equation}\label{eq:fuzzy-shannon}
   H(f) = -c \displaystyle\sum_{i=1}^{n}{f(x_i)lnf(x_i), c > 0}
@@ -155,7 +157,7 @@ Where the power of a fuzzy set is defined as:
   P(f) = \displaystyle\sum_{i=1}^{n}{f (x_i)}
 \end{equation}
 
-Sander further went on to propose some properties, which must be imposed on a Fuzzy Entropy $d$ to ensure that $d(f) = H(f)$:
+Sander further went on to propose some properties, which must be imposed on a fuzzy entropy $d$ to ensure that $d(f) = H(f)$:
 
 \begin{subequations}
   \begin{align}
@@ -171,7 +173,7 @@ Sander further went on to propose some properties, which must be imposed on a Fu
 
 \subsubsection{Object-background segmentation using new definitions of entropy - 1989}
 
-Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all 4 of De Luca and Termini`s 4 conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
+Pal \& Pal outlined their first fuzzy entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all 4 of De Luca and Termini`s 4 conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
 
 \begin{equation} \label{eq:pal-pal-orig}
   H = -k  \displaystyle\sum_{i=1}^{n}{\{\mu_iexp(1 - \mu_i) + (1 - \mu_i)exp(\mu_i)\}}
@@ -180,7 +182,7 @@ Pal \& Pal outlined their first Fuzzy Entropy algorithm in 1989 \cite{Pal_Pal_19
 \subsubsection{Higher Order Fuzzy Entropy \& Hybrid Entropy - 1992}
 \label{sssec:hybrid-section}
 
-In Pal \& Pal's paper \say{Higher order fuzzy entropy and hybrid entropy of a set} \cite{Pal_Pal_1992}, they not only prove some of De Luca \& Termini`s work to be flawed, but also defined two new Fuzzy Entropy algorithms, and a new set of definitions.
+In Pal \& Pal's paper \say{Higher order fuzzy entropy and hybrid entropy of a set} \cite{Pal_Pal_1992}, they not only prove some of De Luca \& Termini`s work to be flawed, but also defined two new fuzzy entropy algorithms, and a new set of definitions.
 
 \noindent \textbf{Higher Order Fuzzy Entropy}
 
@@ -211,7 +213,7 @@ If $r = 1$, then \eqref{eq:higher-order} reduces to Equations \eqref{eq:pal-pal-
 
 \noindent \textbf{Hybrid Entropy}
 
-Another Fuzzy Entropy implementation outlined in Pal \& Pal`s paper was Hybrid Entropy. This algorithm is particularly useful as it combines Probabilistic and Possibilistic (fuzziness) uncertainty and if fuzziness is removed or not present, it returns to that of a classical set.
+Another fuzzy entropy implementation outlined in Pal \& Pal`s paper was Hybrid Entropy. This algorithm is particularly useful as it combines Probabilistic and Possibilistic (fuzziness) uncertainty and if fuzziness is removed or not present, it returns to that of a classical set.
 
 Let us define Hybrid Entropy.
 
@@ -246,7 +248,7 @@ Therefore, the hybrid entropy of fuzzy set $A$ can be defined as:
 
 Due to the older nature of some of the papers listed above, some were difficult to locate online. So when implementing the chosen algorithms (Non-Probalistic Entropy and Hybrid Entropy), Al-sharhan et al's paper \say{Fuzzy Entropy: a Brief Survey} \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was a useful tool.
 
-It's concise nature, and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
+Its concise nature, and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
 
 \subsection{Joint Image Alignment}
 
@@ -286,6 +288,6 @@ This method removes the need to hand-label the input data and improves the perfo
 
 \subsection{Image Alignment using Fuzzy Entropy}
 
-Research has been undertaken in the past to investigate image alignment using Fuzzy Entropy metrics, however typically they were found to be computationally costly, and therefore slow to run on a conventional PC or laptop. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for more everyday use in image alignment. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
+Research has been undertaken in the past to investigate image alignment using fuzzy entropy metrics, however typically they were found to be computationally costly, and therefore slow to run on a conventional PC or laptop. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for more everyday use in image alignment. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
 
 Some of this work which has implemented a more computationally-costly \Gls{Congealing} algorithm is that presented by Mac Parthal\'ain and Strange in their 2013 paper \say{Fuzzy-entropy based image congealing} \cite{Mac_Parthalain_Strange_2013}.  Their implementation included dynamically-calculated fuzzy sets and a fuzzy similiarity relation matrix - allowing a comparison of all the objects to each other.

@@ -22,12 +22,12 @@ And $p_0$ and $p_1$ are the probabilities of receiving 0 and 1 symbols respectiv
 \subsubsection{MATLAB implementation}
 %==============================================================================
 
-Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapeziums covering 2 fuzzy sets, as seen in Figure
+Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapezia covering 2 fuzzy sets, as seen in Figure \ref{fig:2-traps}.
 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter2/hybrid-img/2_traps.png}
-  \caption{Two membership trapeziums for Hybrid Entropy - Low and High grey-level values.}
+  \caption{Two membership trapezia for Hybrid Entropy - Low and High grey-level values.}
   \label{fig:2-traps}
 \end{figure}
 
@@ -40,29 +40,24 @@ Two arrays are then fed into the Hybrid Entropy function - one listing all the p
 
 Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then must belong to the other.
 
-Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapeziums - low, medium and high grey-level values.
-
-\textbf{Initial ideas - check email between me and neil}
-
-
-Logic would dictate that if the comparison of two fuzzy sets works, then to compare the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
+Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapezia - low, medium and high grey-level values. Logic would dictate that if the comparison of two fuzzy sets works, then to compare the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
 
 For example:
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[scale=0.5]{Chapter2/hybrid-img/3_traps.png}
-  \caption{3 fuzzy set trapeziums}
+  \caption{3 fuzzy set trapezia}
   \label{fig:3-traps}
 \end{figure}
 
 In theory, calculating $E_0$ and $E_1$ for each trapezium, calculating the hybrid entropy for each, and then combining them, should work:
 
 \begin{equation}
-E_0 = \frac{1}{No.\_of\_pixels\_in\_low\_trapezium}\displaystyle\sum_{i=1}^{n}{(1-Low\mu_i)exp(Low\mu_i)}
+E_0 = \frac{1}{\text{No. of pixels in low trapezium}}\displaystyle\sum_{i=1}^{n}{(1-Low\mu_i)exp(Low\mu_i)}
 \end{equation}
 \begin{equation}
-E_1 = \frac{1}{No.\_of\_pixels\_in\_low\_trapezium}\displaystyle\sum_{i=1}^{n}{Low\mu_iexp(1-Low\mu_i)}
+E_1 = \frac{1}{\text{No. of pixels in low trapezium}}\displaystyle\sum_{i=1}^{n}{Low\mu_iexp(1-Low\mu_i)}
 \end{equation}
 
 Where $Low\mu$ is the membership of the pixels in the low fuzzy set.
@@ -73,14 +68,14 @@ H_{hy} = -p_0\log_{10}(1 - E_0) - p_1\log_{10}(E_1)
 
 Where
 
-$p_0 = \frac{No.\_of\_pixels\_in\_low\_trapezium}{No.\_of\_pixels\_in\_low\_trapezium + med\_trapezium}$
+$p_0 = \frac{\text{No. of pixels in low trapezium}}{\text{No. of pixels in low trapezium + med trapezium}}$
 
 and
 
-$p_1 = \frac{No.\_of\_pixels\_in\_med\_trapezium}{No.\_of\_pixels\_in\_low\_trapezium + med\_trapezium}$
+$p_1 = \frac{\text{No. of pixels in med trapezium}}{\text{No. of pixels in low trapezium + med trapezium}}$
 
 
-This was done for all 3 trapeziums, then combined and divided by 3 (for the mean entropy). As the result for each trapezium should be between 0 and 1 (as each is an entropy value), then combining them should be no issue. However this was not the case.
+This was done for all 3 trapezia, then combined and divided by 3 (for the mean entropy). As the result for each trapezium should be between 0 and 1 (as each is an entropy value), then combining them should be no issue. However this was not the case.
 
 First of all, the hybrid equation output was deemed to be `NaN' - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting the output equal to 0, in effect ignoring any output from the highest fuzzy set.
 
@@ -123,8 +118,4 @@ After this mitigation, the third and fourth iteration had suitable entropy value
     \label{fig:minus-entropy}
 \end{figure}
 
-It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining timeframe of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal. This would mean, one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.
-
-%==============================================================================
-\subsubsection{Run-time}
-%==============================================================================
+It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining time-frame of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as set out by Pal and Pal. This would mean, one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.

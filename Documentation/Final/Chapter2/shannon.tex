@@ -3,7 +3,16 @@
 This section will provide an outline to the implementation of the Fuzzy Entropy algorithms, along with a brief outline of the Shannon Entropy implementation.
 
 \subsection{Shannon Entropy}
+\label{ssec:shannon-entropy}
 
 Learned-Miller`s demo code was implemented using Shannon Entropy \cite{joint-alignment}. Whilst the predominant dataset was MNIST handwriting data \cite{lecun1998gradientbased}, which is a binary dataset (pixels were either black or white), this was not useful for this project as there is no variation in greyscale, even when a mean is taken of multiple images.
 
 However, Learned-Miller had implemented code to handle the processing of greyscale and colour images, such as in MRI images. This ensured that no function needed to be created to handle grey-scale images, greatly reducing the pre-programming needed. The only image handling that was encountered was to do with the mammograms, and the creation of a large pgm file to pass into the \Gls{Congealing} algorithm, as in Section \ref{sec:tech-diff}
+
+As outlined in \ref{ssec:entropy}, Shannon entropy is defined as:
+
+\begin{equation}
+  H(X) = - \displaystyle\sum_{i=0}^{N}{p_i \log_2 p_i}
+\end{equation}
+
+This can be computed very quickly using a lookup table containing all the possible values of \texttt{p}. This makes it likely that the Shannon entropy algorithm will be the quickest on each iteration. However as it does not take any type of uncertainty into consideration when aligning the scans, the outcome could be quite dramatically different from that of a Fuzzy entropy nature.

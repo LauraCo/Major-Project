@@ -21,9 +21,18 @@ To mitigate this issue, the array passed into fwrite would have to be transposed
 
 MATLAB has a \say{Transpose} function which simply flips two elements in a 2D array as utilised in:
 
-\begin{lstlisting}[style=Matlab-editor,frame=single]
+\begin{minted}
+  [
+  breaklines,
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\small,
+  linenos
+  ]
+  {matlab}
     fwrite(output,handles.finalImg.','uchar');
-\end{lstlisting}
+\end{minted}
 
 Where handles.finalImg is a GUI holder for a 2D array of pixel values. This example was taken from the \texttt{removeMarker.m}  function - where the user can remove Medical Markers and save the output back to the original file.
 
@@ -31,7 +40,16 @@ Where handles.finalImg is a GUI holder for a 2D array of pixel values. This exam
 
 For arrays with more than 2 dimensions, simply swapping the values around will not work, so the MATLAB function \texttt{permute} \cite{permute} must be used.
 
-\begin{lstlisting}[style=Matlab-editor,frame=single]
+\begin{minted}
+  [
+  breaklines,
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\small,
+  linenos
+  ]
+  {matlab}
 
   sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans); %set size of array
 
@@ -47,7 +65,7 @@ outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
 saveSeries(outfname,permute(s,[2,1,3])); %use the saveSeries demo function to write the final image arrays out to a file
 
-\end{lstlisting}
+\end{minted}
 
 This example was taken from the \texttt{pgm2bigPgm.m} function - where a set of input images are passed in, and a large pgm image containing all the input images is outputted (as in Figure \ref{fig:final-output-4}). This image is then passed into the \Gls{Congealing} algorithm for alignment.
 
@@ -132,17 +150,17 @@ Two options were available for the avoidance of Medical Markers:
     \label{fig:marker-removal-discards}
 \end{figure}
 
-\textbf{Morphological operation - remove squares from image}
+\noindent \textbf{Morphological operation - remove squares from image}
 
 Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square}. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. So removal would be made more difficult by the fact you would have to specify a maximum size square to remove, that smaller than the image size.
 
 This idea was discarded due to the marker unlikely to ever be perfectly square in the scan.
 
-\textbf{MATLAB function regionprops}
+\noindent \textbf{MATLAB function regionprops}
 
 Another candidate function for removing Medical Markers was the MATLAB function \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
 
-\textbf{Shape recognition demo}
+\noindent \textbf{Shape recognition demo}
 
 On the Mathworks File Exchange site, a community run to help MATLAB users, there was a demo created by Ahmed Samieh to aid in the recognition of certain shapes \cite{shape_recognition}. It classifies the shape by properties such as roundness, ratios of dimensions and centroids.
 
@@ -150,7 +168,7 @@ Modifying this demo slightly to make it compatible with the grey-scale mammogram
 
 However, due to the slightly inaccurate identification of the tissue boundary, this is likely to remove data which is useful to the \Gls{Congealing} algorithm. Unless this can become a near perfect outline around the breast tissue, it is unlikely to be useful for selecting and focusing in the object of interest.
 
-\textbf{Removing white objects over a specified grey-level value}
+\noindent  \textbf{Removing white objects over a specified grey-level value}
 
 Back on the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small bit of breast tissue.
 
@@ -185,36 +203,62 @@ In order to understand how the demo data was uploaded, and therefore implement a
 
 The structure of \acrshort{pgm} files is very specific and is defined as \cite{PGM_Format}:
 
-\begin{enumerate}
-  \item A \say{magic number} for identifying the file type. A pgm image's magic number is the two characters \say{P5}.
-  \item Whitespace (in the format of tab, space etc)
-  \item A width, formatted as ASCII characters in decimal.
-  \item Whitespace (in the format of tab, space etc)
-  \item A height (in the same format as width)
-  \item Whitespace (in the format of tab, space etc)
-  \item Maximum Grey Value (Maxval) - usually 255
-  \item Single whitespace character (typically new line)
-  \item A raster of Height rows, in order from top to bottom. Each row consists of Width gray values, in order from left to right. Each gray value is a number from 0 through Maxval, with 0 being black and Maxval being white. Each gray value is represented in pure binary by either 1 or 2 bytes. If the Maxval is less than 256, it is 1 byte. Otherwise, it is 2 bytes. The most significant byte is first.
-\end{enumerate}
+\begin{figure}[H]
+  \begin{minted}
+  [
+  breaklines,
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\small,
+  linenos
+  ]
+  {text}
+    A `magic number' which identifies the file type. A pgm image's magic number is the two characters `P5'.
+    Whitespace (in the format of tab, space etc)
+    A width, formatted as ASCII characters in decimal.
+    Whitespace (in the format of tab, space etc)
+    A height (in the same format as width)
+    Whitespace (in the format of tab, space etc)
+    Maximum Grey Value (Maxval) - usually 255
+    Single whitespace character (typically new line)
+    A raster of Height rows, in order from top to bottom. Each row consists of Width gray values, in order from left to right. Each gray value is a number from 0 through Maxval, with 0 being black and Maxval being white. Each gray value is represented in pure binary by either 1 or 2 bytes. If the Maxval is less than 256, it is 1 byte. Otherwise, it is 2 bytes. The most significant byte is first.
+  \end{minted}
+  \caption{PGM header rules}
+  \label{fig:pgm-header-rules}
+\end{figure}
 
-A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in the above formatting.
+A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in the formatting as defined in Figure \ref{fig:pgm-header-rules}.
 
 \subsubsection{Specific file format for \Gls{Congealing}}
 \label{sssec:load}
 
  When investigating the \Gls{Congealing} demo code, it became apparent that comments were utilised in the reading-in of image information.
 
-\begin{lstlisting}[style=Matlab-editor,frame=single,label=pgm_header_written, caption=Example MNIST PGM file header]
-  P5
-  # 28 28 6742
-  2324 2324
-  255
-\end{lstlisting}
+ \begin{figure}[H]
+   \begin{minted}
+   [
+   breaklines,
+   frame=lines,
+   framesep=2mm,
+   baselinestretch=1.2,
+   fontsize=\small,
+   linenos
+   ]
+   {text}
+    P5
+    # 28 28 6742
+    2324 2324
+    255
+  \end{minted}
+\caption{Example MNIST PGM file header}
+\label{fig:pgm_header_written}
+\end{figure}
 
 
-Listing \ref{pgm_header_written} above shows the first 5 lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \# - therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
+Listing \ref{fig:pgm_header_written} above shows the first 5 lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \# - therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
 
-This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries} function.
+This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
 
 
 \subsubsection{Creating an appropriate save function}
@@ -228,6 +272,7 @@ The next step was to write a function which would appropriately concatenate the 
 \end{itemize}
 
 \subsection{Vectorisation}
+\label{ssec:vectorisation}
 
 Vectorisation is the process to replace loop-based code with MATLAB matrix and vector operations. As stated in the MATLAB documentation \cite{vectorisation}, Vectorisation is important for several reasons:
 

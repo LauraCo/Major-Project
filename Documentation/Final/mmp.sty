@@ -37,6 +37,12 @@
 % package for tidy url formatting
 \usepackage{url}
 \usepackage{hyperref}
+\hypersetup{backref,
+pdfpagemode=FullScreen,
+  colorlinks = true,
+    linkcolor=black,
+    citecolor=MidnightBlue,
+    urlcolor=black}
 
 \usepackage[colorinlistoftodos]{todonotes}
 
@@ -49,9 +55,9 @@
 \usepackage{tocloft}
 \usepackage[toc,nonumberlist]{glossaries}
 
-\usepackage{listings}
-\usepackage{matlab-prettifier} % http://ftp.heanet.ie/pub/CTAN/tex/macros/latex/contrib/matlab-prettifier/matlab-prettifier.pdf
+\usepackage{minted}
 
+\usepackage{booktabs}
 \usepackage{pgfplotstable} % http://tex.stackexchange.com/questions/146716/importing-csv-file-into-latex-as-a-table
 %\pgfplotstableset{fixed zerofill, precision = 1}
 
@@ -65,7 +71,9 @@
 
 \usepackage{gensymb} %https://www.overleaf.com/help/115-how-can-i-write-a-degrees-degree-symbol-in-latex
 
+%\usepackage[table]{xcolor}
 \usepackage{longtable}
+
 
 % Various parameters
 \setlength{\textheight}{229mm}

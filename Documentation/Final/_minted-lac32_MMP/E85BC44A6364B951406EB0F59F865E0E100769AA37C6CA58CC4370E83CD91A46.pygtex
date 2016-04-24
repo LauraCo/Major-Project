@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    pixel[1,1]`s membership in trapezium low = 0.8
+    pixel[1,1]`s membership in trapezium medium = 0.4
+    pixel[1,1]`s membership in trapezium high = 0
+
+    Therefore as 0.8 is the highest membership value, this is added to the image membership array
+\end{Verbatim}
