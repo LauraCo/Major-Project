@@ -1,3 +1,6 @@
+% Part of the existing code base from the Congealing Demo
+% Not modified
+
 % This function takes the mean of a set of binary images 
 % and returns the summed pixelwise entropies. It uses a lookup
 % table to get the entropy.

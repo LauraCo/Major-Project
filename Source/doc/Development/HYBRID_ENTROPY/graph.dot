@@ -1,0 +1,7 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  TESThybrid -> hybrid;
+
+  TESThybrid [URL="TESThybrid.html"];
+  hybrid [URL="hybrid.html"];
+}

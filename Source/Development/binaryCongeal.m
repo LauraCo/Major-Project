@@ -1,4 +1,7 @@
-    % This function takes a series of images and returns 
+%      MODIFIED BY: Laura Collins (lac32) 
+%      LAST MODIFIED: 08/04/2016
+%
+% This function takes a series of images and returns 
 % three things, an adjSer which are the congealed images,
 % the meanIms, which are arrays of histograms of values,
 % and xfrms, an array of transforms mapping the 
@@ -35,7 +38,7 @@ for iters=1:numIters       % Until convergence?
   curMean=mean(adjSer,3);
   
   if strcmp(metric,'deLuca')
-      ent=deLucaFuzzy(curMean);
+      ent=nonProbabilistic(curMean);
   elseif  strcmp(metric,'shannon')
       ent=fastEntLookup(curMean);
   elseif  strcmp(metric,'hybrid')

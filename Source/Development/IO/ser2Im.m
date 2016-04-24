@@ -1,3 +1,6 @@
+% Part of the existing code base from the Congealing Demo
+% Not modified
+
 function bigIm=ser2Im(ser)
 
 [imHeight,imWidth,ims]=size(ser);

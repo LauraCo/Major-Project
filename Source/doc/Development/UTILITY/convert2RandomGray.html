@@ -6,17 +6,16 @@
   <meta name="keywords" content="convert2RandomGray">
   <meta name="description" content="">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
   <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">UTILITY</a> &gt; convert2RandomGray.m</div>
-
-<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for Development/UTILITY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
-
+<!-- ../menu.html development --><!-- menu.html UTILITY -->
 <h1>convert2RandomGray
 </h1>
 
@@ -33,7 +32,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="../../development/IO/loadSeries.html" class="code" title="function ser=loadSeries(fname,stInd,endInd)  % st and end are 1-based">loadSeries</a>	loadSeries    Load an image series (in multi-pgm format) from disk.</li><li><a href="../../development/IO/saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>	saveSeries</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -43,7 +42,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 addpath IO
-0002 binaryIms=loadSeries(<span class="string">'/home/vis3/data/emiller/NIST/pgm/train_30_shuf.pbm'</span>,0,1000);
+0002 binaryIms=<a href="../../development/IO/loadSeries.html" class="code" title="function ser=loadSeries(fname,stInd,endInd)  % st and end are 1-based">loadSeries</a>(<span class="string">'/home/vis3/data/emiller/NIST/pgm/train_30_shuf.pbm'</span>,0,1000);
 0003 
 0004 <span class="keyword">for</span> i=1:1001
 0005   imi=binaryIms(:,:,i);
@@ -56,9 +55,9 @@ This function is called by:
 0012 
 0013 
 0014   
-0015 saveSeries(<span class="string">'/home/vis3/data/emiller/NIST/pgm/grayTrain0.pgm'</span>,binaryIms);
+0015 <a href="../../development/IO/saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>(<span class="string">'/home/vis3/data/emiller/NIST/pgm/grayTrain0.pgm'</span>,binaryIms);
 0016 
 0017</pre></div>
-<hr><address>Generated on Tue 23-Feb-2016 16:55:35 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

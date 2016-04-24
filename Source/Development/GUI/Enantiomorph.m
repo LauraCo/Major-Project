@@ -1,5 +1,8 @@
 function varargout = Enantiomorph(varargin)
 % ENANTIOMORPH MATLAB code for Enantiomorph.fig
+%
+%      AUTHOR: Laura Collins (lac32) 
+%
 %      ENANTIOMORPH, by itself, creates a new ENANTIOMORPH or raises the existing
 %      singleton*.
 %

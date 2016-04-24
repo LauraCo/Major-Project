@@ -1,5 +1,8 @@
 % incrTrans
 %
+%       MODIFIED BY: Laura Collins (lac32) 
+%       LAST MODIFIED: 08/04/2016
+%
 % function transVec=incrTrans(mn,cnt,img,transVec)
 %
 % This function finds an incremental change to the transformation
@@ -21,7 +24,7 @@ pars=length(transVec);
 addpath /Users/lauracollins/Git/Major-Project/Source/Development/HYBRID_ENTROPY 
 
 if strcmp(metric,'deLuca')
-    ent=deLucaFuzzy(mn);
+    ent=nonProbabilistic(mn);
 elseif  strcmp(metric,'shannon')
     ent=fastEntLookup(mn);
 elseif  strcmp(metric,'hybrid')
@@ -49,7 +52,7 @@ for i=1:pars
   newMean=allbutone+newImg/cnt;
   
   if strcmp(metric,'deLuca')
-    newEnt=deLucaFuzzy(newMean);
+    newEnt=nonProbabilistic(newMean);
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
   elseif  strcmp(metric,'hybrid')
@@ -66,7 +69,7 @@ for i=1:pars
     newMean=allbutone+newImg/cnt;
     
   if strcmp(metric,'deLuca')
-    newEnt=deLucaFuzzy(newMean);
+    newEnt=nonProbabilistic(newMean);
   elseif  strcmp(metric,'shannon')
     newEnt=fastEntLookup(newMean);
   elseif  strcmp(metric,'hybrid')

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of saveSeries</title>
+  <meta name="keywords" content="saveSeries">
+  <meta name="description" content="Part of the existing code base from the Congealing Demo">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html IO -->
+<h1>saveSeries
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Part of the existing code base from the Congealing Demo</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function saveSeries(fname,ser) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Part of the existing code base from the Congealing Demo
+ Not modified
+
+ saveSeries
+    saveSeries(fname,ser)
+g
+ All ims will we saved as unsigned 8-bit integers from 0-255.
+ The input series are assumed to be in the range:
+  0 &lt;= x &lt; 256.0.
+ 
+ The disk representation will be only the integer part of the
+ representation. That is, and value between 25.0 and 25.99999 will
+ be represented as a 25. Thus, the floor operator is used.
+
+ When re-loaded the images will have a .5 added to each pixel so
+ as to approximate the original pre-truncated value as well as
+ possible.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="pgm2bigPgm.html" class="code" title="function s = pgm2bigPgm(pathname)">pgm2bigPgm</a>	AUTHOR: Laura Collins (lac32)</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Part of the existing code base from the Congealing Demo</span>
+0002 <span class="comment">% Not modified</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% saveSeries</span>
+0005 <span class="comment">%    saveSeries(fname,ser)</span>
+0006 <span class="comment">%g</span>
+0007 <span class="comment">% All ims will we saved as unsigned 8-bit integers from 0-255.</span>
+0008 <span class="comment">% The input series are assumed to be in the range:</span>
+0009 <span class="comment">%  0 &lt;= x &lt; 256.0.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">% The disk representation will be only the integer part of the</span>
+0012 <span class="comment">% representation. That is, and value between 25.0 and 25.99999 will</span>
+0013 <span class="comment">% be represented as a 25. Thus, the floor operator is used.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% When re-loaded the images will have a .5 added to each pixel so</span>
+0016 <span class="comment">% as to approximate the original pre-truncated value as well as</span>
+0017 <span class="comment">% possible.</span>
+0018 <a name="_sub0" href="#_subfunctions" class="code">function saveSeries(fname,ser)</a>
+0019 
+0020 [imHeight,imWidth,ims]=size(ser);
+0021 
+0022 imsPerRow=ceil(sqrt(ims)-.000001);
+0023 
+0024 pixPerRow=imsPerRow*imWidth;
+0025 pixPerCol=imsPerRow*imHeight;
+0026 
+0027 bigIm=zeros(pixPerRow,pixPerCol);
+0028 
+0029 curIm=1;
+0030 <span class="keyword">for</span> i=1:imsPerRow   <span class="comment">% Indexes the row</span>
+0031   <span class="keyword">for</span> j=1:imsPerRow <span class="comment">% Indexes the col.</span>
+0032     bigIm( (i-1)*imHeight+1:i*imHeight,(j-1)*imWidth+1:j*imWidth)=ser(:,:,curIm);
+0033     curIm=curIm+1;
+0034     <span class="keyword">if</span> curIm&gt;ims;
+0035       <span class="keyword">break</span>;
+0036     <span class="keyword">end</span>
+0037   <span class="keyword">end</span>
+0038   <span class="keyword">if</span> curIm&gt;ims;
+0039     <span class="keyword">break</span>;
+0040   <span class="keyword">end</span>
+0041 <span class="keyword">end</span>
+0042 
+0043 b=bigIm';
+0044 ubigIm=floor(b(:));
+0045 
+0046 fid=fopen(fname,<span class="string">'w+'</span>);
+0047 
+0048 fprintf(fid,<span class="string">'P5\n'</span>);
+0049 fprintf(fid,<span class="string">'# %d %d %d\n'</span>,imWidth,imHeight,ims);
+0050 fprintf(fid,<span class="string">'%d %d\n'</span>,pixPerRow,pixPerCol);
+0051 fprintf(fid,<span class="string">'255\n'</span>);
+0052 fwrite(fid,ubigIm,<span class="string">'uchar'</span>);
+0053 fclose(fid);</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:40:00 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of TESTpgmCreation</title>
+  <meta name="keywords" content="TESTpgmCreation">
+  <meta name="description" content="AUTHOR: Laura Collins (lac32)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html IO -->
+<h1>TESTpgmCreation
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>AUTHOR: Laura Collins (lac32)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function tests = pgmCreationTest </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> AUTHOR: Laura Collins (lac32)
+ LAST MODIFIED: 27/03/16</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="pgm2bigPgm.html" class="code" title="function s = pgm2bigPgm(pathname)">pgm2bigPgm</a>	AUTHOR: Laura Collins (lac32)</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function setup(testCase)</a></li><li><a href="#_sub2" class="code">function testImageType(testCase)</a></li><li><a href="#_sub3" class="code">function testCommentInsertion(testCase)</a></li><li><a href="#_sub4" class="code">function testImageSize(testCase)</a></li><li><a href="#_sub5" class="code">function testGreyScale(testCase)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0002 <span class="comment">% LAST MODIFIED: 27/03/16</span>
+0003 
+0004 <a name="_sub0" href="#_subfunctions" class="code">function tests = pgmCreationTest</a>
+0005 tests = functiontests(localfunctions);
+0006 <span class="keyword">end</span>
+0007 
+0008 <a name="_sub1" href="#_subfunctions" class="code">function setup(testCase)</a>
+0009 <a href="pgm2bigPgm.html" class="code" title="function s = pgm2bigPgm(pathname)">pgm2bigPgm</a>(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/'</span>);
+0010 <span class="keyword">end</span>
+0011 
+0012 
+0013 
+0014 <span class="comment">% Test 1 - test is pgm format</span>
+0015 
+0016 <a name="_sub2" href="#_subfunctions" class="code">function testImageType(testCase)</a>
+0017 file = fopen(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm'</span>,<span class="string">'r'</span>);
+0018 ln1=fgetl(file);
+0019 assertEqual(testCase,ln1, <span class="string">'P5'</span>);
+0020 <span class="keyword">end</span>
+0021 
+0022 <span class="comment">% Test 2 - test insertion of comment for load function to read</span>
+0023 <a name="_sub3" href="#_subfunctions" class="code">function testCommentInsertion(testCase)</a>
+0024 file = fopen(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm'</span>,<span class="string">'r'</span>);
+0025 ln1 = fgetl(file);
+0026 ln2=fgetl(file);
+0027 
+0028 assertSubstring(testCase,ln2,<span class="string">'#'</span>);
+0029 <span class="keyword">end</span>
+0030 
+0031 <span class="comment">% Test 3 - test image dimensions are set correctly</span>
+0032 <a name="_sub4" href="#_subfunctions" class="code">function testImageSize(testCase)</a>
+0033 bigFile = fopen(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm'</span>);
+0034 
+0035 ln1 = fgetl(bigFile);
+0036 ln2=strsplit(fgetl(bigFile));
+0037 bigImgHeight = str2double(ln2{2});
+0038 bigImgWidth = str2double(ln2{3});
+0039 
+0040 
+0041 sampleImage = imread(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/sample-1.pgm'</span>);
+0042 [sampleHeight,sampleWidth,dim] = size(sampleImage);
+0043 
+0044 assertEqual(testCase, bigImgHeight, sampleHeight);
+0045 assertEqual(testCase, bigImgWidth, sampleWidth);
+0046 
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% Test 4 - test is grey-scale</span>
+0050 <a name="_sub5" href="#_subfunctions" class="code">function testGreyScale(testCase)</a>
+0051 file = fopen(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm'</span>);
+0052 
+0053 ln1 = fgetl(file);
+0054 ln2 = fgetl(file);
+0055 ln3 = fgetl(file);
+0056 ln4 = fgetl(file);
+0057 
+0058 assertEqual(testCase, ln4, <span class="string">'255'</span>);
+0059 
+0060 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:29:30 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,3 +1,6 @@
+% Part of the existing code base from the Congealing Demo
+% Not modified
+
 function adjImg=computeXfrmImg(img,transVec)
 
 persistent oldx oldy;

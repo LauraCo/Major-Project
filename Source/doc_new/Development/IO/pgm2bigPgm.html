@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of pgm2bigPgm</title>
+  <meta name="keywords" content="pgm2bigPgm">
+  <meta name="description" content="AUTHOR: Laura Collins (lac32)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html IO -->
+<h1>pgm2bigPgm
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>AUTHOR: Laura Collins (lac32)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function s = pgm2bigPgm(pathname) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> AUTHOR: Laura Collins (lac32) 
+ LAST MODIFIED: 28/03/16</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>	Part of the existing code base from the Congealing Demo</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/GUI/Enantiomorph.html" class="code" title="function varargout = Enantiomorph(varargin)">Enantiomorph</a>	ENANTIOMORPH MATLAB code for Enantiomorph.fig</li><li><a href="TESTpgmCreation.html" class="code" title="function tests = pgmCreationTest">TESTpgmCreation</a>	AUTHOR: Laura Collins (lac32)</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0002 <span class="comment">% LAST MODIFIED: 28/03/16</span>
+0003 
+0004 <a name="_sub0" href="#_subfunctions" class="code">function s = pgm2bigPgm(pathname)</a>
+0005 
+0006 scanDirectory = dir(fullfile(pathname, <span class="string">'*.pgm'</span>));
+0007 noOfScans = length(scanDirectory);
+0008 
+0009 filename = strcat(pathname,<span class="string">'/'</span>,scanDirectory(1).name);
+0010 file=fopen(filename,<span class="string">'r'</span>);
+0011 
+0012 <span class="keyword">if</span> file == -1
+0013   error(<span class="string">'Author:Function:OpenFile'</span>, <span class="string">'Cannot open folder: %s'</span>, filename);
+0014 <span class="keyword">end</span>
+0015 
+0016 ln1=fgetl(file);
+0017 ln2=strsplit(fgetl(file));
+0018 
+0019 
+0020 <span class="keyword">if</span> find(strcmp(<span class="string">'#'</span>, ln2))
+0021     ln2(1) = []; <span class="comment">% http://blogs.mathworks.com/videos/2010/03/30/deleting-an-element-from-a-cell-array/</span>
+0022 <span class="keyword">end</span>
+0023 
+0024 squareImageSize = str2double(ln2);
+0025 
+0026 sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans);
+0027 
+0028 <span class="keyword">for</span> i = 1:noOfScans
+0029 
+0030     scan = fopen(strcat(pathname,<span class="string">'/'</span>,scanDirectory(i).name));
+0031 
+0032     im=(fread(scan,[squareImageSize(1),squareImageSize(2)],<span class="string">'uchar'</span>));
+0033     sers(:,:,i) = im;
+0034 <span class="keyword">end</span>
+0035 
+0036 outfname=sprintf(<span class="string">'%s/big_scan.pgm'</span>, pathname);
+0037 s=sers(:,:,:);
+0038 <a href="saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>(outfname,permute(s,[2,1,3])); <span class="comment">%http://uk.mathworks.com/help/matlab/ref/permute.html - swap rows and columns around for fwrite</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:40:00 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

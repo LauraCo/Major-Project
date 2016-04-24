@@ -1,0 +1,9 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  binaryCongeal -> incrTrans;
+  testCongeal -> binaryCongeal;
+
+  binaryCongeal [URL="binaryCongeal.html"];
+  incrTrans [URL="incrTrans.html"];
+  testCongeal [URL="testCongeal.html"];
+}

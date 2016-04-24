@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of hybridMembership</title>
+  <meta name="keywords" content="hybridMembership">
+  <meta name="description" content="Membership function containing 2 fuzzy sets - to be used with Hybrid">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html MEMBERSHIP -->
+<h1>hybridMembership
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Membership function containing 2 fuzzy sets - to be used with Hybrid</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [imgMu, lowMu, highMu]  = hybridMembership(image_matrix) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Membership function containing 2 fuzzy sets - to be used with Hybrid
+ Entropy
+ AUTHOR: Laura Collins (lac32)
+ LAST MODIFIED: 08/04/2016</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/HYBRID_ENTROPY/hybrid.html" class="code" title="function entropy = hybrid(meanImg)">hybrid</a>	AUTHOR: Laura Collins (lac32)</li><li><a href="TESTmembership.html" class="code" title="function tests = membershipTest">TESTmembership</a>	Test the Membership function</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Membership function containing 2 fuzzy sets - to be used with Hybrid</span>
+0002 <span class="comment">% Entropy</span>
+0003 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0004 <span class="comment">% LAST MODIFIED: 08/04/2016</span>
+0005 
+0006 <a name="_sub0" href="#_subfunctions" class="code">function [imgMu, lowMu, highMu]  = hybridMembership(image_matrix)</a>
+0007 <span class="comment">%Calculate the membershipDegree of a pixel</span>
+0008 
+0009 imwrite(image_matrix,<span class="string">'mean_image.pgm'</span>);
+0010 
+0011 image = imread(<span class="string">'mean_image.pgm'</span>);   
+0012 
+0013 [rows,columns] = size(image);
+0014 imgMu{rows,columns} = [];
+0015 
+0016 <span class="comment">%Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html</span>
+0017 x = 0:255; <span class="comment">% Min &amp; Max x values</span>
+0018 
+0019 param1 = [-1 0 100 155]; <span class="comment">%the 4 corners of the trapezium</span>
+0020 
+0021 param3 = [100 155 260 275];
+0022 
+0023 <span class="comment">%If RGB convert to greyscale (this is only really for test images)</span>
+0024 <span class="keyword">if</span> size(image,3) == 3
+0025     image = rgb2gray(image);
+0026 <span class="keyword">end</span>
+0027 
+0028 evalLow = evalmf(x, param1, <span class="string">'trapmf'</span>);
+0029 evalHigh = evalmf(x, param3, <span class="string">'trapmf'</span>);
+0030 
+0031 pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
+0032 
+0033 lowMu = evalLow(pixelIntensity);
+0034 highMu = evalHigh(pixelIntensity);
+0035 
+0036 imgMu = bsxfun(@max, lowMu, highMu);
+0037 
+0038 <span class="comment">%dlmwrite('memberships.txt',imgMu);</span>
+0039 
+0040 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:40:00 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

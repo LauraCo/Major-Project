@@ -1,8 +1,9 @@
+% Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic
+% AUTHOR: Laura Collins (lac32)
+% LAST MODIFIED: 08/04/2016
+
 function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)
 %Calculate the membershipDegree of a pixel
-
-% ARRAY HERE WITH ROWS AND COLUMNS SAME AS MEANIMG
-
 imwrite(image_matrix,'mean_image.pgm');
 
 image = imread('mean_image.pgm');   
@@ -14,13 +15,11 @@ imgMu{rows,columns} = [];
 x = 0:255; % Min & Max x values
 
 param1 = [-1 0 50 85]; %the 4 corners of the trapezium
-low = trapmf(x,param1);
 
 param2 = [60 85 170 195];
-med = trapmf(x,param2);
 
 param3 = [170 205 260 275];
-high = trapmf(x,param3);
+
 
 %If RGB convert to greyscale (this is only really for test images) 
 if size(image,3) == 3

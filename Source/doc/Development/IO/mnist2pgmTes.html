@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mnist2pgmTes</title>
+  <meta name="keywords" content="mnist2pgmTes">
+  <meta name="description" content="Formally: mnist2pgmTest - but would run when Unit tests are run">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html development --><!-- menu.html IO -->
+<h1>mnist2pgmTes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Formally: mnist2pgmTest - but would run when Unit tests are run</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Formally: mnist2pgmTest - but would run when Unit tests are run</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>	saveSeries</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Formally: mnist2pgmTest - but would run when Unit tests are run</span>
+0002 
+0003 im_fname=<span class="string">'/home/vis3/data/emiller/MNIST/t10k-images-idx3-ubyte'</span>;
+0004 label_fname=<span class="string">'/home/vis3/data/emiller/MNIST/t10k-labels-idx1-ubyte'</span>;
+0005 <span class="comment">%im_fname='/home/vis3/data/emiller/MNIST/train-images-idx3-ubyte';</span>
+0006 <span class="comment">%label_fname='/home/vis3/data/emiller/MNIST/train-labels-idx1-ubyte';</span>
+0007 
+0008 
+0009 sers=zeros(28,28,1000,10);
+0010 
+0011 lfid=fopen(label_fname,<span class="string">'r'</span>,<span class="string">'ieee-be'</span>);
+0012 magic=fread(lfid,1,<span class="string">'int32'</span>);
+0013 magic
+0014 
+0015 count=fread(lfid,1,<span class="string">'int32'</span>);
+0016 count
+0017 
+0018 fid=fopen(im_fname,<span class="string">'r'</span>,<span class="string">'ieee-be'</span>);
+0019 magic=fread(fid,1,<span class="string">'int32'</span>);
+0020 magic
+0021 
+0022 count=fread(fid,1,<span class="string">'int32'</span>);
+0023 count
+0024 xs=fread(fid,1,<span class="string">'int32'</span>);
+0025 xs
+0026 ys=fread(fid,1,<span class="string">'int32'</span>);
+0027 ys
+0028 
+0029 curInd=ones(10,1);
+0030 <span class="keyword">for</span> i=1:10000
+0031   i
+0032   im=(fread(fid,[28,28],<span class="string">'uchar'</span>))';
+0033   label=fread(lfid,1,<span class="string">'uchar'</span>);
+0034   sers(:,:,curInd(label+1),label+1)=im;
+0035   curInd(label+1)=curInd(label+1)+1;
+0036 <span class="keyword">end</span>
+0037 
+0038 
+0039 addpath /home/vis3/data/emiller/NIST/matlab/IO;
+0040 <span class="keyword">for</span> i=1:10
+0041   outfname=sprintf(<span class="string">'/home/vis3/data/emiller/MNIST/pgm/test_%d.pgm'</span>,i-1);
+0042   s=sers(:,:,1:curInd(label+1)-1,i);
+0043   <a href="saveSeries.html" class="code" title="function saveSeries(fname,ser)">saveSeries</a>(outfname,s);
+0044 <span class="keyword">end</span>
+0045 
+0046 
+0047 fclose(lfid);
+0048 fclose(fid);
+0049 
+0050   
+0051</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

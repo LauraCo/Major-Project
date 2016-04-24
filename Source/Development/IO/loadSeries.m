@@ -1,3 +1,6 @@
+% Part of the existing code base from the Congealing Demo
+% Not modified
+%
 % loadSeries    Load an image series (in multi-pgm format) from disk.
 %    loadSeries(fname,stInd,endInd)
 %

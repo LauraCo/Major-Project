@@ -6,17 +6,16 @@
   <meta name="keywords" content="deLucaFuzzy">
   <meta name="description" content="Function implementing De Luca &amp; Termini's Fuzzy Entropy algorithm">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
   <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">Development</a> &gt; <a href="index.html">DE_LUCA_FUZZY</a> &gt; deLucaFuzzy.m</div>
-
-<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for Development/DE_LUCA_FUZZY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
-
+<!-- ../menu.html development --><!-- menu.html DE_LUCA_FUZZY -->
 <h1>deLucaFuzzy
 </h1>
 
@@ -33,10 +32,10 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="../../development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>	Calculate the membershipDegree of a pixel</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="TESTnonProb.html" class="code" title="function tests = TESTnonProb">TESTnonProb</a>	Test the Membership function</li><li><a href="../../development/binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)">binaryCongeal</a>	This function takes a series of images and returns</li><li><a href="../../development/incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>	incrTrans</li></ul>
 <!-- crossreference -->
 
 
@@ -47,22 +46,20 @@ This function is called by:
 0003 
 0004 addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
 0005 
-0006 imgMu = membership(meanImg);
+0006 [imgMu, lowMu, medMu, highMu] = <a href="../../development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>(meanImg);
 0007 
-0008 <span class="keyword">persistent</span> entTable;
-0009 <span class="keyword">if</span> size(entTable)==0
-0010   fprintf(1,<span class="string">'Computing entropy lookup table...'</span>);
-0011   entTable= imgMu.*log(imgMu)+(1-imgMu).*log(1-imgMu);
-0012   fprintf(1,<span class="string">'done.\n'</span>);
-0013 <span class="keyword">end</span>
-0014 
-0015 <span class="comment">%WORKS UP TO HERE</span>
-0016 
-0017 ent= (sum(sum(entTable(floor(meanImg*9999.999999+1))))); <span class="comment">%LAC32 - -K x the sum of the ent, which has been normalised</span>
-0018 entropy=ent/numel(meanImg);   <span class="comment">% Return mean pixel entropy. %LAC32 - NUMEL is usually faster than PROD</span>
-0019 
-0020 <span class="keyword">end</span>
-0021</pre></div>
-<hr><address>Generated on Tue 23-Feb-2016 16:55:35 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+0008 <span class="comment">%imageEnt = cell(size(imgMu,1),size(imgMu,2));</span>
+0009 
+0010     pixelEnt = -(imgMu(1:numel(imgMu)).*log10(imgMu(1:numel(imgMu)))+(1-imgMu(1:numel(imgMu))).*log10(1-imgMu(1:numel(imgMu))));
+0011     
+0012     pixelEnt(isnan(pixelEnt))= 0;
+0013 
+0014     imageEnt = num2cell(pixelEnt);
+0015 
+0016 ent = 1/numel(imgMu)*sum(cellfun(@sum, imageEnt));
+0017 entropy=sum(ent);
+0018 <span class="keyword">end</span>
+0019</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

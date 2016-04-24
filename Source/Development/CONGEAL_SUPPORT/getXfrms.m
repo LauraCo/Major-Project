@@ -1,3 +1,6 @@
+% Part of the existing code base from the Congealing Demo
+% Not modified
+
 function xfrms=getXfrms(transVecs)
 
 [cnt,len]=size(transVecs);

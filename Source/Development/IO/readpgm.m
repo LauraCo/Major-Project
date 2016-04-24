@@ -1,4 +1,7 @@
 function [a] = readpgm(name)
+% Part of the existing code base from the Congealing Demo
+% Not modified
+%
 %READPGM
 % reads a pgm in to a matrix
 %WARNING the pgm can not contain comment lines

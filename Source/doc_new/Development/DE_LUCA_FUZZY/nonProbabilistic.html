@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of nonProbabilistic</title>
+  <meta name="keywords" content="nonProbabilistic">
+  <meta name="description" content="AUTHOR: Laura Collins (lac32)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html DE_LUCA_FUZZY -->
+<h1>nonProbabilistic
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>AUTHOR: Laura Collins (lac32)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function entropy = nonProbabilistic(meanImg) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> AUTHOR: Laura Collins (lac32)
+ LAST MODIFIED: 08/04/16
+ Function implementing De Luca &amp; Termini's Non-Probabilistic Fuzzy Entropy algorithm
+ Changed name 08/04/16 to reflect algorithm's true name</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>	Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)">binaryCongeal</a>	MODIFIED BY: Laura Collins (lac32)</li><li><a href="../../Development/incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>	incrTrans</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function entropy = nonProbabilistic(meanImg)</a>
+0002 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0003 <span class="comment">% LAST MODIFIED: 08/04/16</span>
+0004 <span class="comment">% Function implementing De Luca &amp; Termini's Non-Probabilistic Fuzzy Entropy algorithm</span>
+0005 <span class="comment">% Changed name 08/04/16 to reflect algorithm's true name</span>
+0006 
+0007 addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
+0008 
+0009 [imgMu, lowMu, medMu, highMu] = <a href="../../Development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>(meanImg);
+0010 
+0011 <span class="comment">%imageEnt = cell(size(imgMu,1),size(imgMu,2));</span>
+0012 
+0013     pixelEnt = -(imgMu(1:numel(imgMu)).*log10(imgMu(1:numel(imgMu)))+(1-imgMu(1:numel(imgMu))).*log10(1-imgMu(1:numel(imgMu))));
+0014     
+0015     pixelEnt(isnan(pixelEnt))= 0;
+0016 
+0017     imageEnt = num2cell(pixelEnt);
+0018 
+0019 ent = 1/numel(imgMu)*sum(cellfun(@sum, imageEnt));
+0020 entropy=sum(ent);
+0021 <span class="keyword">end</span>
+0022</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:40:00 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

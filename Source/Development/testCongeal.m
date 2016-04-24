@@ -1,5 +1,9 @@
 function [meanIms, adjSer, finalMean, ent, time] = testCongeal(metric,iterations, filename, path)
-%function  testCongeal(metric,iterations, filename, path)
+
+%  Part of the existing code base from the Congealing Demo
+%      MODIFIED BY: Laura Collins (lac32) 
+%      LAST MODIFIED: 08/04/2016
+   
 
 addpath IO
 addpath UTILITY
@@ -21,14 +25,6 @@ sr=min(sr,1);
 
 [adjSer,meanIms,transVecs,ent]=binaryCongeal(sr,iterations,7,metric);
 
-time = toc
-%figure;
-%showSer(meanIms,1);
-%imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
-finalMean = meanIms(:,:,iterations);
+time = toc;
 
-%fid=fopen(strcat(path,'/entropy.txt'),'w+');
-%fprintf(fid,'%f \n',ent);
-%fclose(fid);
-%figure;
-%showSer(adjSer,2);
+finalMean = meanIms(:,:,iterations);

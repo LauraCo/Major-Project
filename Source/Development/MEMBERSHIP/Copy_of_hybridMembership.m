@@ -1,4 +1,6 @@
-%Script to make 2 trapeziums
+% Script to make 2 trapeziums
+% AUTHOR: Laura Collins (lac32)
+% LAST MODIFIED: 07/04/2016
 
 %Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html
 x = 0:255; % Min & Max x values

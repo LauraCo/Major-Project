@@ -1,8 +1,7 @@
-function s = pgm2bigPgm(pathname)
+% AUTHOR: Laura Collins (lac32) 
+% LAST MODIFIED: 28/03/16
 
-%    filename = strcat('/Users/lauracollins/Git/Major-Project/Source/Development/all-mias/sample/',scanDirectory(i).name);
-%    I = imread(filename);
-%    figure, imshow(I);
+function s = pgm2bigPgm(pathname)
 
 scanDirectory = dir(fullfile(pathname, '*.pgm'));
 noOfScans = length(scanDirectory);

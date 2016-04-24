@@ -1,5 +1,8 @@
 function varargout = removeMarker(varargin)
 % REMOVEMARKER MATLAB code for removeMarker.fig
+%
+%      AUTHOR: Laura Collins (lac32) 
+%
 %      REMOVEMARKER, by itself, creates a new REMOVEMARKER or raises the existing
 %      singleton*.
 %
