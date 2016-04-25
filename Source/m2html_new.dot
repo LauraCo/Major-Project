@@ -3,6 +3,7 @@ digraph m2html {
   computeXfrmImg -> getXfrm;
   computeXfrmImgs -> getXfrms;
   getXfrms -> getXfrm;
+  TESTnonProb -> nonProbabilistic;
   nonProbabilistic -> membership;
   Enantiomorph -> removeMarker;
   Enantiomorph -> pgm2bigPgm;
@@ -31,6 +32,7 @@ digraph m2html {
   fastEntLookup [URL="Development/CONGEAL_SUPPORT/fastEntLookup.html"];
   getXfrm [URL="Development/CONGEAL_SUPPORT/getXfrm.html"];
   getXfrms [URL="Development/CONGEAL_SUPPORT/getXfrms.html"];
+  TESTnonProb [URL="Development/DE_LUCA_FUZZY/TESTnonProb.html"];
   nonProbabilistic [URL="Development/DE_LUCA_FUZZY/nonProbabilistic.html"];
   Enantiomorph [URL="Development/GUI/Enantiomorph.html"];
   removeMarker [URL="Development/GUI/removeMarker.html"];
