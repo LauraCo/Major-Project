@@ -8,7 +8,7 @@ function [meanIms, adjSer, finalMean, ent, time] = testCongeal(metric,iterations
 addpath IO
 addpath UTILITY
 addpath CONGEAL_SUPPORT
-addpath DE_LUCA_FUZZY
+addpath NON_PROB_ENTROPY
 addpath MEMBERSHIP
 
 tic
