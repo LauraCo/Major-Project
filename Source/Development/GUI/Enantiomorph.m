@@ -70,6 +70,7 @@ handles.time = 0;
 guidata(hObject, handles);
 
 addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
+addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/GUI'));
 
 % UIWAIT makes Enantiomorph wait for user response (see UIRESUME)
 % uiwait(handles.Main_GUI);

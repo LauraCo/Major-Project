@@ -10,6 +10,7 @@ addpath UTILITY
 addpath CONGEAL_SUPPORT
 addpath NON_PROB_ENTROPY
 addpath MEMBERSHIP
+addpath GUI
 
 tic
 ser=loadSeries(strcat(path,filename),1,20);
@@ -28,3 +29,13 @@ sr=min(sr,1);
 time = toc;
 
 finalMean = meanIms(:,:,iterations);
+
+fid=fopen(strcat(path,'/entropy.txt'),'w+');
+fprintf(fid,'%f \n',ent);
+fclose(fid);
+%figure;
+%showSer(adjSer,2);
+
+%figure;
+%showSer(meanIms,1);
+imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
