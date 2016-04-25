@@ -12,7 +12,7 @@ function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,pa
 
 addpath IO
 addpath UTILITY
-addpath DE_LUCA_FUZZY
+addpath NON_PROB_ENTROPY
 
 [x,y,imgCount]=size(ser);
 meanIms(:,:,1)=mean(ser,3); 
