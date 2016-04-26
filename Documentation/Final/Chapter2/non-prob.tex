@@ -1,35 +1,32 @@
-\subsection{Non-Probabilistic Entropy}
+\subsubsection{Non-Probabilistic Entropy}
 \label{ssec:non-prob-sec}
 
-\subsubsection{Fuzzy entropy description}
-%==============================================================================
-\label{sssec:desc}
-
-As outlined in Section \ref{sssec:non-prob-review}
-
+As outlined in Section \ref{sssec:non-prob-review}, De Luca \& Termini`s Non-Probabilistic entropy can be defined as:
 
 \begin{equation}
   \label{eq:de-luca}
   H_A = -K \displaystyle\sum_{i=1}^{n}{\{\mu_i\log(\mu_i) + (1 - \mu_i)\log(1 - \mu_i)\}}
 \end{equation}
 
-Al-sharhan et al's paper compiling several Fuzzy Entropy algorithms \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} contains a methodical,in-depth derivation of their algorithm, and has been instrumental in building my knowledge on the algorithm in question.
+%Al-sharhan et al's paper compiling several Fuzzy Entropy algorithms \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} contains a methodical,in-depth derivation of their algorithm, and has been instrumental in building my knowledge on the algorithm in question.
 
 We will assume $-K$, the positive constant, is defined as $\frac{1}{n}$ as outlined in \cite{DeLuca_Termini_1972}.
 
 %==============================================================================
-\subsubsection{MATLAB implementation}
+\vspace{0.5cm}
+\noindent \textbf{MATLAB implementation}
 %==============================================================================
 
 After some research into current implementations of Fuzzy Entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership class, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
 
-This array of pixel memberships is fed into a `De Luca' function where it is iteratively passed into latter part of equation \ref{eq:de-luca} (after $\displaystyle\sum$). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Section \ref{sssec:desc} and \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
+This array of pixel memberships is fed into a `De Luca' function where it is iteratively passed into latter part of equation \ref{eq:de-luca} (after $\displaystyle\sum$). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
 
 This is all relatively straight forward to implement in MATLAB, as it is designed to run mathematical equations.
 
 
 %==============================================================================
-\subsubsection{Technical challenges}
+\vspace{0.5cm}
+\noindent \textbf{Technical challenges}
 %==============================================================================
 
 The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own functions for the membership saves a lot of time and lines of code, however it's been important to check what they call from within. One membership function was redrawing the trapezia every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60seconds. This challenge is covered in-depth in the latter Subsection \ref{ssec:vectorisation}.

@@ -1,64 +1,13 @@
-\subsection{Membership Implementation}
-
-As covered in Section \ref{sssec:member}, the Membership trapezia would be defined within the system, rather than dynamically being calculated. This made use of the Fuzzy Logic Toolbox by leveraging the following functions:
-
-\begin{itemize}
-  \item \textbf{trapmf: } trapezium-shaped membership function
-  \item \textbf{evalmf: } a generic membership evaluation function
-\end{itemize}
-
-Having pre-defined functions for creating and evaluating the membership trapezia ensured that the function was a quick implementation. However it did reduce the number of Unit Tests I could have written to test the creation of such elements.
-
-In this function, an image is read in, the membership of each pixel is evaluated against each of the two or three membership trapezia, adding the outcome to a corresponding array (e.g. one array for the membership of all the pixels against the low-trapezium etc). The two/three arrays (depending on number of trapezia) are then compared and the array which has the greater membership for each pixel, that membership value is added to another array which compiles all the highest values.
-
-For example:
-
-\begin{minted}
-  [
-  breaklines,
-  frame=lines,
-  framesep=2mm,
-  baselinestretch=1.2,
-  fontsize=\small,
-  linenos
-  ]
-  {text}
-    pixel[1,1]`s membership in trapezium low = 0.8
-    pixel[1,1]`s membership in trapezium medium = 0.4
-    pixel[1,1]`s membership in trapezium high = 0
-
-    Therefore as 0.8 is the highest membership value, this is added to the image membership array
-\end{minted}
-
-The three/four arrays (one for each trapezium and one for the highest values) are then passed out of the function, and utilised in each of the algorithm functions.
-
-\subsection{GUI Implementation}
-
-Initially the \acrfull{GUI} would be implemented using JavaFX, and any MATLAB additions would be linked in, however it`s possible to create \acrshort{GUI}s easily within MATLAB itself. GUIDE \cite{guide} is MATLAB`s Application development environment where you can either build using purely drag-and-drop techniques, program the application as standard in the editor, or both.
-
-The combination of both the drag-and-drop environment, and manually programming via the editor was undertaken during this project, to allow a greater amount of freedom and flexibility. Drag-and-drop was leveraged to style the \acrshort{GUI} and the editor was used to program the functionality in the back-end and link in the \Gls{Congealing} and Fuzzy Entropy algorithms.
-
-\vspace{1cm}
-\subsection{Algorithm Implementation}
-
-Details of the implementation of the Fuzzy Entropy Algorithms can be found:
-
-\textbf{Shannon Entropy: } Subsection \ref{ssec:shannon-entropy}
-
-\textbf{Non-Probabilistic Entropy: } Subsection \ref{ssec:non-prob-sec}
-
-\textbf{Hybrid Entropy: } Subsection \ref{ssec:hybrid-sec}
-
-\subsection{Data Flow}
+\subsection{Function calls}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{Chapter2/software-img/data_flow_2.png}
-  \caption{Data flow through the application.}
+  \includegraphics[width=\textwidth,clip,trim=0mm 50mm 110mm 50mm]{Chapter2/software-img/function_call_1.pdf}
+  \caption{Function calls through the application.}
   \label{fig:data-flow}
 \end{figure}
 
-Figure \ref{fig:data-flow} shows the flow of data through the application, all the way up to \texttt{Enantiomorph} the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}
+Figure \ref{fig:data-flow} shows which Function/Script calls which through the application, all the way up to \texttt{Enantiomorph}, the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}.
 
 \subsection{Testing}
 
@@ -89,13 +38,15 @@ As Figure \ref{fig:unit-test-results} demonstrates, all Unit tests passed.
 
 \subsubsection{Acceptance Tests}
 
+Acceptance tests are when each `requirement' in turn is assessed to assure its completion. In this project, as there was no firm requirements at the beginning of the process, the User Stories which were derived over the project duration will be assessed against. In \acrfull{XP}, a User Story is not considered to be complete until the time in which it passes it's acceptance test, as stating on the \acrshort{XP} website \cite{Acceptance_Tests}.
+
 Table \ref{table:acceptance} outlines the results from the Acceptance Tests run. The left-most column \say{User Story Reference} aligns with Table \ref{table:User Stories}, so more detail can be found.
 
 \begin{center}
   \small
-  \begin{longtable}{| p{3cm} | p{4cm} | p{4cm}  | p{3cm} | p{2cm} |}
+  \begin{longtable}{| p{2cm} | p{6cm} | p{2cm}  | p{1.5cm} |}
     \hline
-      \textbf{User Story Reference} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Pass/Fail} \\
+      \textbf{User Story Reference} & \textbf{Expected Outcome} & \textbf{Actual \newline Outcome} & \textbf{Pass/Fail} \\ \hline \endhead
       1 & Image is loaded into the system & As expected & Pass \\ \hline
       2 & Membership array is passed out of the membership function and is usable in other functions & As expected & Pass \\ \hline
       3 & Images are aligned using Non-Probabilistic entropy and the output \& entropy outputs are realistic & As expected & Pass \\ \hline

@@ -1,0 +1,33 @@
+\subsection{Run-time results}
+\label{ssec:run-time}
+
+\begin{table}[H]
+  \begin{tabular}{| p{3cm} | p{3cm} | c | c | c | p{2cm} |}
+    \hline
+    \textbf{Alignment metric} & \textbf{No. of iterations} & \multicolumn{3}{ |c| }{\textbf{Time to run (secs)}} & \textbf{Average time per 1 iteration} \\ \hline
+      \multicolumn{2}{ |c| }{} & 5 iterations & 10 iterations & 20 iterations & \\ \hline
+      \multirow{3}{*}{Shannon} & BI-RADS I & 6.4 & 11.9 & 23.5 & \textbf{1.22}  \\
+                               & BI-RADS II & 8.7 & 16.11 & 30.0 & \textbf{1.62} \\
+                               & BI-RADS III & 11.8 & 21.2 & 40.7 & \textbf{2.17} \\
+                               & BI-RADS IV & 8.9 & 15.5 & 29.9 & \textbf{1.61} \\
+        \hline
+        \multirow{3}{*}{Non - Probabilistic} & BI-RADS I & 135.2 & 277.2 & 573.6 & \textbf{27.81} \\
+                                             & BI-RADS II & 214.6 & 425.8 & 893.8 & \textbf{43.40} \\
+                                             & BI-RADS III & 275.5 & 595.3 & 1243.0 & \textbf{58.93} \\
+                                             & BI-RADS IV & 143.3 & 324.4 & 706.4 & \textbf{32.14} \\
+          \hline
+          \multirow{3}{*}{Hybrid} & BI-RADS I & 19.3 & 38.3 & 76.1 & \textbf{3.83} \\
+                                  & BI-RADS II & 30.2 & 56.9 & 108.7 & \textbf{5.72} \\
+                                  & BI-RADS III & 40.6 & 76.5 & 150.6 & \textbf{7.77} \\
+                                  & BI-RADS IV & 25.6 & 50.1 & 98.6 & \textbf{5.02} \\
+            \hline
+  \end{tabular}
+  \caption{Run-time statistics for each set over 5, 10 \& 20 iterations.}
+  \label{table:run-time}
+\end{table}
+
+Table \ref{table:run-time} outlines the run-time statistics for each input set, along with the average time taken to run 1 iteration for each set.
+
+When comparing run-times to the number of images congealed, there is a clear correlation between more images congealed and greater run time, with some algorithms on average taking twice as long to run 1 iteration.
+
+Non-Probabilistic can be seen to be much slower than it`s counterparts. This could be due to implementation, however when analysed alongside the entropy result, it could also be down to a higher accuracy rate. This is a trade-off that the user would have to consider when aligning images. 

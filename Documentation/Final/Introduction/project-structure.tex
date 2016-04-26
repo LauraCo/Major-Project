@@ -8,15 +8,15 @@ The main piece of research to be undertaken in this project will be evaluating w
 
 \subsection{Software Implementation}
 
-In order to assess the usefulness of basic fuzzy entropy algorithms in the alignment of mammographic scans, a tool must be built to handle the input images and all the output data. This tool will be created using MATLAB \cite{MATLAB:2016} and it's Fuzzy Logic \cite{fuzzy_toolbox} and Image Processing \cite{image_toolbox} toolboxes.
+In order to assess the usefulness of basic fuzzy entropy algorithms in the alignment of mammographic images, a tool must be built to handle the input images and all the output data. This tool will be created using MATLAB \cite{MATLAB:2016} and it's Fuzzy Logic \cite{fuzzy_toolbox} and Image Processing \cite{image_toolbox} toolboxes.
 
 The main functions of the tool will be:
 
 \begin{itemize}
-  \item Allow the user to input a large image containing all the scans they wish to align
-  \item Allow the user to remove any medical markers as they see fit
-  \item Allow the user to choose their alignment metric and number of iterations to run on the input images
-  \item Output the final mean image, the adjusted input images (how they look after aligning) and the entropy of the final image set
+  \item Allow the user to input a large image containing all the images they wish to align
+  \item Allow the user to remove any medical markers, or any other artifacts, as they see fit
+  \item Allow the user to choose a particular alignment metric and number of iterations to run on the input images
+  \item Output the final mean image, the adjusted input images (how they look after alignment) and the entropy value of the final image set
 \end{itemize}
 
 \subsection{Testing}

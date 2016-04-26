@@ -93,14 +93,14 @@
 \include{Chapter1/analysis}
 
 \include{Chapter2/chapter2}
-\include{Chapter2/shannon}
-\include{Chapter2/non-prob}
-\include{Chapter2/hybrid}
+\include{Chapter2/algorithmImplementation}
 \include{Chapter2/software}
-\include{Chapter2/implementationAndTesting}
+\include{Chapter2/GUI}
+\include{Chapter2/functionsAndTesting}
 \include{Chapter2/technical-difficulties}
 
-\include{Chapter3/results}
+\include{Chapter3/alignment-results}
+\include{Chapter3/runtime-results}
 \include{Chapter3/conclusions}
 
 \include{Chapter4/chapter4}
@@ -117,6 +117,7 @@
 %\fancyhf{} % clear all header and footer fields
 \fancyhead[L]{\textsl{Appendix\ \thechapter}}
 \fancyhead[R]{\textsl{\leftmark}}}
+
 
 \appendix
 \fancyhead[L]{\textsl{Appendix\ \thechapter}}
@@ -135,11 +136,9 @@
 \include{Appendix2/appendix2}
 \include{Appendix3/appendix3}
 \include{Appendix4/appendix4}
+\include{Appendix5/appendix5}
 
-%\include{References/glossary}
 
-
-\printglossaries
 
 \fancypagestyle{plain}{%
    \fancyhead{} %[C]{Annotated Bibliography}
@@ -148,12 +147,18 @@
    \renewcommand{\footrulewidth}{0pt}
 }
 
+\printglossaries
+
+\clearpage
+
+
 \setemptyheader
 
 \nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
 
 % the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography.
-\addcontentsline{toc}{chapter}{Annotated Bibliography} % Adds References to contents page
+
+%\addcontentsline{toc}{chapter}{Annotated Bibliography} % Adds References to contents page
 
 %
 % example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.

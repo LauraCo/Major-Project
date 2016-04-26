@@ -1,16 +1,346 @@
-\ifglsentryexists{latex}{}%
+\ifglsentryexists{transposition}{}%
 {%
-\gls@defglossaryentry{latex}%
+\gls@defglossaryentry{transposition}%
 {%
-name={latex},%
-sort={latex},%
+name={transposition},%
+sort={transposition},%
 type={main},%
-first={latex},%
-firstplural={latexs},%
-text={latex},%
-plural={latexs},%
-description={Is a mark up language specially suited for scientific documents},%
-descriptionplural={Is a mark up language specially suited for scientific documents},%
+first={transposition},%
+firstplural={transpositions},%
+text={transposition},%
+plural={transpositions},%
+description={to change the order of two or more objects},%
+descriptionplural={to change the order of two or more objects},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{pgm}{}%
+{%
+\gls@defglossaryentry{pgm}%
+{%
+name={PGM},%
+sort={PGM},%
+type={main},%
+first={Portable Gray Map\glsspace (PGM)},%
+firstplural={Portable Gray Map\acrpluralsuffix \glsspace (PGM\acrpluralsuffix )},%
+text={PGM},%
+plural={PGM\acrpluralsuffix },%
+description={Portable Gray Map},%
+descriptionplural={Portable Gray Map\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Portable Gray Map},%
+longplural={Portable Gray Maps},%
+short={PGM},%
+shortplural={PGMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{TDD}{}%
+{%
+\gls@defglossaryentry{TDD}%
+{%
+name={TDD},%
+sort={TDD},%
+type={main},%
+first={Test Driven Development\glsspace (TDD)},%
+firstplural={Test Driven Development\acrpluralsuffix \glsspace (TDD\acrpluralsuffix )},%
+text={TDD},%
+plural={TDD\acrpluralsuffix },%
+description={Test Driven Development},%
+descriptionplural={Test Driven Development\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Test Driven Development},%
+longplural={Test Driven Developments},%
+short={TDD},%
+shortplural={TDDs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{XP}{}%
+{%
+\gls@defglossaryentry{XP}%
+{%
+name={XP},%
+sort={XP},%
+type={main},%
+first={eXtreme Programming\glsspace (XP)},%
+firstplural={eXtreme Programming\acrpluralsuffix \glsspace (XP\acrpluralsuffix )},%
+text={XP},%
+plural={XP\acrpluralsuffix },%
+description={eXtreme Programming},%
+descriptionplural={eXtreme Programming\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={eXtreme Programming},%
+longplural={eXtreme Programmings},%
+short={XP},%
+shortplural={XPs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{CRC}{}%
+{%
+\gls@defglossaryentry{CRC}%
+{%
+name={CRC},%
+sort={CRC},%
+type={main},%
+first={Class, Responsibilities, and Collaboration\glsspace (CRC)},%
+firstplural={Class, Responsibilities, and Collaboration\acrpluralsuffix \glsspace (CRC\acrpluralsuffix )},%
+text={CRC},%
+plural={CRC\acrpluralsuffix },%
+description={Class, Responsibilities, and Collaboration},%
+descriptionplural={Class, Responsibilities, and Collaboration\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Class, Responsibilities, and Collaboration},%
+longplural={Class, Responsibilities, and Collaborations},%
+short={CRC},%
+shortplural={CRCs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{GUI}{}%
+{%
+\gls@defglossaryentry{GUI}%
+{%
+name={GUI},%
+sort={GUI},%
+type={main},%
+first={Graphical User Interface\glsspace (GUI)},%
+firstplural={Graphical User Interface\acrpluralsuffix \glsspace (GUI\acrpluralsuffix )},%
+text={GUI},%
+plural={GUI\acrpluralsuffix },%
+description={Graphical User Interface},%
+descriptionplural={Graphical User Interface\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Graphical User Interface},%
+longplural={Graphical User Interfaces},%
+short={GUI},%
+shortplural={GUIs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{Congealing}{}%
+{%
+\gls@defglossaryentry{Congealing}%
+{%
+name={Congealing},%
+sort={Congealing},%
+type={main},%
+first={Congealing},%
+firstplural={Congealings},%
+text={Congealing},%
+plural={Congealings},%
+description={is an algorithm concerned with joint image alignment, developed by Learned-Miller \cite {joint-alignment}},%
+descriptionplural={is an algorithm concerned with joint image alignment, developed by Learned-Miller \cite {joint-alignment}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SCM}{}%
+{%
+\gls@defglossaryentry{SCM}%
+{%
+name={SCM},%
+sort={SCM},%
+type={main},%
+first={Software Configuration Management\glsspace (SCM)},%
+firstplural={Software Configuration Management\acrpluralsuffix \glsspace (SCM\acrpluralsuffix )},%
+text={SCM},%
+plural={SCM\acrpluralsuffix },%
+description={Software Configuration Management},%
+descriptionplural={Software Configuration Management\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Software Configuration Management},%
+longplural={Software Configuration Managements},%
+short={SCM},%
+shortplural={SCMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SVN}{}%
+{%
+\gls@defglossaryentry{SVN}%
+{%
+name={SVN},%
+sort={SVN},%
+type={main},%
+first={Apache Subversion\glsspace (SVN)},%
+firstplural={Apache Subversion\acrpluralsuffix \glsspace (SVN\acrpluralsuffix )},%
+text={SVN},%
+plural={SVN\acrpluralsuffix },%
+description={Apache Subversion},%
+descriptionplural={Apache Subversion\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Apache Subversion},%
+longplural={Apache Subversions},%
+short={SVN},%
+shortplural={SVNs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{MIAS}{}%
+{%
+\gls@defglossaryentry{MIAS}%
+{%
+name={MIAS},%
+sort={MIAS},%
+type={main},%
+first={Mammographic Image Analysis Society\glsspace (MIAS)},%
+firstplural={Mammographic Image Analysis Society\acrpluralsuffix \glsspace (MIAS\acrpluralsuffix )},%
+text={MIAS},%
+plural={MIAS\acrpluralsuffix },%
+description={Mammographic Image Analysis Society},%
+descriptionplural={Mammographic Image Analysis Society\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Mammographic Image Analysis Society},%
+longplural={Mammographic Image Analysis Societys},%
+short={MIAS},%
+shortplural={MIASs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{DDSM}{}%
+{%
+\gls@defglossaryentry{DDSM}%
+{%
+name={DDSM},%
+sort={DDSM},%
+type={main},%
+first={Digital Database for Screening Mammography\glsspace (DDSM)},%
+firstplural={Digital Database for Screening Mammography\acrpluralsuffix \glsspace (DDSM\acrpluralsuffix )},%
+text={DDSM},%
+plural={DDSM\acrpluralsuffix },%
+description={Digital Database for Screening Mammography},%
+descriptionplural={Digital Database for Screening Mammography\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Digital Database for Screening Mammography},%
+longplural={Digital Database for Screening Mammographys},%
+short={DDSM},%
+shortplural={DDSMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{non-deterministic}{}%
+{%
+\gls@defglossaryentry{non-deterministic}%
+{%
+name={non-deterministic},%
+sort={non-deterministic},%
+type={main},%
+first={non-deterministic},%
+firstplural={non-deterministics},%
+text={non-deterministic},%
+plural={non-deterministics},%
+description={is when a system or algorithm, even if given the same input, can behave in a different manner each time it is executed - i.e. in the Congealing algorithm, there is no set order in which the image transformations can be run, therefore they can be run in a different order each time the images are congealed},%
+descriptionplural={is when a system or algorithm, even if given the same input, can behave in a different manner each time it is executed - i.e. in the Congealing algorithm, there is no set order in which the image transformations can be run, therefore they can be run in a different order each time the images are congealed},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%

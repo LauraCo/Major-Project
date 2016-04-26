@@ -2,7 +2,7 @@
 
 %You need to describe briefly the life cycle model or research method that you used. You do not need to write about all of the different process models that you are aware of. Focus on the process model or research method that you have used. It is possible that you needed to adapt an existing method to suit your project; clearly identify what you used and how you adapted it for your needs.
 
-For this project, a literature review was undertaken to assess the work completed by researchers in the fields of Entropy, Fuzzy Entropy and image alignment methods to help better understand what has been investigated, and to gain a personal background understanding.
+For this project, a literature review was undertaken to assess the work completed by researchers in the fields of Entropy, Fuzzy Entropy and image alignment methods to help better understand what has been investigated, and to gain an understanding of the background.
 
 \subsection{Entropy}
 \label{ssec:entropy}
@@ -58,11 +58,11 @@ On the other side, if a system outputs solely the letter \say{M}, then the entro
 \fi
 \end{figure}
 
-It follows that entropy can only ever be between 0 and 1, with an entropy of 0 have a 50\% probability, and an entropy of 1 being 100\% certain.
+It follows that entropy can only ever take a value between 0 and 1, with an entropy of 1 have a 50\% probability, and an entropy of 0 being 100\% certain.
 
 \subsection{Uncertainty}
 
-However real life is not 100\% certain - a small amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important so as researchers we can understand it, and use it to our advantage in techniques such as fuzzy entropy.
+However real life is not 100\% certain - a small amount of uncertainty in life is to be expected and sometimes desired. A surprise party for many is the nice kind, however uncertainty associated with risk - i.e. \say{Will I lose my job in the recession?} - is uncertainty with a negative impact. Modeling uncertainty is especially important to researchers so they can understand it, and use it to our advantage in techniques such as fuzzy entropy.
 
 \subsubsection{Probabilistic Uncertainty}
 
@@ -254,20 +254,67 @@ Its concise nature, and chronological listing ensured a strong understanding of 
 
 \subsection{Joint Image Alignment}
 
-Joint image alignment focuses on the alignment of several images, into one average image. This Subsection will look into a couple of the techniques available for this project.
+Joint image alignment, occasionally otherwise known as groupwise image alignment, focuses on the alignment of several images, into one average image. This research area has been particularly prevalent in areas such as medical and facial imagery \cite{Tiddeman_Hunter_2011} \cite{Cootes_Twining_Petrovic_Babalola_Taylor_2010}. Cootes et. al. leverage a groupwise registration algorithm to choose one base image with control points to align (typically a standard mesh frame), analyse each following image in turn estimating the movement needed to align corresponding control points, then iteratively warp each image to fit the reference frame, adjusting the texture model as they`re aligned. This type of alignment will not be considered for the project due to the over-complexity needed for the input image, along with computational limitations due to aligning one image at a time with the base image.
+
+This Subsection will look into a couple of the techniques which will be suitable for this project.
 
 \subsubsection{Learned-Miller`s Congealing}
 
-Learned-Miller's \Gls{Congealing} \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data (which must have minimal noise, no occlusions and illumination variation) \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl} \cite{Peng_Ganesh_Wright_Xu_Ma_2012}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
+Learned-Miller's \Gls{Congealing} \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data (which must have minimal noise, no occlusions and illumination variation) \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
 
-This algorithm works by iteratively reducing the pixel-wise entropy over the input images, using a set of standard image transformations such as:
+This algorithm works by iteratively reducing the pixel-wise entropy over the input images, using a set of standard image transformations, in a \gls{non-deterministic} manner, such as:
 
 \begin{itemize}
-  \item $x$ \& $y$ translations
-  \item rotation
-  \item $x$ \& $y$ sheer
-  \item $x$ \& $y$ scale
+  \item $x$ \& $y$ translations (Figure \ref{fig:translation})
+  \item rotation (Figure \ref{fig:rotation})
+  \item $x$ \& $y$ shear (Figures \ref{fig:x-shear} \& \ref{fig:y-shear} respectively)
+  \item $x$ \& $y$ scale (Figure \ref{fig:scale})
 \end{itemize}
+
+\begin{center}
+  \begin{figure}[H]
+      \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+            \includegraphics[width=\textwidth]{Chapter1/lit-review-img/translation.pdf}
+          \caption{Image translation in the $x$ \& $y$ axes.}
+          \label{fig:translation}
+      \end{subfigure} \hfill
+      ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+        %(or a blank line to force the subfigure onto a new line)
+      \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{Chapter1/lit-review-img/rotation.pdf}
+          \caption{Image rotation about the origin.}
+          \label{fig:rotation}
+      \end{subfigure}
+      ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+      %(or a blank line to force the subfigure onto a new line)
+
+      \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+        \includegraphics[width=\textwidth]{Chapter1/lit-review-img/xshear.pdf}
+        \caption{Image shear in the $x$ axis.}
+        \label{fig:x-shear}
+      \end{subfigure} \hfill
+      \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+        \includegraphics[width=\textwidth]{Chapter1/lit-review-img/yshear.pdf}
+        \caption{Image shear in the $y$ axis.}
+        \label{fig:y-shear}
+      \end{subfigure}
+
+      \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.45\textwidth]{Chapter1/lit-review-img/scale.pdf}
+        \caption{Image scale in the $x$ \& $y$ axes.}
+        \label{fig:scale}
+      \end{subfigure}
+    \caption{Image transformations executed by the \Gls{Congealing} algorithm}
+    \label{fig:image-transformations}
+  \end{figure}
+\end{center}
+
+\vspace{-1cm}
 
 The entropy is calculated by assessing each individual set of pixel-locations in the `Pixel Stack' (see Figure \ref{fig:pixel-stack}), and by calculating the entropy of the empirical distribution of values in the Pixel Stack.
 

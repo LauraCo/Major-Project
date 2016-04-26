@@ -1,4 +1,4 @@
-\subsection{Hybrid Entropy}
+\subsubsection{Hybrid Entropy}
 \label{ssec:hybrid-sec}
 
 As mentioned in Section \ref{sssec:hybrid-section}, the Hybrid Entropy equation is as follows:
@@ -19,10 +19,11 @@ Where $E_0$ and $E_1$ can be defined as:
 And $p_0$ and $p_1$ are the probabilities of receiving 0 and 1 symbols respectively.
 
 %==============================================================================
-\subsubsection{MATLAB implementation}
+\vspace{0.5cm}
+\noindent \textbf{MATLAB implementation}
 %==============================================================================
 
-Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapezia covering 2 fuzzy sets, as seen in Figure \ref{fig:2-traps}.
+Due to reasons covered in `Technical Challenges', Hybrid Entropy membership was implemented using 2 trapezia covering 2 fuzzy sets, as seen in Figure \ref{fig:2-traps}.
 
 \begin{figure}[H]
   \center
@@ -34,8 +35,9 @@ Due to reasons covered in the Subsubsection \ref{sssec:hyrid-technical}, Hybrid 
 Two arrays are then fed into the Hybrid Entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
 
 %==============================================================================
-\subsubsection{Technical challenges}
-\label{sssec:hyrid-technical}
+\vspace{0.5cm}
+\noindent \textbf{Technical challenges}
+\label{hyrid-technical}
 %==============================================================================
 
 Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then must belong to the other.
