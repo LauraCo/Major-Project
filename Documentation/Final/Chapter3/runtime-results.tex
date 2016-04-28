@@ -28,6 +28,10 @@
 
 Table \ref{table:run-time} outlines the run-time statistics for each input set, along with the average time taken to run 1 iteration for each set.
 
-When comparing run-times to the number of images congealed, there is a clear correlation between more images congealed and greater run time, with some algorithms on average taking twice as long to run 1 iteration.
+When comparing run-times to the number of images congealed, there is a clear correlation between more images congealed and greater run time (e.g. Set 3: BI-RADS III), with some algorithms on average taking twice as long to run 1 iteration. This is to be expected due to the larger amount of information to be processed upon each iteration as each image is aligned with the other.
 
-Non-Probabilistic can be seen to be much slower than it`s counterparts. This could be due to implementation, however when analysed alongside the entropy result, it could also be down to a higher accuracy rate. This is a trade-off that the user would have to consider when aligning images. 
+Shannon entropy has the quickest run-time of the three algorithms. This is likely to be due to the implementation of a lookup table - something which could have been considered for the two fuzzy entropy algorithms.
+
+Non-Probabilistic can be seen to be much slower than it`s counterparts. This could be due to implementation, however when analysed alongside the entropy result, it could also be down to a higher accuracy rate. This is a trade-off that the user would have to consider when aligning images.
+
+Hybrid entropy has admirable run-time statistics given the complexity of the mathematics needed to compute the entropy value. However the algorithm can be seen to struggle on the larger dataset (Set 3: BI-RADS III), with a runtime of 3.6 times that of Shannon entropy per iteration.

@@ -1,3 +1,4 @@
+%TC:ignore
 \chapter{Third-Party Code and Libraries}
 
 %If you have made use of any third party code or software libraries, i.e. any code that you have not designed and written yourself, then you must include this appendix.
@@ -15,3 +16,17 @@
 \section{Congealing Code}
 
 The project focused on extending the existing Congealing Code implemented by Learned Miller et al in 2005. A Congealing demo is available on the Congealing website \cite{Learned-Miller} which is open for experimentation. The original demo code was modified and extended to be able to read in mammograms and to work with 2 Fuzzy Entropy algorithms.
+
+\section{MATLAB}
+
+MATLAB was the main implementation tool for this project \cite{MATLAB:2016}. It allowed the developer to leverage several built-in functions, such as \texttt{max} and \texttt{bsxfun} - the former to find the maximum value between two number, and the latter to apply a function (such as max) to all elements in an array. This streamlined the development process by ensuring that menial tasks could often be reduced down to a one-line implementation, especially when leveraging the extra Toolboxes provided by MATLAB. This is also covered in the main body of the report in Subsection \ref{ssec:matlab} about implementation tools.
+
+\subsection{Image Processing Toolbox}
+
+The Image Processing Toolbox \cite{image_toolbox} allowed the developer to leverage ready-made algorithms and functions vital for pre-processing and processing of images. Functions utilised in this project include ensuring the image was converted to grey-scale, reading and writing image data from/to files and obtaining image information, such as size and image type.
+
+\subsection{Fuzzy Logic Toolbox}
+
+The Fuzzy Logic Toolbox \cite{fuzzy_toolbox} was primarily used for modeling the fuzzy set membership functions utilised by Non-Probabilistic and Hybrid entropy - using functions such as \texttt{trapmf} and \texttt{evalmf}. More information is covered in the main body of the report in Subsection \ref{ssec:member-imp}.
+
+%TC:endignore

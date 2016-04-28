@@ -42,3 +42,40 @@ Whilst the entropy was often not as small as that output by Non-Probabilistic en
 \textbf{Disadvantages}
 
 One issue faced by Hybrid entropy was over-congealing. Whilst the entropy value did not indicate towards over-congealment, the image output afterwards did cause some concern. As mentioned previously (Subsection \ref{sssec:hybrid-alignment}), estimating when to cut off Hybrid entropy is difficult, as over-congealment often happened at varying iterations given different data-sets.
+
+\subsection{Future Advancements}
+
+Several features were identified for improvement, plus additional functionality could be added to the project if the project time-frame had been longer, or if someone continues this project at a later stage.
+
+\subsubsection{Automated medical marker removal}
+Feature extraction is an ongoing research area. This could be leveraged in the future for the automatic detection and removal of medical markers and/or artifacts. Some interesting areas of research which may be viable for implementation include:
+
+\noindent \textbf{Corner detection: } As the artifacts are typically rectangular in shape, a corner detector could be used to identify their presence - such as Harris Corners, or KLT. Harris Corners was developed by Chris Harris and Mike Stephens in 1988, in a technique which combines an edge detector with a corner detector \cite{Harris_Stephens_1988}. Harris Corners algorithm is looking for a sharp change in intensity within the image, such as passing from the black mammogram background onto the white area of the artifact. If a right-angle in intensity difference can be detected using several sliding windows over the image, then a corner is detected.
+
+The work of Kanade-Lucas-Tomasi on the self-titled algorithm \acrshort{KLT} builds upon that of Harris and Stephens \cite{Shi_Tomasi_1994} \cite{tomasi2004detection}. This implements a scoring function where the highest value (e.g. $x$) above a threshold are classed as a corner, and all other values which neighbour $x$ are removed from contention.
+
+When compared, both Harris and KLT corners perform very similarly and are both still regularly used today.
+
+\noindent \textbf{SURF: } \acrfull{SURF} \cite{Bay_Tuytelaars_Gool_2006} is a speeded up version of an older feature extraction method called \acrfull{SIFT} \cite{Lowe_1999}. \acrshort{SIFT} boasts a number of useful features such as being scale invariant (useful as not all artifacts are the same size), invariant to rotation (again useful as artifacts are often at different orientations) and features are selected only if there is a good enough contrast (as artifacts are typically white on a black background, this is helpful). \acrshort{SURF} improves upon \acrshort{SIFT} by utilising different-sized box features rather than \acrfull{DOG} filters for refining the space in which scale is analysed, therefore making it quicker.
+
+\subsubsection{Classify unseen mammographic images}
+
+If further work was undertaken to build upon this project, the application could be used to classify new, unseen mammographic images into the correct BI-RADS classification using some kind of Machine Learning method. The application could be trained upon the existing Mini-MIAS dataset \cite{Suckling_1994}, along with other datasets which contain healthy tissue, such as \acrshort{DDSM} \cite{Heath_Bowyer_Kopans_Moore_Kegelmeyer_Processing} \cite{Heath_Bowyer_Kopans_Kegelmeyer_Moore_Chang_MunishKumaran_1998} to create an accurate model of what each classification should tend towards.
+
+Research is ongoing into which Machine Learning technique is the best for classification of images, however the likely choice would be either an Artificial Neural Network (ANN) or a Support Vector Machine (SVN) given their high accuracy rate, as outlined in \cite{kotsiantis2007supervised}. Currently both of these are slow to train, however that wouldn't necessarily be a problem for a Doctor to deal with, as it could be trained prior to their usage, or trained annually on new available data to become even more accurate. A high accuracy rate is more important than the training rate due to the human-diagnosis element of the application.
+
+\subsubsection{Optimisation of Non-Probabilistic}
+
+The functionality to run all 3 alignment metrics together was not implemented due to the performance issue of Non-Probabilistic entropy, however if further work was done to optimise the performance, then the author can see no issue as to why all three alignment metrics could be run, and the results displayed side-by-side for comparison.
+
+The current implementation means the user would have to run the three alignment techniques sequentially, the outputs saved to their PC, and then later opened in an image preview software to compare the results alongside each other. This is not a major issue, however it would be advantageous if the user could view them side-by-side easily.
+
+\subsubsection{Further optimisation}
+
+Further optimisation could be carried out for the two fuzzy entropy algorithms by implementing a lookup table structure, as in Learned-Miller's example of Shannon entropy. Whilst this is unlikely to make massive gains for Hybrid entropy, for Non-Probabilistic entropy this could see a significant reduction in run-time, making the algorithm more usable in real-world environments.
+
+\subsubsection{GUI alterations}
+
+Small edits would be made to the \texttt{removeMarker} \acrshort{GUI}, such as a clear button, and the functionality to draw more than one area to remove from an image.
+
+The load functionality in the main \acrshort{GUI} could be compiled into one button - this was initially attempted during the project, however a lack of knowledge into how to detect if a file already exists, along with time constraints, inhibited this advancement.

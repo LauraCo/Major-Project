@@ -13,13 +13,13 @@ One issue which was faced when creating the large .pgm file containing all the i
   \label{fig:rotated-input}
 \end{figure}
 
-It quickly became apparent that the order in which the image array was being written to file to create this larger pgm file was incorrect, however due to MATLAB's clever use of vectorisation, it was difficult to diagnose where the issue lay. After some investigation, it was revealed that the function \texttt{fwrite} by MATLAB \cite{fwrite}, used for writing binary data to file, wrote each line out column-by-column, rather than the customary row-by-row approach.
+It quickly became apparent that the order in which the image array was being written to file to create this larger pgm file was incorrect, however due to MATLAB's use of vectorisation, it was difficult to diagnose where the issue lay. After some investigation, it was revealed that the function \texttt{fwrite} by MATLAB \cite{fwrite}, used for writing binary data to file, wrote each line out column-by-column, rather than the customary row-by-row approach.
 
 To mitigate this issue, the array passed into fwrite would have to be transposed prior or during being passed into the function. There are two ways in which MATLAB permits the \gls{transposition} of arrays:
 
 \subsubsection{Simple 2D array transposition}
 
-MATLAB has a \say{Transpose} function which simply flips two elements in a 2D array as utilised in:
+MATLAB has a \say{Transpose} function \cite{transpose} which simply flips two elements in a 2D array as utilised in:
 
 \begin{minted}
   [
@@ -71,18 +71,18 @@ This example was taken from the \texttt{pgm2bigPgm.m} function - where a set of 
 
 \subsubsection{Final Outcome}
 
-After transposing all arrays which are to be saved out to file, whether directly through \texttt{fwrite} or \texttt{saveSeries}, all images are saved in the correct orientation.
+After transposing all arrays which are to be saved out to file, whether directly through \texttt{fwrite} or via the \texttt{saveSeries} function, all images are saved in the correct orientation.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/big_scan.jpg}
+  \includegraphics[width=0.3\textwidth]{Chapter2/technical-img/big_scan.jpg}
   \caption{Final output image.}
   \label{fig:final-output-4}
 \end{figure}
 
 \subsection{Medical Marker Removal}
 
-This subsection has been formalised from a blog post written on 28th March 2016 \cite{Collins_2016}.
+This subsection has been formalised from a blog post written by the author on 28th March 2016 \cite{Collins_2016}.
 
 As the images are aligned using a comparison of the pixel-value, the Medical Markers included on mammograms cause an issue. This is because if more than one scan contains these white patches (left by the metal clip during scanning), then they will try and align with each other during the \Gls{Congealing} process.
 
@@ -158,7 +158,7 @@ This idea was discarded due to the marker unlikely to ever be perfectly square i
 
 \noindent \textbf{MATLAB function regionprops}
 
-Another candidate function for removing Medical Markers was the MATLAB function \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
+Another candidate function for removing Medical Markers was the MATLAB function \\ \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
 
 \noindent \textbf{Shape recognition demo}
 
@@ -170,7 +170,7 @@ However, due to the slightly inaccurate identification of the tissue boundary, t
 
 \noindent  \textbf{Removing white objects over a specified grey-level value}
 
-Back on the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small bit of breast tissue.
+Returning to the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small bit of breast tissue.
 
 To see if the entire marker could be removed, if you lower the grey-level threshold for removal to anything over 200 value, then the output is as in Figure \ref{fig:remove-white-200}. Unfortunately it does not remove the entire marker, and some of the vital breast tissue is lost.
 
@@ -178,9 +178,9 @@ Further to that, by running the white removal at grey-level value at 220 (the su
 
 \subsubsection{Chosen method}
 
-Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas (such as the Medical Markers) \cite{binary_mask}.
+Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas \cite{binary_mask}.
 
-After reading through the demo given as an answer by \say{Image Analyst} on the forum, I rewrote the function in order to fit the removal criteria. The User can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between scans).
+After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The User can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between scans).
 
 \begin{figure}[H]
   \centering
@@ -191,7 +191,7 @@ After reading through the demo given as an answer by \say{Image Analyst} on the 
 
 As shown in Figure \ref{fig:remove-marker} this has been shown to be extremely successful and therefore was utilised in the project.
 
-\subsection{.pgm file header}
+\subsection{Creating the Mammogram image data}
 
 As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
 
@@ -256,20 +256,25 @@ A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in
 \end{figure}
 
 
-Listing \ref{fig:pgm_header_written} above shows the first 5 lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \# - therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
+Listing \ref{fig:pgm_header_written} above shows the first 5 lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
 
 This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
 
 
 \subsubsection{Creating an appropriate save function}
 
-The next step was to write a function which would appropriately concatenate the MINI-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a refined version of the original \texttt{saveSeries.m} demo function, which will:
+The next step was to write a function which would appropriately concatenate the MINI-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
 \begin{itemize}
 \item read in the number of images in the chosen directory
 \item identifies the dimensions of each scan in the directory (with MINI-MIAS, they are all the same dimensions)
 \item creates a string containing all the suitable information needed for reading (as outlined in Subsubsection \ref{sssec:load})
 \item creates a file called \say{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
 \end{itemize}
+
+\subsubsection{Final outcome}
+
+An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Appendix \ref{appendix:results} Figure \ref{fig:all-input-imgs}.
+
 
 \subsection{Vectorisation}
 \label{ssec:vectorisation}
@@ -282,7 +287,7 @@ Vectorisation is the process to replace loop-based code with MATLAB matrix and v
     \item Performance - vectorised code usually runs a lot faster
 \end{enumerate}
 
-The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzzy.m} contained for loops, so experimentation was run before, during and after vectorisation to evaluate the supposed performance increase.
+The initial implementations of both \texttt{membership.m} and \texttt{nonProbabilistic.m} contained for loops, so experimentation was run before, during and after vectorisation to evaluate the supposed performance increase.
 
 \begin{figure}[H]
   %\iffalse
@@ -307,7 +312,7 @@ The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzz
         \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
         \addlegendentry{Partial optimisation \\ (just membership.m) \\};
         \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-        \addlegendentry{Full optimisation \\ (both membership.m \& \\ deLucaFuzzy.m) \\};
+        \addlegendentry{Full optimisation \\ (both membership.m \& \\ nonProbabilistic.m) \\};
       \end{axis}
     \end{tikzpicture}
     \caption{Time per iteration before, during and after vectorisation}
@@ -315,7 +320,7 @@ The initial implementations of both \texttt{membership.m} and \texttt{deLucaFuzz
     %\fi
 \end{figure}
 
-Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, in the same environment, to run the \texttt{binaryCongeal.m} \footnote{The function which calls the specified entropy algorithm.} function on each iteration. A marked improvement can be seen just by vectorising the \texttt{membership.m} function, and further improvements once the \texttt{deLucaFuzzy.m} function for Non-Probabilistic entropy was vectorised.
+Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, in the same environment, to run the \texttt{binaryCongeal.m} \footnote{The function which calls the specified entropy algorithm.} function. A marked improvement can be seen just by vectorising the \texttt{membership.m} function, and further improvements once the \texttt{nonProbabilistic.m} function for Non-Probabilistic entropy was vectorised.
 
 %http://pgfplots.sourceforge.net/gallery.html
 \begin{figure}[H]
@@ -323,23 +328,22 @@ Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, i
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width= 10cm,
-        symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        width= 12cm,
+        symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
         x tick label style={font=\small,text width=2.5cm,align=center},
         ybar,
         enlargelimits=0.15,
         legend style={at={(0.5,-0.2)},
           anchor=north,legend columns=-1},
         ylabel={Time (secs)},
-        xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& De Luca)},
+        xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
         nodes near coords,
     	  nodes near coords align={vertical},
-        x tick label style={rotate=45,anchor=east},
         ]
         \addplot[ybar,fill] coordinates {
     (Pre optimisation (For loops),265.771186)
     (Partial optimisation (Just membership),155.432352)
-    (Full optimisation (Membership \& De Luca),105.188263) };
+    (Full optimisation (Membership \& Non-Probabilistic),105.188263) };
       \end{axis}
     \end{tikzpicture}
     \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
