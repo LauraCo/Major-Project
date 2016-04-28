@@ -2,13 +2,13 @@
 
 \subsection{Task composition}
 
-After both the background research and literature review were completed, a list of main \say{Tasks} to be undertaken in order to complete this project was composed. These are outlined in the following subsections.
+After both the background research and literature review were completed, a list of main tasks to be undertaken in order to complete this project was composed. These are outlined in the following subsections.
 
 \noindent \textbf{1: Decide how best to implement Membership functions}
 
-Fuzzy entropy requires Membership functions, in which the image data can be classified. This task would be to decide whether to dynamically calculate the Membership functions, or whether to statically define them within the back-end of the system. The take would also be to decide upon which shape of Membership function the application would use. If to be statically defined in the backend of the system, what values would the bases and shoulders of the sets take?
+Fuzzy entropy requires Membership functions, in which the image data can be classified. This task would be to decide whether to dynamically calculate the Membership functions, or whether to statically define them within the back-end of the system. The task would also be to decide upon which shape of Membership function the application would use. If to be statically defined in the backend of the system, what values would the bases and shoulders of the sets take?
 
-\noindent \textbf{2: Research and choose which fuzzy entropy algorithms would be best suited to this project}
+\noindent \textbf{2: Research and choose which two fuzzy entropy algorithms would be best suited to this project}
 
 This project stresses the importance of running image alignment techniques on a standard laptop or PC. With this in mind, each fuzzy entropy algorithm would need to be analysed based on their simplicity of calculations, in order to run quickly.
 
@@ -22,19 +22,31 @@ A lot of image processing can be run using programs such as Python, however the 
 
 \noindent \textbf{6: Decide how best to represent the input and output data}
 
-This most likely would be in the form of a \acrshort{GUI} as the target user - Doctors - wouldn`t have access to tools like MATLAB, nor be well-versed in using the Command Line or Terminal.
+This most likely would be in the form of a \acrshort{GUI} as the target user - doctors - wouldn`t have access to tools like MATLAB, nor be well-versed in using the Command Line or Terminal.
 
 \noindent \textbf{7: Determine how well to best assess the output}
 
-This could possibly involve a professional medical opinion? Or it could be based of the amount the entropy declined over time? Or it could simply be a visual inspection of how well the scans aligned.
+This could possibly involve a professional medical opinion or it could be based on the amount the entropy declined over time. However it could also be a visual inspection of how well the images aligned.
 
 \noindent \textbf{8: Research different ways in which to build the \acrshort{GUI}}
 
-Which programming language would this be done in? If MATLAB were to be chosen, it is capable of linking in which many other languages, such as Java, C and C++. However if the image alignment was done in another programming language, it may be possible to stick to just one language.
+Which programming language would this be done in? If MATLAB were to be chosen, it is capable of linking in with many other languages, such as Java, C and C++. However if the image alignment was done in another programming language, it may be possible to stick to just one language.
 
 \noindent \textbf{9: Determine which dataset to use}
 
-Given the data of choice - Mammograms - there exists an ethical issue of utilising people's medical scans. Research would have to be undertaken to determine whether there are freely-available, license-free Mammographic scans available for use in this project.
+Given the data of choice - Mammograms - there exists an ethical issue of utilising people's medical scans. Research would have to be undertaken to determine whether there are freely-available, license-free mammographic images available for use in this project.
+
+\noindent \textbf{10: Combine the chosen dataset with ground-truth to create project-specific sets}
+
+Due to this project focusing on aligning mammograms from the same density classification, it is likely that a new set of datasets will need to be compiled fitting this criteria. These may also need to be in a specific format to work with the chosen image alignment technique.
+
+\subsection{Discarded Tasks}
+
+Given the short three month timeframe of the project, one major task was dropped from the project after discussions with the project Supervisor, Dr. Neil Mac Parthal\'ain. This discarded task is as follows:
+
+\noindent \textbf{Image classifier}
+
+If the timeframe had been significantly longer, the project could have grown to incorporate some Machine Learning techniques to aid users in the classification of new, unseen images. This would have meant the application would be trained upon appropriate datasets, and extra experimentation would be carried out to ascertain the level of success achieved.
 
 \subsection{Research questions}
 \label{ssec:research-qs}

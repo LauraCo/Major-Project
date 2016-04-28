@@ -4,12 +4,12 @@
 \subsection{Image Rotation}
 \label{ssec:trans}
 
-One issue which was faced when creating the large .pgm file containing all the input images, was that they were rotated 90\degree to the right, as demonstrated in Figure \ref{fig:rotated-input}.
+One issue which was faced when creating the large .pgm file containing all the input images was that they were rotated 90\degree to the right, as demonstrated in Figure \ref{fig:rotated-input}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/rotation.png}
-  \caption{4 rotated input images concatenated into one larger image.}
+  \caption{Four rotated input images concatenated into one larger image.}
   \label{fig:rotated-input}
 \end{figure}
 
@@ -152,7 +152,7 @@ Two options were available for the avoidance of Medical Markers:
 
 \noindent \textbf{Morphological operation - remove squares from image}
 
-Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square}. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. So removal would be made more difficult by the fact you would have to specify a maximum size square to remove, that smaller than the image size.
+Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square} was initially thought to be the most sensible way in which to remove unwanted artefacts. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. Removal is made more difficult by the fact you would have to specify a maximum size square for removal, and given that the input image does not have to conform to a minimum size, this could cause some issues.
 
 This idea was discarded due to the marker unlikely to ever be perfectly square in the scan.
 
@@ -170,7 +170,7 @@ However, due to the slightly inaccurate identification of the tissue boundary, t
 
 \noindent  \textbf{Removing white objects over a specified grey-level value}
 
-Returning to the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small bit of breast tissue.
+Returning to the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small section of breast tissue.
 
 To see if the entire marker could be removed, if you lower the grey-level threshold for removal to anything over 200 value, then the output is as in Figure \ref{fig:remove-white-200}. Unfortunately it does not remove the entire marker, and some of the vital breast tissue is lost.
 
@@ -195,7 +195,7 @@ As shown in Figure \ref{fig:remove-marker} this has been shown to be extremely s
 
 As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
 
-In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of mammogram scans in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
+In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of mammographic images in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
 
 \subsubsection{PGM file format}
 
@@ -256,7 +256,7 @@ A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in
 \end{figure}
 
 
-Listing \ref{fig:pgm_header_written} above shows the first 5 lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
+Listing \ref{fig:pgm_header_written} above shows the first five lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
 
 This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
 
@@ -273,7 +273,7 @@ The next step was to write a function which would appropriately concatenate the 
 
 \subsubsection{Final outcome}
 
-An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Appendix \ref{appendix:results} Figure \ref{fig:all-input-imgs}.
+An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Figure \ref{fig:all-input-imgs}.
 
 
 \subsection{Vectorisation}
@@ -346,10 +346,10 @@ Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, i
     (Full optimisation (Membership \& Non-Probabilistic),105.188263) };
       \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the total time to run 5 iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
+    \caption{A comparison of the total time to run five iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
     \label{fig:total-time}
   \end{center}
   %\fi
 \end{figure}
 
-Figure \ref{fig:total-time} outlines the total time taken to run 5 iterations of Non-Probabilistic Entropy before vectorisation, once vectorisation was complete on the \texttt{membership.m} function, and finally after full vectorisation.
+Figure \ref{fig:total-time} outlines the total time taken to run five iterations of Non-Probabilistic Entropy before vectorisation, once vectorisation was complete on the \texttt{membership.m} function, and finally after full vectorisation.

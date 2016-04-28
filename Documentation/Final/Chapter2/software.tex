@@ -2,7 +2,7 @@
 
 \subsection{Methodology}
 
-In the past, software projects followed a strict-plan driven approach, such as the Waterfall method, however more recently, Agile practices have become widely accepted, allowing the developer more freedom. This features an iterative development approach, with short \say{iterations} or \say{sprints} defined in which the developer should complete a block of work, typically a \say{story} or \say{feature} given the Agile methodology chosen.
+In the past, software projects followed a strict-plan driven approach, such as the Waterfall method, however more recently, Agile practices have become widely accepted, allowing the developer more freedom. This features an iterative development approach, with short `iterations' or `sprints' defined in which the developer should complete a block of work, typically a `story' or `feature' given the Agile methodology chosen.
 
 The Agile Methodology has a manifesto \cite{Manifesto}, which encompasses all the values it strives to achieve:
 \begin{itemize}
@@ -16,7 +16,7 @@ The Agile Methodology has a manifesto \cite{Manifesto}, which encompasses all th
   \textit{That is, while there is value in the items on the right, we value the items on the left more.}
 \end{quotation}
 
-Scrum is one of the most popular interpretations of an Agile Methodology, due to it's simplicity \cite{scrum}. Scrum is \textit{not} an agile methodology, however is a framework, to which agile practices such as Pair Programming and \acrfull{TDD} can be aligned.
+Scrum is one of the most popular interpretations of an Agile Methodology, due to its simplicity \cite{scrum}. Scrum is \textit{not} an agile methodology, however it is a framework to which agile practices such as Pair Programming and \acrfull{TDD} can be aligned.
 
 An adapted Scrum methodology has been undertaken for this project. The flexible nature is particularly useful given the research nature of this project, as the requirements were not fully defined at the start of the process, and changed as time went on given the outcome of experimentation with mathematical concepts for image alignment.
 
@@ -30,7 +30,7 @@ Additionally, \acrfull{XP} \cite{xp} dates back to 1996, and is one of the most 
   \item \textbf{Courage: } deliver the system to the customers as early as possible and implement changes as suggested
 \end{itemize}
 
-Given that this project is a single-person project, neither framework/methodology would work well on it's own, so for this project, it was decided that Scrum would be the main framework, with elements of XP to help strengthen areas such as design and testing.
+Given that this project is a single-person project, neither framework/methodology would work well on it's own, so for this project it was decided that Scrum would be the main framework, with elements of XP to help strengthen areas such as design and testing.
 
 \subsubsection{Tools to manage methodology}
 
@@ -116,9 +116,9 @@ This ensured good practices were carried forward into the next Sprint, whereas u
 
 \subsubsection{Daily Standup}
 
-Daily standups are a vital part of Scrum`s teamwork ethos. Each morning (or during a set allotted time), the team would meet to discuss what was accomplished the day before, what are the plans for the day ahead, and what road-blocks are in their way. This provides the developer (and further the team) a clear picture of what has yet to be done, and allows fellow team-mates to offer expertise to help overcome obstacles. Whilst this project is not being developed by a team, the benefit of daily standups to productivity, organisation and planning still stands, along with the crowd-sourcing element of expertise.
+Daily standups are a vital part of Scrum`s teamwork ethos. Each morning (or during a set allotted time), the team would meet to discuss what was accomplished the day before, what are the plans for the day ahead, and what road-blocks are in their way. This provides the developer (and furthermore the team) a clear picture of what has yet to be done, and allows fellow team-mates to offer expertise to help overcome obstacles. Whilst this project is not being developed by a team, the benefit of daily standups to productivity, organisation and planning still stands, along with the crowd-sourcing element of expertise.
 
-Throughout the project, stand ups have been held with peers, who're also working upon their Major Projects. Whilst not daily, they tended to fall every two days, and it gave the developer a chance to hone skills in explaining the project to people not well-versed in the subject. It was also a good breeding-ground for new ideas, and an open forum for discussion into the pros and cons of certain approaches.
+Throughout the project, stand ups have been held with peers, who are also working on their Major Projects. Whilst not daily, they tended to fall every two days, and it gave the developer a chance to hone skills in explaining the project to people not well-versed in the subject. It was also a good breeding-ground for new ideas, and an open forum for discussion into the pros and cons of certain approaches.
 
 \subsection{Design}
 
@@ -128,7 +128,7 @@ In traditional plan-driven methodologies, such as the Waterfall method, Design w
 
 In \acrshort{XP}, \acrfull{CRC} Cards are a useful task in which the entire team can collaborate on the system design. Whilst there is no team in this project, they still play a vital role in structuring the system, can be iteratively updated and are easily discardable should the need arise.
 
-Typically \acrshort{CRC} cards would represent Objects, with the class written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the \say{Classes} in this project are replaced by Functions and Scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and it's corresponding responsibilities and collaborations as normal - see Figure \ref{fig:crc} for more detail and Appendix \ref{appendix:crc-cards} for the \acrshort{CRC} card iterations throughout the project.
+Typically \acrshort{CRC} cards would represent Objects, with the class written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the `Classes' in this project are replaced by Functions and Scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and its corresponding responsibilities and collaborations as normal - see Figure \ref{fig:crc} for more detail and Appendix \ref{appendix:crc-cards} for the \acrshort{CRC} card iterations throughout the project.
 
 \begin{figure}[H]
   \center
@@ -137,7 +137,7 @@ Typically \acrshort{CRC} cards would represent Objects, with the class written a
   \label{fig:crc}
 \end{figure}
 
-\subsubsection{GUI Design}
+\subsubsection{Graphic User Interface (GUI) Design}
 \label{sssec:gui-design}
 
 The name \say{Enantiomorph} was chosen as the application name as a more concise, recognisable alternative to the project title.
@@ -146,12 +146,12 @@ The name \say{Enantiomorph} was chosen as the application name as a more concise
   \textit{Enantiomorph: either of a pair of crystals (as of quartz) that are structural mirror images \cite{enantiomorph}}
 \end{quotation}
 
-This section will look at the design evolution of the application GUI.
+This section will look at the design evolution of the application \acrfull{GUI}.
 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_1.png}
-  \caption{Initial wireframe design for GUI}
+  \caption{Initial wireframe design for \acrshort{GUI}}
   \label{fig:wireframe1}
 \end{figure}
 
@@ -160,7 +160,7 @@ The initial design, as represented in Figure \ref{fig:wireframe1}, was designed 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_2.png}
-  \caption{Second wireframe design for GUI}
+  \caption{Second wireframe design for acrshort{GUI}}
   \label{fig:wireframe2}
 \end{figure}
 
@@ -173,7 +173,7 @@ During the second application iteration, the outputs of each iteration mean and 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_3.png}
-  \caption{Third wireframe design for GUI}
+  \caption{Third wireframe design for \acrshort{GUI}}
   \label{fig:wireframe3}
 \end{figure}
 

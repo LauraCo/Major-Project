@@ -45,7 +45,7 @@ The three/four arrays (one for each trapezium and one for the highest values) ar
 
 Learned-Miller's demo code came with an implementation of Shannon Entropy \cite{joint-alignment}. Whilst originally the predominant dataset was MNIST handwriting data \cite{lecun1998gradientbased}, which is a binary dataset (pixels were either black or white), this was not useful for this project as there is no variation in greyscale, even when a mean is taken of multiple images.
 
-However, Learned-Miller had included extra code to handle the processing of greyscale and colour images, such as in MRI images. This ensured that no function needed to be created to handle greyscale images, greatly reducing the pre-programming needed. The only image handling that was encountered was to do with the mammograms, and the creation of a large pgm file to pass into the \Gls{Congealing} algorithm.
+However, Learned-Miller had included extra code to handle the processing of greyscale and colour images, such as in MRI images. This ensured that no function needed to be created to handle greyscale images, greatly reducing the pre-programming needed. The only image handling that was encountered was to do with the mammograms, and the creation of a large .pgm file to pass into the \Gls{Congealing} algorithm.
 
 As outlined in \ref{ssec:entropy}, Shannon entropy is defined as:
 
@@ -55,7 +55,7 @@ As outlined in \ref{ssec:entropy}, Shannon entropy is defined as:
 
 \subsubsection{MATLAB implementation}
 
-This can be computed very quickly using a lookup table containing all the possible values of $p$. This makes it likely that the Shannon entropy algorithm will be the quickest on each iteration. However as it does not take any type of uncertainty into consideration when aligning the scans, the outcome could be quite dramatically different from that of a Fuzzy entropy nature.
+This can be computed very quickly using a lookup table containing all the possible values of $p$. This makes it likely that the Shannon entropy algorithm will be the quickest on each iteration. However as it does not take any type of uncertainty into consideration when aligning the images, the outcome could be quite dramatically different from that of a Fuzzy entropy nature.
 
 Learned-Miller's Shannon entropy implementation has been retained, and can be found in the function \texttt{fastEntLookup.m} which is how it was originally named. Where possible, when original functions have been used, their original file names have been kept the same.
 
@@ -89,7 +89,7 @@ This array of pixel memberships is fed into a \texttt{nonProbabilistic.m} functi
 \subsubsection{Technical challenges}
 %==============================================================================
 
-The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own Toolbox for calculating the membership saves a lot of time and lines of code, however it was important to check what they call from within. One membership function was redrawing the trapezia every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60seconds. This challenge of optimisation is covered in-depth in the latter Subsection \ref{ssec:vectorisation}.
+The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own Toolbox for calculating the membership saves a lot of time and lines of code, however it was important to check what they call from within. One membership function was redrawing the trapezia every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60 seconds. This challenge of optimisation is covered in-depth in a latter Subsection \ref{ssec:vectorisation}.
 
 \newpage
 \subsection{Hybrid Entropy}
@@ -116,7 +116,7 @@ And $p_0$ and $p_1$ are the probabilities of receiving 0 and 1 symbols respectiv
 \subsubsection{MATLAB implementation}
 %==============================================================================
 
-Due to reasons covered in Subsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using 2 trapezia covering 2 fuzzy sets, as seen in Figure \ref{fig:2-traps}.
+Due to reasons covered in Subsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using two trapezia covering two fuzzy sets, as seen in Figure \ref{fig:2-traps}.
 
 \begin{figure}[H]
   \center
@@ -162,7 +162,7 @@ $p_1 = \frac{\text{No. of pixels in med trapezium}}{\text{No. of pixels in low t
 
 This was done for all 3 trapezia, then combined and divided by 3 (for the mean entropy). As the result for each trapezium should be between 0 and 1 (as each is an entropy value), then combining them should be no issue. However this was not the case.
 
-First of all, the hybrid equation output was deemed to be `NaN' - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting any `Nan' output equal to 0, in effect ignoring that particular output from the highest fuzzy set.
+First of all, the hybrid equation output was deemed to be \acrfull{NaN} - something which generally occurs when attempting to divide by 0. Anomalous outputs from the high trapezium was to be expected, as there are very few pixels which fall within the range nearer the white end of the grey-level scale. This was mitigated by setting any `\acrshort{NaN}' output equal to 0, in effect ignoring that particular output from the highest fuzzy set.
 
 After this mitigation, the third and fourth iteration had suitable entropy values, however the fifth entropy value was a negative, something which is not possible in terms of entropy, as it must be between 0 and 1 - see Figure \ref{fig:minus-entropy}.
 

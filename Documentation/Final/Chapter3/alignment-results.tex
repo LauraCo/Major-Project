@@ -1,3 +1,4 @@
+%TC:group tabular 1 1
 \chapter{Results and Conclusions}
 
 %This section should discuss issues you encountered as you tried to implement your experiments. What were the results of running the experiments? What conclusions can you draw from these results?%During the work, you might have found that elements of your experiments were unnecessary or overly complex; perhaps third party libraries were available that simplified some of the functions that you intended to implement. If things were easier in some areas, then how did you adapt your project to take account of your findings?%It is more likely that things were more complex than you first thought. In particular, were there any problems or difficulties that you found during implementation that you had to address? Did such problems simply delay you or were they more significant?%If you had multiple experiments to run, it may be sensible to discuss each experiment in separate sections.
@@ -8,11 +9,11 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{Chapter3/results-img/big_scan.png}
-  \caption{4 input scans.}
+  \caption{Four input scans.}
   \label{fig:input-data}
 \end{figure}
 
-Figure \ref{fig:input-data} shows the input image utilised in Figure \ref{fig:set1-results-all}. This large file contains 4 scans from the BI-RADS I classifcation, containing no masses in the tissue. Whilst relatively similar in size and shape, the tissue make-up inside the breast is varied.
+Figure \ref{fig:input-data} shows the input image utilised in Figure \ref{fig:set1-results-all}. This large file contains four scans from the BI-RADS I classifcation, containing no masses in the tissue. Whilst relatively similar in size and shape, the tissue make-up inside the breast is varied.
 
 \begin{table}[H]
   \centering
@@ -130,9 +131,9 @@ Whilst the entropy decline of Shannon entropy and the fuzzy entropy algorithms c
   \label{table:shannon-entropy}
 \end{table}
 
-The largest decrease in Shannon entropy over all 4 of the sample sets can be seen in BI-RADS I. The output for each of the sample sets is relatively sensible (as can be seen in  Appendix \ref{appendix:results} - Section \ref{sec:app-shannon}) and the run time of each iteration is quick due to the lookup table implementation (covered in later Subsection \ref{ssec:run-time}), demonstrating that Learned-Miller`s original code is still useful even upon mammograms.
+The largest decrease in Shannon entropy over all four of the sample sets can be seen in BI-RADS I. The output for each of the sample sets is relatively sensible (as can be seen in  Appendix \ref{appendix:results} - Section \ref{sec:app-shannon}) and the run time of each iteration is quick due to the lookup table implementation (covered in later Subsection \ref{ssec:run-time}), demonstrating that Learned-Miller`s original code is still useful even upon mammograms.
 
-The gradual straightening of the curve of all 4 sets, as represented in Figure \ref{fig:shannon-graph}, indicates a slowing in the reduction of entropy, which would most like result in the over-congealment of the input images. Over-congealing is when the entropy is reduced to such a point that any further iterations could either: increase the entropy; or reduce the entropy to an unreasonable level.
+The gradual straightening of the curve of all four sets, as represented in Figure \ref{fig:shannon-graph}, indicates a slowing in the reduction of entropy, which would most like result in the over-congealment of the input images. Over-congealing is when the entropy is reduced to such a point that any further iterations could either: increase the entropy; or reduce the entropy to an unreasonable level.
 
 \newpage
 \subsubsection{Non-Probabilistic Entropy}

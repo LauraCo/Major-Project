@@ -58,7 +58,7 @@ On the other side, if a system outputs solely the letter \say{M}, then the entro
 %\fi
 \end{figure}
 
-It follows that entropy can only ever take a value between 0 and 1, with an entropy of 1 have a 50\% probability, and an entropy of 0 being 100\% certain.
+It follows that entropy can only ever take a value between 0 and 1, with an entropy of 1 having a 50\% probability rate, and an entropy of 0 being 100\% certain.
 
 \subsection{Uncertainty}
 
@@ -88,7 +88,7 @@ By definition:
   \textit{Possibility: a chance that something might exist, happen, or be true : the state or fact of being possible \cite{POSSIBILITY}}
 \end{quotation}
 
-Possibilistic uncertainty (closely related to \say{fuzziness}) indicates the lack of information we hold about the possible outcome values from a system - a sort of ambiguity. Possibilistic uncertainty models the possible outcomes from a system, as estimated by a decision maker because it is possibly impossible to determine beforehand \cite{Untiedt_2010}.
+Possibilistic uncertainty (closely related to `fuzziness') indicates the lack of information we hold about the possible outcome values from a system - a sort of ambiguity. Possibilistic uncertainty models the possible outcomes from a system, as estimated by a decision maker because it is possibly impossible to determine beforehand \cite{Untiedt_2010}.
 
 \subsubsection{Indiscernibility Uncertainty}
 
@@ -106,9 +106,9 @@ By definition:
 \subsection{Fuzzy Entropy}
 \label{ssec:fuzzy-entropy}
 
-Fuzzy entropy stems from combining standard Shannon entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of \say{Membership} to a category, where an object can belong to more than one category to a certain degree.
+Fuzzy entropy stems from combining standard Shannon entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of `Membership' to a category, where an object can belong to more than one category to a certain degree.
 
-One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5foot 11inches not be classified as tall? Given crisp sets, then they would be classified as `Average'. In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
+One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5' 11'` not be classified as tall? Given crisp sets, then they would be classified as `Average'. In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
 
 \begin{figure}[H]
   \center
@@ -252,17 +252,17 @@ Therefore, the hybrid entropy of fuzzy set $A$ can be defined as:
 
 Due to the older nature of some of the papers listed above, some were difficult to locate online. So when implementing the chosen algorithms (Non-Probalistic Entropy and Hybrid Entropy), Al-sharhan et al's paper \say{Fuzzy Entropy: a Brief Survey} \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was a useful tool.
 
-Its concise nature, and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
+Its concise nature and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
 
 \subsection{Joint Image Alignment}
 
-Joint image alignment, occasionally otherwise known as groupwise image alignment, focuses on the alignment of several images, into one average image. This research area has been particularly prevalent in areas such as medical and facial imagery \cite{Tiddeman_Hunter_2011} \cite{Cootes_Twining_Petrovic_Babalola_Taylor_2010}. Cootes et. al. leverage a groupwise registration algorithm to choose one base image with control points to align (typically a standard mesh frame), analyse each following image in turn estimating the movement needed to align corresponding control points, then iteratively warp each image to fit the reference frame, adjusting the texture model as they`re aligned. This type of alignment will not be considered for the project due to the over-complexity needed for the input image, along with computational limitations due to aligning one image at a time with the base image.
+Joint image alignment, occasionally otherwise known as groupwise image alignment, focuses on the alignment of several images into one average image. This research area has been particularly prevalent in areas such as medical and facial imagery \cite{Tiddeman_Hunter_2011} \cite{Cootes_Twining_Petrovic_Babalola_Taylor_2010}. Cootes et. al. leveraged a groupwise registration algorithm to choose one base image with control points to align (typically a standard mesh frame), analyse each following image in turn estimating the movement needed to align corresponding control points, then iteratively warp each image to fit the reference frame, adjusting the texture model as they`re aligned. This type of alignment will not be considered for the project due to the over-complexity needed for the input image, along with computational limitations due to aligning one image at a time with the base image.
 
 This Subsection will look into a couple of the techniques which will be suitable for this project.
 
 \subsubsection{Learned-Miller`s Congealing}
 
-Learned-Miller's \Gls{Congealing} \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data (which must have minimal noise, no occlusions and illumination variation) \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational-expense.
+Learned-Miller's \Gls{Congealing} \cite{joint-alignment} is often cited as being one of the first to truly align simple sets of data (which must have minimal noise, no occlusions and illumination variation) \cite{Zhou_Lee_Yu_Efros_2015} \cite{peng2012rasl}. Many more robust image alignment techniques have been developed off of the basis of this work, however with more computational expense.
 
 This algorithm works by iteratively reducing the pixel-wise entropy over the input images, using a set of standard image transformations, in a \gls{non-deterministic} manner, such as:
 
@@ -337,8 +337,8 @@ Huang and a team (notably including Learned-Miller) further extended the \Gls{Co
 
 \subsection{Image Alignment using Fuzzy Entropy}
 
-Research has been undertaken in the past to investigate image alignment using fuzzy entropy metrics, however typically they were found to be computationally costly, and therefore slow to run on a conventional PC or laptop. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for an increased chance that image alignment techniques can be leveraged in everyday-life. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
+Research has been undertaken in the past to investigate image alignment using fuzzy entropy metrics, however typically they were found to be computationally costly, and therefore slow to run on a conventional PC or laptop. This project will be investigating whether there are simpler, more light-weight fuzzy entropy metrics which could be implemented, for an increased chance that image alignment techniques can be leveraged in everyday life. It will also be investigated if, and further how, the outputs of these alignments differ per each fuzzy entropy metric.
 
 Some of this work which has implemented a more computationally-costly \Gls{Congealing} algorithm is that presented by Mac Parthal\'ain and Strange in their 2013 paper \say{Fuzzy-entropy based image congealing} \cite{Mac_Parthalain_Strange_2013}.  Their implementation included dynamically-calculated fuzzy sets and a fuzzy similarity relation matrix - allowing a comparison of all the objects simultaneously to each other.
 
-Further work upon Mac Parthal\'ain and Strange's technique was published in 2014, by Li a visiting-student to Aberystwyth University \cite{Li_Shen_Li_Parthaláin_2014}. Li's work, which was supported by Mac Parthal\'ain and other Aberystwyth staff, considered the application of similarity relation fuzzy entropy and image congealing in order to carry out chinese character recognition. One of Li's final conclusions was that similarity relation fuzzy entropy was too computationally costly for the application, and that another algorithm from Al-Sharhan et. al's fuzzy entropy paper \cite{Sharhan_Karray_Gueaieb_Basir_2001} may have been more appropriate.
+Further work upon Mac Parthal\'ain and Strange's technique was published in 2014, by Li a visiting-student to Aberystwyth University \cite{Li_Shen_Li_Parthaláin_2014}. Li's work, which was supported by Mac Parthal\'ain and other Aberystwyth staff, considered the application of similarity relation fuzzy entropy and image congealing in order to carry out Chinese character recognition. One of Li's final conclusions was that similarity relation fuzzy entropy was too computationally costly for the application, and that another algorithm from Al-Sharhan et. al's fuzzy entropy paper \cite{Sharhan_Karray_Gueaieb_Basir_2001} may have been more appropriate.
