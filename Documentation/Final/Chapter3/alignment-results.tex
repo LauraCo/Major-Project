@@ -13,7 +13,7 @@
   \label{fig:input-data}
 \end{figure}
 
-Figure \ref{fig:input-data} shows the input image utilised in Figure \ref{fig:set1-results-all}. This large file contains four scans from the BI-RADS I classifcation, containing no masses in the tissue. Whilst relatively similar in size and shape, the tissue make-up inside the breast is varied.
+Figure \ref{fig:input-data} shows the input image utilised in Figure \ref{fig:set1-results-all}. This large file contains four scans from the BI-RADS I classifcation, containing no masses in the tissue. Whilst relatively similar in size and shape, the tissue composition inside the breast is varied.
 
 \begin{table}[H]
   \centering
@@ -62,7 +62,7 @@ Results for each set outlined in Table \ref{table:image-info} can be found in Ap
   \end{center}
 \end{figure}
 
-Whilst the entropy decline of Shannon entropy and the fuzzy entropy algorithms can be plotted on one graph to show the general trend of decreasing entropy, it is worth noting that they are indeed not comparitive. As Shannon entropy does not contain any possibilistic uncertainty, the entropy outcome is vastly different in it`s calculation to that of both Non-Probabilistic and Hybrid.
+Whilst the entropy decline of Shannon entropy and the fuzzy entropy algorithms can be plotted on one graph to show the general trend of decreasing entropy, it is worth noting that they are indeed not comparitive. As Shannon entropy does not contain any possibilistic uncertainty, the entropy outcome is vastly different in its calculation to that of both Non-Probabilistic and Hybrid.
 
 \newpage
 \subsubsection{Shannon Entropy}
@@ -133,7 +133,7 @@ Whilst the entropy decline of Shannon entropy and the fuzzy entropy algorithms c
 
 The largest decrease in Shannon entropy over all four of the sample sets can be seen in BI-RADS I. The output for each of the sample sets is relatively sensible (as can be seen in  Appendix \ref{appendix:results} - Section \ref{sec:app-shannon}) and the run time of each iteration is quick due to the lookup table implementation (covered in later Subsection \ref{ssec:run-time}), demonstrating that Learned-Miller`s original code is still useful even upon mammograms.
 
-The gradual straightening of the curve of all four sets, as represented in Figure \ref{fig:shannon-graph}, indicates a slowing in the reduction of entropy, which would most like result in the over-congealment of the input images. Over-congealing is when the entropy is reduced to such a point that any further iterations could either: increase the entropy; or reduce the entropy to an unreasonable level.
+The gradual straightening of the curve of all four sets, as represented in Figure \ref{fig:shannon-graph}, indicates a slowing in the reduction of entropy, which would most likely result in the over-congealment of the input images. Over-congealing is when the entropy is reduced to such a point that any further iterations could either: increase the entropy, or reduce the entropy to an unreasonable level.
 
 \newpage
 \subsubsection{Non-Probabilistic Entropy}
@@ -206,7 +206,7 @@ The gradual straightening of the curve of all four sets, as represented in Figur
 
 As outlined in both Figure \ref{fig:non-prob-graph}, and Table \ref{table:non-prob-entropy}, the entropy for image alignment using the Non-Probabilistic algorithm tends to be quite low. Because of this, often the entropy decline seems to be quite low, however generally the intial entropy can be lower than the final entropy of Hybrid entropy.
 
-Sample sets 1 \& 2 can be seen in Figure \ref{fig:non-prob-graph} to be fluctuating, especially in the latter iterations. This is due to over-congealing the image, as mentioned in the previous section. In Set 1 for example, the entropy of the images barely decreases between iterations 4 and 20, therefore the algorithm could be stopped a lot quicker, saving time for the user.
+Sample sets 1 \& 2 can be seen in Figure \ref{fig:non-prob-graph} to be fluctuating, especially in the latter iterations. This is due to over-congealing the image, as mentioned in the previous section. In Set 1 for example, the entropy of the images barely decreases between iterations four and twenty, therefore the algorithm could be stopped a lot quicker, saving time for the user.
 
 \newpage
 \subsubsection{Hybrid Entropy}
@@ -279,7 +279,7 @@ Sample sets 1 \& 2 can be seen in Figure \ref{fig:non-prob-graph} to be fluctuat
 
 In the previous two sections, over-congealing has been spoken about. Figure \ref{fig:20-hybrid} is a perfect example of an image becoming overly-congealed. However, the graph does not seem to mimic the erratic behavior displayed by Non-Probabilistic entropy. This brings to light how different the fuzzy entropy implementations can be, and how the non-deterministic nature of the \Gls{Congealing} algorithm can lead to dramatically different results, depending upon which order the image transformations are run.
 
-It could be mistakenly understood that Hybrid entropy should be stopped between 5 and 10 iterations, however it is purely dependent upon the dataset fed into the \Gls{Congealing} algorithm utilising Hybrid alignment, as is demonstrated in Figure \ref{fig:hybrid-behaviour}. Whilst Figure \ref{fig:hybrid-set3-5iters}, utilising the third data set (BI-RADS III,) could be seen to past the optimal alignment at only 5 iterations, Figure \ref{fig:hybrid-set4-10iters}, utilising the fourth data set (BI-RADS IV) is nearing the best alignment possible. This is one reason it is difficult to ascertain when to stop the \Gls{Congealing} algorithm automatically.
+It could be mistakenly understood that Hybrid entropy should be stopped between five and ten iterations, however it is purely dependent upon the dataset fed into the \Gls{Congealing} algorithm utilising Hybrid alignment, as is demonstrated in Figure \ref{fig:hybrid-behaviour}. Whilst Figure \ref{fig:hybrid-set3-5iters}, utilising the third data set (BI-RADS III,) could be seen to pass the optimal alignment at only five iterations, Figure \ref{fig:hybrid-set4-10iters}, utilising the fourth data set (BI-RADS IV) is nearing the best possible average. This is one reason it is difficult to ascertain when to terminate the \Gls{Congealing} algorithm automatically.
 
 \begin{figure}[H]
     \centering

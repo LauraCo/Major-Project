@@ -30,7 +30,7 @@ Additionally, \acrfull{XP} \cite{xp} dates back to 1996, and is one of the most 
   \item \textbf{Courage: } deliver the system to the customers as early as possible and implement changes as suggested
 \end{itemize}
 
-Given that this project is a single-person project, neither framework/methodology would work well on it's own, so for this project it was decided that Scrum would be the main framework, with elements of XP to help strengthen areas such as design and testing.
+Given that this project is a single-person project, neither framework/methodology would work well on its own, so for this project it was decided that Scrum would be the main framework, with elements of XP to help strengthen areas such as design and testing.
 
 \subsubsection{Tools to manage methodology}
 
@@ -49,9 +49,9 @@ User Stories typically follow a template for consistency, usually something simi
   \textit{As a $<$type of user$>$, I want $<$some goal$>$ so that $<$some reason$>$.} \cite{user_story}
 \end{quotation}
 
-User Stories also have associated Story Points, which is a typically a numbering system leveraged to indicate the effort needed to implement the Story. Due to the uncertain nature of programming, it is not always an accurate reflection of effort, however through the Agile community it is generally accepted that to be consistent in your assignment of points is more useful than being accurate \cite{estimation}. During the early stages of the project, it is often the case in which estimation is a little off what it should be, however as the project progresses, and the developer gains a better understanding of the tasks, and how to implement them, then estimation tends to become more accurate.
+User Stories also have associated Story Points, which is a typically a numbering system leveraged to indicate the effort needed to implement the Story. Due to the uncertain nature of programming, it is not always an accurate reflection of effort, however through the Agile community it is generally accepted that to be consistent in your assignment of points is more useful than being accurate \cite{estimation}. During the early stages of the project estimation can be quite inaccurate, however as the project progresses, and the developer gains a better understanding of the tasks, and how to implement them, then estimation tends to become more accurate.
 
-Table \ref{table:User Stories} outlines the User Stories used during this project, along with when they were worked upon (during which Sprint) and how many Story Points were associated with it.
+Table \ref{table:User Stories} outlines the User Stories used during this project, along with when they were worked upon (during which sprint) and how many Story Points were associated with it.
 
 \begin{center}
   \small
@@ -97,28 +97,28 @@ Table \ref{table:User Stories} outlines the User Stories used during this projec
   \label{fig:burndown}
 \end{figure}
 
-Figure \ref{fig:burndown} is a graphical representation of progress per week, as utilised in Scrum, called a Burndown chart. It allows the developer(s) a quick reference as to the progress of the project, and works by subtracting completed Story points as they're completed. Taiga includes the trend line which sets a target for completion per Sprint.
+Figure \ref{fig:burndown} is a graphical representation of progress per week, as utilised in Scrum, called a Burndown chart. It allows the developer(s) a quick reference as to the progress of the project, and works by subtracting completed Story points as they're completed. Taiga includes the trend line which sets a target for completion per sprint.
 
 In Taiga, it was also possible to have a weekly burndown chart, so as to track progress throughout the week, rather than just the entire project. This ensured a steady rate of development through the week between Supervisor meetings, rather than over-working at the beginning of the week and having nothing left to do at the end, or vice-versa.
 
-\subsubsection{Sprint Review \& Retrospective}
+\subsubsection{Sprint review \& retrospective}
 
-Sprint Review meetings are held at the end of each Sprint, to assess what work was done during the week, and does the end product match the Sprint Goal set out at the start of the week. In this project, Sprint Goals, Sprint Reviews and Retrospectives took shape in the form of an informal online blog. Sprints were defined as a week long in this project, running between supervisor meetings (Monday - Sunday). Weekly posts would outline what had been completed that week, how things went (good and bad) and what was to be completed during the following week. Whilst less structured than the conventional approach to Reviews, it works well within a single-person project, and was a good reflection of what had been accomplished.
+Sprint review meetings are held at the end of each sprint, to assess what work was done during the week, and does the end product match the sprint goal set out at the start of the week. In this project, sprint goals, sprint reviews and retrospectives took shape in the form of an informal online blog. sprints were defined as a week long in this project, running between supervisor meetings (Monday - Sunday). Weekly posts would outline what had been completed that week, how things went (good and bad) and what was to be completed during the following week. Whilst less structured than the conventional approach to reviews, it works well within a single-person project, and was a good reflection of what had been accomplished.
 
-In Agile Methodologies, Retrospectives are typically at the end of each Sprint, so the team can assess:
+In Agile Methodologies, retrospectives are typically at the end of each sprint, so the team can assess:
 \begin{itemize}
   \item What works well
   \item What doesn't work well
   \item What should they start doing
 \end{itemize}
 
-This ensured good practices were carried forward into the next Sprint, whereas unhelpful ideas were left in the previous week.
+This ensured good practices were carried forward into the next sprint, whereas unhelpful ideas were left in the previous week.
 
 \subsubsection{Daily Standup}
 
 Daily standups are a vital part of Scrum`s teamwork ethos. Each morning (or during a set allotted time), the team would meet to discuss what was accomplished the day before, what are the plans for the day ahead, and what road-blocks are in their way. This provides the developer (and furthermore the team) a clear picture of what has yet to be done, and allows fellow team-mates to offer expertise to help overcome obstacles. Whilst this project is not being developed by a team, the benefit of daily standups to productivity, organisation and planning still stands, along with the crowd-sourcing element of expertise.
 
-Throughout the project, stand ups have been held with peers, who are also working on their Major Projects. Whilst not daily, they tended to fall every two days, and it gave the developer a chance to hone skills in explaining the project to people not well-versed in the subject. It was also a good breeding-ground for new ideas, and an open forum for discussion into the pros and cons of certain approaches.
+Throughout the project, stand ups have been held with peers, who are also working on their Major Projects. Whilst not daily, they tended to fall every two days, and it gave the developer a chance to hone skills in explaining the project to people not well-versed in the subject. It was also a good hotbed for new ideas, and an open forum for discussion into the pros and cons of certain approaches.
 
 \subsection{Design}
 
@@ -126,9 +126,9 @@ In traditional plan-driven methodologies, such as the Waterfall method, Design w
 
 \subsubsection{CRC Cards}
 
-In \acrshort{XP}, \acrfull{CRC} Cards are a useful task in which the entire team can collaborate on the system design. Whilst there is no team in this project, they still play a vital role in structuring the system, can be iteratively updated and are easily discardable should the need arise.
+In \acrshort{XP}, \acrfull{CRC} Cards are useful visual aid so the entire team can easily collaborate on the system design. Whilst there is no team in this project, they still play a vital role in structuring the system, can be iteratively updated and are easily discardable should the need arise.
 
-Typically \acrshort{CRC} cards would represent Objects, with the class written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the `Classes' in this project are replaced by Functions and Scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and its corresponding responsibilities and collaborations as normal - see Figure \ref{fig:crc} for more detail and Appendix \ref{appendix:crc-cards} for the \acrshort{CRC} card iterations throughout the project.
+Typically \acrshort{CRC} cards would represent Objects, with the class written at the top, the responsibilities down the left and the collaborating classes down the right-hand side. However as mentioned in Section \ref{ssec:matlab}, MATLAB is built around a scripting language, and all the `classes' in this project are replaced by functions and scripts. Therefore, each \acrshort{CRC} card represents a function or a script, and its corresponding responsibilities and collaborations as normal - see Figure \ref{fig:crc} for more detail and Appendix \ref{appendix:crc-cards} for the \acrshort{CRC} card iterations throughout the project.
 
 \begin{figure}[H]
   \center
@@ -160,7 +160,7 @@ The initial design, as represented in Figure \ref{fig:wireframe1}, was designed 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.5]{Chapter2/software-img/wireframe_2.png}
-  \caption{Second wireframe design for acrshort{GUI}}
+  \caption{Second wireframe design for \acrshort{GUI}}
   \label{fig:wireframe2}
 \end{figure}
 
@@ -176,7 +176,6 @@ During the second application iteration, the outputs of each iteration mean and 
   \caption{Third wireframe design for \acrshort{GUI}}
   \label{fig:wireframe3}
 \end{figure}
-
 The final wireframe created is outlined in Figure \ref{fig:wireframe3}. Additional information  about the \Gls{Congealing} process can be accessed via the button in the bottom left corner and metadata about the input image displayed in the top section. Users can also clear the entire \acrshort{GUI} to start a new alignment - this could be useful should they wish to compare the outputs from the 3 different entropy alignment techniques.
 
 \noindent \textbf{The final \acrshort{GUI}} can be found in Subsection \ref{ssec:GUI-implement}, Figure \ref{fig:final_gui_pic}.

@@ -22,12 +22,14 @@ For example:
 
 \begin{minted}
   [
+  %xleftmargin=\parindent,
+  %gobble=2,
   breaklines,
   frame=lines,
   framesep=2mm,
   baselinestretch=1.2,
   fontsize=\small,
-  linenos
+  %linenos
   ]
   {text}
     pixel[1,1]`s membership in trapezium low = 0.8
@@ -37,7 +39,7 @@ For example:
     Therefore as 0.8 is the highest membership value, this is added to the image membership array
 \end{minted}
 
-The three/four arrays (one for each trapezium and one for the highest values) are then passed out of the function, and utilised in both of the fuzzy entropy algorithm functions.
+The three/four arrays (one for each trapezium and one for the highest values) are then returned out of the function, and utilised in both of the fuzzy entropy algorithm functions.
 
 \newpage
 \subsection{Shannon Entropy}
@@ -82,7 +84,7 @@ We will assume $-K$, the positive constant, is defined as $\frac{1}{n}$ as outli
 
 After some research into current implementations of Fuzzy Entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership function, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
 
-This array of pixel memberships is fed into a \texttt{nonProbabilistic.m} function where it is iteratively passed into latter part of equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
+This array of pixel memberships is passed into a \texttt{nonProbabilistic.m} function where it is then iteratively passed into latter part of equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
 
 
 %==============================================================================
@@ -125,14 +127,14 @@ Due to reasons covered in Subsection \ref{sssec:hyrid-technical}, Hybrid Entropy
   \label{fig:2-traps}
 \end{figure}
 
-Two arrays are then fed into the Hybrid Entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
+Two arrays are then passed into the Hybrid Entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
 
 %==============================================================================
 \subsubsection{Technical challenges}
 \label{sssec:hyrid-technical}
 %==============================================================================
 
-Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then must belong to the other.
+Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then it must belong to the other.
 
 Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapezia - low, medium and high grey-level values. Logic would dictate that if the comparison of two fuzzy sets works, then to compare the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
 

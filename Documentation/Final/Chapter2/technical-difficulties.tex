@@ -1,6 +1,104 @@
 \section{Technical Difficulties}
 \label{sec:tech-diff}
 
+\subsection{Creating the Mammogram image data}
+
+As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
+
+In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of mammographic images in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
+
+\subsubsection{PGM file format}
+
+\acrfull{pgm} file format is part of a package called Netpbm, which contains 220 separate programs for dealing with files such as \acrshort{pgm}, pbm and pnm. As the name suggests, it is a lightweight-greyscale image format, which is simple for use in programs, making it ideal for this project.
+
+The structure of \acrshort{pgm} files is very specific and is defined as \cite{PGM_Format}:
+
+\begin{figure}[H]
+  \begin{minted}
+  [
+  %gobble=2,
+  xleftmargin= 0.5cm,
+  numberblanklines=true,
+  numbersep=12pt,
+  numbersep=5pt,
+  gobble=0,
+  frame=leftline,
+  breaklines,
+  %frame=lines,
+  %framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\small,
+  linenos
+  ]
+  {text}
+  A `magic number' which identifies the file type. A pgm image's magic number is the two characters `P5'.
+  Whitespace (in the format of tab, space etc)
+  A width, formatted as ASCII characters in decimal.
+  Whitespace (in the format of tab, space etc)
+  A height (in the same format as width)
+  Whitespace (in the format of tab, space etc)
+  Maximum Grey Value (Maxval) - usually 255
+  Single whitespace character (typically new line)
+  A raster of Height rows, in order from top to bottom. Each row consists of Width gray values, in order from left to right. Each gray value is a number from 0 through Maxval, with 0 being black and Maxval being white. Each gray value is represented in pure binary by either 1 or 2 bytes. If the Maxval is less than 256, it is 1 byte. Otherwise, it is 2 bytes. The most significant byte is first.
+  \end{minted}
+  \caption{PGM header rules}
+  \label{fig:pgm-header-rules}
+\end{figure}
+
+A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in the formatting as defined in Figure \ref{fig:pgm-header-rules}.
+
+\subsubsection{Specific file format for \Gls{Congealing}}
+\label{sssec:load}
+
+ When investigating the \Gls{Congealing} demo code, it became apparent that comments were utilised in the reading-in of image information.
+
+ \begin{figure}[H]
+   \begin{minted}
+   [
+   xleftmargin= 0.5cm,
+   numberblanklines=true,
+   numbersep=12pt,
+   numbersep=5pt,
+   gobble=0,
+   frame=leftline,
+   breaklines,
+   %frame=lines,
+   framesep=2mm,
+   baselinestretch=1.2,
+   fontsize=\small,
+   linenos
+   ]
+   {text}
+P5
+# 28 28 6742
+2324 2324
+255
+  \end{minted}
+\caption{Example MNIST PGM file header}
+\label{fig:pgm_header_written}
+\end{figure}
+
+
+Listing \ref{fig:pgm_header_written} above shows the first five lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
+
+This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
+
+
+\subsubsection{Creating an appropriate save function}
+
+The next step was to write a function which would appropriately concatenate the MINI-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
+\begin{itemize}
+\item read in the number of images in the chosen directory
+\item identifies the dimensions of each scan in the directory (with MINI-MIAS, they are all the same dimensions)
+\item creates a string containing all the suitable information needed for reading (as outlined in Subsubsection \ref{sssec:load})
+\item creates a file called \say{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
+\end{itemize}
+
+\subsubsection{Final outcome}
+
+An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Figure \ref{fig:all-input-imgs}. There was an issue with the images rotation 90\degree as will be covered in the next Section.
+
+
 \subsection{Image Rotation}
 \label{ssec:trans}
 
@@ -23,15 +121,20 @@ MATLAB has a \say{Transpose} function \cite{transpose} which simply flips two el
 
 \begin{minted}
   [
+  xleftmargin= 0.5cm,
+  numberblanklines=true,
+  numbersep=12pt,
+  numbersep=5pt,
+  gobble=0,
+  frame=leftline,
   breaklines,
-  frame=lines,
   framesep=2mm,
   baselinestretch=1.2,
   fontsize=\small,
-  linenos
+  %linenos
   ]
   {matlab}
-    fwrite(output,handles.finalImg.','uchar');
+fwrite(output,handles.finalImg.','uchar');
 \end{minted}
 
 Where handles.finalImg is a GUI holder for a 2D array of pixel values. This example was taken from the \texttt{removeMarker.m}  function - where the user can remove Medical Markers and save the output back to the original file.
@@ -42,8 +145,13 @@ For arrays with more than 2 dimensions, simply swapping the values around will n
 
 \begin{minted}
   [
+  xleftmargin= 0.5cm,
+  numberblanklines=true,
+  numbersep=12pt,
+  numbersep=5pt,
+  gobble=0,
+  frame=leftline,
   breaklines,
-  frame=lines,
   framesep=2mm,
   baselinestretch=1.2,
   fontsize=\small,
@@ -51,15 +159,15 @@ For arrays with more than 2 dimensions, simply swapping the values around will n
   ]
   {matlab}
 
-  sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans); %set size of array
+sers=zeros(squareImageSize(1),squareImageSize(2),noOfScans); %set size of array
 
-  for i = 1:noOfScans
+for i = 1:noOfScans
 
-    scan = fopen(strcat(pathname,'/',scanDirectory(i).name)); %open each input image individually
-    im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
-    sers(:,:,i) = im; %add each input image to a 3D array which compiles all the input images into one
+  scan = fopen(strcat(pathname,'/',scanDirectory(i).name)); %open each input image individually
+  im=(fread(scan,[squareImageSize(1),squareImageSize(2)],'uchar'));
+  sers(:,:,i) = im; %add each input image to a 3D array which compiles all the input images into one
 
-  end
+end
 
 outfname=sprintf('%s/big_scan.pgm', pathname);
 s=sers(:,:,:);
@@ -95,7 +203,7 @@ As the images are aligned using a comparison of the pixel-value, the Medical Mar
 
 Two options were available for the avoidance of Medical Markers:
 \begin{itemize}
-  \item Ask the User not to use scans containing Medical Markers
+  \item Ask the user not to use scans containing Medical Markers
   \begin{itemize}
     \item This is extremely restrictive
     \item This could massively reduce their number of usable scans
@@ -152,7 +260,7 @@ Two options were available for the avoidance of Medical Markers:
 
 \noindent \textbf{Morphological operation - remove squares from image}
 
-Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square} was initially thought to be the most sensible way in which to remove unwanted artefacts. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. Removal is made more difficult by the fact you would have to specify a maximum size square for removal, and given that the input image does not have to conform to a minimum size, this could cause some issues.
+Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square} was initially thought to be the most sensible way in which to remove unwanted artefacts. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. Removal is made more difficult by the fact the user would have to specify a maximum size square for removal, and given that the input image does not have to conform to a minimum size, this could cause some issues.
 
 This idea was discarded due to the marker unlikely to ever be perfectly square in the scan.
 
@@ -160,6 +268,7 @@ This idea was discarded due to the marker unlikely to ever be perfectly square i
 
 Another candidate function for removing Medical Markers was the MATLAB function \\ \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
 
+\vspace{2cm}
 \noindent \textbf{Shape recognition demo}
 
 On the Mathworks File Exchange site, a community run to help MATLAB users, there was a demo created by Ahmed Samieh to aid in the recognition of certain shapes \cite{shape_recognition}. It classifies the shape by properties such as roundness, ratios of dimensions and centroids.
@@ -172,7 +281,7 @@ However, due to the slightly inaccurate identification of the tissue boundary, t
 
 Returning to the Mathworks forum, there is a thread about removing white glare from a jewellery photo \cite{remove_white}. This was adapted to detect the medical marker by specifying to find and remove patches over 220 grey-level value. As seen in Figure \ref{fig:remove-white}, most of the marker has been removed, however it also removes a small section of breast tissue.
 
-To see if the entire marker could be removed, if you lower the grey-level threshold for removal to anything over 200 value, then the output is as in Figure \ref{fig:remove-white-200}. Unfortunately it does not remove the entire marker, and some of the vital breast tissue is lost.
+To see if the entire marker could be removed, if the grey-level threshold is lowered for removal to anything over 200 value, then the output is as in Figure \ref{fig:remove-white-200}. Unfortunately it does not remove the entire marker, and some of the vital breast tissue is lost.
 
 Further to that, by running the white removal at grey-level value at 220 (the suitable choice for my first test scan) on another test scan and absolutely nothing is removed. Lower the threshold to begin removing white areas (down to grey-level value of 180) the results are less desirable, as demonstrated in Figure \ref{fig:remove-other-scan}.
 
@@ -180,7 +289,7 @@ Further to that, by running the white removal at grey-level value at 220 (the su
 
 Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas \cite{binary_mask}.
 
-After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The User can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between scans).
+After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The user can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between scans).
 
 \begin{figure}[H]
   \centering
@@ -191,89 +300,6 @@ After reading through the demo given as an answer by \say{Image Analyst} on the 
 
 As shown in Figure \ref{fig:remove-marker} this has been shown to be extremely successful and therefore was utilised in the project.
 
-\subsection{Creating the Mammogram image data}
-
-As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
-
-In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of mammographic images in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
-
-\subsubsection{PGM file format}
-
-\acrfull{pgm} file format is part of a package called Netpbm, which contains 220 separate programs for dealing with files such as \acrshort{pgm}, pbm and pnm. As the name suggests, it is a lightweight-greyscale image format, which is simple for use in programs, making it ideal for this project.
-
-The structure of \acrshort{pgm} files is very specific and is defined as \cite{PGM_Format}:
-
-\begin{figure}[H]
-  \begin{minted}
-  [
-  breaklines,
-  frame=lines,
-  framesep=2mm,
-  baselinestretch=1.2,
-  fontsize=\small,
-  linenos
-  ]
-  {text}
-    A `magic number' which identifies the file type. A pgm image's magic number is the two characters `P5'.
-    Whitespace (in the format of tab, space etc)
-    A width, formatted as ASCII characters in decimal.
-    Whitespace (in the format of tab, space etc)
-    A height (in the same format as width)
-    Whitespace (in the format of tab, space etc)
-    Maximum Grey Value (Maxval) - usually 255
-    Single whitespace character (typically new line)
-    A raster of Height rows, in order from top to bottom. Each row consists of Width gray values, in order from left to right. Each gray value is a number from 0 through Maxval, with 0 being black and Maxval being white. Each gray value is represented in pure binary by either 1 or 2 bytes. If the Maxval is less than 256, it is 1 byte. Otherwise, it is 2 bytes. The most significant byte is first.
-  \end{minted}
-  \caption{PGM header rules}
-  \label{fig:pgm-header-rules}
-\end{figure}
-
-A comment in \acrshort{pgm} is proceeded by the \# symbol, and is not counted in the formatting as defined in Figure \ref{fig:pgm-header-rules}.
-
-\subsubsection{Specific file format for \Gls{Congealing}}
-\label{sssec:load}
-
- When investigating the \Gls{Congealing} demo code, it became apparent that comments were utilised in the reading-in of image information.
-
- \begin{figure}[H]
-   \begin{minted}
-   [
-   breaklines,
-   frame=lines,
-   framesep=2mm,
-   baselinestretch=1.2,
-   fontsize=\small,
-   linenos
-   ]
-   {text}
-    P5
-    # 28 28 6742
-    2324 2324
-    255
-  \end{minted}
-\caption{Example MNIST PGM file header}
-\label{fig:pgm_header_written}
-\end{figure}
-
-
-Listing \ref{fig:pgm_header_written} above shows the first five lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
-
-This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
-
-
-\subsubsection{Creating an appropriate save function}
-
-The next step was to write a function which would appropriately concatenate the MINI-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
-\begin{itemize}
-\item read in the number of images in the chosen directory
-\item identifies the dimensions of each scan in the directory (with MINI-MIAS, they are all the same dimensions)
-\item creates a string containing all the suitable information needed for reading (as outlined in Subsubsection \ref{sssec:load})
-\item creates a file called \say{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
-\end{itemize}
-
-\subsubsection{Final outcome}
-
-An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Figure \ref{fig:all-input-imgs}.
 
 
 \subsection{Vectorisation}
@@ -294,7 +320,7 @@ The initial implementations of both \texttt{membership.m} and \texttt{nonProbabi
   \centering
     \begin{tikzpicture}
       \begin{axis}[
-          width = 12cm,
+          width = 11cm,
           ybar,
           bar width=4pt,
           ylabel={Time (secs)},
@@ -308,7 +334,7 @@ The initial implementations of both \texttt{membership.m} and \texttt{nonProbabi
           legend style={cells={align=left}},
           ]
         \addplot table[x=Iteration, y=Pre optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-        \addlegendentry{Pre optimisation \\ (for loops) \\};
+        \addlegendentry{Pre-optimisation \\ (for loops) \\};
         \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
         \addlegendentry{Partial optimisation \\ (just membership.m) \\};
         \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
@@ -328,20 +354,20 @@ Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, i
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width= 12cm,
-        symbolic x coords={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
+        width= 11cm,
+        symbolic x coords={Pre-optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
         x tick label style={font=\small,text width=2.5cm,align=center},
         ybar,
         enlargelimits=0.15,
         legend style={at={(0.5,-0.2)},
           anchor=north,legend columns=-1},
         ylabel={Time (secs)},
-        xtick={Pre optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
+        xtick={Pre-optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
         nodes near coords,
     	  nodes near coords align={vertical},
         ]
         \addplot[ybar,fill] coordinates {
-    (Pre optimisation (For loops),265.771186)
+    (Pre-optimisation (For loops),265.771186)
     (Partial optimisation (Just membership),155.432352)
     (Full optimisation (Membership \& Non-Probabilistic),105.188263) };
       \end{axis}

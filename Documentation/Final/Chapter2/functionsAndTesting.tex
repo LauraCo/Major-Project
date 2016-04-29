@@ -10,11 +10,11 @@
 
 Figure \ref{fig:data-flow} shows which Function/Script calls which through the application, all the way up to \texttt{Enantiomorph}, the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}.
 
-Diagrams such as this were helpful especially at the beginning of the project, due to working with an existing code-base. It was advantageous to see which functions were directly being called, and where the new functions for fuzzy entropy and membership would fit in.
+Initial diagrams like this were helpful especially at the beginning of the project, due to working with an existing code-base. It was advantageous to see which functions were directly being called, and where the new functions for fuzzy entropy and membership would fit in. However Figure \ref{fig:data-flow} is representative of the final design.
 
 \subsection{Testing}
 
-Prior to the project beginning, it was outlined that this project would follow a \acrfull{TDD} practice. In \acrshort{TDD}, the Developer first writes a test, which will fail due to the lack of corresponding functionality. They would then go on to implement the functionality desired by the test. Finally, any refactoring of the initial test and/or code would take place.
+Prior to the project beginning, it was outlined that this project would follow a \acrfull{TDD} practice. In \acrshort{TDD}, the developer first writes a test, which will fail due to the lack of corresponding functionality. They would then go on to implement the functionality desired by the test. Finally, any refactoring of the initial test and/or code would take place.
 
 However due to the nature of the project, it became increasingly more difficult to follow given the research which had to be undertaken alongside development. This led to a change from \acrshort{TDD} to Retrospective Testing, all tests would be written post-functional-implementation. This is a more traditional approach to testing, and still catches the same errors which might occur during \acrshort{TDD}.
 
@@ -39,7 +39,7 @@ The majority of my work in MATLAB was function-based, so this was the style foll
 
 \subsubsection{Acceptance Tests}
 
-Acceptance tests are when each `requirement' is assessed in turn to assure its completion. In this project, as there was no firm requirements at the beginning of the process, the User Stories which were derived over the project duration will be assessed against. In \acrfull{XP}, a User Story is not considered to be complete until the time in which it passes its acceptance test, as stating on the \acrshort{XP} website \cite{Acceptance_Tests}.
+Acceptance tests are when each `requirement' is assessed in turn to assure its completion. In this project, as there was no firm requirements at the beginning of the process, the User Stories which were derived over the project duration will be assessed against. In \acrfull{XP}, a user story is not considered to be complete until the time in which it passes its acceptance test, as stating on the \acrshort{XP} website \cite{Acceptance_Tests}.
 
 Table \ref{table:acceptance} outlines the results from the Acceptance Tests run. The left-most column \say{User Story Reference} aligns with Table \ref{table:User Stories}, where more detail on each Story can be found.
 

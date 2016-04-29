@@ -1,51 +1,51 @@
 \section{Conclusions}
 
-The project provides results which are a promising sign towards implementing image alignment techniques using light-weight fuzzy entropy algorithms. The results show a varied output of aligned mammographic images, each usually maintaining a natural shape.
+The project provides results which are a promising sign towards implementing image alignment techniques using lightweight fuzzy entropy algorithms. The results show a varied output of aligned mammographic images, each usually maintaining a natural shape.
 
 \subsection{Does the use of fuzzy entropy alignment metrics improve the alignment of mammograms?}
 
-The judgement as to whether the fuzzy entropy metrics align images `better' than standard Shannon entropy is a subjective one. However this project does show that the output gained from fuzzy entropy \gls{Congealing} is somewhat different to that of Shannon entropy, and therefore could be perceived to be more useful to a mammographer.
+The judgement as to whether the fuzzy entropy metrics align images `better' than standard Shannon entropy is a subjective one. However this project does show that the output gained from fuzzy entropy \gls{Congealing} is somewhat different to that of Shannon entropy due to the uncertainty introduced via fuzzy set theory, and therefore could be perceived to be more useful to a mammographer.
 
 \subsection{Do mammographers find the output at all useful?}
 
-Unfortunately due to the time constraints of this project, the author was unable to ascertain a firm conclusion to this hypothesis. It is hoped that given the sensible nature of the outputs produced, that this work would indeed be useful to mammographers in their classification of breast tissue density, as it provides a generalised average image of each BI-RADS density classification.
+Unfortunately due to the time constraints of this project, the author was unable to ascertain a firm conclusion to this hypothesis. It is hoped that given the appropriate nature of the outputs produced, that this work would indeed be useful to mammographers in their classification of breast tissue density, as it provides a generalised average image of each BI-RADS density classification.
 
 \subsection{What advantages / disadvantages does each entropy alignment metric entail?}
 
 \subsubsection{Shannon entropy}
 
 \textbf{Advantages: }
-The Shannon entropy implementation provided by Learned-Miller has the quickest performance rate due to the lookup table implementation, and straightforward mathematics involved. Combining this with the sensible output the user can expect after 20+ iterations, makes this an extremely strong bench-mark for the two fuzzy entropy implementations.
+The Shannon entropy implementation provided by Learned-Miller has the quickest performance rate due to the lookup table implementation, and straightforward mathematics involved. Combining this with the sensible output the user can expect after 20+ iterations, makes this an extremely strong benchmark for the two fuzzy entropy implementations.
 
 \textbf{Disadvantages: }
-However, this project was about utilising uncertainty and using it to model breast tissue accurately. Shannon entropy provides no such uncertainty, and therefore the alignment of the images is based purely on if the pixels match one another exactly, with no variation allow. This rigidity can translate into a slower alignment process.
+However, this project was about utilising uncertainty and using it to model breast tissue accurately. Shannon entropy provides no such uncertainty, and therefore the alignment of the images is based purely on the condition that pixels match one another exactly, with no variation allowed. This rigidity can translate into a slower alignment process.
 
 \subsubsection{Non-Probabilistic entropy}
 
 \textbf{Advantages}
-At 20 iterations, Non-Probabilistic entropy can be seen in some experiments to be \say{over-congealing} the input images, yet the output images were never corrupted nor distorted. This natural slowing on entropy decline, with fluctuating results in the latter stages is extremely reflective of nature. Were a human try to align two images by hand, their initial results would see large changes in alignment, however the more precise they try to be, the more the alignment is likely to just \say{miss} the mark.
+At 20 iterations, Non-Probabilistic entropy can be seen in some experiments to be \say{over-congealing} the input images, yet the output images were never corrupted nor distorted. This natural slowing on entropy decline, with fluctuating results in the latter stages is extremely reflective of nature. Were a human try to align two images by hand, their initial results would see large changes in alignment, however the more precise they try to be, the more the alignment is likely to just miss the mark.
 
 This alignment metric exhibits a quick decrease in entropy in the first few iterations of the \Gls{Congealing} algorithm. This results in fewer iterations necessary for an accurate alignment when compared to it`s counterparts.
 
-\textbf{Disadvantages}
-Whilst the metric takes very few iterations to align the input images accurately, the performance of this implementation is not ideal. With run-times up to 4830\% longer (\textit{1.22 vs 58.93 seconds per iteration}) than that of Shannon entropy, it is by no means a quick solution. This could be due to implementation, however the final run-times produced for Non-Probabilistic entropy are inclusive of the vectorisation optimisations carried out during implementation. Prior to vectorisation run-times were significantly worse, as detailed in Subsection \ref{ssec:vectorisation}.
+\noindent \textbf{Disadvantages}
+Whilst the metric takes very few iterations to align the input images accurately, the performance of this implementation is not ideal. With run-times up to 4830\% longer (\textit{1.22 vs 58.93 seconds per iteration}) than that of Shannon entropy, as seen in Table \ref{table:run-time}, it is by no means a quick solution. This could be due to implementation, however the final run-times produced for Non-Probabilistic entropy are inclusive of the vectorisation optimisations carried out during implementation. Prior to vectorisation run-times were significantly worse, as detailed in Subsection \ref{ssec:vectorisation}.
 
 As the algorithm name suggests, this fuzzy entropy metric does not model probabilistic uncertainty, just that of possibilistic, therefore does not model true uncertainty to the same level as Hybrid entropy.
 
 \subsubsection{Hybrid entropy}
 
-\textbf{Advantages}
-The run-times produced by Hybrid entropy are close to that of Shannon entropy`s. This is admirable given the complexity of the calculations involved in the generation of the input image entropy value. This quick run-time brings to the user a truly usable image alignment method which leverages fuzzy entropy.
+\noindent \textbf{Advantages}
+The run-times produced by Hybrid entropy are close to that of Shannon entropy's. This is admirable given the complexity of the calculations involved in the generation of the input image entropy value. This quick run-time brings to the user a truly usable image alignment method which leverages fuzzy entropy.
 
 Whilst the entropy was often not as small as that output by Non-Probabilistic entropy, it produced an admirable attempt at initially aligning the input images, and went on to produce the highest degradations in entropy seen in this project.
 
-\textbf{Disadvantages}
+\noindent \textbf{Disadvantages}
 
-One issue faced by Hybrid entropy was over-congealing. Whilst the entropy value did not indicate towards over-congealment, the image output afterwards did cause some concern. As mentioned previously (Subsection \ref{sssec:hybrid-alignment}), estimating when to cut off Hybrid entropy is difficult, as over-congealment often happened at varying iterations given different data-sets.
+One issue faced by Hybrid entropy was over-congealing. Whilst the entropy value did not indicate a value near over-congealment, the image output afterwards did cause some concern. As mentioned previously (Subsection \ref{sssec:hybrid-alignment}), estimating when to cut off Hybrid entropy is difficult, as over-congealment often happened at varying iterations given different data-sets.
 
 \subsection{Future Advancements}
 
-Several features were identified for improvement, plus additional functionality could be added to the project if the project time-frame had been longer, or if someone continues this project at a later stage.
+Several features were identified for improvement, plus additional functionality could be added to the project if the project time frame had been longer, or if this project were to be continued at a later stage.
 
 \subsubsection{Automated medical marker removal}
 Feature extraction is an ongoing research area. This could be leveraged in the future for the automatic detection and removal of medical markers and/or artefacts. Some interesting areas of research which may be viable for implementation include:
