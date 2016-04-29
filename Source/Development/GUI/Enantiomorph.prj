@@ -1,0 +1,90 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="2802265246" file="/Users/lauracollins/Git/Major-Project/Source/Development/GUI/Enantiomorph.prj" location="/Users/lauracollins/Git/Major-Project/Source/Development/GUI" name="Enantiomorph" target="target.mlapps" target-name="Package App">
+    <param.appname>Enantiomorph</param.appname>
+    <param.authnamewatermark>Enantiomorph</param.authnamewatermark>
+    <param.email>lac32@aber.ac.uk</param.email>
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary>Application to align images using fuzzy entropy and shannon entropy metrics.</param.summary>
+    <param.description />
+    <param.screenshot />
+    <param.version>1.0</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Fuzzy Logic Toolbox</item>
+      <item>Image Processing Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>23</item>
+      <item>17</item>
+    </param.products.id>
+    <param.products.version>
+      <item>9.0</item>
+      <item>2.2.23</item>
+      <item>9.4</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>/Users/lauracollins/Git/Major-Project/Source</param.output>
+    <param.guid>39806fc6-6dfc-4215-97c3-43889da193e8</param.guid>
+    <unset>
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.description />
+      <param.screenshot />
+      <param.version />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/Enantiomorph.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/CONGEAL_SUPPORT/computeXfrmImg.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/CONGEAL_SUPPORT/computeXfrmImgs.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/CONGEAL_SUPPORT/fastEntLookup.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/CONGEAL_SUPPORT/getXfrm.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/CONGEAL_SUPPORT/getXfrms.m</file>
+      <file>${PROJECT_ROOT}/Enantiomorph.fig</file>
+      <file>${PROJECT_ROOT}/removeMarker.fig</file>
+      <file>${PROJECT_ROOT}/removeMarker.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/HYBRID_ENTROPY/hybrid.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/IO/loadSeries.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/IO/pgm2bigPgm.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/IO/saveSeries.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP/hybridMembership.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP/membership.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/NON_PROB_ENTROPY/nonProbabilistic.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/UTILITY/showSer.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/binaryCongeal.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/incrTrans.m</file>
+      <file>/Users/lauracollins/Git/Major-Project/Source/Development/testCongeal.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/Users/lauracollins/Git/Major-Project" name="Source" optional="false">/Users/lauracollins/Git/Major-Project/Source</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2016a.app</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.11.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

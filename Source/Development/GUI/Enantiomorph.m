@@ -88,6 +88,7 @@ varargout{1} = handles.output;
 
 
 % --- Executes on button press in generate.
+% This generates the large pgm file needed for Congealing.
 function generate_Callback(hObject, eventdata, handles)
 % hObject    handle to generate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -106,23 +107,22 @@ elseif exist('/big_scan.pgm', 'file') == 2
 else
     addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
     pgm2bigPgm(pathname);
-    
-   % inputImg = strcat(pathname,'/big_scan.pgm');
-    
+  
     handles.imagePath = pathname;
       
     handles.imageName = '/big_scan.pgm';
     guidata(hObject, handles);
     
+    % Show image in GUI
     axes(handles.input_img);
-    
     imshow(handles.imageName);
     
+    % Switch buttons on once image is loaded
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
     set(handles.run, 'enable','on')
    
-    
+    % Metadate about image loaded
     info = imfinfo(handles.imageName);
     set(handles.filename, 'String', info.Filename);
     set(handles.modified, 'String', info.FileModDate);
@@ -137,6 +137,7 @@ end
 
 
 % --- Executes on selection change in alignment_menu.
+% Functionality for drop-down menu of alignment choices
 function alignment_menu_Callback(hObject, eventdata, handles)
 % hObject    handle to alignment_menu (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -162,9 +163,8 @@ guidata(hObject, handles);
 
 
 
-
-
 % --- Executes during object creation, after setting all properties.
+% Handles the info seen in the drop-down menu
 function alignment_menu_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to alignment_menu (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -175,19 +175,12 @@ function alignment_menu_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-set(hObject,'String',{'Shannon';'De-Luca & Termini';'Hybrid'});
-
-
-
-% --- Executes on button press in adjSer.
-function adjSer_Callback(hObject, eventdata, handles)
-% hObject    handle to adjSer (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
+set(hObject,'String',{'Shannon';'Non-Probabilistic';'Hybrid'});
 
 
 % --- Executes on button press in clear_output.
+% Once the user presses to clear the GUI - execute all the clearing
+% functions
 function clear_output_Callback(hObject, eventdata, handles)
 % hObject    handle to clear_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -207,11 +200,13 @@ axes(handles.output_img)
 cla
 
 % --- Executes on button press in run.
+% Run button functionality
 function run_Callback(hObject, eventdata, handles)
 % hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+% This shouldn't be needed as button is disable when no image is loaded
 if strcmp(handles.imageName,'')
     message = sprintf('Image has not been loaded.'); 
     uiwait(msgbox(message)); 
@@ -229,10 +224,13 @@ end
 set(gcf, 'pointer', 'watch')
 drawnow;
 
+% Run testCongeal
 [meanIms, adjSer, finalMean, ent, time] = testCongeal(handles.alignment, handles.iterations, handles.imageName, handles.imagePath);
 
+% Set pointer back to arrow so user can continue
 set(gcf, 'pointer', 'arrow')
 
+% Set all the GUI handles
 handles.meanIms = meanIms;
 handles.adjSer = adjSer;
 handles.ent = ent;
@@ -242,12 +240,14 @@ guidata(hObject, handles);
 handles.finalImg = finalMean;
 guidata(hObject, handles);
 
+% Show the final mean image in the GUI
 imshow(handles.finalImg, 'parent', handles.output_img);
 
 set(handles.ttr_box, 'String', handles.time);
 set(handles.final_entropy, 'String', handles.ent(handles.iterations));
 set(handles.final_txt, 'visible', 'on');
 
+% Enable all the buttons
 set(handles.entropy_btn, 'enable','on');
 set(handles.larger_output, 'enable','on');
 set(handles.mean_ims_button, 'enable','on');
@@ -256,10 +256,8 @@ set(handles.save_output, 'enable','on');
 set(handles.start_new_btn, 'enable','on');
 
 
-
-
-
 % --- Executes on button press in load_existing.
+% Functionality for load button
 function load_existing_Callback(hObject, eventdata, handles)
 % hObject    handle to load_existing (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -274,14 +272,16 @@ else
     handles.imagePath = pathname;
     guidata(hObject, handles);
     
-    axes(handles.input_img);
-    
+    % Show loaded image in the GUI
+    axes(handles.input_img);    
     imshow(strcat(handles.imagePath,handles.imageName));
     
+    % Enable buttons
     set(handles.clear, 'enable','on')
     set(handles.view, 'enable','on')
     set(handles.run, 'enable','on')
     
+    % Show image metdata
     info = imfinfo(filename);
     set(handles.filename, 'String', info.Filename);
     set(handles.modified, 'String', info.FileModDate);
@@ -289,20 +289,22 @@ else
     set(handles.height, 'String', info.Height);
     set(handles.width, 'String', info.Width);
     
+    % Read in image data
     file = fopen(filename);
     ln1=fgetl(file);
     ln2=strsplit(fgetl(file));
     
+    % Check image is in right format
     if numel(ln2) ~= 4
         message = sprintf('The header doesn`t seem to the in the right format. \nAre you sure this is the right image?'); 
         uiwait(msgbox(message));
         return;
-    end
-    
+    end 
 end
 
 
 % --- Executes on button press in clear.
+% Clears all the input section
 function clear_Callback(hObject, eventdata, handles)
 % hObject    handle to clear (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -319,7 +321,9 @@ set(handles.filename, 'String', '');
     set(handles.height, 'String', '');
     set(handles.width, 'String', '');
 
+    
 % --- Executes on button press in view.
+% View input image larger
 function view_Callback(hObject, eventdata, handles)
 % hObject    handle to view (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -330,6 +334,7 @@ imshow(handles.imageName);
 
 
 %http://uk.mathworks.com/help/matlab/creating_guis/add-code-for-components-in-callbacks.html#f10-1001464
+% Box to handle the input of iteration choice
 function iterations_box_Callback(hObject, eventdata, handles)
 % hObject    handle to iterations_box (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -339,6 +344,7 @@ function iterations_box_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of iterations_box as a double
 num = str2double(get(hObject,'String'));
 
+% Validation
 if isnan(num)
     errordlg('You must enter a numeric value','Invalid Input','modal')
   uicontrol(hObject)
@@ -352,12 +358,12 @@ elseif num <= 0
 else
   display(num);
   handles.iterations=num;
-  guidata(hObject, handles);
+  guidata(hObject, handles); % Set GUI handles
 end
-    
-
+   
 
 % --- Executes during object creation, after setting all properties.
+% Styling iteration input box
 function iterations_box_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to iterations_box (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -371,6 +377,7 @@ end
 
 
 % --- Executes on button press in pushbutton11.
+% Button to open removeMarker GUI
 function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -380,6 +387,7 @@ removeMarker;
 
 
 % --- Executes on button press in save_output.
+% Functionality for saving the final mean image out to file
 function save_output_Callback(hObject, eventdata, handles)
 % hObject    handle to save_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -395,6 +403,7 @@ imwrite(handles.finalImg,strcat(path,file),'pgm'); % Doesn't save in the right f
 end
 
 % --- Executes on button press in mean_ims_button.
+% Functionality to open all the mean iteration images
 function mean_ims_button_Callback(hObject, eventdata, handles)
 % hObject    handle to mean_ims_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -405,6 +414,7 @@ hold on
 
 
 % --- Executes on button press in adj_ser_button.
+% Functionality to open the adjusted input images
 function adj_ser_button_Callback(hObject, eventdata, handles)
 % hObject    handle to adj_ser_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -416,6 +426,7 @@ hold on
 
 
 % --- Executes on button press in larger_output.
+% Functionality to open the final mean image larger
 function larger_output_Callback(hObject, eventdata, handles)
 % hObject    handle to larger_output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -426,6 +437,7 @@ imshow(handles.finalImg);
 
 
 % --- Executes on button press in start_new_btn.
+% Button to handle clearing the GUI
 function start_new_btn_Callback(hObject, eventdata, handles)
 % hObject    handle to start_new_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -459,6 +471,7 @@ set(handles.iterations_box, 'String', '');
 
 
 % --- Executes on button press in entropy_btn.
+% Button to open new figure displaying the entropy decline
 function entropy_btn_Callback(hObject, eventdata, handles)
 % hObject    handle to entropy_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
