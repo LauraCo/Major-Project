@@ -1,0 +1,12 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  TESTpgmCreation -> pgm2bigPgm;
+  pgm2bigPgm -> saveSeries;
+
+  TESTpgmCreation [URL="TESTpgmCreation.html"];
+  loadSeries [URL="loadSeries.html"];
+  pgm2bigPgm [URL="pgm2bigPgm.html"];
+  readpgm [URL="readpgm.html"];
+  saveSeries [URL="saveSeries.html"];
+  ser2Im [URL="ser2Im.html"];
+}

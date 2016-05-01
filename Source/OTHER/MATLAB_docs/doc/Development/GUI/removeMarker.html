@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of removeMarker</title>
+  <meta name="keywords" content="removeMarker">
+  <meta name="description" content="REMOVEMARKER MATLAB code for removeMarker.fig">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html GUI -->
+<h1>removeMarker
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REMOVEMARKER MATLAB code for removeMarker.fig</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = removeMarker(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> REMOVEMARKER MATLAB code for removeMarker.fig
+
+      AUTHOR: Laura Collins (lac32) 
+
+      REMOVEMARKER, by itself, creates a new REMOVEMARKER or raises the existing
+      singleton*.
+
+      H = REMOVEMARKER returns the handle to a new REMOVEMARKER or the handle to
+      the existing singleton*.
+
+      REMOVEMARKER('CALLBACK',hObject,eventData,handles,...) calls the local
+      function named CALLBACK in REMOVEMARKER.M with the given input arguments.
+
+      REMOVEMARKER('Property','Value',...) creates a new REMOVEMARKER or raises the
+      existing singleton*.  Starting from the left, property value pairs are
+      applied to the GUI before removeMarker_OpeningFcn gets called.  An
+      unrecognized property name or invalid value makes property application
+      stop.  All inputs are passed to removeMarker_OpeningFcn via varargin.
+
+      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one
+      instance to run (singleton)&quot;.
+
+ See also: GUIDE, GUIDATA, GUIHANDLES</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="Enantiomorph.html" class="code" title="function varargout = Enantiomorph(varargin)">Enantiomorph</a>	ENANTIOMORPH MATLAB code for Enantiomorph.fig</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function removeMarker_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = removeMarker_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function pushbutton1_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function pushbutton2_Callback(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = removeMarker(varargin)</a>
+0002 <span class="comment">% REMOVEMARKER MATLAB code for removeMarker.fig</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%      AUTHOR: Laura Collins (lac32)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%      REMOVEMARKER, by itself, creates a new REMOVEMARKER or raises the existing</span>
+0007 <span class="comment">%      singleton*.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%      H = REMOVEMARKER returns the handle to a new REMOVEMARKER or the handle to</span>
+0010 <span class="comment">%      the existing singleton*.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      REMOVEMARKER('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0013 <span class="comment">%      function named CALLBACK in REMOVEMARKER.M with the given input arguments.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%      REMOVEMARKER('Property','Value',...) creates a new REMOVEMARKER or raises the</span>
+0016 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0017 <span class="comment">%      applied to the GUI before removeMarker_OpeningFcn gets called.  An</span>
+0018 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0019 <span class="comment">%      stop.  All inputs are passed to removeMarker_OpeningFcn via varargin.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0022 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0025 
+0026 <span class="comment">% Edit the above text to modify the response to help removeMarker</span>
+0027 
+0028 <span class="comment">% Last Modified by GUIDE v2.5 28-Mar-2016 15:54:14</span>
+0029 
+0030 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0031 gui_Singleton = 1;
+0032 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0033                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0034                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction removeMarker_OpeningFcn(hObject, eventdata, handles, varargin)">removeMarker_OpeningFcn</a>, <span class="keyword">...</span>
+0035                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = removeMarker_OutputFcn(hObject, eventdata, handles)">removeMarker_OutputFcn</a>, <span class="keyword">...</span>
+0036                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0037                    <span class="string">'gui_Callback'</span>,   []);
+0038 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0039     gui_State.gui_Callback = str2func(varargin{1});
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="keyword">if</span> nargout
+0043     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0044 <span class="keyword">else</span>
+0045     gui_mainfcn(gui_State, varargin{:});
+0046 <span class="keyword">end</span>
+0047 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0048 
+0049 
+0050 <span class="comment">% --- Executes just before removeMarker is made visible.</span>
+0051 <a name="_sub1" href="#_subfunctions" class="code">function removeMarker_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0052 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0053 <span class="comment">% hObject    handle to figure</span>
+0054 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0055 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0056 <span class="comment">% varargin   command line arguments to removeMarker (see VARARGIN)</span>
+0057 addpath(genpath(<span class="string">'/Users/lauracollins/Git/Major-Project/Source/Development/'</span>));
+0058 <span class="comment">% Choose default command line output for removeMarker</span>
+0059 handles.output = hObject;
+0060 handles.imageName = <span class="string">''</span>;
+0061 handles.imagePath = <span class="string">''</span>;
+0062 handles.finalImg = [];
+0063 <span class="comment">% Update handles structure</span>
+0064 guidata(hObject, handles);
+0065 
+0066 <span class="comment">% UIWAIT makes removeMarker wait for user response (see UIRESUME)</span>
+0067 <span class="comment">% uiwait(handles.figure1);</span>
+0068 
+0069 
+0070 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0071 <a name="_sub2" href="#_subfunctions" class="code">function varargout = removeMarker_OutputFcn(hObject, eventdata, handles) </a>
+0072 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0073 <span class="comment">% hObject    handle to figure</span>
+0074 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0075 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0076 
+0077 <span class="comment">% Get default command line output from handles structure</span>
+0078 varargout{1} = handles.output;
+0079 
+0080 
+0081 <span class="comment">% --- Executes on button press in pushbutton1.</span>
+0082 <a name="_sub3" href="#_subfunctions" class="code">function pushbutton1_Callback(hObject, eventdata, handles)</a>
+0083 <span class="comment">% hObject    handle to pushbutton1 (see GCBO)</span>
+0084 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0085 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0086 
+0087 [filename, pathname] = uigetfile(<span class="string">'*.pgm'</span>,<span class="string">'Select pre-compiled pgm file'</span>);
+0088 <span class="keyword">if</span> isequal(pathname,0)
+0089    disp(<span class="string">'User selected Cancel'</span>)
+0090 <span class="keyword">else</span>
+0091     
+0092     handles.imageName = filename;   
+0093     handles.imagePath = pathname;
+0094     guidata(hObject, handles);
+0095 
+0096     axes(handles.inputImg);
+0097     <span class="comment">%imshow(handles.imageName);</span>
+0098     
+0099     <span class="comment">%handles.finalImg = removeMarker(strcat(handles.imagePath,handles.imageName));</span>
+0100     
+0101     image = imread(strcat(handles.imagePath,handles.imageName));
+0102 
+0103     <span class="comment">%http://uk.mathworks.com/matlabcentral/answers/102219-how-do-i-make-a-figure-full-screen-programmatically-in-matlab</span>
+0104     <span class="comment">%figure('units','normalized','outerposition',[0 0 1 1]);</span>
+0105     
+0106     imshow(image);
+0107     title(<span class="string">'Input image'</span>);
+0108     
+0109     message = sprintf(<span class="string">'Draw the area to be removed. \n Release the mouse once you have finished drawing.'</span>);
+0110     
+0111     uiwait(msgbox(message));
+0112     areaDrawn = imfreehand();
+0113     
+0114     mask = areaDrawn.createMask();
+0115     
+0116     finalImage = image;
+0117     
+0118     darkestPoint = min(image(:));
+0119     
+0120     finalImage(mask) = darkestPoint; <span class="comment">%set the mask to the darkest point found in the mask</span>
+0121     
+0122     handles.finalImg = finalImage;
+0123     guidata(hObject, handles);
+0124     
+0125     axes(handles.outputImg);
+0126     imshow(handles.finalImg);
+0127 <span class="keyword">end</span>
+0128 
+0129 <span class="comment">% --- Executes on button press in pushbutton2.</span>
+0130 <a name="_sub4" href="#_subfunctions" class="code">function pushbutton2_Callback(hObject, eventdata, handles)</a>
+0131 <span class="comment">% hObject    handle to pushbutton2 (see GCBO)</span>
+0132 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0133 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0134 
+0135 <span class="comment">%http://uk.mathworks.com/help/matlab/ref/uiputfile.html</span>
+0136 
+0137 [file,path] = uiputfile(strcat(handles.imagePath,handles.imageName),<span class="string">'Save file name'</span>);
+0138 
+0139 [imHeight,imWidth, dim] = size(handles.finalImg);
+0140 
+0141 output = fopen(strcat(path,file), <span class="string">'w'</span>);
+0142 
+0143 fprintf(output,<span class="string">'P5\n'</span>);
+0144 fprintf(output,<span class="string">'%d %d\n'</span>,imWidth,imHeight);
+0145 fprintf(output,<span class="string">'255\n'</span>);
+0146 fwrite(output,handles.finalImg.',<span class="string">'uchar'</span>); <span class="comment">%Need to transpose the array, as fwrite writes by columns</span>
+0147 fclose(output);
+0148 
+0149 <span class="comment">%imwrite(handles.finalImg, strcat(path,file), 'pgm');</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:29:30 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

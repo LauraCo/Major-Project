@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of deLucaFuzzy</title>
+  <meta name="keywords" content="deLucaFuzzy">
+  <meta name="description" content="Function implementing De Luca &amp; Termini's Fuzzy Entropy algorithm">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html development --><!-- menu.html DE_LUCA_FUZZY -->
+<h1>deLucaFuzzy
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Function implementing De Luca &amp; Termini's Fuzzy Entropy algorithm</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function entropy = deLucaFuzzy(meanImg) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Function implementing De Luca &amp; Termini's Fuzzy Entropy algorithm</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>	Calculate the membershipDegree of a pixel</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="TESTnonProb.html" class="code" title="function tests = TESTnonProb">TESTnonProb</a>	Test the Membership function</li><li><a href="../../development/binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)">binaryCongeal</a>	This function takes a series of images and returns</li><li><a href="../../development/incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>	incrTrans</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function entropy = deLucaFuzzy(meanImg)</a>
+0002 <span class="comment">% Function implementing De Luca &amp; Termini's Fuzzy Entropy algorithm</span>
+0003 
+0004 addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
+0005 
+0006 [imgMu, lowMu, medMu, highMu] = <a href="../../development/MEMBERSHIP/membership.html" class="code" title="function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)">membership</a>(meanImg);
+0007 
+0008 <span class="comment">%imageEnt = cell(size(imgMu,1),size(imgMu,2));</span>
+0009 
+0010     pixelEnt = -(imgMu(1:numel(imgMu)).*log10(imgMu(1:numel(imgMu)))+(1-imgMu(1:numel(imgMu))).*log10(1-imgMu(1:numel(imgMu))));
+0011     
+0012     pixelEnt(isnan(pixelEnt))= 0;
+0013 
+0014     imageEnt = num2cell(pixelEnt);
+0015 
+0016 ent = 1/numel(imgMu)*sum(cellfun(@sum, imageEnt));
+0017 entropy=sum(ent);
+0018 <span class="keyword">end</span>
+0019</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

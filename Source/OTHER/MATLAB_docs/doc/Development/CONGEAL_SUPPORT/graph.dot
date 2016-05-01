@@ -1,0 +1,12 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  computeXfrmImg -> getXfrm;
+  computeXfrmImgs -> getXfrms;
+  getXfrms -> getXfrm;
+
+  computeXfrmImg [URL="computeXfrmImg.html"];
+  computeXfrmImgs [URL="computeXfrmImgs.html"];
+  fastEntLookup [URL="fastEntLookup.html"];
+  getXfrm [URL="getXfrm.html"];
+  getXfrms [URL="getXfrms.html"];
+}

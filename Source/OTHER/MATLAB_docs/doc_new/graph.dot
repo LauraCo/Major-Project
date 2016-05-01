@@ -1,0 +1,56 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  computeXfrmImg -> getXfrm;
+  computeXfrmImgs -> getXfrms;
+  getXfrms -> getXfrm;
+  TESTnonProb -> nonProbabilistic;
+  nonProbabilistic -> membership;
+  Enantiomorph -> removeMarker;
+  Enantiomorph -> pgm2bigPgm;
+  Enantiomorph -> showSer;
+  Enantiomorph -> testCongeal;
+  TESThybrid -> hybrid;
+  hybrid -> hybridMembership;
+  TESTpgmCreation -> pgm2bigPgm;
+  pgm2bigPgm -> saveSeries;
+  TESTmembership -> hybridMembership;
+  TESTmembership -> membership;
+  binaryCongeal -> computeXfrmImgs;
+  binaryCongeal -> fastEntLookup;
+  binaryCongeal -> nonProbabilistic;
+  binaryCongeal -> hybrid;
+  binaryCongeal -> incrTrans;
+  incrTrans -> computeXfrmImg;
+  incrTrans -> fastEntLookup;
+  incrTrans -> nonProbabilistic;
+  incrTrans -> hybrid;
+  testCongeal -> loadSeries;
+  testCongeal -> binaryCongeal;
+
+  computeXfrmImg [URL="Development/CONGEAL_SUPPORT/computeXfrmImg.html"];
+  computeXfrmImgs [URL="Development/CONGEAL_SUPPORT/computeXfrmImgs.html"];
+  fastEntLookup [URL="Development/CONGEAL_SUPPORT/fastEntLookup.html"];
+  getXfrm [URL="Development/CONGEAL_SUPPORT/getXfrm.html"];
+  getXfrms [URL="Development/CONGEAL_SUPPORT/getXfrms.html"];
+  TESTnonProb [URL="Development/DE_LUCA_FUZZY/TESTnonProb.html"];
+  nonProbabilistic [URL="Development/DE_LUCA_FUZZY/nonProbabilistic.html"];
+  Enantiomorph [URL="Development/GUI/Enantiomorph.html"];
+  removeMarker [URL="Development/GUI/removeMarker.html"];
+  TESThybrid [URL="Development/HYBRID_ENTROPY/TESThybrid.html"];
+  hybrid [URL="Development/HYBRID_ENTROPY/hybrid.html"];
+  TESTpgmCreation [URL="Development/IO/TESTpgmCreation.html"];
+  loadSeries [URL="Development/IO/loadSeries.html"];
+  pgm2bigPgm [URL="Development/IO/pgm2bigPgm.html"];
+  readpgm [URL="Development/IO/readpgm.html"];
+  saveSeries [URL="Development/IO/saveSeries.html"];
+  ser2Im [URL="Development/IO/ser2Im.html"];
+  Copy_of_hybridMembership [URL="Development/MEMBERSHIP/Copy_of_hybridMembership.html"];
+  Copy_of_membership [URL="Development/MEMBERSHIP/Copy_of_membership.html"];
+  TESTmembership [URL="Development/MEMBERSHIP/TESTmembership.html"];
+  hybridMembership [URL="Development/MEMBERSHIP/hybridMembership.html"];
+  membership [URL="Development/MEMBERSHIP/membership.html"];
+  showSer [URL="Development/UTILITY/showSer.html"];
+  binaryCongeal [URL="Development/binaryCongeal.html"];
+  incrTrans [URL="Development/incrTrans.html"];
+  testCongeal [URL="Development/testCongeal.html"];
+}

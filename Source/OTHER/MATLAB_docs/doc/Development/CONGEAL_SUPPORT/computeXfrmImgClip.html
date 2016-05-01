@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of computeXfrmImgClip</title>
+  <meta name="keywords" content="computeXfrmImgClip">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html development --><!-- menu.html CONGEAL_SUPPORT -->
+<h1>computeXfrmImgClip
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function adjImg=computeXfrmImgClip(img,transVec,cutout) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="getXfrm.html" class="code" title="function xfrm=getXfrm(transVec)">getXfrm</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function adjImg=computeXfrmImgClip(img,transVec,cutout)</a>
+0002 
+0003 <span class="keyword">persistent</span> oldx oldy;
+0004 <span class="keyword">persistent</span> xorg yorg orgCoords;
+0005 
+0006 xfrm=<a href="getXfrm.html" class="code" title="function xfrm=getXfrm(transVec)">getXfrm</a>(transVec);
+0007   
+0008 [y,x]=size(img);
+0009 
+0010 <span class="keyword">if</span> isempty(oldx) | y~=oldy | x~=oldx
+0011   fprintf(1,<span class="string">'Making coord entries.\n'</span>);
+0012   xorg=repmat(-(x/2-0.5):1:x/2-0.5,[y 1]);
+0013   yorg=repmat((-(y/2-0.5):1:y/2-0.5)',[1 x]);
+0014   orgCoords=[xorg(:)'; yorg(:)'; ones(1,x*y)];
+0015 <span class="keyword">end</span>
+0016 
+0017 newCoords=xfrm*orgCoords;
+0018 xnew=reshape(newCoords(1,:),y,x);
+0019 ynew=reshape(newCoords(2,:),y,x);
+0020 
+0021 rows=y;
+0022 cols=x;
+0023 rowst=floor((.5-cutout/2)*rows)+1;
+0024 rowend=ceil((.5+cutout/2)*rows);
+0025 colst=floor((.5-cutout/2)*cols)+1;
+0026 colend=ceil((.5+cutout/2)*cols);
+0027 
+0028 adjImg=interp2(xorg,yorg,img,xnew(rowst:rowend,colst:colend),ynew(rowst:rowend,colst:colend),<span class="string">'nearest'</span>);
+0029 
+0030 adjImg(isnan(adjImg))=rand;
+0031   
+0032 oldy=y;
+0033 oldx=x;</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

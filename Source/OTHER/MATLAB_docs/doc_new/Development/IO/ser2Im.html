@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ser2Im</title>
+  <meta name="keywords" content="ser2Im">
+  <meta name="description" content="Part of the existing code base from the Congealing Demo">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html IO -->
+<h1>ser2Im
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Part of the existing code base from the Congealing Demo</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function bigIm=ser2Im(ser) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Part of the existing code base from the Congealing Demo
+ Not modified</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Part of the existing code base from the Congealing Demo</span>
+0002 <span class="comment">% Not modified</span>
+0003 
+0004 <a name="_sub0" href="#_subfunctions" class="code">function bigIm=ser2Im(ser)</a>
+0005 
+0006 [imHeight,imWidth,ims]=size(ser);
+0007 
+0008 imsPerRow=ceil(sqrt(ims)-.000001);
+0009 
+0010 pixPerRow=imsPerRow*imHeight;
+0011 pixPerCol=imsPerRow*imWidth;
+0012 
+0013 bigIm=zeros(pixPerRow,pixPerCol);
+0014 
+0015 curIm=1;
+0016 <span class="keyword">for</span> i=1:imsPerRow   <span class="comment">% Indexes the row</span>
+0017   <span class="keyword">for</span> j=1:imsPerRow <span class="comment">% Indexes the col.</span>
+0018     bigIm( (i-1)*imHeight+1:i*imHeight,(j-1)*imWidth+1:j*imWidth)=ser(:,:,curIm);
+0019     curIm=curIm+1;
+0020     <span class="keyword">if</span> curIm&gt;ims;
+0021       <span class="keyword">break</span>;
+0022     <span class="keyword">end</span>
+0023   <span class="keyword">end</span>
+0024   <span class="keyword">if</span> curIm&gt;ims;
+0025     <span class="keyword">break</span>;
+0026   <span class="keyword">end</span>
+0027 <span class="keyword">end</span>
+0028 
+0029</pre></div>
+<hr><address>Generated on Mon 25-Apr-2016 10:59:17 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

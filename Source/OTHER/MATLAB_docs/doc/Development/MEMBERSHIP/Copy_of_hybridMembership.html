@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Copy_of_hybridMembership</title>
+  <meta name="keywords" content="Copy_of_hybridMembership">
+  <meta name="description" content="Script to make 2 trapeziums">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html MEMBERSHIP -->
+<h1>Copy_of_hybridMembership
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Script to make 2 trapeziums</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Script to make 2 trapeziums
+ AUTHOR: Laura Collins (lac32)
+ LAST MODIFIED: 07/04/2016</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Script to make 2 trapeziums</span>
+0002 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0003 <span class="comment">% LAST MODIFIED: 07/04/2016</span>
+0004 
+0005 <span class="comment">%Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html</span>
+0006 x = 0:255; <span class="comment">% Min &amp; Max x values</span>
+0007 
+0008 param1 = [-1 0 100 155]; <span class="comment">%the 4 corners of the trapezium</span>
+0009 low = trapmf(x,param1);
+0010 
+0011 param3 = [100 155 260 275];
+0012 high = trapmf(x,param3);
+0013 
+0014 <span class="comment">%figure;</span>
+0015 ax2 = axes();
+0016 
+0017 plot(ax2,x,low,<span class="string">'r'</span>);
+0018 text(20,1.1,<span class="string">'Low'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16);
+0019 hold on;
+0020 plot(ax2,x,high,<span class="string">'m'</span>);
+0021 text(200,1.1,<span class="string">'High'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16);
+0022 hold on; 
+0023 
+0024 <span class="comment">%Set boundaries of graph</span>
+0025 xlim([0 250]);
+0026 ylim([0 1.2]); 
+0027 
+0028 <span class="comment">%Label Axis</span>
+0029 <span class="comment">% http://uk.mathworks.com/matlabcentral/answers/3732-how-to-change-the-title-of-a-plot</span>
+0030 set(gcf,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>) <span class="comment">%don't show the figure number</span>
+0031 set(gcf,<span class="string">'Name'</span>,<span class="string">'Grey Level Membership'</span>) <span class="comment">%select the name you want</span>
+0032 <span class="comment">%COMMENTED OUT UNTIL CAN FIX FIGURE ISSUE</span>
+0033 xlabel(<span class="string">'Grey Level Value'</span>, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16);
+0034 ylabel(<span class="string">'Degree of Membership'</span>, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16);
+0035 
+0036 hold on;
+0037        
+0038       
+0039         <span class="comment">%plot(ax2,pixelIntensity,maximumU,'r*'); %plot membership degree</span>
+0040         <span class="comment">%hold on;</span>
+0041 
+0042         <span class="comment">%plot([pixelIntensity,pixelIntensity],[0,maximumU],'linestyle','-','color','r');</span>
+0043         <span class="comment">%plot([0,pixelIntensity],[maximumU,maximumU],'linestyle','-','color','r');</span>
+0044         <span class="comment">%hold off;</span>
+0045 
+0046         <span class="comment">%string = sprintf('\\bf Membership \n Degrees \\rm \n \n \\mu_{Low} = %.4f \n \\mu_{Med} = %.4f \n \\mu_{High} = %.4f', evalLow, evalMed, evalHigh);</span>
+0047 
+0048         <span class="comment">%allEvals = {string};</span>
+0049 
+0050         <span class="comment">%axes(ax1)</span>
+0051         <span class="comment">%text(.025,0.6,allEvals,'FontSize',14)</span>
+0052 
+0053 <span class="comment">%disp(image);</span>
+0054 
+0055 <span class="comment">%figure;</span>
+0056 
+0057 <span class="comment">%imshow(image);</span>
+0058 
+0059 <span class="comment">%disp(imgMu);</span>
+0060 
+0061 <span class="comment">%dlmwrite('image.txt',image);</span>
+0062 <span class="comment">%dlmwrite('memberships.txt',imgMu);</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:29:30 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of computeXfrmImgs</title>
+  <meta name="keywords" content="computeXfrmImgs">
+  <meta name="description" content="Part of the existing code base from the Congealing Demo">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html CONGEAL_SUPPORT -->
+<h1>computeXfrmImgs
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Part of the existing code base from the Congealing Demo</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function adjSer=computeXfrmImgs(ser,transVecs) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Part of the existing code base from the Congealing Demo
+ Not modified</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="getXfrms.html" class="code" title="function xfrms=getXfrms(transVecs)">getXfrms</a>	Part of the existing code base from the Congealing Demo</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)">binaryCongeal</a>	MODIFIED BY: Laura Collins (lac32)</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Part of the existing code base from the Congealing Demo</span>
+0002 <span class="comment">% Not modified</span>
+0003 
+0004 <a name="_sub0" href="#_subfunctions" class="code">function adjSer=computeXfrmImgs(ser,transVecs)</a>
+0005 
+0006 <span class="keyword">persistent</span> oldx oldy;
+0007 <span class="keyword">persistent</span> xorg yorg orgCoords;
+0008 
+0009 xfrms=<a href="getXfrms.html" class="code" title="function xfrms=getXfrms(transVecs)">getXfrms</a>(transVecs);
+0010   
+0011 [y,x,imgCount]=size(ser);
+0012   
+0013 <span class="keyword">if</span> isempty(oldx) | y~=oldy | x~=oldx
+0014   fprintf(1,<span class="string">'Making coord entries.\n'</span>);
+0015   xorg=repmat(-(x/2-0.5):1:x/2-0.5,[y 1]);
+0016   yorg=repmat((-(y/2-0.5):1:y/2-0.5)',[1 x]);
+0017   orgCoords=[xorg(:)';yorg(:)'; ones(1,x*y)];
+0018 <span class="keyword">end</span>
+0019 
+0020 <span class="keyword">for</span> i=1:imgCount
+0021     newCoords=xfrms(:,:,i)*orgCoords;
+0022     xnew=reshape(newCoords(1,:),y,x);
+0023     ynew=reshape(newCoords(2,:),y,x);
+0024     adjSer(:,:,i)=interp2(xorg,yorg,ser(:,:,i),xnew,ynew);
+0025 <span class="keyword">end</span>
+0026   
+0027 adjSer(isnan(adjSer))=0;
+0028   
+0029 oldy=y;
+0030 oldx=x;
+0031</pre></div>
+<hr><address>Generated on Mon 25-Apr-2016 10:59:17 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

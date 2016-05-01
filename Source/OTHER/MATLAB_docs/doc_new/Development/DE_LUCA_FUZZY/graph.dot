@@ -1,0 +1,7 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  TESTnonProb -> nonProbabilistic;
+
+  TESTnonProb [URL="TESTnonProb.html"];
+  nonProbabilistic [URL="nonProbabilistic.html"];
+}

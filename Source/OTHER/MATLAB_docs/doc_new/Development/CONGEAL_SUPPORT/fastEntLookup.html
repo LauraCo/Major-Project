@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fastEntLookup</title>
+  <meta name="keywords" content="fastEntLookup">
+  <meta name="description" content="Part of the existing code base from the Congealing Demo">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html CONGEAL_SUPPORT -->
+<h1>fastEntLookup
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Part of the existing code base from the Congealing Demo</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ent=fastEntLookup(meanImg) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Part of the existing code base from the Congealing Demo
+ Not modified</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/binaryCongeal.html" class="code" title="function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)">binaryCongeal</a>	MODIFIED BY: Laura Collins (lac32)</li><li><a href="../../Development/incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>	incrTrans</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Part of the existing code base from the Congealing Demo</span>
+0002 <span class="comment">% Not modified</span>
+0003 
+0004 <span class="comment">% This function takes the mean of a set of binary images</span>
+0005 <span class="comment">% and returns the summed pixelwise entropies. It uses a lookup</span>
+0006 <span class="comment">% table to get the entropy.</span>
+0007 
+0008 <a name="_sub0" href="#_subfunctions" class="code">function ent=fastEntLookup(meanImg)</a>
+0009 
+0010  
+0011 <span class="keyword">persistent</span> entTable;
+0012 <span class="keyword">if</span> size(entTable)==0
+0013   fprintf(1,<span class="string">'Computing entropy lookup table...'</span>);
+0014   p=0.00000001:1/10000:0.9999999999;
+0015   entTable= -(p.*log2(p)+(1-p).*log2(1-p));
+0016   fprintf(1,<span class="string">'done.\n'</span>);
+0017 <span class="keyword">end</span>
+0018 
+0019 <span class="comment">% This function works by indexing into a table of 10,000</span>
+0020 <span class="comment">% entries in which entry i holds the entropy for the binary</span>
+0021 <span class="comment">% value between [upper,lower) with lower=(i-1)/10,000 and</span>
+0022 <span class="comment">% upper=i/10,000.</span>
+0023 
+0024 ent= sum(sum(entTable(floor(meanImg*9999.999999+1))));
+0025 ent=ent/prod(size(meanImg));   <span class="comment">% Return mean pixel entropy.</span></pre></div>
+<hr><address>Generated on Mon 25-Apr-2016 10:59:17 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,11 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  TESTmembership -> hybridMembership;
+  TESTmembership -> membership;
+
+  Copy_of_hybridMembership [URL="Copy_of_hybridMembership.html"];
+  Copy_of_membership [URL="Copy_of_membership.html"];
+  TESTmembership [URL="TESTmembership.html"];
+  hybridMembership [URL="hybridMembership.html"];
+  membership [URL="membership.html"];
+}

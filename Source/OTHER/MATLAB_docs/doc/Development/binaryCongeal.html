@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of binaryCongeal</title>
+  <meta name="keywords" content="binaryCongeal">
+  <meta name="description" content="MODIFIED BY: Laura Collins (lac32)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Development -->
+<h1>binaryCongeal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MODIFIED BY: Laura Collins (lac32)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">      MODIFIED BY: Laura Collins (lac32) 
+      LAST MODIFIED: 08/04/2016
+
+ This function takes a series of images and returns 
+ three things, an adjSer which are the congealed images,
+ the meanIms, which are arrays of histograms of values,
+ and xfrms, an array of transforms mapping the 
+
+ Note that the images are not necessary binary, but they
+ are congealed under the &quot;binary image model&quot;.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="../Development/CONGEAL_SUPPORT/computeXfrmImgs.html" class="code" title="function adjSer=computeXfrmImgs(ser,transVecs)">computeXfrmImgs</a>	Part of the existing code base from the Congealing Demo</li><li><a href="../Development/CONGEAL_SUPPORT/fastEntLookup.html" class="code" title="function ent=fastEntLookup(meanImg)">fastEntLookup</a>	Part of the existing code base from the Congealing Demo</li><li><a href="../Development/DE_LUCA_FUZZY/nonProbabilistic.html" class="code" title="function entropy = nonProbabilistic(meanImg)">nonProbabilistic</a>	AUTHOR: Laura Collins (lac32)</li><li><a href="../Development/HYBRID_ENTROPY/hybrid.html" class="code" title="function entropy = hybrid(meanImg)">hybrid</a>	AUTHOR: Laura Collins (lac32)</li><li><a href="incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>	incrTrans</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="testCongeal.html" class="code" title="function [meanIms, adjSer, finalMean, ent, time] = testCongeal(metric,iterations, filename, path)">testCongeal</a>	Part of the existing code base from the Congealing Demo</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">%      MODIFIED BY: Laura Collins (lac32)</span>
+0002 <span class="comment">%      LAST MODIFIED: 08/04/2016</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% This function takes a series of images and returns</span>
+0005 <span class="comment">% three things, an adjSer which are the congealed images,</span>
+0006 <span class="comment">% the meanIms, which are arrays of histograms of values,</span>
+0007 <span class="comment">% and xfrms, an array of transforms mapping the</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% Note that the images are not necessary binary, but they</span>
+0010 <span class="comment">% are congealed under the &quot;binary image model&quot;.</span>
+0011 <a name="_sub0" href="#_subfunctions" class="code">function [adjSer,meanIms,transVecs, entropy_count]=binaryCongeal(ser,numIters,par_count,metric)</a>
+0012 
+0013 addpath IO
+0014 addpath UTILITY
+0015 addpath DE_LUCA_FUZZY
+0016 
+0017 [x,y,imgCount]=size(ser);
+0018 meanIms(:,:,1)=mean(ser,3); 
+0019 curMean=meanIms(:,:,1);
+0020 
+0021 transVecs=zeros(imgCount,par_count);
+0022 oldTransVecs=transVecs;
+0023 
+0024 entropy_count = size(numIters);
+0025 
+0026 <span class="keyword">for</span> iters=1:numIters       <span class="comment">% Until convergence?</span>
+0027     <span class="comment">%tic</span>
+0028   fprintf(1,<span class="string">'Iteration %d\n'</span>,iters);
+0029   <span class="keyword">for</span> i=1:imgCount
+0030     <span class="comment">%i</span>
+0031     <span class="comment">% Change the transformation vector so that the current image</span>
+0032     <span class="comment">% is more likely under the current mean.</span>
+0033     transVecs(i,:)=<a href="incrTrans.html" class="code" title="function transVec=incrTrans(mn,cnt,img,transVec,metric)">incrTrans</a>(curMean,imgCount,ser(:,:,i),oldTransVecs(i,:),metric);
+0034   <span class="keyword">end</span>
+0035 
+0036   transVecs=transVecs-repmat(mean(transVecs,1),[imgCount 1]);
+0037   adjSer=<a href="../Development/CONGEAL_SUPPORT/computeXfrmImgs.html" class="code" title="function adjSer=computeXfrmImgs(ser,transVecs)">computeXfrmImgs</a>(ser,transVecs);
+0038   curMean=mean(adjSer,3);
+0039   
+0040   <span class="keyword">if</span> strcmp(metric,<span class="string">'deLuca'</span>)
+0041       ent=<a href="../Development/DE_LUCA_FUZZY/nonProbabilistic.html" class="code" title="function entropy = nonProbabilistic(meanImg)">nonProbabilistic</a>(curMean);
+0042   <span class="keyword">elseif</span>  strcmp(metric,<span class="string">'shannon'</span>)
+0043       ent=<a href="../Development/CONGEAL_SUPPORT/fastEntLookup.html" class="code" title="function ent=fastEntLookup(meanImg)">fastEntLookup</a>(curMean);
+0044   <span class="keyword">elseif</span>  strcmp(metric,<span class="string">'hybrid'</span>)
+0045       ent=<a href="../Development/HYBRID_ENTROPY/hybrid.html" class="code" title="function entropy = hybrid(meanImg)">hybrid</a>(curMean);
+0046   <span class="keyword">else</span> fprintf(2, <span class="string">'Error in chosing alignment metric'</span>);
+0047   <span class="keyword">end</span>
+0048   
+0049   
+0050   fprintf(1,<span class="string">'Current entropy: %f\n'</span>,ent);
+0051   meanIms(:,:,iters+1)=curMean;
+0052   oldTransVecs=transVecs;
+0053   
+0054   entropy_count(iters) = ent;
+0055   
+0056  <span class="comment">%toc</span>
+0057 <span class="keyword">end</span>
+0058</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:29:30 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

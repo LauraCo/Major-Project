@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of minsort2d</title>
+  <meta name="keywords" content="minsort2d">
+  <meta name="description" content="Return two vectors. The first vector has the row of the nth largest">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html development --><!-- menu.html UTILITY -->
+<h1>minsort2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Return two vectors. The first vector has the row of the nth largest</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [rowVec,colVec]=minsort2d(m) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Return two vectors. The first vector has the row of the nth largest
+ element. The second vector has the column of the nth largest.
+ Usage: [rowVec,colVec]=maxsort2d.m</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Return two vectors. The first vector has the row of the nth largest</span>
+0002 <span class="comment">% element. The second vector has the column of the nth largest.</span>
+0003 <span class="comment">% Usage: [rowVec,colVec]=maxsort2d.m</span>
+0004 <a name="_sub0" href="#_subfunctions" class="code">function [rowVec,colVec]=minsort2d(m)</a>
+0005 
+0006 [rows,cols]=size(m);
+0007 vm=m(:);
+0008 [val,ind]=sort(vm);
+0009 
+0010 colVec=floor((ind-1)/rows)+1;
+0011 rowVec=ind-(colVec-1)*rows;
+0012 
+0013 
+0014</pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:16:03 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

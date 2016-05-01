@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of membership</title>
+  <meta name="keywords" content="membership">
+  <meta name="description" content="Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html Development --><!-- menu.html MEMBERSHIP -->
+<h1>membership
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic
+ AUTHOR: Laura Collins (lac32)
+ LAST MODIFIED: 08/04/2016</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../Development/DE_LUCA_FUZZY/nonProbabilistic.html" class="code" title="function entropy = nonProbabilistic(meanImg)">nonProbabilistic</a>	AUTHOR: Laura Collins (lac32)</li><li><a href="TESTmembership.html" class="code" title="function tests = membershipTest">TESTmembership</a>	Test the Membership function</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Membership function containing 3 fuzzy sets - to be used with Non-Probabilistic</span>
+0002 <span class="comment">% AUTHOR: Laura Collins (lac32)</span>
+0003 <span class="comment">% LAST MODIFIED: 08/04/2016</span>
+0004 
+0005 <a name="_sub0" href="#_subfunctions" class="code">function [imgMu, lowMu, medMu, highMu]  = membership(image_matrix)</a>
+0006 <span class="comment">%Calculate the membershipDegree of a pixel</span>
+0007 imwrite(image_matrix,<span class="string">'mean_image.pgm'</span>);
+0008 
+0009 image = imread(<span class="string">'mean_image.pgm'</span>);   
+0010 
+0011 [rows,columns] = size(image);
+0012 imgMu{rows,columns} = [];
+0013 
+0014 <span class="comment">%Work on Trapmf for the pixel intensities - http://uk.mathworks.com/help/fuzzy/trapmf.html</span>
+0015 x = 0:255; <span class="comment">% Min &amp; Max x values</span>
+0016 
+0017 param1 = [-1 0 50 85]; <span class="comment">%the 4 corners of the trapezium</span>
+0018 
+0019 param2 = [60 85 170 195];
+0020 
+0021 param3 = [170 205 260 275];
+0022 
+0023 
+0024 <span class="comment">%If RGB convert to greyscale (this is only really for test images)</span>
+0025 <span class="keyword">if</span> size(image,3) == 3
+0026     image = rgb2gray(image);
+0027 <span class="keyword">end</span>
+0028 
+0029 evalLow = evalmf(x, param1, <span class="string">'trapmf'</span>);
+0030 evalMed = evalmf(x, param2, <span class="string">'trapmf'</span>);
+0031 evalHigh = evalmf(x, param3, <span class="string">'trapmf'</span>);
+0032 
+0033 pixelIntensity = double(image(1:size(image,1),1:size(image,2))) + 1;
+0034 
+0035 lowMu = evalLow(pixelIntensity);
+0036 medMu = evalMed(pixelIntensity);
+0037 highMu = evalHigh(pixelIntensity);
+0038 
+0039 temp = bsxfun(@max, lowMu, medMu);
+0040 imgMu = bsxfun(@max, temp,highMu);
+0041 
+0042 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 24-Apr-2016 22:29:30 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
