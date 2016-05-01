@@ -39,13 +39,13 @@ The answer to this question is both yes, and no. The main gist of the project wa
 
 Initially Dr. Neil Mac Parthal\'ain, my supervisor, and I,identified a need for an application which would take in a set of mammographic images, and would return the output from 3 different fuzzy entropy algorithms. Unfortunately, due to my lack of knowledge in MATLAB, initial progress was slower than I anticipated, causing some worry about the amount of work which could be completed in the project time-frame. Along with this, the deficit in fuzzy entropy knowledge led me to believe that Fuzzy Shannon entropy would be a good algorithm to implement, however when meeting with Dr. Mac Parthal\'ain it was found to not be suitable for the project. Because of this, the initial requirement to have 3 fuzzy entropy implementations was reduced to 2, as there was a lack of time left in the project.
 
-A requirement identified about mid-way through the process was the need to remove medical markers / other artefacts from the scans. This addition falls into an active area of research, so in the time available to myself, it was only possible to implement a very simple and rudimentary way to remove such unwanted markings.
+A requirement identified about mid-way through the process was the need to remove medical markers / other artifacts from the scans. This addition falls into an active area of research, so in the time available to myself, it was only possible to implement a very simple and rudimentary way to remove such unwanted markings.
 
 \section{How did the choice of Process support the project?}
 
 It was identified very early on in the project that the project would undertake an Agile process. This was due to a lot of uncertainty surrounding both the requirements, and the actual work which would need to be undertaken. Overall, I'm extremely happy with their choice of process, as it provided just enough structure to ensure the project stayed on track and was well thought-out. The project may have benefited from a true \acrshort{TDD} approach, however upon reflection, I was too new to the concept of \acrshort{TDD} and the language worked in, to apply it to the fullest effect.
 
-Taiga, the tool utilised to support my use of adapted-Scrum, was invaluable in detailing which task were remaining in my product backlog, and which tasks did I still have to undertake that week. The burndown chart for each week was useful for tracking my progress over time, and for pinpointing any days where development might have been slowed by an issue or outside concern. This in itself helped me to write my weekly blog posts - see Section \ref{sec:blog}.
+Taiga, the tool utilised to support my use of adapted-Scrum, was invaluable in detailing which task were remaining in my product backlog, and which tasks did I still have to undertake that week. The burndown chart for each week was useful for tracking my progress over time, and for pinpointing any days where development might have been slowed by an issue or outside concern. This in itself helped me to write my weekly blog posts - see Section \ref{sec:blog}. Taiga itself is still in Beta, and occasionally would be buggy, however for the most part they were small issues and did not hinder my progress.
 
 \section{Was the choice of implementation tool correct for this project?}
 
@@ -53,24 +53,24 @@ MATLAB was chosen as the main implementation tool for this project due to the fa
 
 MATLAB was for one, costly. \pounds29.00 for the initial base MATLAB software, plus \pounds16.00 each for the Image Processing Toolbox and the Fuzzy Logic toolbox, totaling \pounds51.00 spent of implementation software alone. Whilst it has not been verified, it is highly likely that Octave would've been able to run with the \Gls{Congealing} demo code after a few alterations.
 
-Secondly, MATLAB was difficult to set up, and often gave non-descript error messages which were difficult to debug quickly. Whilst the documentation and MATLAB forums were extremely useful, during times of unique implementation - such as that of implementing three fuzzy set trapezia - I often found myself unstuck with no useful guidance online.
+Secondly, MATLAB was difficult to set up, and often gave nondescript error messages which were difficult to debug quickly. Whilst the documentation and MATLAB forums were extremely useful, during times of unique implementation - such as that of implementing three fuzzy set trapezia - I often found myself unstuck with no useful guidance online.
 
 \section{How did the author find working with their choice of technologies?}
 
-Before the project I had no worked with MATLAB, nor worked with any kind of Fuzzy logic system - so this project was a steep learning curve. That being said, I now feel extremely accomplished given I have learned a new language in such a short space of time, and implemented a usable application.
+Before the project I had not worked with MATLAB, nor worked with any kind of Fuzzy logic system - so this project was a steep learning curve. That being said, I now feel extremely accomplished given that I've learned a new language in such a short space of time, and implemented a usable application.
 
-I found the MATLAB documentation to be extremely useful and extensive, and the forum in which MATLAB users can post queries and answers held many answers to small quirky issues discovered along the way.
+I found the MATLAB documentation to be extremely useful and extensive, and the forum in which MATLAB users can post questions and replies held many answers to small quirky issues discovered along the way. I enjoyed the the combination of mathematics and programming, it felt like a good balance between my two academic interests, even though many software-engineers would question the legitimacy of MATLAB and the word 'programming`.
 
 \section{How did the use of a blog aid the author in this project?}
 \label{sec:blog}
 
-A blog outlining the weekly reviews \& retrospectives can be found at \url{lauramcollins.co.uk/blog}. It provided wonderful insight each week into the work completed, and was invaluable when writing this report to reflect upon the work week by week. It also allowed an informal environment for me to work through issues via a couple of \say{Hurdles} blog posts - where I would talk about the bigger hurdles through the project, and I tried to keep them updated with the solutions I had discovered.
+My blog outlining the weekly reviews \& retrospectives can be found at \url{lauramcollins.co.uk/blog}. It provided wonderful insight each week into the work I had completed, and was invaluable when writing this report to reflect upon the work and when it happened. It also allowed an informal environment for me to work through issues via a couple of `Hurdles' blog posts - where I would talk about the bigger hurdles through the project, and I tried to keep them updated with the solutions I had discovered.
 
-The blog was also a good source of screenshots, as often many would get lost throughout the 3 month-timeline.
+The blog was also a good source of screenshots, as often many would get lost throughout the 3 month-timeline, so again, this was hugely useful for this final report.
 
 \section{If the project could be restarted, what would the author keep the same or do differently?}
 
-Primarily I would keep the project objectives and hypotheses to be tested the same. This kept me motivated through the 3-month long project and I enjoy the feeling of knowing my work could one day help people in need. I would also keep my Agile approach to process as it supported the project very well and did not make me feel over-burdened with formalities such as documentation.
+Fundamentally I would keep the project objectives and hypotheses to be tested the same. This kept me motivated through the 3-month long project and I enjoy the feeling of knowing my work could one day help people in need. I would also keep my Agile approach to process as it supported the project very well and did not make me feel over-burdened with formalities such as documentation.
 
 Something I would change, or at least investigate changing, would be the choice of implementation tool. As mentioned earlier, MATLAB became expensive and was often cumbersome and slow, so there does lie the possibility that Octave might've been a more reasonable choice.
 
