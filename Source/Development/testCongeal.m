@@ -30,12 +30,18 @@ time = toc;
 
 finalMean = meanIms(:,:,iterations);
 
-fid=fopen(strcat(path,'/entropy.txt'),'w+');
-fprintf(fid,'%f \n',ent);
-fclose(fid);
+%% Utilised for testing the application and creating information for the Final Report. 
+%% The author believes these lines are useful enough to include for users to explore if they wish.
+
+%fid=fopen(strcat(path,'/entropy.txt'),'w+');
+%fprintf(fid,'%f \n',ent);
+%fclose(fid);
+
 %figure;
 %showSer(adjSer,2);
 
 %figure;
 %showSer(meanIms,1);
-imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
+
+%imwrite(meanIms(:,:,iterations),strcat(path,'/',metric,'_',iterations,'-final_mean.pgm'),'pgm');
+
