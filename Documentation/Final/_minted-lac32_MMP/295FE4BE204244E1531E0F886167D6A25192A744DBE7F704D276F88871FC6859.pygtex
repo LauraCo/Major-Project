@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{p}{[}\PYGdefault{n}{imgMu}\PYGdefault{p}{,} \PYGdefault{n}{lowMu}\PYGdefault{p}{,} \PYGdefault{n}{highMu}\PYGdefault{p}{]} \PYGdefault{p}{=} \PYGdefault{n}{hybridMembership}\PYGdefault{p}{(}\PYGdefault{n}{meanImg}\PYGdefault{p}{);}
+
+\PYGdefault{n}{lowCount} \PYGdefault{p}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{;}
+\PYGdefault{n}{highCount} \PYGdefault{p}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{;}
+
+\PYGdefault{k}{for} \PYGdefault{n+nb}{i}\PYGdefault{p}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{:}\PYGdefault{n+nb}{numel}\PYGdefault{p}{(}\PYGdefault{n}{imgMu}\PYGdefault{p}{)}
+    \PYGdefault{k}{if} \PYGdefault{n}{lowMu}\PYGdefault{p}{(}\PYGdefault{n+nb}{i}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{highMu}\PYGdefault{p}{(}\PYGdefault{n+nb}{i}\PYGdefault{p}{)}
+        \PYGdefault{n}{lowCount} \PYGdefault{p}{=} \PYGdefault{n}{lowCount} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{;}
+    \PYGdefault{k}{elseif} \PYGdefault{n}{highMu}\PYGdefault{p}{(}\PYGdefault{n+nb}{i}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{lowMu}\PYGdefault{p}{(}\PYGdefault{n+nb}{i}\PYGdefault{p}{)}
+        \PYGdefault{n}{highCount} \PYGdefault{p}{=} \PYGdefault{n}{highCount} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{;}
+    \PYGdefault{k}{end}
+\PYGdefault{k}{end}
+
+\PYGdefault{n}{eLow0} \PYGdefault{p}{=} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{lowMu}\PYGdefault{p}{)}\PYGdefault{o}{.*}\PYGdefault{n+nb}{exp}\PYGdefault{p}{(}\PYGdefault{n}{lowMu}\PYGdefault{p}{);}
+\PYGdefault{n}{eLow0} \PYGdefault{p}{=} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{n}{lowCount}\PYGdefault{p}{))} \PYGdefault{o}{*} \PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{eLow0}\PYGdefault{p}{));}
+
+\PYGdefault{n}{eLow1} \PYGdefault{p}{=} \PYGdefault{n}{lowMu}\PYGdefault{o}{.*}\PYGdefault{n+nb}{exp}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{lowMu}\PYGdefault{p}{);}
+\PYGdefault{n}{eLow1} \PYGdefault{p}{=} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{n}{lowCount}\PYGdefault{p}{))} \PYGdefault{o}{*} \PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{eLow1}\PYGdefault{p}{));}
+
+\PYGdefault{n}{hybridLow} \PYGdefault{p}{=} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{p}{(}\PYGdefault{n}{lowCount} \PYGdefault{o}{/} \PYGdefault{p}{(}\PYGdefault{n}{lowCount}\PYGdefault{o}{+}\PYGdefault{n}{highCount}\PYGdefault{p}{))}\PYGdefault{o}{*}\PYGdefault{n+nb}{log10}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{eLow0}\PYGdefault{p}{);}
+\PYGdefault{n}{hybridLow} \PYGdefault{p}{=} \PYGdefault{n}{hybridLow} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{p}{(}\PYGdefault{n}{highCount} \PYGdefault{o}{/} \PYGdefault{p}{(}\PYGdefault{n}{lowCount}\PYGdefault{o}{+}\PYGdefault{n}{highCount}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n+nb}{log10}\PYGdefault{p}{(}\PYGdefault{n}{eLow1}\PYGdefault{p}{));}
+
+\PYGdefault{n}{entropy} \PYGdefault{p}{=} \PYGdefault{n}{hybridLow}\PYGdefault{p}{;}
+\end{Verbatim}

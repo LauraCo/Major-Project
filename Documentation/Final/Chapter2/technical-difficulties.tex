@@ -113,11 +113,11 @@ One issue which was faced when creating the large .pgm file containing all the i
 
 It quickly became apparent that the order in which the image array was being written to file to create this larger pgm file was incorrect, however due to MATLAB's use of vectorisation, it was difficult to diagnose where the issue lay. After some investigation, it was revealed that the function \texttt{fwrite} by MATLAB \cite{fwrite}, used for writing binary data to file, wrote each line out column-by-column, rather than the customary row-by-row approach.
 
-To mitigate this issue, the array passed into fwrite would have to be transposed prior or during being passed into the function. There are two ways in which MATLAB permits the \gls{transposition} of arrays:
+To mitigate this issue, the array would have to be transposed prior to or during being passed into \texttt{fwrite}. There are two ways in which MATLAB permits the \gls{transposition} of arrays:
 
 \subsubsection{Simple 2D array transposition}
 
-MATLAB has a \say{Transpose} function \cite{transpose} which simply flips two elements in a 2D array as utilised in:
+MATLAB has a \say{Transpose} function \cite{transpose} which simply swaps the row and column values in a 2D array as utilised in:
 
 \begin{minted}
   [
@@ -203,10 +203,10 @@ As the images are aligned using a comparison of the pixel-value, the Medical Mar
 
 Two options were available for the avoidance of Medical Markers:
 \begin{itemize}
-  \item Ask the user not to use scans containing Medical Markers
+  \item Ask the user not to use images containing Medical Markers
   \begin{itemize}
     \item This is extremely restrictive
-    \item This could massively reduce their number of usable scans
+    \item This could massively reduce their number of usable images
   \end{itemize}
   \item Find a computer vision and/or image processing technique to remove these clips
   \begin{itemize}
@@ -289,7 +289,7 @@ Further to that, by running the white removal at grey-level value at 220 (the su
 
 Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas \cite{binary_mask}.
 
-After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The user can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between scans).
+After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The user can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between images).
 
 \begin{figure}[H]
   \centering
@@ -309,7 +309,7 @@ Vectorisation is the process to replace loop-based code with MATLAB matrix and v
 
 \begin{enumerate}
     \item Appearance - more concise, more like what is seen in textbooks
-    \item Less Error Prone - less for loops = less lines of code for errors to appear
+    \item Less error prone - less for loops = less lines of code for errors to appear
     \item Performance - vectorised code usually runs a lot faster
 \end{enumerate}
 

@@ -10,7 +10,7 @@ More information on the new functions created for this project, along with funct
 As covered in Section \ref{sssec:member}, the Membership trapezia would be defined within the system, rather than dynamically being calculated. This made use of the Fuzzy Logic Toolbox \cite{fuzzy_toolbox} by leveraging the following functions:
 
 \begin{itemize}
-  \item \textbf{trapmf: } trapezium-shaped membership function
+  \item \textbf{trapmf: } trapezoidal membership function
   \item \textbf{evalmf: } a generic membership evaluation function
 \end{itemize}
 
@@ -47,7 +47,7 @@ The three/four arrays (one for each trapezium and one for the highest values) ar
 
 Learned-Miller's demo code came with an implementation of Shannon Entropy \cite{joint-alignment}. Whilst originally the predominant dataset was MNIST handwriting data \cite{lecun1998gradientbased}, which is a binary dataset (pixels were either black or white), this was not useful for this project as there is no variation in greyscale, even when a mean is taken of multiple images.
 
-However, Learned-Miller had included extra code to handle the processing of greyscale and colour images, such as in MRI images. This ensured that no function needed to be created to handle greyscale images, greatly reducing the pre-programming needed. The only image handling that was encountered was to do with the mammograms, and the creation of a large .pgm file to pass into the \Gls{Congealing} algorithm.
+However, Learned-Miller had included extra code to handle the processing of greyscale and colour images, such as in MRI images. This ensured that no function needed to be created to handle greyscale images, greatly reducing the initial pre-programming needed. The only image handling that was encountered was to do with the mammograms, and the creation of a large .pgm file to pass into the \Gls{Congealing} algorithm.
 
 As outlined in \ref{ssec:entropy}, Shannon entropy is defined as:
 
@@ -57,9 +57,9 @@ As outlined in \ref{ssec:entropy}, Shannon entropy is defined as:
 
 \subsubsection{MATLAB implementation}
 
-This can be computed very quickly using a lookup table containing all the possible values of $p$. This makes it likely that the Shannon entropy algorithm will be the quickest on each iteration. However as it does not take any type of uncertainty into consideration when aligning the images, the outcome could be quite dramatically different from that of a Fuzzy entropy nature.
+This can be computed very quickly using a lookup table containing all the possible values of $p$. This makes it likely that the Shannon entropy algorithm will be the quickest on each iteration. However as it does not take any type of uncertainty into consideration when aligning the images, the outcome could be quite dramatically different from that of a fuzzy entropy nature.
 
-Learned-Miller's Shannon entropy implementation has been retained, and can be found in the function \texttt{fastEntLookup.m} which is how it was originally named. Where possible, when original functions have been used, their original file names have been kept the same.
+Learned-Miller's Shannon entropy implementation has been retained, as in Appendix \ref{appendix:algorithms} - Figure \ref{fig:shannon-entropy-matlab}, and can be found in the function \texttt{fastEntLookup.m} which is how it was originally named. Where possible, when original functions have been used, their original file names have been kept the same.
 
 The function itself needed no changes to fit in with this project, however the way in which it is called by both \texttt{binaryCongeal.m} and \texttt{incrTrans.m} has been adapted so the user can choose which alignment metric to use when congealing their images.
 
@@ -84,8 +84,7 @@ We will assume $-K$, the positive constant, is defined as $\frac{1}{n}$ as outli
 
 After some research into current implementations of Fuzzy Entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership function, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
 
-This array of pixel memberships is passed into a \texttt{nonProbabilistic.m} function where it is then iteratively passed into latter part of equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image.
-
+This array of pixel memberships is passed into a \texttt{nonProbabilistic.m} function where it is then iteratively passed into latter part of equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image. This process can be seen in Appendix \ref{appendix:algorithms} - Figure \ref{fig:nonProb-entropy-matlab}.
 
 %==============================================================================
 \subsubsection{Technical challenges}
@@ -97,7 +96,7 @@ The main technical challenge for this implementation is ensuring maximum optimis
 \subsection{Hybrid Entropy}
 \label{ssec:hybrid-sec}
 
-As mentioned in Section \ref{sssec:hybrid-section}, the Hybrid Entropy equation is as follows:
+As mentioned in Section \ref{sssec:hybrid-section}, the Hybrid entropy equation is as follows:
 
 \begin{equation}
   H_{hy} = -p_0\log(1 - E_0) - p_1\log(E_1)
@@ -118,25 +117,26 @@ And $p_0$ and $p_1$ are the probabilities of receiving 0 and 1 symbols respectiv
 \subsubsection{MATLAB implementation}
 %==============================================================================
 
-Due to reasons covered in Subsection \ref{sssec:hyrid-technical}, Hybrid Entropy membership was implemented using two trapezia covering two fuzzy sets, as seen in Figure \ref{fig:2-traps}.
+Due to reasons covered in Subsection \ref{sssec:hyrid-technical}, Hybrid entropy membership was implemented using two trapezia covering two fuzzy sets, as seen in Figure \ref{fig:2-traps}.
 
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.4]{Chapter2/hybrid-img/2_traps.png}
-  \caption{Two membership trapezia for Hybrid Entropy - Low and High grey-level values.}
+  \caption{Two membership trapezia for Hybrid entropy - Low and High grey-level values.}
   \label{fig:2-traps}
 \end{figure}
 
-Two arrays are then passed into the Hybrid Entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets.
+Two arrays are then passed into the Hybrid entropy function - one listing all the pixel membership values from the low trapezium, and the other from the high trapezium. The final entropy is taken as a comparison between the low and high fuzzy sets. This process can be seen in Appendix \ref{appendix:algorithms} - Figure \ref{fig:hybrid-entropy-matlab}.
+
 
 %==============================================================================
 \subsubsection{Technical challenges}
 \label{sssec:hyrid-technical}
 %==============================================================================
 
-Whilst Hybrid Entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then it must belong to the other.
+Whilst Hybrid entropy utilises a membership function, much like Non-Probabilistic entropy, it was derived to work with binary entropy, not the ternary membership modeled for Non-Probabilistic. Because of the binary nature, the equation uses `inversion' to depict if not this fuzzy set, then it must belong to the other.
 
-Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapezia - low, medium and high grey-level values. Logic would dictate that if the comparison of two fuzzy sets works, then to compare the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
+Experimentation was done as to whether the equation could be adapted in such a way to continue using three separate membership trapezia - low, medium and high grey-level values. Logic would dictate that if the comparison of two fuzzy sets works, then comparing the low fuzzy set to the medium, the medium to the high and the high to the medium should work.
 
 In theory, calculating $E_0$ and $E_1$ for each trapezium, calculating the hybrid entropy for each, and then combining them, should work:
 
@@ -205,4 +205,4 @@ After this mitigation, the third and fourth iteration had suitable entropy value
     \label{fig:minus-entropy}
 \end{figure}
 
-It was concluded that the implementation of three fuzzy sets within Hybrid Entropy would not be realistic within the remaining time-frame of the project, and the membership for Hybrid Entropy was redefined to the concept of 2 fuzzy sets, as derived by Pal and Pal. This would mean one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.
+It was concluded that the implementation of three fuzzy sets within Hybrid entropy would not be realistic within the remaining time-frame of the project, and the membership for Hybrid entropy was redefined to the concept of 2 fuzzy sets, as derived by Pal and Pal. This would mean one trapezium for pixel grey-level values with low values, overlapping with a high grey-level value trapezium at approximately 128, as seen in Figure \ref{fig:2-traps}.

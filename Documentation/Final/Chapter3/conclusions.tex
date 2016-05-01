@@ -6,6 +6,31 @@ The project provides results which are a promising sign towards implementing ima
 
 The judgement as to whether the fuzzy entropy metrics align images `better' than standard Shannon entropy is a subjective one. However this project does show that the output gained from fuzzy entropy \gls{Congealing} is somewhat different to that of Shannon entropy due to the uncertainty introduced via fuzzy set theory, and therefore could be perceived to be more useful to a mammographer.
 
+Figure \ref{fig:comparison-of-techniques} presents the three different entropy-based alignment metrics, running the same amount of iterations and upon the same dataset.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{Chapter3/shannon-img/s-10-final.png}
+        \caption{10 Shannon entropy iterations.}
+        \label{fig:shannon-comp}
+    \end{subfigure} \hfill
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[t]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{Chapter3/nonProb-img/nonprob10.png}
+        \caption{10 Non-Probabilistic entropy iterations.}
+        \label{fig:nonProb-comp}
+    \end{subfigure} \hfill
+    \begin{subfigure}[t]{0.3\textwidth}
+      \includegraphics[width=\textwidth]{Chapter3/hybrid-img/hybrid-10.png}
+      \caption{10 Hybrid entropy iterations.}
+      \label{fig:hybrid-comp}
+    \end{subfigure}
+    \caption{Comparison of the three entropy alignment metrics upon Set 1 - BI-RADS I image data.}
+    \label{fig:comparison-of-techniques}
+\end{figure}
+
 \subsection{Do mammographers find the output at all useful?}
 
 Unfortunately due to the time constraints of this project, the author was unable to ascertain a firm conclusion to this hypothesis. It is hoped that given the appropriate nature of the outputs produced, that this work would indeed be useful to mammographers in their classification of breast tissue density, as it provides a generalised average image of each BI-RADS density classification.
@@ -44,6 +69,7 @@ Whilst the entropy was often not as small as that output by Non-Probabilistic en
 One issue faced by Hybrid entropy was over-congealing. Whilst the entropy value did not indicate a value near over-congealment, the image output afterwards did cause some concern. As mentioned previously (Subsection \ref{sssec:hybrid-alignment}), estimating when to cut off Hybrid entropy is difficult, as over-congealment often happened at varying iterations given different data-sets.
 
 \subsection{Future Advancements}
+\label{ssec:improvements}
 
 Several features were identified for improvement, plus additional functionality could be added to the project if the project time frame had been longer, or if this project were to be continued at a later stage.
 
