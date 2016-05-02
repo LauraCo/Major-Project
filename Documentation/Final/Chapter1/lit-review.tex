@@ -98,14 +98,14 @@ Indiscernibility as defined by Pawlak in \say{Granularity of knowledge, indiscer
   \textit{However, more interesting seems to assume that the indiscernibility relation is formalized as a tolerance relation, i.e., transitivity of indiscernibilty is denied in this case, for, if x is indiscernible from y and y is indiscernible from z then not necessarily x is indiscernible from z.}
 \end{quotation}
 
-The minor differences between $x$ \& $y$ and $y$ \& $z$, to make them indiscernible, may actually still result in a fairly significant difference between $x$ and $z$, especially in instances such as image values.
+The minor differences between $x$ \& $y$ and $y$ \& $z$, which make them indiscernible, may actually still result in a fairly significant difference between $x$ and $z$, especially in instances such as image values.
 
 \subsection{Fuzzy Entropy}
 \label{ssec:fuzzy-entropy}
 
 Fuzzy entropy stems from combining standard Shannon entropy with the practices of Fuzzy Set Theory, discovered by Zadeh in 1965 \cite{Zadeh_1965}. This introduces the idea of `membership' to a category, where an object can belong to more than one category to a certain degree.
 
-One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5' 11'` not be classified as tall? Given crisp sets, then they would be classified as `Average'. In fuzzy set theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
+One common example of this is listing someone as `Short', `Average' or `Tall' in height. If a tall person is someone over 6 feet in height, would a person who measured 5' 11'` not be classified as tall? Given crisp sets, then they would be classified as `Average'. In Fuzzy Set Theory, they would be be a certain degree of tall, and a certain degree of average, with the highest membership likely to win out when categorising their height. Another example of this can be seen in Figure \ref{fig:fuzzy-sets}
 
 \begin{figure}[H]
   \center
@@ -172,6 +172,8 @@ Sander further went on to propose some properties, which must be imposed on a fu
   \end{align}
 \end{subequations}
 
+
+\vspace{2cm}
 \subsubsection{Object-background segmentation using new definitions of entropy - 1989}
 
 Pal \& Pal outlined their first fuzzy entropy algorithm in 1989 \cite{Pal_Pal_1989}, which satisfies all four of De Luca and Termini`s conditions (outlined in Equations\eqref{eq:de-luca-cond}). It as as follows:
@@ -249,7 +251,15 @@ Therefore, the hybrid entropy of fuzzy set $A$ can be defined as:
 
 Due to the older nature of some of the papers listed above, some were difficult to locate online. So when implementing the chosen algorithms (Non-Probalistic Entropy and Hybrid Entropy), Al-sharhan et al's paper \say{Fuzzy Entropy: a Brief Survey} \cite{Al-Sharhan_Karray_Gueaieb_Basir_2001} was a useful tool.
 
-Its concise nature and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution.
+Its concise nature and chronological listing ensured a strong understanding of the basic principles, before introducing the more complex algorithms (such as Higher Order Fuzzy Entropy). The paper also highlights advantages and flaws to each solution. The algorithms covered within the paper include:
+
+\begin{itemize}
+  \item Non-Probabilistic entropy
+  \item Shannon Fuzzy entropy
+  \item Hybrid entropy
+  \item Higher Order entropy
+  \item Geometry of Fuzzy Set and Entropy
+\end{itemize}
 
 \subsection{Joint Image Alignment}
 
@@ -308,7 +318,7 @@ This algorithm works by iteratively reducing the pixel-wise entropy over the inp
         \caption{Image scale in the $x$ \& $y$ axes.}
         \label{fig:scale}
       \end{subfigure}
-    \caption{Image transformations executed by the \Gls{Congealing} algorithm}
+    \caption{Image transformations executed by the Congealing algorithm}
     \label{fig:image-transformations}
   \end{figure}
 \end{center}

@@ -79,30 +79,30 @@ P5
 \end{figure}
 
 
-Listing \ref{fig:pgm_header_written} above shows the first five lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
+Figure \ref{fig:pgm_header_written} above shows the first five lines of the \acrshort{pgm} MNIST data which was included in the \Gls{Congealing} demo. The second line, proceeded by a \#, therefore a comment, includes information on height and width of each individual MNIST number (28 and 28), and how many of these numbers are included in the large file (6742).
 
 This information is then used to set the number of images per row and to set an array to the appropriate height, width and number of included images in the \texttt{loadSeries.m} function.
 
 
 \subsubsection{Creating an appropriate save function}
 
-The next step was to write a function which would appropriately concatenate the mini-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
+The next step was to write a function which would appropriately concatenate the mini-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \\ \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
 \begin{itemize}
 \item read in the number of images in the chosen directory
 \item identifies the dimensions of each scan in the directory (with mini-MIAS, they are all the same dimensions)
 \item creates a string containing all the suitable information needed for reading (as outlined in Subsubsection \ref{sssec:load})
-\item creates a file called \say{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
+\item creates a file called \texttt{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
 \end{itemize}
 
 \subsubsection{Final outcome}
 
-An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Figure \ref{fig:all-input-imgs}. There was an issue with the images rotation 90\degree as will be covered in the next Section.
+An example of the final mammogram image data can be found in Figure \ref{fig:final-output-4}. When the user specifies an odd number of images, or the number of images do not create a square, extra black padding is created around the image, as can be observed in Figure \ref{fig:all-input-imgs}. There was an issue with the images rotation 90{\degree} as will be covered in the next Section.
 
 
 \subsection{Image Rotation}
 \label{ssec:trans}
 
-One issue which was faced when creating the large .pgm file containing all the input images was that they were rotated 90\degree to the right, as demonstrated in Figure \ref{fig:rotated-input}.
+One issue which was faced when creating the large .pgm file containing all the input images was that they were rotated 90{\degree} to the right, as demonstrated in Figure \ref{fig:rotated-input}.
 
 \begin{figure}[H]
   \centering
@@ -137,7 +137,7 @@ MATLAB has a `Transpose' function \cite{transpose} which simply swaps the row an
 fwrite(output,handles.finalImg.','uchar');
 \end{minted}
 
-Where handles.finalImg is a GUI holder for a 2D array of pixel values. This example was taken from the \texttt{removeMarker.m}  function - where the user can remove Medical Markers and save the output back to the original file.
+Where handles.finalImg is a GUI holder for a 2D array of pixel values. This example was taken from the \texttt{removeMarker.m}  function - where the user can remove medical markers and save the output back to the original file.
 
 \subsubsection{3D+ array transposition}
 
@@ -189,21 +189,22 @@ After transposing all arrays which are to be saved out to file, whether directly
 \end{figure}
 
 \subsection{Medical Marker Removal}
+\label{ssec:marker-removal}
 
 This subsection has been formalised from a blog post written by the author on 28th March 2016 \cite{Collins_2016}.
 
-As the images are aligned using a comparison of the pixel-value, the Medical Markers included on mammograms cause an issue. This is because if more than one scan contains these white patches (left by the metal clip during scanning), then they will try and align with each other during the \Gls{Congealing} process.
+As the images are aligned using a comparison of the pixel-value, the medical markers included on mammograms cause an issue. This is because if more than one scan contains these white patches (left by the metal clip during scanning), then they will try and align with each other during the \Gls{Congealing} process.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{Chapter2/technical-img/mdb196.png}
-  \caption{Image containing Medical Markers}
+  \caption{Image containing medical markers}
   \label{fig:med-markers}
 \end{figure}
 
-Two options were available for the avoidance of Medical Markers:
+Two options were available for the avoidance of medical markers:
 \begin{itemize}
-  \item Ask the user not to use images containing Medical Markers
+  \item Ask the user not to use images containing medical markers
   \begin{itemize}
     \item This is extremely restrictive
     \item This could massively reduce their number of usable images
@@ -214,6 +215,8 @@ Two options were available for the avoidance of Medical Markers:
     \item Manually removing would work for small input data sets
   \end{itemize}
 \end{itemize}
+
+The following subsection will discuss the discarded ideas explored for artefact removal, before moving on to discuss the final implemented solution.
 
 \subsubsection{Discarded ideas}
 
@@ -260,15 +263,14 @@ Two options were available for the avoidance of Medical Markers:
 
 \noindent \textbf{Morphological operation - remove squares from image}
 
-Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square} was initially thought to be the most sensible way in which to remove unwanted artefacts. However, as can be seen in Figure \ref{fig:morph}, not only is the Marker itself not perfectly square, but because the image is square, it detects that instead. Removal is made more difficult by the fact the user would have to specify a maximum size square for removal, and given that the input image does not have to conform to a minimum size, this could cause some issues.
+Utilising a morphological operation, such as the one demonstrated by Chandra Kurniawan in the thread \cite{detect_square} was initially thought to be the most sensible way in which to remove unwanted artefacts. However, as can be seen in Figure \ref{fig:morph}, not only is the marker itself not perfectly square, but because the image is square, it detects that instead. Removal is made more difficult by the fact the user would have to specify a maximum size square for removal, and given that the input image does not have to conform to a minimum size, this could cause some issues.
 
 This idea was discarded due to the marker unlikely to ever be perfectly square in the scan.
 
 \noindent \textbf{MATLAB function regionprops}
 
-Another candidate function for removing Medical Markers was the MATLAB function \\ \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
+Another candidate function for removing medical markers was the MATLAB function \\ \texttt{regionprops} \cite{regionprops}. The idea behind using this function would be to measure the area of the squares in the image, so then they could be removed. However, the output, as seen in Figure \ref{fig:regionprops}, was not something desired, and without spending an inordinate amount of time tweaking the function, it is not useful to the detection of the markers.
 
-\vspace{2cm}
 \noindent \textbf{Shape recognition demo}
 
 On the Mathworks File Exchange site, a community run to help MATLAB users, there was a demo created by Ahmed Samieh to aid in the recognition of certain shapes \cite{shape_recognition}. It classifies the shape by properties such as roundness, ratios of dimensions and centroids.
@@ -285,17 +287,15 @@ To see if the entire marker could be removed, if the grey-level threshold is low
 
 Further to that, by running the white removal at grey-level value at 220 (the suitable choice for my first test scan) on another test scan and absolutely nothing is removed. Lower the threshold to begin removing white areas (down to grey-level value of 180) the results are less desirable, as demonstrated in Figure \ref{fig:remove-other-scan}.
 
+\vspace{-4.3mm}
 \subsubsection{Chosen method}
 
-Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas \cite{binary_mask}.
+Another demo on the MATLAB forum outlined a way in which a user can draw an area to remove, then a mask can be applied over the top to hide any problem areas \cite{binary_mask}. After reading through the demo given as an answer by \say{Image Analyst} on the forum, the project author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The user can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest greylevel value found in the drawn area (typically 0 for black, however may differ between images), as can be seen in Figure \ref{fig:remove-marker}.
 
-After reading through the demo given as an answer by \say{Image Analyst} on the forum, the author rewrote and refactored some of the functionality in the provided code in order to fit the removal criteria. The user can utilise the MATLAB function \texttt{imfreehand} \cite{imfreehand} to draw over the input image in order to indicate the area to be removed. This area is then filled in with the darkest grey-level value found in the drawn area (typically 0 for black, however may differ between images).
-
+%\vspace{-3.3mm}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{Chapter2/technical-img/draw-to-remove.png}
-  \caption{Image depicting the steps taken to remove Medical Markers from a scan.}
+  \includegraphics[scale=0.3]{Chapter2/technical-img/draw-to-remove.png}
+  \caption{Image depicting the steps taken to remove medical markers from a scan.}
   \label{fig:remove-marker}
 \end{figure}
-
-As shown in Figure \ref{fig:remove-marker} this has been shown to be extremely successful and therefore was utilised in the project.

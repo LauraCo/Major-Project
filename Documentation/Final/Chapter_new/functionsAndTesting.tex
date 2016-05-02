@@ -8,9 +8,9 @@
   \label{fig:data-flow}
 \end{figure}
 
-Figure \ref{fig:data-flow} shows which Function/Script calls which through the application, all the way up to \texttt{Enantiomorph}, the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}.
+Figure \ref{fig:data-flow} shows which function/script calls which through the application, all the way up to \texttt{Enantiomorph}, the \acrshort{GUI}. This diagram shows the integration of new, modified and existing functions/scripts in the code-base, as listed in Appendix \ref{appendix:code}.
 
-Initial diagrams like this were helpful especially at the beginning of the project, due to working with an existing code-base. It was advantageous to see which functions were directly being called, and where the new functions for fuzzy entropy and membership would fit in. However Figure \ref{fig:data-flow} is representative of the final design.
+Initial diagrams like this were helpful especially at the beginning of the project, due to working with an existing code-base. It was advantageous to see which functions were directly being called, and where the new functions for fuzzy entropy and membership would fit in. However Figure \ref{fig:data-flow} is representative of the final design and was generated once development had been completed.
 
 \newpage
 \section{Vectorisation}
@@ -24,7 +24,7 @@ Vectorisation is the process to replace loop-based code with MATLAB matrix and v
     \item Performance - vectorised code usually runs a lot faster
 \end{enumerate}
 
-Whilst appearance as an advantage in the MATLAB documentation, it's concise nature often makes it harder for developers to read - as was demonstrated in Subsection \ref{ssec:trans}.
+Whilst appearance as an advantage in the MATLAB documentation, it's concise nature often makes it harder for developers to read - as will be briefly discussed in Subsection \ref{ssec:trans}.
 
 The initial implementations of both \texttt{membership.m} and \texttt{nonProbabilistic.m} contained for loops, so experimentation was run before, during and after vectorisation to evaluate the supposed performance increase.
 
@@ -119,11 +119,12 @@ The majority of my work in MATLAB was function-based, so this was the style foll
   \label{fig:unit-test-results}
 \end{figure}
 
+\newpage
 \subsection{Acceptance Tests}
 
 Acceptance tests are when each `requirement' is assessed in turn to assure its completion. In this project, as there was no firm requirements at the beginning of the process, the User Stories which were derived over the project duration will be assessed against. In \acrfull{XP}, a user story is not considered to be complete until the time in which it passes its acceptance test, as stating on the \acrshort{XP} website \cite{Acceptance_Tests}.
 
-Table \ref{table:acceptance} outlines the results from the Acceptance Tests run. The left-most column \say{User Story Reference} aligns with Table \ref{table:User Stories}, where more detail on each Story can be found.
+Table \ref{table:acceptance} outlines the results from the Acceptance Tests run. The left-most column \say{User Story Reference} aligns with Table \ref{table:User Stories}, where more detail on each story can be found.
 
 \begin{center}
   \small

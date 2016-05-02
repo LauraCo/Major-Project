@@ -82,15 +82,15 @@ We will assume $-K$, the positive constant, is defined as $\frac{1}{n}$ as outli
 \subsubsection{MATLAB implementation}
 %==============================================================================
 
-After some research into current implementations of Fuzzy Entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership function, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
+After some research into current implementations of fuzzy entropy algorithms in MATLAB, it was concluded the best approach would be to implement De-Luca \& Termini's algorithm from scratch. This entailed creating a membership function, which computes the grey-level membership of each pixel in the mean image (calculated from a set of input images).
 
-This array of pixel memberships is passed into a \texttt{nonProbabilistic.m} function where it is then iteratively passed into latter part of equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image. This process can be seen in Appendix \ref{appendix:algorithms} - Figure \ref{fig:nonProb-entropy-matlab}.
+This array of pixel memberships is passed into a \texttt{nonProbabilistic.m} function where it is then iteratively passed into latter part of Equation \ref{eq:de-luca} \big(after $\displaystyle\sum$\big). The output array is then summed and multiplied by $\frac{1}{n}$ as defined in Equation \ref{eq:de-luca} and Subsection \ref{sssec:non-prob-review}. The final mean pixel entropy is calculated by taking the image entropy and dividing by the number of pixels in the image. This process can be seen in Appendix \ref{appendix:algorithms} - Figure \ref{fig:nonProb-entropy-matlab}.
 
 %==============================================================================
 \subsubsection{Technical challenges}
 %==============================================================================
 
-The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own Toolbox for calculating the membership saves a lot of time and lines of code, however it was important to check what they call from within. One membership function was redrawing the trapezia every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60 seconds. This challenge of optimisation is covered in-depth in a latter Subsection \ref{ssec:vectorisation}.
+The main technical challenge for this implementation is ensuring maximum optimisation to keep running times to a minimum. Leveraging MATLAB's own Toolbox for calculating the membership saves a lot of time and lines of code, however it was important to check what they call from within. One membership function was redrawing the trapezia every time it was called, significantly slowing down the process - reducing the amount of times the initial function was called helped reduced the run-time by over 60 seconds. This challenge of optimisation is covered in-depth in a latter Subsection \ref{sec:vectorisation}.
 
 \newpage
 \subsection{Hybrid Entropy}
@@ -161,6 +161,7 @@ and
 
 $p_1 = \frac{\text{No. of pixels in med trapezium}}{\text{No. of pixels in low trapezium + med trapezium}}$
 
+\vspace{1cm}
 
 This was done for all 3 trapezia, then combined and divided by 3 (for the mean entropy). As the result for each trapezium should be between 0 and 1 (as each is an entropy value), then combining them should be no issue. However this was not the case.
 
