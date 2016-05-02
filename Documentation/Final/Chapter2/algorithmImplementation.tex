@@ -14,7 +14,7 @@ As covered in Section \ref{sssec:member}, the Membership trapezia would be defin
   \item \textbf{evalmf: } a generic membership evaluation function
 \end{itemize}
 
-Having pre-defined functions for creating and evaluating the membership trapezia ensured that the function was a quick implementation. However it did reduce the number of Unit Tests that could be written to test the creation of such elements.
+Having pre-defined functions for creating and evaluating the membership trapezia ensured that the function was a quick implementation. However it did reduce the number of unit tests that could be written to test the creation of such elements.
 
 In this function, an image is read in, the membership of each pixel is evaluated against each of the two or three membership trapezia, adding the outcome to a corresponding array (e.g. one array for the membership of all the pixels against the low-trapezium etc). The two or three arrays (depending on the number of trapezia) are then compared and the element at position $x$,$y$ with the greatest membership value is added to another array which collates all of the highest values.
 

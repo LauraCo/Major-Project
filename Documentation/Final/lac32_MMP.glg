@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
 Scanning style file ./lac32_MMP.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file lac32_MMP.glo....done (150 entries accepted, 0 rejected).
-Sorting entries....done (1233 comparisons).
-Generating output file lac32_MMP.gls....done (76 lines written, 0 warnings).
+Scanning input file lac32_MMP.glo....done (161 entries accepted, 0 rejected).
+Sorting entries....done (1260 comparisons).
+Generating output file lac32_MMP.gls....done (85 lines written, 0 warnings).
 Output written in lac32_MMP.gls.
 Transcript written in lac32_MMP.glg.

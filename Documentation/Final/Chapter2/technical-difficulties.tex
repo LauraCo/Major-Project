@@ -5,7 +5,7 @@
 
 As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
 
-In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of mammographic images in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
+In order to understand how the demo data was uploaded, and therefore implement a function to compile a large set of \gls{mammographic images} in the correct format, research was carried out into the nature of \acrshort{pgm} files, and the function which comments play in the headers.
 
 \subsubsection{PGM file format}
 
@@ -86,10 +86,10 @@ This information is then used to set the number of images per row and to set an 
 
 \subsubsection{Creating an appropriate save function}
 
-The next step was to write a function which would appropriately concatenate the MINI-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
+The next step was to write a function which would appropriately concatenate the mini-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
 \begin{itemize}
 \item read in the number of images in the chosen directory
-\item identifies the dimensions of each scan in the directory (with MINI-MIAS, they are all the same dimensions)
+\item identifies the dimensions of each scan in the directory (with mini-MIAS, they are all the same dimensions)
 \item creates a string containing all the suitable information needed for reading (as outlined in Subsubsection \ref{sssec:load})
 \item creates a file called \say{big\_scan.pgm} and saves all the images out to the one file (after transposition, as in Subsection \ref{ssec:trans})
 \end{itemize}
@@ -117,7 +117,7 @@ To mitigate this issue, the array would have to be transposed prior to or during
 
 \subsubsection{Simple 2D array transposition}
 
-MATLAB has a \say{Transpose} function \cite{transpose} which simply swaps the row and column values in a 2D array as utilised in:
+MATLAB has a `Transpose' function \cite{transpose} which simply swaps the row and column values in a 2D array as utilised in:
 
 \begin{minted}
   [
@@ -299,83 +299,3 @@ After reading through the demo given as an answer by \say{Image Analyst} on the 
 \end{figure}
 
 As shown in Figure \ref{fig:remove-marker} this has been shown to be extremely successful and therefore was utilised in the project.
-
-
-
-\subsection{Vectorisation}
-\label{ssec:vectorisation}
-
-Vectorisation is the process to replace loop-based code with MATLAB matrix and vector operations. As stated in the MATLAB documentation \cite{vectorisation}, Vectorisation is important for several reasons:
-
-\begin{enumerate}
-    \item Appearance - more concise, more like what is seen in textbooks
-    \item Less error prone - less for loops = less lines of code for errors to appear
-    \item Performance - vectorised code usually runs a lot faster
-\end{enumerate}
-
-The initial implementations of both \texttt{membership.m} and \texttt{nonProbabilistic.m} contained for loops, so experimentation was run before, during and after vectorisation to evaluate the supposed performance increase.
-
-\begin{figure}[H]
-  %\iffalse
-  \centering
-    \begin{tikzpicture}
-      \begin{axis}[
-          width = 11cm,
-          ybar,
-          bar width=4pt,
-          ylabel={Time (secs)},
-          xlabel={Iterations},
-          xtick={1,...,5},
-          nodes near coords,
-          every node near coord/.append style={font=\scriptsize,
-                xshift=-6pt,  yshift=+5pt,anchor=west},
-          nodes near coords align={vertical},
-          legend pos=outer north east,
-          legend style={cells={align=left}},
-          ]
-        \addplot table[x=Iteration, y=Pre optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-        \addlegendentry{Pre-optimisation \\ (for loops) \\};
-        \addplot table[x=Iteration, y=Partial optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-        \addlegendentry{Partial optimisation \\ (just membership.m) \\};
-        \addplot table[x=Iteration, y=Full optimisation, col sep=comma] {Chapter2/technical-img/time.csv};
-        \addlegendentry{Full optimisation \\ (both membership.m \& \\ nonProbabilistic.m) \\};
-      \end{axis}
-    \end{tikzpicture}
-    \caption{Time per iteration before, during and after vectorisation}
-    \label{fig:time-per-iteration}
-    %\fi
-\end{figure}
-
-Figure \ref{fig:time-per-iteration} demonstrates the time taken per iteration, in the same environment, to run the \texttt{binaryCongeal.m} \footnote{The function which calls the specified entropy algorithm.} function. A marked improvement can be seen just by vectorising the \texttt{membership.m} function, and further improvements once the \texttt{nonProbabilistic.m} function for Non-Probabilistic entropy was vectorised.
-
-%http://pgfplots.sourceforge.net/gallery.html
-\begin{figure}[H]
-  %\iffalse
-  \begin{center}
-    \begin{tikzpicture}
-      \begin{axis}[
-        width= 11cm,
-        symbolic x coords={Pre-optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
-        x tick label style={font=\small,text width=2.5cm,align=center},
-        ybar,
-        enlargelimits=0.15,
-        legend style={at={(0.5,-0.2)},
-          anchor=north,legend columns=-1},
-        ylabel={Time (secs)},
-        xtick={Pre-optimisation (For loops),Partial optimisation (Just membership),Full optimisation (Membership \& Non-Probabilistic)},
-        nodes near coords,
-    	  nodes near coords align={vertical},
-        ]
-        \addplot[ybar,fill] coordinates {
-    (Pre-optimisation (For loops),265.771186)
-    (Partial optimisation (Just membership),155.432352)
-    (Full optimisation (Membership \& Non-Probabilistic),105.188263) };
-      \end{axis}
-    \end{tikzpicture}
-    \caption{A comparison of the total time to run five iterations prior to vectorisation, during (part vectorisation) and post-vectorisation.}
-    \label{fig:total-time}
-  \end{center}
-  %\fi
-\end{figure}
-
-Figure \ref{fig:total-time} outlines the total time taken to run five iterations of Non-Probabilistic Entropy before vectorisation, once vectorisation was complete on the \texttt{membership.m} function, and finally after full vectorisation.

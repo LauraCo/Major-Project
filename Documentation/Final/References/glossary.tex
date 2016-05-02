@@ -3,10 +3,13 @@
 %\chapter{Glossary}
 \makeglossaries
 
+\renewcommand*{\glstextformat}[1]{\textbf{#1}}
+
 \newglossaryentry{transposition}
 {
-    name=transposition,
-    description={to change the order of two or more objects}
+    name=Transposition,
+    text=transposition,
+    description={To change the order of two or more objects}
 }
 
 \newacronym{pgm}{PGM}{Portable Gray Map}
@@ -22,7 +25,7 @@
 \newglossaryentry{Congealing}
 {
     name=Congealing,
-    description={is an algorithm concerned with joint image alignment, developed by Learned-Miller \cite{joint-alignment}}
+    description={Is an algorithm concerned with joint image alignment, developed by Learned-Miller \cite{joint-alignment}}
 }
 
 \newacronym{SCM}{SCM}{Software Configuration Management}
@@ -36,8 +39,9 @@
 
 \newglossaryentry{non-deterministic}
 {
-    name=non-deterministic,
-    description={is when a system or algorithm, even if given the same input, can behave in a different manner each time it is executed - i.e. in the Congealing algorithm, there is no set order in which the image transformations can be run, therefore they can be run in a different order each time the images are congealed}
+    name=Non-deterministic,
+    text=non-deterministic,
+    description={Is when a system or algorithm, even if given the same input, can behave in a different manner each time it is executed - i.e. in the Congealing algorithm, there is no set order in which the image transformations can be run, therefore they can be run in a different order each time the images are congealed}
 }
 
 \newacronym{SURF}{SURF}{Speeded Up Robust Features}
@@ -49,5 +53,12 @@
 \newacronym{KLT}{KLT}{Kanade-Lucas-Tomasi}
 
 \newacronym{NaN}{NaN}{Not a Number}
+
+\newglossaryentry{mammographic images}
+{
+  name = {Mammographic images},
+  text = {mammographic images},
+  description = {Are the resultant images after a patient undergoes a mammogram.}
+}
 
 %TC:endignore

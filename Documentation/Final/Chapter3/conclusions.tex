@@ -1,6 +1,6 @@
 \section{Conclusions}
 
-The project provides results which are a promising sign towards implementing image alignment techniques using lightweight fuzzy entropy algorithms. The results show a varied output of aligned mammographic images, each usually maintaining a natural shape.
+The project provides results which are a promising sign towards implementing image alignment techniques using lightweight fuzzy entropy algorithms. The results show a varied output of aligned \gls{mammographic images}, each usually maintaining a natural shape.
 
 \subsection{Does the use of fuzzy entropy alignment metrics improve the alignment of mammograms?}
 
@@ -76,7 +76,7 @@ Several features were identified for improvement, plus additional functionality 
 \subsubsection{Automated medical marker removal}
 Feature extraction is an ongoing research area. This could be leveraged in the future for the automatic detection and removal of medical markers and/or artefacts. Some interesting areas of research which may be viable for implementation include:
 
-\noindent \textbf{Corner detection: } As the artefacts are typically rectangular in shape, a corner detector could be used to identify their presence - such as Harris Corners, or KLT. Harris Corners was developed by Chris Harris and Mike Stephens in 1988, in a technique which combines an edge detector with a corner detector \cite{Harris_Stephens_1988}. Harris Corners algorithm is looking for a sharp change in intensity within the image, such as passing from the black mammogram background onto the white area of the artifact. If a right-angle in intensity difference can be detected using several sliding windows over the image, then a corner is detected.
+\noindent \textbf{Corner detection: } As the artefacts are typically rectangular in shape, a corner detector could be used to identify their presence - such as Harris Corners, or KLT. Harris Corners was developed by Chris Harris and Mike Stephens in 1988, in a technique which combines an edge detector with a corner detector \cite{Harris_Stephens_1988}. Harris Corners algorithm is looking for a sharp change in intensity within the image, such as passing from the black mammogram background onto the white area of the artefact. If a right-angle in intensity difference can be detected using several sliding windows over the image, then a corner is detected.
 
 The work of Kanade-Lucas-Tomasi on the self-titled algorithm \acrshort{KLT} builds upon that of Harris and Stephens \cite{Shi_Tomasi_1994} \cite{tomasi2004detection}. This implements a scoring function where the highest value (e.g. $x$) above a threshold are classed as a corner, and all other values which neighbour $x$ are removed from contention.
 
@@ -86,7 +86,7 @@ When compared, both Harris and KLT corners perform very similarly and are both s
 
 \subsubsection{Classify unseen mammographic images}
 
-If further work was undertaken to build upon this project, the application could be used to classify new, unseen mammographic images into the correct BI-RADS classification using some kind of Machine Learning method. The application could be trained upon the existing Mini-MIAS dataset \cite{Suckling_1994}, along with other datasets which contain healthy tissue, such as \acrshort{DDSM} \cite{Heath_Bowyer_Kopans_Moore_Kegelmeyer_Processing} \cite{Heath_Bowyer_Kopans_Kegelmeyer_Moore_Chang_MunishKumaran_1998} to create an accurate model of what each classification should tend towards.
+If further work was undertaken to build upon this project, the application could be used to classify new, unseen \gls{mammographic images} into the correct BI-RADS classification using some kind of Machine Learning method. The application could be trained upon the existing Mini-MIAS dataset \cite{Suckling_1994}, along with other datasets which contain healthy tissue, such as \acrshort{DDSM} \cite{Heath_Bowyer_Kopans_Moore_Kegelmeyer_Processing} \cite{Heath_Bowyer_Kopans_Kegelmeyer_Moore_Chang_MunishKumaran_1998} to create an accurate model of what each classification should tend towards.
 
 Research is ongoing into which Machine Learning technique is the best for classification of images, however the likely choice would be either an Artificial Neural Network (ANN) or a Support Vector Machine (SVN) given their high accuracy rate, as outlined in \cite{kotsiantis2007supervised}. Currently both of these are slow to train, however that wouldn't necessarily be a problem for a Doctor to deal with, as it could be trained prior to their usage, or trained annually on new available data to become even more accurate. A high accuracy rate is more important than the training rate due to the human-diagnosis element of the application.
 
