@@ -146,13 +146,16 @@
 \include{Appendix5/appendix5}
 
 
-
+\setemptyheader
 \fancypagestyle{plain}{%
-   \fancyhead{} %[C]{Annotated Bibliography}
+   \fancyhead[L]{} %[C]{Annotated Bibliography}
    \fancyfoot[C]{{\thepage} of \pageref{LastPage}} % except the center
    \renewcommand{\headrulewidth}{0pt}
    \renewcommand{\footrulewidth}{0pt}
 }
+\clearpage
+
+\fancyhead[L]{}
 
 \glossarystyle{altlist}
 \printglossaries
@@ -161,6 +164,15 @@
 
 
 \setemptyheader
+
+\fancypagestyle{plain}{%
+   \fancyhead[L]{} %[C]{Annotated Bibliography}
+   \fancyfoot[C]{{\thepage} of \pageref{LastPage}} % except the center
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+\rhead{\textsl{\nouppercase\leftmark}}
 
 \nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
 
@@ -171,6 +183,7 @@
 %
 % example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.
 %\bibliographystyle{authordate2annot}
+\clearpage
 \bibliographystyle{IEEEannot}
 \renewcommand{\bibname}{Annotated Bibliography}
 \bibliography{References/references} % References file
