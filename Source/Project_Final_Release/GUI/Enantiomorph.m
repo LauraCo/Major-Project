@@ -69,8 +69,9 @@ handles.time = 0;
 % Update handles structure
 guidata(hObject, handles);
 
-addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
-addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/GUI'));
+% User edit this path
+addpath(genpath(pwd));
+addpath(genpath(strcat(pwd,'GUI')));
 
 % UIWAIT makes Enantiomorph wait for user response (see UIRESUME)
 % uiwait(handles.Main_GUI);
@@ -95,7 +96,8 @@ function generate_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 pathname = uigetdir();
-rmpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development'));
+% User edit this path
+rmpath(genpath(pwd));
 addpath(pathname);
 if isequal(pathname,0)
    disp('User selected Cancel')
@@ -105,7 +107,8 @@ elseif exist('/big_scan.pgm', 'file') == 2
     uiwait(msgbox(message));
     return;
 else
-    addpath('/Users/lauracollins/Git/Major-Project/Source/Development/IO');
+    % User edit this path
+    addpath(strcat(pwd,'/IO'));
     pgm2bigPgm(pathname);
   
     handles.imagePath = pathname;
@@ -131,7 +134,8 @@ else
     set(handles.width, 'String', info.Width);
    
     
-   addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development'));
+   % User edit this path
+   addpath(genpath(pwd));
 end
 
 

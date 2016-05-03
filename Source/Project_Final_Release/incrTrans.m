@@ -21,7 +21,7 @@ function transVec=incrTrans(mn,cnt,img,transVec,metric)
 
 pars=length(transVec);
 
-addpath /Users/lauracollins/Git/Major-Project/Source/Development/HYBRID_ENTROPY 
+addpath HYBRID_ENTROPY 
 
 if strcmp(metric,'deLuca')
     ent=nonProbabilistic(mn);

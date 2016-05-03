@@ -6,7 +6,8 @@ tests = functiontests(localfunctions);
 end
 
 function setup(testCase)
-pgm2bigPgm('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/');
+% User edit this path
+pgm2bigPgm(strcat(pwd,'IO/scans/'));
 end
 
 
@@ -14,14 +15,16 @@ end
 % Test 1 - test is pgm format
 
 function testImageType(testCase)
-file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm','r');
+% User edit this path
+file = fopen(strcat(pwd,'/IO/scans/big_scan.pgm'),'r');
 ln1=fgetl(file);
 assertEqual(testCase,ln1, 'P5');
 end
 
 % Test 2 - test insertion of comment for load function to read
 function testCommentInsertion(testCase)
-file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm','r');
+% User edit this path
+file = fopen(strcat(pwd,'/IO/scans/big_scan.pgm'),'r');
 ln1 = fgetl(file);
 ln2=fgetl(file);
 
@@ -30,15 +33,16 @@ end
 
 % Test 3 - test image dimensions are set correctly
 function testImageSize(testCase)
-bigFile = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm');
+% User edit this path
+bigFile = fopen(strcat(pwd,'/IO/scans/big_scan.pgm'),'r');
 
 ln1 = fgetl(bigFile);
 ln2=strsplit(fgetl(bigFile));
 bigImgHeight = str2double(ln2{2});
 bigImgWidth = str2double(ln2{3});
 
-
-sampleImage = imread('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/sample-1.pgm');
+% User edit this path
+sampleImage = imread(strcat(pwd,'/IO/scans/sample-1.pgm'));
 [sampleHeight,sampleWidth,dim] = size(sampleImage);
 
 assertEqual(testCase, bigImgHeight, sampleHeight);
@@ -48,7 +52,8 @@ end
 
 % Test 4 - test is grey-scale
 function testGreyScale(testCase)
-file = fopen('/Users/lauracollins/Git/Major-Project/Source/Development/IO/scans/big_scan.pgm');
+% User edit this path
+file = fopen(strcat(pwd,'/IO/scans/sample-1.pgm'));
 
 ln1 = fgetl(file);
 ln2 = fgetl(file);

@@ -5,7 +5,8 @@ function entropy = hybrid(meanImg)
 % Function to calculate the hybrid entropy of an image based off of the
 % work by Pal & Pal, 1992
 
-addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
+% User edit this path
+addpath(strcat(pwd,'/MEMBERSHIP'));
 
 [imgMu, lowMu, highMu] = hybridMembership(meanImg);
 

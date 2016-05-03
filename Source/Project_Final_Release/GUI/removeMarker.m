@@ -54,7 +54,9 @@ function removeMarker_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to removeMarker (see VARARGIN)
-addpath(genpath('/Users/lauracollins/Git/Major-Project/Source/Development/'));
+
+% User edit this path
+addpath(genpath(pwd));
 % Choose default command line output for removeMarker
 handles.output = hObject;
 handles.imageName = '';

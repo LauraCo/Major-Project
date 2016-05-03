@@ -1,0 +1,81 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="3309378964" file="/Users/lauracollins/Git/Major-Project/Source/Project_Final_Release/Enantiomorph.prj" location="/Users/lauracollins/Git/Major-Project/Source/Project_Final_Release" name="Enantiomorph" target="target.mlapps" target-name="Package App">
+    <param.appname>Enantiomorph</param.appname>
+    <param.authnamewatermark>lac32</param.authnamewatermark>
+    <param.email>lac32@aber.ac.uk</param.email>
+    <param.company>Aberystwyth University</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary>Installer to add Enantiomorph to the MATLAB 'Apps' toolbar.</param.summary>
+    <param.description />
+    <param.screenshot />
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>/Users/lauracollins/Git/Major-Project/Source/Project_Final_Release</param.output>
+    <param.guid>5e58fb30-c60a-45f4-9607-d67e8de7c705</param.guid>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.description />
+      <param.screenshot />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/GUI/Enantiomorph.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/CONGEAL_SUPPORT/computeXfrmImg.m</file>
+      <file>${PROJECT_ROOT}/CONGEAL_SUPPORT/computeXfrmImgs.m</file>
+      <file>${PROJECT_ROOT}/CONGEAL_SUPPORT/fastEntLookup.m</file>
+      <file>${PROJECT_ROOT}/CONGEAL_SUPPORT/getXfrm.m</file>
+      <file>${PROJECT_ROOT}/CONGEAL_SUPPORT/getXfrms.m</file>
+      <file>${PROJECT_ROOT}/GUI/Enantiomorph.fig</file>
+      <file>${PROJECT_ROOT}/GUI/removeMarker.fig</file>
+      <file>${PROJECT_ROOT}/GUI/removeMarker.m</file>
+      <file>${PROJECT_ROOT}/HYBRID_ENTROPY/hybrid.m</file>
+      <file>${PROJECT_ROOT}/IO/loadSeries.m</file>
+      <file>${PROJECT_ROOT}/IO/pgm2bigPgm.m</file>
+      <file>${PROJECT_ROOT}/IO/saveSeries.m</file>
+      <file>${PROJECT_ROOT}/MEMBERSHIP/hybridMembership.m</file>
+      <file>${PROJECT_ROOT}/MEMBERSHIP/membership.m</file>
+      <file>${PROJECT_ROOT}/NON_PROB_ENTROPY/nonProbabilistic.m</file>
+      <file>${PROJECT_ROOT}/UTILITY/showSer.m</file>
+      <file>${PROJECT_ROOT}/binaryCongeal.m</file>
+      <file>${PROJECT_ROOT}/incrTrans.m</file>
+      <file>${PROJECT_ROOT}/testCongeal.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/Users/lauracollins/Git/Major-Project/Source" name="Project_Final_Release" optional="false">/Users/lauracollins/Git/Major-Project/Source/Project_Final_Release</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2016a.app</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.11.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

@@ -4,7 +4,7 @@ function entropy = nonProbabilistic(meanImg)
 % Function implementing De Luca & Termini's Non-Probabilistic Fuzzy Entropy algorithm
 % Changed name 08/04/16 to reflect algorithm's true name
 
-addpath /Users/lauracollins/Git/Major-Project/Source/Development/MEMBERSHIP 
+addpath(strcat(pwd,'/MEMBERSHIP'));
 
 [imgMu, lowMu, medMu, highMu] = membership(meanImg);
 

@@ -74,7 +74,7 @@ In-depth information on the functions and scripts within this project can be fou
 
 ### MATLAB users
 
-Users who have MATLAB installed on their PC can use the file ```Enantiomorph.mlappinstall``` found in the main directory to install the application directly into their workspace. This will automatically open the main GUI - ```Enantiomorph.fig```, as found in the source code.
+Users who have MATLAB installed on their PC can use the file ```Enantiomorph.mlappinstall``` found in the main directory to install the application directly into their workspace. This will automatically open the main GUI - ```Enantiomorph.m```, as found in the source code.
 
 Another way in which MATLAB users can open the project would be to import the entire project into MATLAB, navigate to the ```GUI``` directory, and run ```Enantiomorph.fig``` from there.
 
@@ -124,3 +124,11 @@ Followed by:
 ```rt = table(results)```
 
 to view the results in a table.
+
+---
+
+## Occasional Path issues
+
+For any issues with paths - please type ```path``` into the MATLAB Command Window and verify that it is correct.
+
+You can add a path to MATLAB by typing ```addpath(genpath(pwd));``` in the Command Window - this will add all subdirectories to the path.
