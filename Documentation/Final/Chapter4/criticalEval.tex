@@ -23,9 +23,10 @@ This section will analyse areas of the project where there have been both achiev
 These sections will be:
 \begin{itemize}
   \item Initial requirements
+  \item Outcome
   \item Process
   \item Choice of implementation tool
-  \item Choice of technologies
+  \item Choice of technologies \& algorithms
   \item Use of blog
   \item If the project were to be restarted
   \item Degree relevance
@@ -36,15 +37,25 @@ These sections will be:
 
 The answer to this question is both yes, and no. The main gist of the project was very much the same, and the outcome was no different than initially planned, but the work involved did evolve over time - as is the nature of an Agile project.
 
-Initially Dr. Neil Mac Parthal\'ain, my supervisor, and I, identified a need for an application which would take in a set of \gls{mammographic images}, and would return the output from three different fuzzy entropy algorithms. Unfortunately, due to my lack of knowledge in MATLAB, initial progress was slower than I anticipated, causing some worry about the amount of work which could be completed in the project timeframe. Along with this, the deficit in fuzzy entropy knowledge led me to believe that Fuzzy Shannon entropy would be a good algorithm to implement, however when meeting with Dr. Mac Parthal\'ain it was found to not be suitable for the project. Because of this, the initial requirement to have three fuzzy entropy implementations was reduced to two, as there was a lack of time left in the project.
+Initially Dr. Neil Mac Parthal\'ain, my supervisor, and I, identified a need for an application which would take in a set of \gls{mammographic images}, and would return the output from three different fuzzy entropy algorithms. Unfortunately, due to my lack of knowledge in MATLAB, initial progress was slower than I anticipated, causing some worry about the amount of work which could be completed in the project timeframe. Additionally, my deficit in fuzzy entropy knowledge led me to believe that Fuzzy Shannon entropy would be a good algorithm to implement, however when meeting with Dr. Mac Parthal\'ain it was found to not be suitable for the project. Because of this, the initial requirement to have three fuzzy entropy implementations was reduced to two, as there was a lack of time left in the project.
 
 A requirement identified about mid-way through the process was the need to remove medical markers / other artefacts from the images. This addition falls into an active area of research, so in the time available to myself, it was only possible to implement a very simple and rudimentary way to remove such unwanted markings. However I did continue to do research into the area, and outlined some ideas in the Future Improvements section (Section \ref{ssec:improvements}).
 
-\section{How did the choice of Process support the project?}
+\section{Were all outcomes met?}
 
-It was identified very early on in the project that the project would undertake an Agile process. This was due to a lot of uncertainty surrounding both the requirements, and the actual work which would need to be undertaken. Overall, I'm extremely happy with their choice of process, as it provided just enough structure to ensure the project stayed on track and was well thought-out. The project may have benefited from a true \acrshort{TDD} approach, however upon reflection, I was too new to the concept of \acrshort{TDD} and the language I was working in, to apply it to the fullest effect.
+One of the major outcomes which was not met during this project was to have a radiologist assess the output images created by the application. This was due to development taking longer than expected, and the project timeframe. This, I feel, would have been a major coup for the project, as it could have validated the need for an application such as this, and further boosted my feeling of accomplishment.
+
+Due to not meeting with a radiologist, it is difficult to obtain a true measure of how useful the output images are. Whilst as computer scientists we can see they are well aligned and the entropy declines over each iteration, the actual usefulness of these final images has not be confirmed.
+
+I personally would have loved to implement the one discarded task which I discuss in-depth in Subsection \ref{ssec:improvements}. Machine learning is an extremely exciting field, and to have applied some of the principles to my project would have been personally very fulfilling.
+
+\section{How did the choice of process support the project?}
+
+It was identified very early on in the project that the project would undertake an Agile process. This was due to a lot of uncertainty surrounding both the requirements, and the actual work which would need to be undertaken. Overall, I'm extremely happy with my choice of process, as it provided just enough structure to ensure the project stayed on track and was well thought-out. The project may have benefited from a true \acrshort{TDD} approach, however upon reflection, I was too new to the concept of \acrshort{TDD} and the language I was working in, to apply it to the fullest effect.
 
 Taiga, the tool utilised to support my use of adapted-Scrum, was invaluable in detailing which task were remaining in my product backlog, and which tasks did I still have to undertake that week. The burndown chart for each week was useful for tracking my progress over time, and for pinpointing any days where development might have been slowed by an issue or outside concern. This in itself helped me to write my weekly blog posts - see Section \ref{sec:blog}. Taiga itself is still in Beta, and occasionally would be buggy, however for the most part they were small issues and did not hinder my progress.
+
+Often my peers would discuss software methodologies, and whether they're truly applicable to a single-person project. Whilst for the most part some practices become less useful, as you're no longer having to cooperate with a team, in the long-run a light-weight approach like I took paid dividends. It did not slow down my progress or make my ideas convoluted, it created a simple design and allowed me to easily abstract each week's tasks (something I had struggled to do in previous projects).
 
 \section{Was the choice of implementation tool correct for this project?}
 
@@ -54,13 +65,19 @@ MATLAB was for one, costly. \pounds29.00 for the initial base MATLAB software, p
 
 Secondly, MATLAB was difficult to set up, and often gave nondescript error messages which were difficult to debug quickly. Whilst the documentation and MATLAB forums were extremely useful, during times of unique implementation - such as that of implementing three fuzzy set trapezia - I often found myself unstuck with no useful guidance online.
 
-\section{How did the author find working with their choice of technologies?}
+Finally, MATLAB has a compiler add-on, to allow the developer to create a standalone application, removing the need for the application user to have MATLAB and dedicated Toolboxes installed on their computer. However it became evident that as I was on a student license, I would not be able to trial the compiler add-on, and therefore could not create this executable application. This to me was a massive shame, as eventually my own MATLAB license will expire and I will no longer be able to run my own project. It also means that if any of my markers do not have the necessary access to MATLAB, they also will not be able to compile and run the code. I \textit{could} have bought the compiler add-on, however this would have cost a further \pounds16, something I was unwilling to pay.
+
+\section{How did the author find working with their choice of technologies and algorithms?}
 
 Before the project I had not worked with MATLAB, nor worked with any kind of Fuzzy logic system - so this project was a steep learning curve. That being said, I now feel extremely accomplished given that I've learned a new language in such a short space of time, and implemented a usable application.
 
 I found the MATLAB documentation to be extremely useful and extensive, and the forum in which MATLAB users can post questions and replies held many answers to small quirky issues discovered along the way. I enjoyed the the combination of mathematics and programming, it felt like a good balance between my two academic interests, even though many software-engineers would question the legitimacy of MATLAB and the word 'programming`.
 
-\section{How did the use of a blog aid the author in this project?}
+One of the things I am quite pleased about is my commitment to ensuring a good Git flow throughout the project. I had not previously worked with `Branches', and this took some getting used to, however at the end of the project I had 15 branches, which including one for each major development area - e.g. membership, Hybrid entropy and Non-Probabilistic entropy.
+
+The algorithms chosen for aligning the images - Non-Probabilistic and Hybrid entropy - were both fit for purpose. Hybrid entropy caused a few issues in implementation due to the two-fuzzy-set nature derived by Pal \& Pal, however in the long run, the two trapezia membership functions worked sufficiently. The run-time of Non-Probabilistic entropy is somewhat short of ideal, however the alignment results could in the long-run make up for this - this is something that only a true user could decide. I would have liked to have further optimised the algorithm, however it was not feasible in the time I had left.
+
+\section{How did the use of a Blog aid the Author in this Project?}
 \label{sec:blog}
 
 My blog outlining the weekly reviews \& retrospectives can be found at \url{lauramcollins.co.uk/blog}. It provided wonderful insight each week into the work I had completed, and was invaluable when writing this report to reflect upon the work and when it happened. It also allowed an informal environment for me to work through issues via a couple of `Hurdles' blog posts - where I would talk about the bigger hurdles through the project, and I tried to keep them updated with the solutions I had discovered.
@@ -73,12 +90,14 @@ Fundamentally I would keep the project objectives and hypotheses to be tested th
 
 Something I would change, or at least investigate changing, would be the choice of implementation tool. As mentioned earlier, MATLAB became expensive and was often cumbersome and slow, so there does lie the possibility that Octave might've been a more reasonable choice.
 
-\section{How relevant was this project to the author's degree scheme?}
+\section{How relevant was this Project to the Author's Degree Scheme?}
 
 My degree scheme is \textit{Artifical Intelligence and Robotics}, so whilst there is no element of Robotics, my project can be seen to be venturing into the world of Artificial Intelligence somewhat as entropy, fuzzy sets and machine learning techniques fall within this category.
 
 Whilst this project wasn't the closest alignment to my degree scheme offered by the department, my choice of project was fueled by a personal interest into the topic, and I believe that helped me carry on development when things became hard. If I had not had a vested interested in the general topic I likely wouldn't have enjoyed this project as much.
 
-\section{Final words}
+\section{Final Words}
 
-Finally I would like to close with my overall thoughts on my Major Project. I am extremely pleased in the outcome of the project, whilst the final application mightn't have been as complex in its calculations and output as I had first hoped, it does signify a step in the right direction for the classification of patient's breast tissue using image processing techniques. This project has offered me new insight into how medical practitioners classify breast tissue, it has brought me challenges in the form of a new programming language and a new development style and it has granted me the opportunity to close out my Bachelor's degree with a project on a topic close to my heart. 
+Finally I would like to close with my overall thoughts on my Major Project. I am extremely pleased in the outcome of the project, whilst the final application mightn't have been as complex in its calculations and output as I had first hoped, it does signify a step in the right direction for the classification of patient's breast tissue using image processing techniques. Whilst this project focuses on the alignment of mammographic images, there is no restriction to the type of grayscale image that could be aligned using this technique - this in itself further extends the project beyond it's original scope.
+
+ This project has offered me new insight into how medical practitioners classify breast tissue, it has brought me challenges in the form of a new programming language and a new development style and it has granted me the opportunity to close out my Bachelor's degree with a project on a topic close to my heart.

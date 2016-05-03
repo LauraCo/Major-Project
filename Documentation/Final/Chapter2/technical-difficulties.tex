@@ -1,7 +1,7 @@
 \section{Technical Difficulties}
 \label{sec:tech-diff}
 
-\subsection{Creating the Mammogram image data}
+\subsection{Creating the Mammogram Image Data}
 
 As this project was building upon the work done by Learned-Miller \cite{joint-alignment}, it was useful to utilise the load function that was already in place. However, the nature in which the image files were loaded into the system caused some unexpected hurdles.
 
@@ -86,7 +86,7 @@ This information is then used to set the number of images per row and to set an 
 
 \subsubsection{Creating an appropriate save function}
 
-The next step was to write a function which would appropriately concatenate the mini-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \\ \texttt{pgm2bigPgm.m}, which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
+The next step was to write a function which would appropriately concatenate the mini-MIAS dataset \cite{Suckling_1994} to create a large \acrshort{pgm} input image for \Gls{Congealing}. This led to the function \texttt{pgm2bigPgm.m} which is a pre-processing funciton before the original \texttt{saveSeries.m} demo function, which will:
 \begin{itemize}
 \item read in the number of images in the chosen directory
 \item identifies the dimensions of each scan in the directory (with mini-MIAS, they are all the same dimensions)
@@ -188,6 +188,7 @@ After transposing all arrays which are to be saved out to file, whether directly
   \label{fig:final-output-4}
 \end{figure}
 
+\newpage
 \subsection{Medical Marker Removal}
 \label{ssec:marker-removal}
 

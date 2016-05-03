@@ -12,11 +12,11 @@ As a reminder, the high-level objectives for this project are are follows (furth
   \item Research and implement a solution to remove medical markers from mammographic images.
 \end{itemize}
 
-\subsection{Aligning images using fuzzy entropy algorithms}
+\subsection{Aligning Images using Fuzzy Entropy Algorithms}
 
 This objective was successfully met by implementing both Non-Probabilistic and Hybrid entropy. As can be clearly seen in the resulting images in Subsection \ref{ssec:align}, alignment of multiple images is possible utilising entropy metrics combined with uncertainty and more iterations \textit{generally} creates a better alignment, until over-congealment begins. Figure \ref{fig:comparison-of-techniques} in the following subsection also provides a comparison of the three alignment techniques.
 
-\subsection{Research questions}
+\subsection{Research Questions}
 
 It is important to assess the outcome of each of the research questions defined in Subsection \ref{ssec:research-qs}.
 
@@ -88,15 +88,15 @@ Whilst the entropy was often not as small as that output by Non-Probabilistic en
 
 One issue faced by Hybrid entropy was over-congealing. Whilst the entropy value did not indicate a value near over-congealment, the image output afterwards did cause some concern. As mentioned previously (Subsection \ref{sssec:hybrid-alignment}), estimating when to cut off Hybrid entropy is difficult, as over-congealment often happened at varying iterations given different data-sets.
 
-\subsection{Creation of an application to handle the process of aligning images}
+\subsection{Creation of an Application to handle the Process of Aligning Images}
 
 As can be seen in Section \ref{sec:GUI-implement}, an application was created to handle every step of the image alignment process. This included inputting a set of images, selecting the entropy alignment metric and number of iterations and outputting the final mean image.
 
-\subsection{Create an application with a quick run-time}
+\subsection{Create an Application with a quick Run-time}
 
 This objective has been somewhat met. Whilst both Shannon and Hybrid entropy run-times are particularly good, and would not be inconvenient to the user, Non-Probabilistic entropy is still a little slow for everyday use. MATLAB have a restriction upon their `Compiler' \cite{compiler}, which means that anyone on a student license, such as the author, cannot trial this functionality. Therefore an external application to MATLAB was not created.
 
-\subsection{Research and implement a solution for medical marker removal}
+\subsection{Research and Implement a Solution for Medical Marker Removal}
 
 This objective is covered extensively in Subsection \ref{ssec:marker-removal}. This functionality was introduced to the main application, however at a simple, rudimentary level. The user must manually draw around the areas to remove in each scan, as the process is not automated.
 
@@ -107,7 +107,7 @@ This objective is covered extensively in Subsection \ref{ssec:marker-removal}. T
 
 Several features were identified for improvement, plus additional functionality could be added to the project if the project time frame had been longer, or if this project were to be continued at a later stage.
 
-\subsection{Automated medical marker removal}
+\subsection{Automated Medical Marker Removal}
 Feature extraction is an ongoing research area. This could be leveraged in the future for the automatic detection and removal of medical markers and/or artefacts. Some interesting areas of research which may be viable for implementation include:
 
 \subsubsection{Corner detection: } As the artefacts are typically rectangular in shape, a corner detector could be used to identify their presence - such as Harris Corners, or KLT. Harris Corners was developed by Chris Harris and Mike Stephens in 1988, in a technique which combines an edge detector with a corner detector \cite{Harris_Stephens_1988}. Harris Corners algorithm is looking for a sharp change in intensity within the image, such as passing from the black mammogram background onto the white area of the artefact. If a right-angle in intensity difference can be detected using several sliding windows over the image, then a corner is detected.
@@ -118,7 +118,7 @@ When compared, both Harris and KLT corners perform very similarly and are both s
 
 \subsubsection{SURF: } \acrfull{SURF} \cite{Bay_Tuytelaars_Gool_2006} is a speeded up version of an older feature extraction method called \acrfull{SIFT} \cite{Lowe_1999}. \acrshort{SIFT} boasts a number of useful features such as being scale invariant (useful as not all artefacts are the same size), invariant to rotation (again useful as artefacts are often at different orientations) and features are selected only if there is a good enough contrast (as artefacts are typically white on a black background, this is helpful). \acrshort{SURF} improves upon \acrshort{SIFT} by utilising different-sized box features rather than \acrfull{DOG} filters for refining the space in which scale is analysed, therefore making it quicker.
 
-\subsection{Classify unseen mammographic images}
+\subsection{Classify Unseen Mammographic Images}
 
 If further work was undertaken to build upon this project, the application could be used to classify new, unseen \gls{mammographic images} into the correct BI-RADS classification using some kind of Machine Learning method. The application could be trained upon the existing Mini-MIAS dataset \cite{Suckling_1994}, along with other datasets which contain healthy tissue, such as \acrshort{DDSM} \cite{Heath_Bowyer_Kopans_Moore_Kegelmeyer_Processing} \cite{Heath_Bowyer_Kopans_Kegelmeyer_Moore_Chang_MunishKumaran_1998} to create an accurate model of what each classification should tend towards.
 
@@ -130,11 +130,11 @@ The functionality to run all three alignment metrics together was not implemente
 
 The current implementation means the user would have to run the three alignment techniques sequentially, the outputs saved to their PC, and then later opened in an image preview software to compare the results alongside each other. This is not a major issue, however it would be advantageous if the user could view them side-by-side easily.
 
-\subsection{Further optimisation}
+\subsection{Further Optimisation}
 
 Further optimisation could be carried out for the two fuzzy entropy algorithms by implementing a lookup table structure, as in Learned-Miller's example of Shannon entropy. Whilst this is unlikely to make massive gains for Hybrid entropy, for Non-Probabilistic entropy this could see a significant reduction in run-time, making the algorithm more usable in real-world environments.
 
-\subsection{GUI alterations}
+\subsection{GUI Alterations}
 
 Small edits would be made to the \texttt{removeMarker} \acrshort{GUI}, such as a clear button, and the functionality to draw more than one area to remove from an image.
 
